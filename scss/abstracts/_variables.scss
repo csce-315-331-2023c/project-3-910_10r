@@ -6,6 +6,7 @@
     */
 
     /**************** COLORS ****************/
+    --ACCENT-COLOR-DARK: hsl(0, 45%, 56%);
     --ACCENT-COLOR: hsl(0, 86%, 81%);
     --ACCENT-COLOR-LIGHT: hsl(0, 100%, 91%);
 
@@ -24,7 +25,7 @@
     /**************** SHADOWS ****************/
     --LOGIN-SHADOW: 0px 0px 30px var(--GREEN-DARK);
     --BUTTON-SHADOW: 0px 0px 5px var(--GREEN-DARK);
-    --BUTTON-SHADOW-ACCENT: 0px 0px 5px var(--ACCENT-COLOR);
+    --BUTTON-SHADOW-ACCENT: 0px 0px 5px var(--ACCENT-COLOR-DARK);
 
     --TEXT-SHADOW-LIGHT: 0px 0px 3px var(--GREEN-MED);
     --TEXT-SHADOW-DARK: 0px 0px 3px var(--GREEN-DARK);

@@ -7,6 +7,7 @@
       but we're not there yet - idk if we wanna do mobile-friendly design
   */
   /**************** COLORS ****************/
+  --ACCENT-COLOR-DARK: hsl(0, 45%, 56%);
   --ACCENT-COLOR: hsl(0, 86%, 81%);
   --ACCENT-COLOR-LIGHT: hsl(0, 100%, 91%);
   --GREEN-LIGHT: #F6FFF8;
@@ -20,7 +21,7 @@
   /**************** SHADOWS ****************/
   --LOGIN-SHADOW: 0px 0px 30px var(--GREEN-DARK);
   --BUTTON-SHADOW: 0px 0px 5px var(--GREEN-DARK);
-  --BUTTON-SHADOW-ACCENT: 0px 0px 5px var(--ACCENT-COLOR);
+  --BUTTON-SHADOW-ACCENT: 0px 0px 5px var(--ACCENT-COLOR-DARK);
   --TEXT-SHADOW-LIGHT: 0px 0px 3px var(--GREEN-MED);
   --TEXT-SHADOW-DARK: 0px 0px 3px var(--GREEN-DARK);
   --TEXT-SHADOW-ACCENT: 0px 0px 3px var(--ACCENT-COLOR-LIGHT);
@@ -131,6 +132,7 @@ form, input, button, input, textarea {
       justify-content: center;
   padding: var(--PADDING-SMALL) 0;
   width: 100%;
+  color: var(--TEXT-COLOR-DARK);
 }
 .drinkSidebar__bill p {
   padding: 0 var(--PADDING-SMALL);
@@ -186,6 +188,42 @@ footer {
 } */
 /* animations and stuff will go here */
 /* For each HTML page, there will be respective scss file */
+/* TESTING: vertical overflow works, but horizontal does not */
+.customer {
+  width: calc(100vw - clamp(175px, 22vw, 300px));
+  height: 93vh;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: column nowrap;
+      flex-flow: column nowrap;
+  padding: var(--PADDING-SMALL);
+}
+.customer__category {
+  width: auto;
+  padding: var(--PADDING-SMALL);
+  margin: var(--MARGIN-SMALL) var(--MARGIN-MED);
+  /* background-color: white; */
+  /* &-name {
+
+  } */
+}
+.customer__category-panel {
+  overflow: auto;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+  gap: 1.5rem;
+}
+.customer__category-panel-drink {
+  display: inline-block;
+  background-color: black;
+  width: 100px;
+  height: 100px;
+  /* the rules above in this ruleset are temporary */
+  /* flex-basis: ; */
+}
+
 .login {
   background-color: white;
   display: block;
