@@ -1,0 +1,14 @@
+/* functions, mixins, and placeholders - TODO */
+
+/* basic functions and presets and mixins go here */
+
+/**************** HELPERS ****************/
+%offscreen {
+    position: absolute;
+    left: -10000px;
+}
+
+%nowrap {
+    white-space: nowrap;
+}
+

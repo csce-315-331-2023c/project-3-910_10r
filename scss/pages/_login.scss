@@ -1,0 +1,92 @@
+/* For each HTML page, there will be respective scss file */
+
+.login-title {
+    @extend %offscreen;
+}
+
+.login {
+    background-color: white;
+    display: block;
+    position: fixed;
+    width: clamp(200px, 50vw, 600px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: var(--LOGIN-SHADOW);
+    border-radius: var(--LOGIN-BORDER-RADIUS);
+    padding: var(--PADDING-LARGE);
+    padding-top: var(--PADDING-MED);
+
+    &__header {
+        color: var(--GREEN-DARK);
+        text-align: center;
+        padding-bottom: var(--PADDING-MED);
+        font-size: var(--FONT-LARGE);
+    }
+
+    &__form {
+
+        &-input {
+            margin-right: var(--MARGIN-SMALL);
+            margin-bottom: var(--MARGIN-SMALL);
+            padding: var(--PADDING-SMALL);
+            width: 100%;
+            border: none;
+            background-color: var(--GREEN-MID60);
+            color: var(--TEXT-COLOR-DARK);
+            transition: box-shadow 0.25s;
+
+            &::placeholder {
+                color: var(--TEXT-COLOR-DARK);
+            }
+
+            &:focus-visible {
+                outline: none;
+                box-shadow: var(--BUTTON-SHADOW);
+            }
+        }
+
+        &-btn-container {
+            width: 100%;
+            display: flex;
+            flex-flow: row nowrap;
+            gap: var(--MARGIN-SMALL);
+
+            .login__form-btn {
+                padding: var(--PADDING-SMALL);
+                flex-basis: 50%;
+                border: var(--BORDER-DARK);
+                transition: color 0.25s, background-color 0.25s, box-shadow 0.25s;
+                cursor: pointer;
+            }
+
+            #loginResetBtn {
+                background-color: var(--TEXT-COLOR-LIGHT);
+                color: var(--TEXT-COLOR-DARK);
+
+                &:hover, &:focus-visible {
+                    box-shadow: var(--BUTTON-SHADOW);
+                    /* TODO */
+                }
+
+                &:active {
+                    filter: brightness(0.9);
+                }
+            }
+
+            #loginSubmitBtn {
+                background-color: var(--GREEN-DARK);
+                color: var(--TEXT-COLOR-LIGHT);
+
+                &:hover, &:focus-visible {
+                    box-shadow: var(--BUTTON-SHADOW);
+                    /* TODO */
+                }
+
+                &:active {
+                    filter: brightness(0.9);
+                }
+            }
+        }
+    }
+}

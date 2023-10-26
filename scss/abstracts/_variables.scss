@@ -1,0 +1,48 @@
+:root {
+    /**************** COLORS ****************/
+    --BG-COLOR: #f0f0f0;
+    --ACCENT-COLOR: rgb(255, 240, 145);
+
+    --GREEN-LIGHT: #F6FFF8;
+    --GREEN-MID: #CCE3DE;
+    --GREEN-MID60: hsla(167, 29%, 85%, 0.60);
+    --GREEN-DARK: #6B9080;
+
+    --TEXT-COLOR-LIGHT: white;
+    --TEXT-COLOR-DARK: var(--GREEN-DARK);
+
+    /* more colors for transparency and stuff */
+
+    /**************** SHADOWS ****************/
+    --LOGIN-SHADOW: 0px 0px 30px var(--GREEN-DARK);
+    --BUTTON-SHADOW: 0px 0px 5px var(--GREEN-DARK);
+
+
+    /**************** BORDERS ****************/
+    --LOGIN-BORDER-RADIUS: 10px;
+    --BUTTON-BORDER-RADIUS: 5px;
+
+    --BORDER-MID: 2px solid var(--GREEN-MID);
+    --BORDER-DARK: 2px solid var(--GREEN-DARK);
+    --BORDER-ACCENT: 2px solid var(--ACCENT-COLOR);
+    --BORDER-HELP: 1px solid red;
+
+
+    /**************** PADDING & MARGIN ****************/
+    --PADDING-LARGE: 3rem;
+    --PADDING-MED: 1.5rem;
+    --PADDING-SMALL: 0.5rem;
+    
+    --MARGIN-CENTER: 0 auto;
+    --MARGIN-LARGE: 3rem;
+    --MARGIN-MED: 1.5rem;
+    --MARGIN-SMALL: 0.5rem;
+
+    /**************** FONT SIZES ****************/
+    --FONT-LARGE: 4rem;
+    --FONT-MED: 2rem;
+    --FONT-NORMAL: 1rem;
+    --FONT-SMALL: 0.5rem;
+
+    /* etc - TODO */
+}

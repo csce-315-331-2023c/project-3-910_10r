@@ -1,0 +1,26 @@
+@import "./abstracts/variables", "./abstracts/config", "./abstracts/responsive";
+@import "./base/reset", "./base/typography";
+@import "./components/drinkPopup", "./components/keyframes"; /* will add more components here when they are made */
+@import "./pages/login"; /* will add more pages here when they are made */
+
+body {
+    min-height: 100vh;
+    background-color: var(--GREEN-MID);
+}
+
+header {
+    /* Headers are important, but idk if we have any in our Figma */
+}
+
+main {
+    /* todo */
+}
+
+footer {
+    display: flex;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 10vh;
+    background-color: var(--GREEN-DARK);
+}
