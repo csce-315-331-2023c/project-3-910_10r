@@ -1,15 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 :root {
+  /* 
+      Most of these variables that use units (px, rem, em, etc) 
+      should use the clamp function to minimize the amount of responsive code, 
+      but we're not there yet - idk if we wanna do mobile-friendly design
+  */
   /**************** COLORS ****************/
-  --BG-COLOR: #f0f0f0;
-  --ACCENT-COLOR: rgb(255, 240, 145);
+  --ACCENT-COLOR: hsl(0, 86%, 81%);
   --GREEN-LIGHT: #F6FFF8;
-  --GREEN-MID: #CCE3DE;
-  --GREEN-MID60: hsla(167, 29%, 85%, 0.60);
+  --GREEN-MED: #CCE3DE;
+  --GREEN-MED60: hsla(167, 29%, 85%, 0.60);
   --GREEN-DARK: #6B9080;
   --TEXT-COLOR-LIGHT: white;
   --TEXT-COLOR-DARK: var(--GREEN-DARK);
+  --SIDEBAR-BG-COLOR: #f0f0f0;
   /* more colors for transparency and stuff */
   /**************** SHADOWS ****************/
   --LOGIN-SHADOW: 0px 0px 30px var(--GREEN-DARK);
@@ -17,7 +22,7 @@
   /**************** BORDERS ****************/
   --LOGIN-BORDER-RADIUS: 10px;
   --BUTTON-BORDER-RADIUS: 5px;
-  --BORDER-MID: 2px solid var(--GREEN-MID);
+  --BORDER-MED: 2px solid var(--GREEN-MED);
   --BORDER-DARK: 2px solid var(--GREEN-DARK);
   --BORDER-ACCENT: 2px solid var(--ACCENT-COLOR);
   --BORDER-HELP: 1px solid red;
@@ -34,13 +39,13 @@
   --FONT-MED: 2rem;
   --FONT-NORMAL: 1rem;
   --FONT-SMALL: 0.5rem;
-  /* etc - TODO */
+  /* etc */
 }
 
 /* functions, mixins, and placeholders - TODO */
 /* basic functions and presets and mixins go here */
 /**************** HELPERS ****************/
-.login-title {
+.semantic-heading {
   position: absolute;
   left: -10000px;
 }
@@ -79,8 +84,65 @@ form, input, button, input, textarea {
         dropdowns, 
         etc
 */
+.drinkSidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 93vh;
+  width: 22vw;
+  background-color: var(--SIDEBAR-BG-COLOR);
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: column nowrap;
+      flex-flow: column nowrap;
+  -ms-flex-align: center;
+      align-items: center;
+  padding: 0 var(--PADDING-MED);
+  /* TODO */
+}
+.drinkSidebar__header {
+  text-align: center;
+  font-size: var(--FONT-MED);
+}
+.drinkSidebar__bill {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: column nowrap;
+      flex-flow: column nowrap;
+  -ms-flex-align: end;
+      align-items: end;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+.drinkSidebar__btn {
+  background-color: var(--ACCENT-COLOR);
+  width: 100%;
+  height: 7%;
+}
+
+footer {
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 7vh;
+  width: 100%;
+  background-color: var(--GREEN-DARK);
+  z-index: 1;
+  /* GONNA HAVE A LOT MORE STUFF 
+      - weather
+      - time
+      - translate
+      - icons (fontawesome) 
+  */
+}
+
+/* header {
+    TODO
+    Headers are important, but idk if we have any in our Figma 
+} */
 /* animations and stuff will go here */
-/* will add more components here when they are made */
 /* For each HTML page, there will be respective scss file */
 .login {
   background-color: white;
@@ -107,7 +169,7 @@ form, input, button, input, textarea {
   padding: var(--PADDING-SMALL);
   width: 100%;
   border: none;
-  background-color: var(--GREEN-MID60);
+  background-color: var(--GREEN-MED60);
   color: var(--TEXT-COLOR-DARK);
   transition: box-shadow 0.25s;
 }
@@ -163,27 +225,13 @@ form, input, button, input, textarea {
   filter: brightness(0.9);
 }
 
-/* will add more pages here when they are made */
+/* GLOBAL STYLES GO HERE */
 body {
   min-height: 100vh;
-  background-color: var(--GREEN-MID);
-}
-
-header {
-  /* Headers are important, but idk if we have any in our Figma */
+  background-color: var(--GREEN-MED);
 }
 
 main {
-  /* todo */
-}
-
-footer {
-  display: -ms-flexbox;
-  display: flex;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  height: 7vh;
-  width: 100%;
-  background-color: var(--GREEN-DARK);
+  overflow: auto;
+  background-color: var(--GREEN-MED);
 }/*# sourceMappingURL=main.css.map */

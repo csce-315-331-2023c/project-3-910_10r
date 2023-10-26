@@ -1,15 +1,22 @@
 :root {
+    /* 
+        Most of these variables that use units (px, rem, em, etc) 
+        should use the clamp function to minimize the amount of responsive code, 
+        but we're not there yet - idk if we wanna do mobile-friendly design
+    */
+
     /**************** COLORS ****************/
-    --BG-COLOR: #f0f0f0;
-    --ACCENT-COLOR: rgb(255, 240, 145);
+    --ACCENT-COLOR: hsl(0, 86%, 81%);
 
     --GREEN-LIGHT: #F6FFF8;
-    --GREEN-MID: #CCE3DE;
-    --GREEN-MID60: hsla(167, 29%, 85%, 0.60);
+    --GREEN-MED: #CCE3DE;
+    --GREEN-MED60: hsla(167, 29%, 85%, 0.60);
     --GREEN-DARK: #6B9080;
 
     --TEXT-COLOR-LIGHT: white;
     --TEXT-COLOR-DARK: var(--GREEN-DARK);
+
+    --SIDEBAR-BG-COLOR: #f0f0f0;
 
     /* more colors for transparency and stuff */
 
@@ -22,7 +29,7 @@
     --LOGIN-BORDER-RADIUS: 10px;
     --BUTTON-BORDER-RADIUS: 5px;
 
-    --BORDER-MID: 2px solid var(--GREEN-MID);
+    --BORDER-MED: 2px solid var(--GREEN-MED);
     --BORDER-DARK: 2px solid var(--GREEN-DARK);
     --BORDER-ACCENT: 2px solid var(--ACCENT-COLOR);
     --BORDER-HELP: 1px solid red;
@@ -44,5 +51,5 @@
     --FONT-NORMAL: 1rem;
     --FONT-SMALL: 0.5rem;
 
-    /* etc - TODO */
+    /* etc */
 }
