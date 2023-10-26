@@ -8,6 +8,7 @@
   */
   /**************** COLORS ****************/
   --ACCENT-COLOR: hsl(0, 86%, 81%);
+  --ACCENT-COLOR-LIGHT: hsl(0, 100%, 91%);
   --GREEN-LIGHT: #F6FFF8;
   --GREEN-MED: #CCE3DE;
   --GREEN-MED60: hsla(167, 29%, 85%, 0.60);
@@ -19,6 +20,10 @@
   /**************** SHADOWS ****************/
   --LOGIN-SHADOW: 0px 0px 30px var(--GREEN-DARK);
   --BUTTON-SHADOW: 0px 0px 5px var(--GREEN-DARK);
+  --BUTTON-SHADOW-ACCENT: 0px 0px 5px var(--ACCENT-COLOR);
+  --TEXT-SHADOW-LIGHT: 0px 0px 3px var(--GREEN-MED);
+  --TEXT-SHADOW-DARK: 0px 0px 3px var(--GREEN-DARK);
+  --TEXT-SHADOW-ACCENT: 0px 0px 3px var(--ACCENT-COLOR-LIGHT);
   /**************** BORDERS ****************/
   --LOGIN-BORDER-RADIUS: 10px;
   --BUTTON-BORDER-RADIUS: 5px;
@@ -37,13 +42,13 @@
   /**************** FONT SIZES ****************/
   --FONT-LARGE: 4rem;
   --FONT-MED: 2rem;
+  --FONT-MED-NORMAL: 1.5rem;
   --FONT-NORMAL: 1rem;
   --FONT-SMALL: 0.5rem;
   /* etc */
 }
 
-/* functions, mixins, and placeholders - TODO */
-/* basic functions and presets and mixins go here */
+/* basic helper functions, mixins, and presets go here */
 /**************** HELPERS ****************/
 .semantic-heading {
   position: absolute;
@@ -73,6 +78,10 @@ form, input, button, input, textarea {
   font: inherit;
 }
 
+.login__form-btn-container .login__form-btn, .drinkSidebar__btn {
+  transition: box-shadow 0.25s, text-shadow 0.25s, filter 0.15s;
+}
+
 /* 
     For each feature, there will be a respective scss file
     Examples include, 
@@ -89,7 +98,7 @@ form, input, button, input, textarea {
   top: 0;
   right: 0;
   height: 93vh;
-  width: 22vw;
+  width: clamp(175px, 22vw, 300px);
   background-color: var(--SIDEBAR-BG-COLOR);
   display: -ms-flexbox;
   display: flex;
@@ -98,6 +107,13 @@ form, input, button, input, textarea {
   -ms-flex-align: center;
       align-items: center;
   padding: 0 var(--PADDING-MED);
+  padding-bottom: var(--PADDING-MED);
+}
+.drinkSidebar__panel {
+  /* background-color: white; */
+  -ms-flex-positive: 2;
+      flex-grow: 2;
+  width: 100%;
   /* TODO */
 }
 .drinkSidebar__header {
@@ -110,14 +126,40 @@ form, input, button, input, textarea {
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap;
   -ms-flex-align: end;
-      align-items: end;
+      align-items: flex-end;
   -ms-flex-pack: center;
       justify-content: center;
+  padding: var(--PADDING-SMALL) 0;
+  width: 100%;
+}
+.drinkSidebar__bill p {
+  padding: 0 var(--PADDING-SMALL);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.drinkSidebar__bill p span {
+  text-align: end;
+}
+.drinkSidebar__bill p:last-child {
+  border-top: var(--BORDER-DARK);
 }
 .drinkSidebar__btn {
+  font-size: var(--FONT-MED-NORMAL);
+  color: var(--TEXT-COLOR-LIGHT);
   background-color: var(--ACCENT-COLOR);
   width: 100%;
   height: 7%;
+  border: none;
+  border-radius: var(--BUTTON-BORDER-RADIUS);
+  cursor: pointer;
+}
+.drinkSidebar__btn:hover, .drinkSidebar__btn:focus-visible {
+  box-shadow: var(--BUTTON-SHADOW-ACCENT);
+  text-shadow: var(--TEXT-SHADOW-ACCENT);
+}
+.drinkSidebar__btn:active {
+  filter: brightness(0.9);
 }
 
 footer {
@@ -187,6 +229,7 @@ footer {
   box-shadow: var(--BUTTON-SHADOW);
 }
 .login__form-btn-container {
+  margin-top: var(--MARGIN-SMALL);
   width: 100%;
   display: -ms-flexbox;
   display: flex;
@@ -199,30 +242,23 @@ footer {
   -ms-flex-preferred-size: 50%;
       flex-basis: 50%;
   border: var(--BORDER-DARK);
-  transition: color 0.25s, background-color 0.25s, box-shadow 0.25s;
   cursor: pointer;
+  border-radius: var(--BUTTON-BORDER-RADIUS);
+}
+.login__form-btn-container .login__form-btn:hover, .login__form-btn-container .login__form-btn:focus-visible {
+  box-shadow: var(--BUTTON-SHADOW);
+  text-shadow: var(--TEXT-SHADOW-LIGHT);
+}
+.login__form-btn-container .login__form-btn:active {
+  filter: brightness(0.9);
 }
 .login__form-btn-container #loginResetBtn {
   background-color: var(--TEXT-COLOR-LIGHT);
   color: var(--TEXT-COLOR-DARK);
 }
-.login__form-btn-container #loginResetBtn:hover, .login__form-btn-container #loginResetBtn:focus-visible {
-  box-shadow: var(--BUTTON-SHADOW);
-  /* TODO */
-}
-.login__form-btn-container #loginResetBtn:active {
-  filter: brightness(0.9);
-}
 .login__form-btn-container #loginSubmitBtn {
   background-color: var(--GREEN-DARK);
   color: var(--TEXT-COLOR-LIGHT);
-}
-.login__form-btn-container #loginSubmitBtn:hover, .login__form-btn-container #loginSubmitBtn:focus-visible {
-  box-shadow: var(--BUTTON-SHADOW);
-  /* TODO */
-}
-.login__form-btn-container #loginSubmitBtn:active {
-  filter: brightness(0.9);
 }
 
 /* GLOBAL STYLES GO HERE */

@@ -1,5 +1,3 @@
-/* For each HTML page, there will be respective scss file */
-
 .login {
     background-color: white;
     display: block;
@@ -43,6 +41,7 @@
         }
 
         &-btn-container {
+            margin-top: var(--MARGIN-SMALL);
             width: 100%;
             display: flex;
             flex-flow: row nowrap;
@@ -52,36 +51,20 @@
                 padding: var(--PADDING-SMALL);
                 flex-basis: 50%;
                 border: var(--BORDER-DARK);
-                transition: color 0.25s, background-color 0.25s, box-shadow 0.25s;
                 cursor: pointer;
+                border-radius: var(--BUTTON-BORDER-RADIUS);
+                @extend %button-transitions;
+                @include button-interact(var(--BUTTON-SHADOW), var(--TEXT-SHADOW-LIGHT));
             }
 
             #loginResetBtn {
                 background-color: var(--TEXT-COLOR-LIGHT);
                 color: var(--TEXT-COLOR-DARK);
-
-                &:hover, &:focus-visible {
-                    box-shadow: var(--BUTTON-SHADOW);
-                    /* TODO */
-                }
-
-                &:active {
-                    filter: brightness(0.9);
-                }
             }
 
             #loginSubmitBtn {
                 background-color: var(--GREEN-DARK);
                 color: var(--TEXT-COLOR-LIGHT);
-
-                &:hover, &:focus-visible {
-                    box-shadow: var(--BUTTON-SHADOW);
-                    /* TODO */
-                }
-
-                &:active {
-                    filter: brightness(0.9);
-                }
             }
         }
     }

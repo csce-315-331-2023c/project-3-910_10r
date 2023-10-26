@@ -7,6 +7,7 @@
 
     /**************** COLORS ****************/
     --ACCENT-COLOR: hsl(0, 86%, 81%);
+    --ACCENT-COLOR-LIGHT: hsl(0, 100%, 91%);
 
     --GREEN-LIGHT: #F6FFF8;
     --GREEN-MED: #CCE3DE;
@@ -23,6 +24,11 @@
     /**************** SHADOWS ****************/
     --LOGIN-SHADOW: 0px 0px 30px var(--GREEN-DARK);
     --BUTTON-SHADOW: 0px 0px 5px var(--GREEN-DARK);
+    --BUTTON-SHADOW-ACCENT: 0px 0px 5px var(--ACCENT-COLOR);
+
+    --TEXT-SHADOW-LIGHT: 0px 0px 3px var(--GREEN-MED);
+    --TEXT-SHADOW-DARK: 0px 0px 3px var(--GREEN-DARK);
+    --TEXT-SHADOW-ACCENT: 0px 0px 3px var(--ACCENT-COLOR-LIGHT);
 
 
     /**************** BORDERS ****************/
@@ -48,6 +54,7 @@
     /**************** FONT SIZES ****************/
     --FONT-LARGE: 4rem;
     --FONT-MED: 2rem;
+    --FONT-MED-NORMAL: 1.5rem;
     --FONT-NORMAL: 1rem;
     --FONT-SMALL: 0.5rem;
 
