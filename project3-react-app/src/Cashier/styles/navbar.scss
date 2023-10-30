@@ -1,0 +1,22 @@
+.navvvv{
+    position: fixed;
+    width: 180px;
+    z-index: 200;
+    
+  }
+
+  .navvvv-bar{
+    overflow: scroll;
+    font-size: 25px;
+    height: 100vh;
+  }
+
+  .navvvv-category{
+    background-color: #F6FFF8;
+    height: 136px;
+    width: 100%;
+  }
+
+  .navvvv-category:hover{
+    background-color: #d5e7d9;
+  }
