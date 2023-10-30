@@ -1,2 +1,4 @@
 *.map
 *.txt
+*node_modules*
+.env

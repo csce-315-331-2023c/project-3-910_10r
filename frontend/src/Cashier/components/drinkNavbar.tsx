@@ -1,5 +1,5 @@
 import DrinkCategory from "./drinkCategories";
-import "../styles/navbar.scss";
+import "../styles/drinkNavbar.scss";
 
 function Navigationbar() {
   let items = [
@@ -13,8 +13,8 @@ function Navigationbar() {
   ];
 
   return (
-    <div className="navvvv">
-      <div className="navvvv-bar">
+    <div className="nav">
+      <div className="nav-bar">
         {items.map((item, index) => (
           <DrinkCategory key={item} onClick={() => console.log({ item })}>
             {item}

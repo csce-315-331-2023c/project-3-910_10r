@@ -31,7 +31,7 @@
 //     </>
 //   );
 // }
-import "../styles/navbar.scss";
+import "../styles/drinkNavbar.scss";
 
 interface Props {
   children: string;
@@ -40,7 +40,7 @@ interface Props {
 
 const drinkCategories = ({ children, onClick }: Props) => {
   return (
-    <button className="navvvv-category" onClick={onClick}>
+    <button className="nav-category" onClick={onClick}>
       {children}
     </button>
   );
