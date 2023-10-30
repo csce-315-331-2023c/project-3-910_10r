@@ -58,7 +58,6 @@
         border: none;
         border-radius: var(--BUTTON-BORDER-RADIUS);
         cursor: pointer;
-        @extend %button-transitions;
         @include button-interact(var(--BUTTON-SHADOW-ACCENT), var(--TEXT-SHADOW-ACCENT));
     }
 }

@@ -53,7 +53,6 @@
                 border: var(--BORDER-DARK);
                 cursor: pointer;
                 border-radius: var(--BUTTON-BORDER-RADIUS);
-                @extend %button-transitions;
                 @include button-interact(var(--BUTTON-SHADOW), var(--TEXT-SHADOW-LIGHT));
             }
 

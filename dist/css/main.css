@@ -75,14 +75,11 @@ body {
   font-family: "Poppins", "Montserrat", "Times New Roman", Times, serif;
 }
 
-form, input, button, input, textarea {
+form, input, button, label, textarea {
   font: inherit;
 }
 
-.login__form-btn-container .login__form-btn, .drinkSidebar__btn {
-  transition: box-shadow 0.25s, text-shadow 0.25s, filter 0.15s;
-}
-
+/* All font awesome related code goes here */
 /* 
     For each feature, there will be a respective scss file
     Examples include, 
@@ -155,6 +152,7 @@ form, input, button, input, textarea {
   border: none;
   border-radius: var(--BUTTON-BORDER-RADIUS);
   cursor: pointer;
+  transition: box-shadow 0.25s, text-shadow 0.25s, filter 0.15s;
 }
 .drinkSidebar__btn:hover, .drinkSidebar__btn:focus-visible {
   box-shadow: var(--BUTTON-SHADOW-ACCENT);
@@ -282,6 +280,7 @@ footer {
   border: var(--BORDER-DARK);
   cursor: pointer;
   border-radius: var(--BUTTON-BORDER-RADIUS);
+  transition: box-shadow 0.25s, text-shadow 0.25s, filter 0.15s;
 }
 .login__form-btn-container .login__form-btn:hover, .login__form-btn-container .login__form-btn:focus-visible {
   box-shadow: var(--BUTTON-SHADOW);
