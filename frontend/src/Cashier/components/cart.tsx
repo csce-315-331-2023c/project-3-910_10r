@@ -7,7 +7,7 @@ interface order {
   name: string;
   ice: string;
   sugar: string;
-  topping: string;
+  topping: string[];
   price: string;
 }
 

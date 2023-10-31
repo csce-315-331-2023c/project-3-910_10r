@@ -1,12 +1,13 @@
 import Topping from "./topping";
 import "../styles/drinkCustomize.scss";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 interface order {
   name: string;
   ice: string;
   sugar: string;
-  topping: string;
+  topping: string[];
   price: string;
 }
 
@@ -38,6 +39,13 @@ function DrinkCustomize({ name, updateOrder }: Props) {
     setSelectedSugarButton(buttonId);
   };
 
+  let _order: order = {
+    name: name,
+    ice: "",
+    sugar: "",
+    topping: [],
+    price: "$0.00",
+  };
   const calculateSelections = () => {
     console.log(selectedButton, selectedSugarButton);
     pcount > 0 && console.log("pearls : " + pcount);
@@ -49,14 +57,6 @@ function DrinkCustomize({ name, updateOrder }: Props) {
     ljcount > 0 && console.log("lychee jelly : " + ljcount);
     rbcount > 0 && console.log("red bean : " + rbcount);
     ajcount > 0 && console.log("aiyu jelly : " + ajcount);
-
-    let _order: order = {
-      name: name,
-      ice: "",
-      sugar: "",
-      topping: "",
-      price: "",
-    };
 
     if (selectedButton === 1) {
       _order.ice = "regular ice";
@@ -83,37 +83,36 @@ function DrinkCustomize({ name, updateOrder }: Props) {
     }
 
     if (pcount > 0) {
-      _order.topping += "pearls x" + pcount + "\n";
+      _order.topping.push("pearls x" + pcount);
     }
     if (avcount > 0) {
-      _order.topping += "aloe vera x" + avcount + "\n";
     }
+    _order.topping.push("aloe vera x" + avcount);
+
     if (hjcount > 0) {
-      _order.topping += "herb jelly x" + hjcount + "\n";
+      _order.topping.push("herb jelly x" + hjcount);
     }
     if (pucount > 0) {
-      _order.topping += "pudding x" + pucount + "\n";
+      _order.topping.push("pudding x" + pucount);
     }
     if (mpcount > 0) {
-      _order.topping += "mini pearls x" + mpcount + "\n";
+      _order.topping.push("mini pearls x" + mpcount);
     }
     if (cbcount > 0) {
-      _order.topping += "crystal boba x" + cbcount + "\n";
+      _order.topping.push("crystal boba x" + cbcount);
     }
     if (ljcount > 0) {
-      _order.topping += "lychee jelly x" + ljcount + "\n";
+      _order.topping.push("lychee jelly x" + ljcount);
     }
     if (rbcount > 0) {
-      _order.topping += "red bean x" + rbcount + "\n";
+      _order.topping.push("red bean x" + rbcount);
     }
     if (ajcount > 0) {
-      _order.topping += "aiyu jelly x" + ajcount + "\n";
+      _order.topping.push("aiyu jelly x" + ajcount);
     }
-    //query database
 
     updateOrder(_order);
     resetCount();
-    console.log(_order.topping);
   };
 
   const resetCount = () => {
@@ -130,6 +129,24 @@ function DrinkCustomize({ name, updateOrder }: Props) {
     setSelectedButton(1);
     setSelectedSugarButton(1);
   };
+
+  //query database
+  let [backendData, setData] = useState<string>("");
+
+  useEffect(() => {
+    // Make a GET request to your backend API
+    axios
+      .get("http://localhost:8000/cashier/price?parameter=" + name)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  _order.price = backendData;
+  console.log(backendData);
 
   return (
     <div className="customize">

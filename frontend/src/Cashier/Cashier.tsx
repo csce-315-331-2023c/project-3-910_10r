@@ -9,7 +9,7 @@ interface order {
   name: string;
   ice: string;
   sugar: string;
-  topping: string;
+  topping: string[];
   price: string;
 }
 
@@ -31,7 +31,7 @@ function Cashier() {
       <Cart orders={orders}></Cart>
       <Drinks></Drinks>
       <DrinkCustomize
-        name="Classic Milk Tea"
+        name="Honey milk tea"
         updateOrder={updateOrder}
       ></DrinkCustomize>
     </div>
