@@ -112,6 +112,23 @@ function DrinkCustomize({ name, updateOrder }: Props) {
     //query database
 
     updateOrder(_order);
+    resetCount();
+    console.log(_order.topping);
+  };
+
+  const resetCount = () => {
+    setPCount(0);
+    setAVCount(0);
+    setHJCount(0);
+    setPUCount(0);
+    setMPCount(0);
+    setMPCount(0);
+    setCBCount(0);
+    setLJCount(0);
+    setRBCount(0);
+    setAJCount(0);
+    setSelectedButton(1);
+    setSelectedSugarButton(1);
   };
 
   return (
