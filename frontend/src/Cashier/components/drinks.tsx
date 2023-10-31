@@ -32,15 +32,19 @@ function drinks({
     >
       <div className="drinks-bound">
         <div className="drinks-grid">
-          {drinks.map((item, index) => (
-            <Drink
-              key={item}
-              setShowCustomizationPage={setShowCustomizationPage}
-              setDrinkName={setDrinkName}
-            >
-              {item}
-            </Drink>
-          ))}
+          {drinks.length === 0 ? (
+            <div>Loading</div>
+          ) : (
+            drinks.map((item, index) => (
+              <Drink
+                key={item}
+                setShowCustomizationPage={setShowCustomizationPage}
+                setDrinkName={setDrinkName}
+              >
+                {item}
+              </Drink>
+            ))
+          )}
         </div>
       </div>
     </div>

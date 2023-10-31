@@ -33,6 +33,7 @@ function Cashier() {
   const [drinks, setDrinks] = useState<{ [key: string]: string[] }>({});
   // keeps track of all categories
   const [categories, setCatogories] = useState<string[]>([]);
+  const [loaded, setLoaded] = useState<boolean>(false);
 
   const updateOrder = (newOrder: order) => {
     setOrders((prevArray) => [...prevArray, newOrder]);
@@ -56,6 +57,7 @@ function Cashier() {
       .then((response) => {
         setDrinks(response.data);
         console.log(response.data);
+        setLoaded(true);
       })
       .catch((error) => {
         console.error(error);
@@ -63,30 +65,40 @@ function Cashier() {
   }, []);
 
   return (
-    <div
-      style={{
-        position: "relative",
-      }}
-    >
-      <Footer></Footer>
-      <Navigationbar
-        showCustomizationPage={showCustomizationPage}
-        setCatogory={setCatogory}
-        category={categories}
-      ></Navigationbar>
-      <Cart orders={orders}></Cart>
-      <Drinks
-        setShowCustomizationPage={setShowCustomizationPage}
-        showCustomizationPage={showCustomizationPage}
-        setDrinkName={setDrinkName}
-        drinks={category === "" ? drinks[categories[0]] : drinks[category]}
-      ></Drinks>
-      {showCustomizationPage && (
-        <DrinkCustomize
-          name={drinkName}
-          updateOrder={updateOrder}
-          setShowCustomizationPage={setShowCustomizationPage}
-        ></DrinkCustomize>
+    <div style={{ position: "relative" }}>
+      {loaded ? (
+        <>
+          <Footer></Footer>
+          <Navigationbar
+            showCustomizationPage={showCustomizationPage}
+            setCatogory={setCatogory}
+            category={categories}
+          ></Navigationbar>
+          <Cart orders={orders}></Cart>
+          <Drinks
+            setShowCustomizationPage={setShowCustomizationPage}
+            showCustomizationPage={showCustomizationPage}
+            setDrinkName={setDrinkName}
+            drinks={category === "" ? drinks[categories[0]] : drinks[category]}
+          ></Drinks>
+          {showCustomizationPage && (
+            <DrinkCustomize
+              name={drinkName}
+              updateOrder={updateOrder}
+              setShowCustomizationPage={setShowCustomizationPage}
+            ></DrinkCustomize>
+          )}
+        </>
+      ) : (
+        <div
+          style={{
+            height: "100vh",
+            width: "100vw",
+            backgroundColor: "var(--GREEN-MED)",
+          }}
+        >
+          Loading
+        </div>
       )}
     </div>
   );

@@ -1,14 +1,14 @@
 .drinks{
     height: 100vh;
     width: 100vw;
-    background-color: #CCE3DE; 
+    background-color: var(--GREEN-MED); 
     
 }
 
 .drinks-selected{
     height: 100vh;
     width: 100vw;
-    background-color: #CCE3DE; 
+    background-color: var(--GREEN-MED); 
     filter:brightness(20%);
 }
 
