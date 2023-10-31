@@ -114,3 +114,13 @@
 .customize-confirm:active{
     background-color: var(--ON-ACTIVE);
 }
+
+.customize-exit{
+    position: absolute;
+    background-color: var(--GREEN-MED);
+    border: none;
+    font-size: 40px;
+    right: 15px;
+    top: 0px;
+    cursor: pointer;
+}

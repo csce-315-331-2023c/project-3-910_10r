@@ -41,6 +41,7 @@ function Cashier() {
         <DrinkCustomize
           name="Honey milk tea"
           updateOrder={updateOrder}
+          setShowCustomizationPage={setShowCustomizationPage}
         ></DrinkCustomize>
       )}
     </div>

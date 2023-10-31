@@ -14,8 +14,13 @@ interface order {
 interface Props {
   name: string;
   updateOrder: (newOrder: order) => void;
+  setShowCustomizationPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
-function DrinkCustomize({ name, updateOrder }: Props) {
+function DrinkCustomize({
+  name,
+  updateOrder,
+  setShowCustomizationPage,
+}: Props) {
   const [selectedButton, setSelectedButton] = useState<number | null>(1);
   const [selectedSugarButton, setSelectedSugarButton] = useState<number | null>(
     1
@@ -171,6 +176,12 @@ function DrinkCustomize({ name, updateOrder }: Props) {
 
   return (
     <div className="customize">
+      <button
+        className="customize-exit"
+        onClick={() => setShowCustomizationPage(false)}
+      >
+        X
+      </button>
       <div className="customize-grid">
         <div className="customize-drink">{name}</div>
         <div className="ice">
