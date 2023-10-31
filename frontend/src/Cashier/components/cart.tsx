@@ -13,17 +13,26 @@ interface order {
 
 interface Props {
   orders: order[];
+  setOrders: React.Dispatch<React.SetStateAction<order[]>>;
   setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Cart({ orders, setPayPage }: Props) {
+function Cart({ orders, setOrders, setPayPage }: Props) {
   let totalPrice = 0;
   const updatePrice = (price: number) => {
     totalPrice += price;
   };
+
   const navigateToPayPage = () => {
     setPayPage(true);
   };
+
+  const removeChild = (index: number) => {
+    const updatedComponents = [...orders];
+    updatedComponents.splice(index, 1);
+    setOrders(updatedComponents);
+  };
+
   return (
     <div className="cart">
       <div className="cart-title">Cart</div>
@@ -37,6 +46,7 @@ function Cart({ orders, setPayPage }: Props) {
               sugar={_order.sugar}
               topping={_order.topping}
               price={_order.price}
+              onRemove={() => removeChild(index)}
             ></Order>
             {updatePrice(+_order.price)}
           </>

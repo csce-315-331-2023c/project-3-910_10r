@@ -73,7 +73,11 @@ function Cashier({ setPayPage }: Props) {
             setCatogory={setCatogory}
             category={categories}
           ></Navigationbar>
-          <Cart orders={orders} setPayPage={setPayPage}></Cart>
+          <Cart
+            orders={orders}
+            setOrders={setOrders}
+            setPayPage={setPayPage}
+          ></Cart>
           <Drinks
             setShowCustomizationPage={setShowCustomizationPage}
             showCustomizationPage={showCustomizationPage}

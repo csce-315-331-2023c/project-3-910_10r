@@ -6,9 +6,10 @@ interface Props {
   sugar: string;
   topping: string[];
   price: string;
+  onRemove: () => void;
 }
 
-const order = ({ name, ice, sugar, topping, price }: Props) => {
+const order = ({ name, ice, sugar, topping, price, onRemove }: Props) => {
   return (
     <>
       <div className="order">
@@ -23,6 +24,9 @@ const order = ({ name, ice, sugar, topping, price }: Props) => {
           </div>
         </div>
         <div className="order-price">{price}</div>
+        <button className="order-cancel" onClick={onRemove}>
+          X
+        </button>
       </div>
     </>
   );
