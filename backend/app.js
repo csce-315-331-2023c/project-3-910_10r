@@ -52,6 +52,32 @@ app.get("/cashier/drinkCategory", (req, res) => {
     });
 });
 
+app.get("/cashier/drinkAndCategories", (req, res) => {
+  let command = "SELECT category, drinkname FROM recipes;";
+  const categoryMap = {};
+  pool
+    .query(command)
+    .then((query_res) => {
+      query_res.rows.forEach((row) => {
+        const category = row.category;
+        const drinkname = row.drinkname;
+
+        if (category in categoryMap) {
+          categoryMap[category].push(drinkname);
+        } else {
+          categoryMap[category] = [drinkname];
+        }
+      });
+      res.send(categoryMap);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when selecting categories from recipes",
+      });
+    });
+});
+
 // app.get("/api", (req, res) => {
 //   res.json("user1");
 // });

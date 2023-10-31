@@ -5,27 +5,23 @@ import axios from "axios";
 
 interface Props {
   showCustomizationPage: boolean;
+  setCatogory: React.Dispatch<React.SetStateAction<string>>;
+  category: string[];
 }
 
-function Navigationbar({ showCustomizationPage }: Props) {
-  const [items, setItems] = useState<string[]>([]);
+function Navigationbar({
+  showCustomizationPage,
+  setCatogory,
+  category,
+}: Props) {
+  // keeps track of the drink categories
+  //
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/cashier/drinkCategory")
-      .then((response) => {
-        setItems(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
   return (
     <div className={`${showCustomizationPage ? "nav-selected" : "nav"}`}>
       <div className="nav-bar">
-        {items.map((item, index) => (
-          <DrinkCategory key={item} onClick={() => console.log({ item })}>
+        {category.map((item, index) => (
+          <DrinkCategory key={item} onClick={() => setCatogory(item)}>
             {item}
           </DrinkCategory>
         ))}
