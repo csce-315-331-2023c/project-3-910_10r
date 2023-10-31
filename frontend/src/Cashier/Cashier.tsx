@@ -95,6 +95,8 @@ function Cashier() {
             height: "100vh",
             width: "100vw",
             backgroundColor: "var(--GREEN-MED)",
+            color: "black",
+            fontSize: "30px",
           }}
         >
           Loading

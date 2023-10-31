@@ -52,6 +52,7 @@ function DrinkCustomize({
     price: "0.00",
   };
   const calculateSelections = () => {
+    setShowCustomizationPage(false);
     console.log(selectedButton, selectedSugarButton);
     pcount > 0 && console.log("pearls : " + pcount);
     avcount > 0 && console.log("aloe vera : " + avcount);
