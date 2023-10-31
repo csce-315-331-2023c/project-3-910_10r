@@ -1,7 +1,11 @@
 import DrinkCategory from "./drinkCategories";
 import "../styles/drinkNavbar.scss";
 
-function Navigationbar() {
+interface Props {
+  showCustomizationPage: boolean;
+}
+
+function Navigationbar({ showCustomizationPage }: Props) {
   let items = [
     "Milk Tea",
     "Fruit Tea",
@@ -13,7 +17,7 @@ function Navigationbar() {
   ];
 
   return (
-    <div className="nav">
+    <div className={`${showCustomizationPage ? "nav-selected" : "nav"}`}>
       <div className="nav-bar">
         {items.map((item, index) => (
           <DrinkCategory key={item} onClick={() => console.log({ item })}>

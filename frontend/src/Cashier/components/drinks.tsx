@@ -1,7 +1,13 @@
 import Drink from "./drink.tsx";
 import "../styles/drinksMainSection.scss";
+import React from "react";
 
-function drinks() {
+interface Props {
+  setShowCustomizationPage: React.Dispatch<React.SetStateAction<boolean>>;
+  showCustomizationPage: boolean;
+}
+
+function drinks({ setShowCustomizationPage, showCustomizationPage }: Props) {
   let drinkNames = [
     "Classic milk tea",
     "Honey milk tea",
@@ -11,11 +17,19 @@ function drinks() {
     "Fresh matcha milk tea",
   ];
   return (
-    <div className="drinks">
+    <div
+      //className="drinks"
+      className={`${showCustomizationPage ? "drinks-selected" : "drinks"}`}
+    >
       <div className="drinks-bound">
         <div className="drinks-grid">
           {drinkNames.map((item, index) => (
-            <Drink key={item}>{item}</Drink>
+            <Drink
+              key={item}
+              setShowCustomizationPage={setShowCustomizationPage}
+            >
+              {item}
+            </Drink>
           ))}
         </div>
       </div>

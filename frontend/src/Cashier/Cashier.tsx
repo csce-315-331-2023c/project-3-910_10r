@@ -15,6 +15,8 @@ interface order {
 
 function Cashier() {
   const [orders, setOrders] = useState<order[]>([]);
+  const [showCustomizationPage, setShowCustomizationPage] =
+    useState<boolean>(false);
 
   const updateOrder = (newOrder: order) => {
     setOrders((prevArray) => [...prevArray, newOrder]);
@@ -27,13 +29,20 @@ function Cashier() {
       }}
     >
       <Footer></Footer>
-      <Navigationbar></Navigationbar>
+      <Navigationbar
+        showCustomizationPage={showCustomizationPage}
+      ></Navigationbar>
       <Cart orders={orders}></Cart>
-      <Drinks></Drinks>
-      <DrinkCustomize
-        name="Honey milk tea"
-        updateOrder={updateOrder}
-      ></DrinkCustomize>
+      <Drinks
+        setShowCustomizationPage={setShowCustomizationPage}
+        showCustomizationPage={showCustomizationPage}
+      ></Drinks>
+      {showCustomizationPage && (
+        <DrinkCustomize
+          name="Honey milk tea"
+          updateOrder={updateOrder}
+        ></DrinkCustomize>
+      )}
     </div>
   );
 }
