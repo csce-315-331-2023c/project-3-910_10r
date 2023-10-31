@@ -14,12 +14,11 @@ interface order {
   price: string;
 }
 
-// interface drinkCategory {
-//   category: "";
-//   drinks: [];
-// }
+interface Props {
+  setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-function Cashier() {
+function Cashier({ setPayPage }: Props) {
   // keeps track of orders in the cart
   const [orders, setOrders] = useState<order[]>([]);
   // keeps track of if drink is selected in order to dim other pages
@@ -74,7 +73,7 @@ function Cashier() {
             setCatogory={setCatogory}
             category={categories}
           ></Navigationbar>
-          <Cart orders={orders}></Cart>
+          <Cart orders={orders} setPayPage={setPayPage}></Cart>
           <Drinks
             setShowCustomizationPage={setShowCustomizationPage}
             showCustomizationPage={showCustomizationPage}

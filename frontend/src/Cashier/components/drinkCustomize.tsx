@@ -148,13 +148,6 @@ function DrinkCustomize({
     setAJCount(0);
     setSelectedButton(1);
     setSelectedSugarButton(1);
-    // _order = {
-    //   name: name,
-    //   ice: "",
-    //   sugar: "",
-    //   topping: [],
-    //   price: "$0.00",
-    // };
   };
 
   //query database

@@ -13,12 +13,16 @@ interface order {
 
 interface Props {
   orders: order[];
+  setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Cart({ orders }: Props) {
+function Cart({ orders, setPayPage }: Props) {
   let totalPrice = 0;
   const updatePrice = (price: number) => {
     totalPrice += price;
+  };
+  const navigateToPayPage = () => {
+    setPayPage(true);
   };
   return (
     <div className="cart">
@@ -44,7 +48,9 @@ function Cart({ orders }: Props) {
         total={"$" + (totalPrice * 1.0625).toFixed(2)}
       ></Checkout>
       <div className="cart-buttons">
-        <button className="cart-buttons-1">Charge</button>
+        <button className="cart-buttons-1" onClick={navigateToPayPage}>
+          Charge
+        </button>
         <button className="cart-buttons-2">Print Ticket</button>
       </div>
     </div>
