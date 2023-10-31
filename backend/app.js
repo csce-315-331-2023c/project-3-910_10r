@@ -23,16 +23,22 @@ process.on("SIGINT", function () {
   process.exit(0);
 });
 
-app.get("/user", (req, res) => {
-  teammembers = [];
-  pool.query("SELECT * FROM recipes;").then((query_res) => {
-    for (let i = 0; i < query_res.rowCount; i++) {
-      teammembers.push(query_res.rows[i]);
-    }
-    const data = { teammembers: teammembers };
-
-    res.send(teammembers);
-  });
+app.get("/cashier/price*", (req, res) => {
+  let command =
+    "SELECT price FROM recipes where drinkname = '" +
+    req.query.parameter +
+    "';";
+  console.log(command);
+  pool
+    .query(
+      "SELECT price FROM recipes where drinkname = '" +
+        req.query.parameter +
+        "';"
+    )
+    .then((query_res) => {
+      res.send(query_res.rows[0].price);
+      console.log(query_res.rows[0].price);
+    });
 });
 
 // app.get("/api", (req, res) => {

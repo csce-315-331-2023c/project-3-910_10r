@@ -44,7 +44,7 @@ function DrinkCustomize({ name, updateOrder }: Props) {
     ice: "",
     sugar: "",
     topping: [],
-    price: "$0.00",
+    price: "0.00",
   };
   const calculateSelections = () => {
     console.log(selectedButton, selectedSugarButton);
@@ -82,34 +82,48 @@ function DrinkCustomize({ name, updateOrder }: Props) {
       _order.sugar = "120% sugar";
     }
 
+    let toppingPrice: number = 0.0;
     if (pcount > 0) {
       _order.topping.push("pearls x" + pcount);
+      toppingPrice += pcount * 0.75;
     }
     if (avcount > 0) {
+      _order.topping.push("aloe vera x" + avcount);
+      toppingPrice += avcount * 0.75;
     }
-    _order.topping.push("aloe vera x" + avcount);
 
     if (hjcount > 0) {
       _order.topping.push("herb jelly x" + hjcount);
+      toppingPrice += hjcount * 0.75;
     }
     if (pucount > 0) {
       _order.topping.push("pudding x" + pucount);
+      toppingPrice += pucount * 0.75;
     }
     if (mpcount > 0) {
       _order.topping.push("mini pearls x" + mpcount);
+      toppingPrice += mpcount * 0.75;
     }
     if (cbcount > 0) {
       _order.topping.push("crystal boba x" + cbcount);
+      toppingPrice += cbcount * 0.75;
     }
     if (ljcount > 0) {
       _order.topping.push("lychee jelly x" + ljcount);
+      toppingPrice += ljcount * 0.75;
     }
     if (rbcount > 0) {
       _order.topping.push("red bean x" + rbcount);
+      toppingPrice += rbcount * 0.75;
     }
     if (ajcount > 0) {
       _order.topping.push("aiyu jelly x" + ajcount);
+      toppingPrice += ajcount * 0.75;
     }
+
+    let tmpPrice: number = +_order.price;
+    toppingPrice += tmpPrice;
+    _order.price = "" + toppingPrice.toFixed(2);
 
     updateOrder(_order);
     resetCount();
@@ -128,6 +142,13 @@ function DrinkCustomize({ name, updateOrder }: Props) {
     setAJCount(0);
     setSelectedButton(1);
     setSelectedSugarButton(1);
+    // _order = {
+    //   name: name,
+    //   ice: "",
+    //   sugar: "",
+    //   topping: [],
+    //   price: "$0.00",
+    // };
   };
 
   //query database
