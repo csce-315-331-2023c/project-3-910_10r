@@ -3,7 +3,8 @@
     grid-template-columns: 2fr 1fr 1fr;
     width: 200px;
     height: 55px;
-    background-color: #6B9080;
+    // background-color: #6B9080;
+    background-color: var(--GREEN-DARK);
     border-radius: 5px;
     align-items: center;
     justify-items: center;
@@ -42,7 +43,7 @@
 .customize{
     width: 50vw;
     height: 90vh;
-    background-color: #CCE3DE;
+    background-color: var(--GREEN-MED);
     left: 20vw;
     position: absolute;
     top: 2vh;
@@ -73,8 +74,16 @@
     background-color: white;
 }
 
+.ice-button-selected, .sugar-button-selected{
+    height: 45px;
+    background-color: var(--GREEN-DARK);
+}
+
 .ice-button:hover, .sugar-button:hover, .topping-button:hover, .customize-confirm:hover{
-    background-color: rgb(238, 238, 238);
+    background-color: var(--ON-HOVER);
+}
+.ice-button:active, .sugar-button:active, .topping-button:active, .customize-confirm:active{
+    background-color: var(--ON-ACTIVE);
 }
 
 .customize-drink{
@@ -94,4 +103,12 @@
     width: 100px;
     height: 50px;
     background-color: white;
+}
+
+.customize-confirm:hover{
+    background-color: var(--ON-HOVER);
+}
+
+.customize-confirm:active{
+    background-color: var(--ON-ACTIVE);
 }

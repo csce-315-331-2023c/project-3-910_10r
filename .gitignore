@@ -3,17 +3,3 @@
 *node_modules*
 .env
 
-backend/node_modules/.package-lock.json
-backend/node_modules/debug/CHANGELOG.md
-  backend/node_modules/debug/package.json   
-  backend/node_modules/debug/src/browser.js   
-  backend/node_modules/debug/src/common.js   
-  backend/node_modules/debug/README.md
-        backend/node_modules/debug/src/index.js
-        backend/node_modules/debug/src/node.js
-        backend/node_modules/express/README.md
-        backend/node_modules/express/package.json
-        backend/node_modules/ms/index.js
-        backend/node_modules/ms/license.md
-        backend/node_modules/ms/package.json
-        backend/node_modules/ms/readme.md
