@@ -1,0 +1,96 @@
+.topping{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    width: 200px;
+    height: 55px;
+    background-color: #6B9080;
+    border-radius: 5px;
+    align-items: center;
+    justify-items: center;
+    padding-right: 3px;
+}
+
+.topping-name{
+    color: white;
+    font-size: 20px;
+}
+
+.topping-button{
+    height: 45px;
+    width: 45px;
+    background-color: white;
+    color: black;
+    border-radius: 12px;
+}
+.topping-count{
+    height: 13px;
+    text-align: center;
+}
+
+.toppings-box{
+    display: grid;
+    width: 500px;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 10px;
+    column-gap: 30px;
+    align-items: center;
+    justify-items: center;
+}
+
+.customize{
+    width: 50vw;
+    height: 90vh;
+    background-color: #CCE3DE;
+    left: 20vw;
+    position: absolute;
+    top: 2vh;
+}
+
+.customize-grid{
+    height: 92%;
+    display: grid;
+    grid-template-rows: 0.1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.ice, .sugar, .toppings{
+    
+    margin-bottom: 20px;
+}
+
+.ice-buttons, .sugar-buttons{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 10px;
+    column-gap: 10px;
+    
+}
+
+.ice-button, .sugar-button{
+    height: 50px;
+    background-color: white;
+}
+
+.ice-button:hover, .sugar-button:hover, .topping-button:hover, .customize-confirm:hover{
+    background-color: rgb(238, 238, 238);
+}
+
+.customize-drink{
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.ice-title, .sugar-title, .toppings-title{
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.customize-confirm{
+    position: absolute;
+    right: 10px;
+    width: 100px;
+    height: 50px;
+    background-color: white;
+}

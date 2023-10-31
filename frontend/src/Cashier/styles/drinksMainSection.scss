@@ -1,9 +1,24 @@
-.drinks-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+.drinks{
+    height: 100vh;
+    width: 100vw;
+    background-color: #CCE3DE; 
+    filter:brightness(20%);
+}
+
+.drinks-bound{
+    
+    width: 50vw;
+    height: 90vh;
     margin-left: 300px;
     margin-right: 450px;
     padding-top: 50px;
+   
+}
+
+.drinks-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+   
     row-gap: 40px;
     column-gap: 40px;
 }

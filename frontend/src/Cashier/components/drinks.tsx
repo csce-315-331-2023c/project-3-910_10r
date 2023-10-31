@@ -11,11 +11,15 @@ function drinks() {
     "Fresh matcha milk tea",
   ];
   return (
-    <main className="drinks-grid">
-      {drinkNames.map((item, index) => (
-        <Drink key={item}>{item}</Drink>
-      ))}
-    </main>
+    <div className="drinks">
+      <div className="drinks-bound">
+        <div className="drinks-grid">
+          {drinkNames.map((item, index) => (
+            <Drink key={item}>{item}</Drink>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 

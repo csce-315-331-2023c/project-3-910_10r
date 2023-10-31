@@ -15,24 +15,24 @@ interface MyData {
 }
 
 function App() {
-  let [backendData, setData] = useState<MyData[]>([]);
+  // let [backendData, setData] = useState<MyData[]>([]);
 
-  useEffect(() => {
-    // Make a GET request to your backend API
-    axios
-      .get("http://localhost:8000/user")
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // Make a GET request to your backend API
+  //   axios
+  //     .get("http://localhost:8000/user")
+  //     .then((response) => {
+  //       setData(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
 
   return (
     <>
       <div
-        style={{ backgroundColor: "#CCE3DE", width: "100vw", height: "100vh" }}
+      // style={{ backgroundColor: "#CCE3DE", width: "100vw", height: "100vh" }}
       >
         <Cashier></Cashier>
       </div>
