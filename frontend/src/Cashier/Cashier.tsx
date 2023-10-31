@@ -17,6 +17,7 @@ function Cashier() {
   const [orders, setOrders] = useState<order[]>([]);
   const [showCustomizationPage, setShowCustomizationPage] =
     useState<boolean>(false);
+  const [drinkName, setDrinkName] = useState<string>("");
 
   const updateOrder = (newOrder: order) => {
     setOrders((prevArray) => [...prevArray, newOrder]);
@@ -36,10 +37,11 @@ function Cashier() {
       <Drinks
         setShowCustomizationPage={setShowCustomizationPage}
         showCustomizationPage={showCustomizationPage}
+        setDrinkName={setDrinkName}
       ></Drinks>
       {showCustomizationPage && (
         <DrinkCustomize
-          name="Honey milk tea"
+          name={drinkName}
           updateOrder={updateOrder}
           setShowCustomizationPage={setShowCustomizationPage}
         ></DrinkCustomize>

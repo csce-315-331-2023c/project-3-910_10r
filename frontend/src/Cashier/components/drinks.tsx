@@ -5,9 +5,14 @@ import React from "react";
 interface Props {
   setShowCustomizationPage: React.Dispatch<React.SetStateAction<boolean>>;
   showCustomizationPage: boolean;
+  setDrinkName: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function drinks({ setShowCustomizationPage, showCustomizationPage }: Props) {
+function drinks({
+  setShowCustomizationPage,
+  showCustomizationPage,
+  setDrinkName,
+}: Props) {
   let drinkNames = [
     "Classic milk tea",
     "Honey milk tea",
@@ -27,6 +32,7 @@ function drinks({ setShowCustomizationPage, showCustomizationPage }: Props) {
             <Drink
               key={item}
               setShowCustomizationPage={setShowCustomizationPage}
+              setDrinkName={setDrinkName}
             >
               {item}
             </Drink>
