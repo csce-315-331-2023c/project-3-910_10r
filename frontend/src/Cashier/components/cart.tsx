@@ -16,32 +16,33 @@ interface Props {
 }
 
 function Cart({ orders }: Props) {
-  //const [orders, setOrders] = useState<order[]>([]);
-  // const orders: order[] = [
-  //   // {
-  //   //   name: "Classic milk tea",
-  //   //   ice: "Light ice",
-  //   //   sugar: "50% Sugar",
-  //   //   topping: "Pearls",
-  //   //   price: "$5.95",
-  //   // },
-  // ];
+  let totalPrice = 0;
+  const updatePrice = (price: number) => {
+    totalPrice += price;
+  };
   return (
     <div className="cart">
       <div className="cart-title">Cart</div>
       <div className="cart-orders">
-        {orders.map((order, index) => (
-          <Order
-            key={index}
-            name={order.name}
-            ice={order.ice}
-            sugar={order.sugar}
-            topping={order.topping}
-            price={order.price}
-          ></Order>
+        {orders.map((_order, index) => (
+          <>
+            <Order
+              key={index}
+              name={_order.name}
+              ice={_order.ice}
+              sugar={_order.sugar}
+              topping={_order.topping}
+              price={_order.price}
+            ></Order>
+            {updatePrice(+_order.price)}
+          </>
         ))}
       </div>
-      <Checkout price="$11.90" tax="$1.20" total="$13.10"></Checkout>
+      <Checkout
+        price={"$" + totalPrice.toFixed(2)}
+        tax={"$" + (totalPrice * 0.0625).toFixed(2)}
+        total={"$" + (totalPrice * 1.0625).toFixed(2)}
+      ></Checkout>
       <div className="cart-buttons">
         <button className="cart-buttons-1">Charge</button>
         <button className="cart-buttons-2">Print Ticket</button>
