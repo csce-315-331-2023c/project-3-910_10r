@@ -3,22 +3,37 @@ import Drinks from "./components/drinks.tsx";
 import Cart from "./components/cart.tsx";
 import Footer from "./components/footer.tsx";
 import DrinkCustomize from "./components/drinkCustomize.tsx";
+import React, { useState } from "react";
+
+interface order {
+  name: string;
+  ice: string;
+  sugar: string;
+  topping: string;
+  price: string;
+}
 
 function Cashier() {
+  const [orders, setOrders] = useState<order[]>([]);
+
+  const updateOrder = (newOrder: order) => {
+    setOrders((prevArray) => [...prevArray, newOrder]);
+  };
+
   return (
     <div
       style={{
         position: "relative",
-        // width: "100vw",
-        // height: "100vh",
-        // overflow: "scroll",
       }}
     >
       <Footer></Footer>
       <Navigationbar></Navigationbar>
-      <Cart></Cart>
+      <Cart orders={orders}></Cart>
       <Drinks></Drinks>
-      <DrinkCustomize name="Classic Milk Tea"></DrinkCustomize>
+      <DrinkCustomize
+        name="Classic Milk Tea"
+        updateOrder={updateOrder}
+      ></DrinkCustomize>
     </div>
   );
 }

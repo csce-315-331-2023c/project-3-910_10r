@@ -3,10 +3,12 @@ import { useState } from "react";
 
 interface Props {
   name: string;
+  count: number;
+  setCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Topping = ({ name }: Props) => {
-  const [count, setCount] = useState(0);
+const Topping = ({ name, count, setCount }: Props) => {
+  //const [count, setCount] = useState(0);
 
   const handlePlus = () => {
     setCount(count + 1);

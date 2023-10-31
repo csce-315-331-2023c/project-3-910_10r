@@ -72,11 +72,13 @@
 .ice-button, .sugar-button{
     height: 45px;
     background-color: white;
+    color: black;
 }
 
 .ice-button-selected, .sugar-button-selected{
     height: 45px;
     background-color: var(--GREEN-DARK);
+    color: white;
 }
 
 .ice-button:hover, .sugar-button:hover, .topping-button:hover, .customize-confirm:hover{
