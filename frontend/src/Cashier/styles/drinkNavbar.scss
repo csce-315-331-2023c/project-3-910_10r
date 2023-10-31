@@ -2,6 +2,7 @@
     position: fixed;
     width: 180px;
     z-index: 200;
+    height: 94vh;
   }
 
   .nav-selected{
@@ -14,7 +15,7 @@
   .nav-bar{
     overflow: scroll;
     font-size: 25px;
-    height: 100vh;
+    height: 100%;
   }
 
   .nav-category{

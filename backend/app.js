@@ -28,16 +28,27 @@ app.get("/cashier/price*", (req, res) => {
     "SELECT price FROM recipes where drinkname = '" +
     req.query.parameter +
     "';";
-  console.log(command);
+  pool.query(command).then((query_res) => {
+    res.send(query_res.rows[0].price);
+  });
+});
+
+app.get("/cashier/drinkCategory", (req, res) => {
+  let command = "SELECT DISTINCT category from recipes;";
+  let categories = [];
   pool
-    .query(
-      "SELECT price FROM recipes where drinkname = '" +
-        req.query.parameter +
-        "';"
-    )
+    .query(command)
     .then((query_res) => {
-      res.send(query_res.rows[0].price);
-      console.log(query_res.rows[0].price);
+      for (let i = 0; i < query_res.rowCount; i++) {
+        categories.push(query_res.rows[i].category);
+      }
+      res.send(categories);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when selecting categories from recipes",
+      });
     });
 });
 
