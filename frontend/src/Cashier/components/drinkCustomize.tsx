@@ -4,7 +4,6 @@ interface Props {
   name: string;
 }
 function DrinkCustomize({ name }: Props) {
-  let toppings = ["Pearls", "Aiyu Jelly"];
   return (
     <div className="customize">
       <div className="customize-grid">
@@ -33,12 +32,15 @@ function DrinkCustomize({ name }: Props) {
         <div className="toppings">
           <div className="toppings-title">Toppings</div>
           <div className="toppings-box">
-            <Topping name="pearls" count={0}></Topping>
-            <Topping name="pearls" count={0}></Topping>
-            <Topping name="pearls" count={0}></Topping>
-            <Topping name="pearls" count={0}></Topping>
-            <Topping name="pearls" count={0}></Topping>
-            <Topping name="pearls" count={0}></Topping>
+            <Topping name="pearls"></Topping>
+            <Topping name="aloe vera"></Topping>
+            <Topping name="herb jelly"></Topping>
+            <Topping name="pudding"></Topping>
+            <Topping name="mini pearl"></Topping>
+            <Topping name="crystal boba"></Topping>
+            <Topping name="lychee jelly"></Topping>
+            <Topping name="red bean"></Topping>
+            <Topping name="aiyu jelly"></Topping>
           </div>
         </div>
       </div>

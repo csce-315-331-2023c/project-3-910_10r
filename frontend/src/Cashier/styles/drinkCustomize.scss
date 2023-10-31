@@ -12,7 +12,9 @@
 
 .topping-name{
     color: white;
-    font-size: 20px;
+    font-size: 18px;
+    text-align: center;
+    line-height: 23px;
 }
 
 .topping-button{
@@ -29,8 +31,8 @@
 
 .toppings-box{
     display: grid;
-    width: 500px;
-    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
     row-gap: 10px;
     column-gap: 30px;
     align-items: center;
@@ -55,8 +57,7 @@
 }
 
 .ice, .sugar, .toppings{
-    
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .ice-buttons, .sugar-buttons{
@@ -68,7 +69,7 @@
 }
 
 .ice-button, .sugar-button{
-    height: 50px;
+    height: 45px;
     background-color: white;
 }
 
