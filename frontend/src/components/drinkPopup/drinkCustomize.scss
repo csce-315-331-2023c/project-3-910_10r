@@ -1,0 +1,126 @@
+.topping{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    width: 200px;
+    height: 55px;
+    // background-color: #6B9080;
+    background-color: var(--GREEN-DARK);
+    border-radius: 5px;
+    align-items: center;
+    justify-items: center;
+    padding-right: 3px;
+}
+
+.topping-name{
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    line-height: 23px;
+}
+
+.topping-button{
+    height: 45px;
+    width: 45px;
+    background-color: white;
+    color: black;
+    border-radius: 12px;
+}
+.topping-count{
+    height: 13px;
+    text-align: center;
+}
+
+.toppings-box{
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 10px;
+    column-gap: 30px;
+    align-items: center;
+    justify-items: center;
+}
+
+.customize{
+    width: 50vw;
+    height: 90vh;
+    background-color: var(--GREEN-MED);
+    left: 20vw;
+    position: absolute;
+    top: 2vh;
+}
+
+.customize-grid{
+    height: 92%;
+    display: grid;
+    grid-template-rows: 0.1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.ice, .sugar, .toppings{
+    margin-bottom: 15px;
+}
+
+.ice-buttons, .sugar-buttons{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 10px;
+    column-gap: 10px;
+    
+}
+
+.ice-button, .sugar-button{
+    height: 45px;
+    background-color: white;
+    color: black;
+}
+
+.ice-button-selected, .sugar-button-selected{
+    height: 45px;
+    background-color: var(--GREEN-DARK);
+    color: white;
+}
+
+.ice-button:hover, .sugar-button:hover, .topping-button:hover, .customize-confirm:hover{
+    background-color: var(--ON-HOVER);
+}
+.ice-button:active, .sugar-button:active, .topping-button:active, .customize-confirm:active{
+    background-color: var(--ON-ACTIVE);
+}
+
+.customize-drink{
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.ice-title, .sugar-title, .toppings-title{
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.customize-confirm{
+    position: absolute;
+    right: 10px;
+    width: 100px;
+    height: 50px;
+    background-color: white;
+}
+
+.customize-confirm:hover{
+    background-color: var(--ON-HOVER);
+}
+
+.customize-confirm:active{
+    background-color: var(--ON-ACTIVE);
+}
+
+.customize-exit{
+    position: absolute;
+    background-color: var(--GREEN-MED);
+    border: none;
+    font-size: 40px;
+    right: 15px;
+    top: 0px;
+    cursor: pointer;
+}

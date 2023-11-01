@@ -23,16 +23,62 @@ process.on("SIGINT", function () {
   process.exit(0);
 });
 
-app.get("/user", (req, res) => {
-  teammembers = [];
-  pool.query("SELECT * FROM recipes;").then((query_res) => {
-    for (let i = 0; i < query_res.rowCount; i++) {
-      teammembers.push(query_res.rows[i]);
-    }
-    const data = { teammembers: teammembers };
-
-    res.send(teammembers);
+// gets the price for a specific drink whose name is passed in via parameter
+app.get("/cashier/price*", (req, res) => {
+  let command =
+    "SELECT price FROM recipes where drinkname = '" +
+    req.query.parameter +
+    "';";
+  pool.query(command).then((query_res) => {
+    res.send(query_res.rows[0].price);
   });
+});
+
+// gets all the categories for the display bar
+app.get("/cashier/drinkCategory", (req, res) => {
+  let command = "SELECT DISTINCT category from recipes;";
+  let categories = [];
+  pool
+    .query(command)
+    .then((query_res) => {
+      for (let i = 0; i < query_res.rowCount; i++) {
+        categories.push(query_res.rows[i].category);
+      }
+      res.send(categories);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when selecting categories from recipes",
+      });
+    });
+});
+
+// gets all the categories and drinks and send it as a dictionary
+app.get("/cashier/drinkAndCategories", (req, res) => {
+  let command = "SELECT category, drinkname FROM recipes;";
+  const categoryMap = {};
+  pool
+    .query(command)
+    .then((query_res) => {
+      query_res.rows.forEach((row) => {
+        const category = row.category;
+        const drinkname = row.drinkname;
+
+        if (category in categoryMap) {
+          categoryMap[category].push(drinkname);
+        } else {
+          categoryMap[category] = [drinkname];
+        }
+      });
+      res.send(categoryMap);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when selecting categories from recipes",
+      });
+    });
 });
 
 // app.get("/api", (req, res) => {
