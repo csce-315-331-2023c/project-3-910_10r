@@ -23,6 +23,7 @@ process.on("SIGINT", function () {
   process.exit(0);
 });
 
+// gets the price for a specific drink whose name is passed in via parameter
 app.get("/cashier/price*", (req, res) => {
   let command =
     "SELECT price FROM recipes where drinkname = '" +
@@ -33,6 +34,7 @@ app.get("/cashier/price*", (req, res) => {
   });
 });
 
+// gets all the categories for the display bar
 app.get("/cashier/drinkCategory", (req, res) => {
   let command = "SELECT DISTINCT category from recipes;";
   let categories = [];
@@ -52,6 +54,7 @@ app.get("/cashier/drinkCategory", (req, res) => {
     });
 });
 
+// gets all the categories and drinks and send it as a dictionary
 app.get("/cashier/drinkAndCategories", (req, res) => {
   let command = "SELECT category, drinkname FROM recipes;";
   const categoryMap = {};
