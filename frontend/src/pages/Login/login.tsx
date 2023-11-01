@@ -37,6 +37,7 @@ const Login = () => {
                         autoComplete="off"
                         value={formData.username}
                         onChange={handleInputChange}
+                        autoFocus
                     />
                     
                     <label htmlFor="password" className="login__form-label">Password: </label>
