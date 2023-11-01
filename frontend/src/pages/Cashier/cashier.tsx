@@ -4,6 +4,7 @@ import Cart from "../../components/cart/cart.tsx";
 import Footer from "../../components/footer/footer.tsx";
 import DrinkCustomize from "../../components/drinkPopup/drinkCustomize.tsx";
 import React, { useState, useEffect } from "react";
+import "./cashier.scss";
 import axios from "axios";
 
 interface order {
@@ -66,24 +67,29 @@ function Cashier({ setPayPage }: Props) {
   return (
     <div style={{ position: "relative" }}>
       {loaded ? (
-        <>
+        <div className="cashier-grid">
+          <div className="cashier-grid-main">
+            <Navigationbar
+              showCustomizationPage={showCustomizationPage}
+              setCatogory={setCatogory}
+              category={categories}
+            ></Navigationbar>
+
+            <Drinks
+              setShowCustomizationPage={setShowCustomizationPage}
+              showCustomizationPage={showCustomizationPage}
+              setDrinkName={setDrinkName}
+              drinks={
+                category === "" ? drinks[categories[0]] : drinks[category]
+              }
+            ></Drinks>
+            <Cart
+              orders={orders}
+              setOrders={setOrders}
+              setPayPage={setPayPage}
+            ></Cart>
+          </div>
           <Footer></Footer>
-          <Navigationbar
-            showCustomizationPage={showCustomizationPage}
-            setCatogory={setCatogory}
-            category={categories}
-          ></Navigationbar>
-          <Cart
-            orders={orders}
-            setOrders={setOrders}
-            setPayPage={setPayPage}
-          ></Cart>
-          <Drinks
-            setShowCustomizationPage={setShowCustomizationPage}
-            showCustomizationPage={showCustomizationPage}
-            setDrinkName={setDrinkName}
-            drinks={category === "" ? drinks[categories[0]] : drinks[category]}
-          ></Drinks>
           {showCustomizationPage && (
             <DrinkCustomize
               name={drinkName}
@@ -91,7 +97,7 @@ function Cashier({ setPayPage }: Props) {
               setShowCustomizationPage={setShowCustomizationPage}
             ></DrinkCustomize>
           )}
-        </>
+        </div>
       ) : (
         <div
           style={{

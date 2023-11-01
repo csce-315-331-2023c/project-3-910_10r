@@ -1,8 +1,8 @@
 .footer{
     background-color: #6B9080 ;
-    height: 6vh;
     width: 100vw;
-    position: fixed;
+    position: absolute;
+    height: 6vh;
     // z-index: 1000;
     // margin-top: 94vh;
     align-items: center;
@@ -13,6 +13,7 @@
 
 .footer-button{
     flex: 1;
+    min-height: 30px;
 }
 
 .footer-logout{
@@ -25,4 +26,5 @@
    width: 100px;
    color: white;
    font-size: 20px;
+   min-height: 20px;
 }

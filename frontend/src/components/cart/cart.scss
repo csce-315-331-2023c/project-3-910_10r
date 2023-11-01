@@ -1,23 +1,25 @@
 .cart{
-    position: fixed;
+    position: absolute;
     width: 350px;
     z-index: 200;
     right: 0px;
     background-color: #F6FFF8;
-    height: 94vh;
-    padding-top: 10px;
-    
+    height: 94%;
+    display: flex;
+    flex-direction: column;
 }
 
 .cart-orders{
     height: 55vh;
-    overflow: scroll;
+    overflow: auto;
+    flex: 1;
 }
 
 .cart-title{
     text-align: center;
     font-size: 25px;
-    margin-bottom: 10px;
+    margin-top: 10px;
+    height: 50px;
 }
 
 .cart-buttons{
@@ -25,13 +27,14 @@
     width: 350px;
     flex-direction: column;
     align-items: center;
+    height: 150px;
 }
 
 .cart-buttons-1{
     width: 250px;
     height: 60px;
     border-radius: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
     background-color: #F8A3A3;
     color: white;
     font-size: 30px;
@@ -84,10 +87,10 @@
 }
 
 .checkout{
+    height: 100px;
     display: grid;
     grid-template-columns: 1fr 100px;
     font-size: 20px;
-    margin-top: 20px;
 }
 
 .checkout-title{

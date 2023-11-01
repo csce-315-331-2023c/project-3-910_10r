@@ -14,11 +14,13 @@
 
 .drinks-bound{
     
-    width: 50vw;
-    height: 90vh;
+    // width: 50vw;
+    // height: 90vh;
+    
     margin-left: 300px;
     margin-right: 450px;
     padding-top: 50px;
+    background-color: var(--GREEN-MED); 
    
 }
 
@@ -33,7 +35,7 @@
 .drinks-grid-drink{
     background-color: white;
     height: 136px;
-    width: 100%;
+    width: 200px;
     border-radius: 10px;
     font-size: 18px;
 }

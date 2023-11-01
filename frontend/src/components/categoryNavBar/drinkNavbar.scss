@@ -1,19 +1,18 @@
 .nav{
-    position: fixed;
+    position: absolute;
     width: 180px;
     z-index: 200;
     height: 94vh;
   }
 
   .nav-selected{
-    position: fixed;
     width: 180px;
     z-index: 200;
     filter: brightness(20%);
   }
 
   .nav-bar{
-    overflow: scroll;
+    overflow: auto;
     font-size: 25px;
     height: 100%;
   }
