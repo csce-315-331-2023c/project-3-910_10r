@@ -1,9 +1,22 @@
+/* all variables go here */
+
+//    Sass variables start with $
+//    ex: $BG-COLOR: #000;
+//    |
+//    |    But thing is that Sass variables are not dynamic, meaning once compiled, they cannot be changed.
+//    |    Instead, they get replaced by their values.
+//    |
+//    CSS variables are found in :root starting with --
+//    ex: --BG-COLOR: #000;
+//    |
+//    |    CSS are dynamic, meaning they can be changed while the app is running and the app will reflect those changes.
+//    |
+//    Kevin much prefers to use CSS variables
+
 :root {
-    /* 
-        Most of these variables that use units (px, rem, em, etc) 
-        should use the clamp function to minimize the amount of responsive code, 
-        but we're not there yet - idk if we wanna do mobile-friendly design
-    */
+    // Most of these variables that use units (px, rem, em, etc) 
+    // should use the clamp function to minimize the amount of responsive code, 
+    // but we're not there yet - idk if we wanna do mobile-friendly design
 
     /**************** COLORS ****************/
     --ACCENT-COLOR-DARK: hsl(0, 45%, 56%);

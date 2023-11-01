@@ -1,7 +1,6 @@
-/* 
-    media query mixins !! 
-    to use a media query, call @include ___ {} inside a ruleset 
-*/
+/* media query mixins !! */
+
+// to use a media query, call @include ___ {} inside a ruleset 
 
 @mixin media-xs {
     @media screen and (max-width: 320px) {
