@@ -1,0 +1,43 @@
+.drinks{
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--GREEN-MED); 
+    
+}
+
+.drinks-selected{
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--GREEN-MED); 
+    filter:brightness(20%);
+}
+
+.drinks-bound{
+    
+    width: 50vw;
+    height: 90vh;
+    margin-left: 300px;
+    margin-right: 450px;
+    padding-top: 50px;
+   
+}
+
+.drinks-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+   
+    row-gap: 40px;
+    column-gap: 40px;
+}
+
+.drinks-grid-drink{
+    background-color: white;
+    height: 136px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.drinks-grid-drink:hover {
+    background-color: rgb(244, 244, 244);
+  }
