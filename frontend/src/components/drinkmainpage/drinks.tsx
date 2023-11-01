@@ -1,5 +1,5 @@
 import Drink from "./drink.tsx";
-import "../styles/drinksMainSection.scss";
+import "./drinksMainSection.scss";
 import React, { useState, useEffect } from "react";
 
 interface Props {

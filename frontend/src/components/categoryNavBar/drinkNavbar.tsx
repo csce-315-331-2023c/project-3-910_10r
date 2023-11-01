@@ -1,5 +1,5 @@
 import DrinkCategory from "./drinkCategories";
-import "../styles/drinkNavbar.scss";
+import "./drinkNavbar.scss";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 

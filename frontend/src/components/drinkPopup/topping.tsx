@@ -1,4 +1,4 @@
-import "../styles/drinkCustomize.scss";
+import "./drinkCustomize.scss";
 import { useState } from "react";
 
 interface Props {

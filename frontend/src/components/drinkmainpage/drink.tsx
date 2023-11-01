@@ -1,4 +1,4 @@
-import "../styles/drinksMainSection.scss";
+import "./drinksMainSection.scss";
 import React from "react";
 
 interface Props {

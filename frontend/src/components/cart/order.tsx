@@ -1,4 +1,4 @@
-import "../styles/cart.scss";
+import "./cart.scss";
 
 interface Props {
   name: string;

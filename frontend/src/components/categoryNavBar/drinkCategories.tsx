@@ -31,7 +31,7 @@
 //     </>
 //   );
 // }
-import "../styles/drinkNavbar.scss";
+import "./drinkNavbar.scss";
 
 interface Props {
   children: string;

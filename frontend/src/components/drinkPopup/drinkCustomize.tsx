@@ -1,5 +1,5 @@
 import Topping from "./topping";
-import "../styles/drinkCustomize.scss";
+import "./drinkCustomize.scss";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 

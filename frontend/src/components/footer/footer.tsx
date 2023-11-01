@@ -1,4 +1,4 @@
-import "../styles/footer.scss";
+import "./footer.scss";
 
 const footer = () => {
   const date = new Date();

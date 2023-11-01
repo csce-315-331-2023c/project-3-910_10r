@@ -1,6 +1,6 @@
 import Order from "./order.tsx";
 import Checkout from "./checkoutAmount.tsx";
-import "../styles/cart.scss";
+import "./cart.scss";
 import { useState } from "react";
 
 interface order {
