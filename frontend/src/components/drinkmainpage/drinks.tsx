@@ -1,6 +1,6 @@
 import Drink from "./drink.tsx";
 import "./drinksMainSection.scss";
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 
 interface Props {
   setShowCustomizationPage: React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,7 +35,7 @@ function drinks({
           {drinks.length === 0 ? (
             <div>Loading</div>
           ) : (
-            drinks.map((item, index) => (
+            drinks.map((item) => (
               <Drink
                 key={item}
                 setShowCustomizationPage={setShowCustomizationPage}

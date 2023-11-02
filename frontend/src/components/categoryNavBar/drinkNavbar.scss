@@ -1,21 +1,22 @@
 .nav{
-    position: fixed;
     width: 180px;
     z-index: 200;
     height: 94vh;
   }
 
   .nav-selected{
-    position: fixed;
     width: 180px;
     z-index: 200;
     filter: brightness(20%);
+    height: 94vh;
   }
 
   .nav-bar{
-    overflow: scroll;
+    overflow: auto;
     font-size: 25px;
+    position: fixed;
     height: 100%;
+    width: 180px;
   }
 
   .nav-category{

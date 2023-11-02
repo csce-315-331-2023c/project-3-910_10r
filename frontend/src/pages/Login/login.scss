@@ -1,15 +1,18 @@
+@import './../../scss/main.scss';
+
 .login {
-    background-color: white;
+    background-color: var(--TEXT-COLOR-LIGHT);
     display: block;
     position: fixed;
-    width: clamp(200px, 50vw, 600px);
+    width: clamp(300px, 70vw, 600px);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: var(--LOGIN-SHADOW);
     border-radius: var(--LOGIN-BORDER-RADIUS);
-    padding: var(--PADDING-LARGE);
+    padding-inline: var(--PADDING-LARGE);
     padding-top: var(--PADDING-MED);
+    padding-bottom: var(--PADDING-MED-LARGE);
 
     &__header {
         color: var(--GREEN-DARK);
@@ -19,6 +22,14 @@
     }
 
     &__form {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 0;
+        justify-content: center;
+
+        &-label {
+            @extend %offscreen;
+        }
 
         &-input {
             margin-right: var(--MARGIN-SMALL);
@@ -40,30 +51,48 @@
             }
         }
 
-        &-btn-container {
-            margin-top: var(--MARGIN-SMALL);
+        &-login {
             width: 100%;
+            margin-top: var(--MARGIN-SMALL);
+            padding: var(--PADDING-SMALL);
+            border: var(--BORDER-DARK);
+            border-radius: var(--BUTTON-BORDER-RADIUS);
+            @include button-interact(var(--BUTTON-SHADOW), var(--TEXT-SHADOW-LIGHT));
+            background-color: var(--GREEN-DARK);
+            color: var(--TEXT-COLOR-LIGHT);
+        }
+
+
+        &-google {
             display: flex;
-            flex-flow: row nowrap;
-            gap: var(--MARGIN-SMALL);
-
-            .login__form-btn {
-                padding: var(--PADDING-SMALL);
-                flex-basis: 50%;
-                border: var(--BORDER-DARK);
-                cursor: pointer;
-                border-radius: var(--BUTTON-BORDER-RADIUS);
-                @include button-interact(var(--BUTTON-SHADOW), var(--TEXT-SHADOW-LIGHT));
-            }
-
-            #loginResetBtn {
+            margin-top: var(--MARGIN-MED);
+            flex-flow: column nowrap;
+            border-top: var(--BORDER-DARK);
+            
+            &-btn {
                 background-color: var(--TEXT-COLOR-LIGHT);
                 color: var(--TEXT-COLOR-DARK);
+                // margin-top: var(--MARGIN-MED);
+                padding: var(--PADDING-SMALL);
+                border: var(--BORDER-DARK);
+                border-radius: var(--BUTTON-BORDER-RADIUS);
+                @include button-interact(var(--BUTTON-SHADOW), var(--TEXT-SHADOW-LIGHT));
+
+                i {
+                    padding-right: var(--PADDING-SMALL);
+                }
             }
 
-            #loginSubmitBtn {
-                background-color: var(--GREEN-DARK);
-                color: var(--TEXT-COLOR-LIGHT);
+            &-cover {
+                background-color: var(--TEXT-COLOR-LIGHT);
+                color: var(--TEXT-COLOR-DARK);
+                width: clamp(35px, 7%, 70px);
+                height: 25px;
+                text-align: center;
+                position: relative;
+                top: 0;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
         }
     }
