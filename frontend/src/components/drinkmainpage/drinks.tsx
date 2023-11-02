@@ -35,7 +35,7 @@ function drinks({
           {drinks.length === 0 ? (
             <div>Loading</div>
           ) : (
-            drinks.map((item, index) => (
+            drinks.map((item) => (
               <Drink
                 key={item}
                 setShowCustomizationPage={setShowCustomizationPage}

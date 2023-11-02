@@ -20,7 +20,7 @@ function Navigationbar({
   return (
     <div className={`${showCustomizationPage ? "nav-selected" : "nav"}`}>
       <div className="nav-bar">
-        {category.map((item, index) => (
+        {category.map((item) => (
           <DrinkCategory key={item} onClick={() => setCatogory(item)}>
             {item}
           </DrinkCategory>
