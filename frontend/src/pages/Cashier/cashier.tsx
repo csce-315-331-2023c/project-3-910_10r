@@ -4,7 +4,18 @@ import Cart from "../../components/cart/cart.tsx";
 import Footer from "../../components/footer/footer.tsx";
 import DrinkCustomize from "../../components/drinkPopup/drinkCustomize.tsx";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
+import "./cashier.scss";
+
+import axios , { AxiosInstance } from 'axios';
+
+let baseURL = import.meta.env.VITE_API_URL;
+
+const API: AxiosInstance = axios.create({
+  baseURL: baseURL,
+  timeout: 10000
+});
+
 
 interface order {
   name: string;
@@ -39,8 +50,7 @@ function Cashier({ setPayPage }: Props) {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/cashier/drinkCategory")
+    API.get("/cashier/drinkCategory")
       .then((response) => {
         setCatogories(response.data);
         console.log(response.data);
@@ -51,8 +61,7 @@ function Cashier({ setPayPage }: Props) {
   }, []);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/cashier/drinkAndCategories")
+    API.get("/cashier/drinkAndCategories")
       .then((response) => {
         setDrinks(response.data);
         console.log(response.data);
@@ -67,23 +76,29 @@ function Cashier({ setPayPage }: Props) {
     <div style={{ position: "relative" }}>
       {loaded ? (
         <>
-          <Footer></Footer>
-          <Navigationbar
-            showCustomizationPage={showCustomizationPage}
-            setCatogory={setCatogory}
-            category={categories}
-          ></Navigationbar>
-          <Cart
-            orders={orders}
-            setOrders={setOrders}
-            setPayPage={setPayPage}
-          ></Cart>
-          <Drinks
-            setShowCustomizationPage={setShowCustomizationPage}
-            showCustomizationPage={showCustomizationPage}
-            setDrinkName={setDrinkName}
-            drinks={category === "" ? drinks[categories[0]] : drinks[category]}
-          ></Drinks>
+          <div className="cashier-grid">
+            <div className="cashier-grid-main">
+              <Navigationbar
+                showCustomizationPage={showCustomizationPage}
+                setCatogory={setCatogory}
+                category={categories}
+              ></Navigationbar>
+              <Drinks
+                setShowCustomizationPage={setShowCustomizationPage}
+                showCustomizationPage={showCustomizationPage}
+                setDrinkName={setDrinkName}
+                drinks={
+                  category === "" ? drinks[categories[0]] : drinks[category]
+                }
+              ></Drinks>
+              <Cart
+                orders={orders}
+                setOrders={setOrders}
+                setPayPage={setPayPage}
+              ></Cart>
+            </div>
+            <Footer></Footer>
+          </div>
           {showCustomizationPage && (
             <DrinkCustomize
               name={drinkName}
