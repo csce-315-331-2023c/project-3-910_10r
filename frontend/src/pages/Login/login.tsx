@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 import './login.scss';
 
-const Login = () => {
+interface Props{
+    setIsManager: React.Dispatch<React.SetStateAction<boolean>>
+    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Login = ({setIsManager, setIsLogin} : Props) => {
     const [formData, setFormData] = useState({ username: '', password: '' });
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        
-        // Access the username and password from the formData state
         const { username, password } = formData;
+        setIsLogin(false);
+        setIsManager(false);
+        /* 
+            get username, password, and manager Array from DB
+                [ [user, pass, t/f], [user, pass, t/f], ...]
+                not efficient, but idc
+            check to see if username is a key -> if not show error
+            check the password with the value -> if does not match, show error
+            if the user is manager, show manager page
+            if the user is not a manager, show cashier page
+        */
 
-        // Now you can use username and password for further processing,
-        // like sending them to the server or performing client-side validation.
-
-        console.log('Username:', username);
-        console.log('Password:', password);
+        console.log(username, " " + password);
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
