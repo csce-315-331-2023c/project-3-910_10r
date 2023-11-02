@@ -1,6 +1,6 @@
 import Drink from "./drink.tsx";
 import "./drinksMainSection.scss";
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 
 interface Props {
   setShowCustomizationPage: React.Dispatch<React.SetStateAction<boolean>>;

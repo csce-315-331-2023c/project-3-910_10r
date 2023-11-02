@@ -1,7 +1,7 @@
 import DrinkCategory from "./drinkCategories";
 import "./drinkNavbar.scss";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
 
 interface Props {
   showCustomizationPage: boolean;
