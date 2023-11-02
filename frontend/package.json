@@ -1,6 +1,5 @@
 {
   "name": "project3-react-app",
-  "proxy": "http://localhost:8000",
   "private": true,
   "version": "0.0.0",
   "type": "module",
