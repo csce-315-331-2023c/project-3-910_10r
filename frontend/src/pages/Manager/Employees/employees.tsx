@@ -4,7 +4,7 @@ const Employees = () => {
 
   return (
     <>
-      <h1>I LOVE FRANK</h1>
+      <h1>EMPLOYEES PAGE</h1>
     </>
   );
 };
