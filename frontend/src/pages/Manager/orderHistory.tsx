@@ -24,7 +24,7 @@ interface EmployeeData {
   hourlyPay: number;
 }
 
-function Employee() {
+function OrderHistory() {
   console.log("Employee component is being rendered"); 
 
   const [selectedEmployee, setSelectedEmployee] = useState<EmployeeData | null>(null);
@@ -94,7 +94,7 @@ function Employee() {
       <div className="section">
           <button className="section-icon-button" onClick={handleIconButtonClick}>
             <i>
-              <FontAwesomeIcon icon="square-plus" size="2x" style={{color: "#0d6f06",}} />
+              <FontAwesomeIcon icon="square-plus" style={{color: "#0d6f06",}} />
             </i>
           </button>
         <h1>Managers:</h1>
@@ -109,11 +109,6 @@ function Employee() {
           </ul>
       </div>
       <div className="section">
-          <button className="section-icon-button" onClick={handleIconButtonClick}>
-            <i>
-              <FontAwesomeIcon icon="square-plus" size="2x" style={{color: "#0d6f06",}} />
-            </i>
-          </button>
         <h2>Employees:</h2>
       <ul className="ullabel">
         {employees.map((employee, index) => (
@@ -140,4 +135,4 @@ function Employee() {
   );
 }
 
-export default Employee;
+export default OrderHistory;

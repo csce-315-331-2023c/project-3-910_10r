@@ -1,31 +1,35 @@
-import ManagerCategory from "./managerCategories";
 import "./managerNavBar.scss";
+import React from 'react';
 
 interface Props {
-  showCustomizationPage: boolean;
-  setCatogory: React.Dispatch<React.SetStateAction<string>>;
-  category: string[];
+  activePage: string;
+  onNavItemClick: (page: string) => void;
 }
+//nav classname: nav-bar
 
-function Navigationbar({
-  showCustomizationPage,
-  setCatogory,
-  category,
-}: Props) {
-  // keeps track of the drink categories
-  //
-
+const NavigationBar: React.FC<Props> = ({ activePage, onNavItemClick }) => {
   return (
-    <div className={`${showCustomizationPage ? "nav-selected" : "nav"}`}>
-      <div className="nav-bar">
-        {category.map((item) => (
-          <ManagerCategory key={item} onClick={() => setCatogory(item)}>
-            {item}
-          </ManagerCategory>
-        ))}
-      </div>
-    </div>
+    <nav className="nav-bar"> 
+      <ul>
+        <li className={`nav-category ${activePage === 'employees' ? 'nav-selected' : 'nav'}`}>
+          <button className="nav-link" onClick={() => onNavItemClick('employees')}>Employees</button>
+        </li>
+        <li className={`nav-category ${activePage === 'inventory' ? 'nav-selected' : 'nav'}`}>
+          <button className="nav-link" onClick={() => onNavItemClick('inventory')}>Inventory</button>
+        </li>
+        <li className={`nav-category ${activePage === 'menu' ? 'nav-selected' : 'nav'}`}>
+          <button className="nav-link" onClick={() => onNavItemClick('menu')}>Menus</button>
+        </li>
+        <li className={`nav-category ${activePage === 'reports' ? 'nav-selected' : 'nav'}`}>
+          <button className="nav-link" onClick={() => onNavItemClick('reports')}>Report</button>
+        </li>
+        <li className={`nav-category ${activePage === 'orderHistory' ? 'nav-selected' : 'nav'}`}>
+          <button className="nav-link" onClick={() => onNavItemClick('orderHistory')}>Order History</button>
+        </li>
+      </ul>
+    </nav>
   );
-}
+};
 
-export default Navigationbar;
+export default NavigationBar;
+
