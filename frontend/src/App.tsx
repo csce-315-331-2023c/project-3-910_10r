@@ -7,6 +7,7 @@ import Payment from "./pages/Cashier/Payment.tsx";
 // import React, { useEffect } from "react";
 
 import Login from "./pages/Login/login.tsx";
+import Manager from "./pages/Manager/employees.tsx";
 
 function App() {
   const [payPage, setPayPage] = useState<boolean>(false);
@@ -16,11 +17,14 @@ function App() {
     <>
       <div>
         {isLogin ? (<Login setIsLogin={setIsLogin} setIsManager={setIsManager}></Login>) : 
+          (isManager ? (
+            <Manager></Manager>
+          ) :
           (payPage ? (
             <Payment></Payment>
           ) : (
             <Cashier setPayPage={setPayPage}></Cashier>
-          ))
+          )))
 }
       </div>
     </>

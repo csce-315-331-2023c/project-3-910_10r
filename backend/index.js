@@ -81,6 +81,27 @@ app.get("/cashier/drinkAndCategories", (req, res) => {
     });
 });
 
+// gets the manager boolean based on a given username and password
+app.get("/login", (req, res) => {
+    let command = "SELECT manager FROM employee WHERE " + req.query.parameter +";";
+      
+    pool.query(command)
+    .then((query_res) => {
+      if(query_res.rowCount != 0) {
+        res.send(query_res.rows[0].manager);
+      }
+      else {
+        res.send(-1);
+      } 
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({
+        error: "An error occurred when determining manager status from employees",
+      });
+    });
+})
+
 // app.get("/api", (req, res) => {
 //   res.json("user1");
 // });
