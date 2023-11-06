@@ -1,7 +1,14 @@
 import Topping from "./topping";
 import "./drinkCustomize.scss";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios , { AxiosInstance } from 'axios';
+
+let baseURL = import.meta.env.VITE_API_URL;
+
+const API: AxiosInstance = axios.create({
+  baseURL: baseURL,
+  timeout: 10000
+});
 
 interface order {
   name: string;
@@ -201,8 +208,8 @@ function DrinkCustomize({
 
   useEffect(() => {
     // Make a GET request to your backend API
-    axios
-      .get("http://localhost:8000/cashier/price?parameter=" + name)
+    API
+      .get('/cashier/price/' + name)
       .then((response) => {
         setData(response.data);
       })
