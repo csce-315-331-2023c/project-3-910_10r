@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
-//import Cashier from "./pages/Cashier/cashier.tsx";
+import Cashier from "./pages/Cashier/cashier.tsx";
 import Payment from "./pages/Cashier/Payment.tsx";
 // import axios from "axios";
 // import React, { useEffect } from "react";
