@@ -72,12 +72,15 @@ const handleFilterSubmit = () => {
     console.log("Selected Start Date:", startDate.toLocaleDateString());
     console.log("Selected End Date:", endDate.toLocaleDateString());
   }
-  if (maxPrice >= 0.00) {
+  if (maxPrice > 0.00) {
     console.log("Min Price: ", minPrice);
     console.log("Max Price: ", maxPrice);
   }
   setShowFilterPopup(false); // Close the filter popup when submitted
-  setIsFilterActive(true); // Set the filter as active
+  //only if something was changed:
+  if (drink || (startDate && endDate) || maxPrice > 0.00){
+      setIsFilterActive(true); // Set the filter as active
+  }
 };
 
 const filteredOrderData = isFilterActive
@@ -104,9 +107,11 @@ const filteredOrderData = isFilterActive
           </button>
         )}
         </div>
+        <div className="filter-button-container">
         <button className="filter-button" onClick={handleFilterButtonClick}>
           Filter
         </button>
+        </div>
       </div>
       <div>
         <div className="main-container">

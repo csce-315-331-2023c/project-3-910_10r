@@ -4,20 +4,27 @@
   
     .header {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        //width: 100%;
-  
-      .filter-button {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-right: 400px;
-      }
-    }
+      
+        .filter-button-container {
+          margin-right: 400px; /* Adjust the margin as needed for spacing */
+        }
+      
+        .filter-button {
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+      
+        .close-button {
+          /* No margin settings for the "X" button */
+          margin-left: 500px;
+        }
+      }      
+      
   
     .main-container {
       display: flex;
