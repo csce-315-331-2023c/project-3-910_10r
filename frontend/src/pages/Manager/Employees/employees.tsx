@@ -79,6 +79,7 @@ function Employee() {
   }, []);
 
   //<FontAwesomeIcon icon="fa-solid fa-square-plus" style={{color: "#0d6f06",}} />
+
   //        <EmployeesList managers={managers} employees={employees} />
   
   /*const handleIconButtonClick = () => {
@@ -155,6 +156,7 @@ function Employee() {
       </div>
       {isPopupOpen && (
         <EmployeePopup
+          isOpen={isPopupOpen}
           isOpen={isPopupOpen}
           onClose={closeEmployeePopup}
           onSubmit={handleConfirmation}
