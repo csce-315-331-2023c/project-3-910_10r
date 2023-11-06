@@ -15,4 +15,16 @@
     justify-content: $justify;
 }
 
-// more stuff later
+@mixin button-interact($box-shadow, $text-shadow) {
+    cursor: pointer;
+    transition: box-shadow 0.25s, text-shadow 0.25s, filter 0.075s;
+    
+    &:hover, &:focus-visible {
+        box-shadow: $box-shadow;
+        text-shadow: $text-shadow;
+    }
+
+    &:active {
+        filter: brightness(0.9);
+    }
+}

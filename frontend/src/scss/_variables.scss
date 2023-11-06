@@ -27,11 +27,15 @@
     --GREEN-MED: #CCE3DE;
     --GREEN-MED60: hsla(167, 29%, 85%, 0.60);
     --GREEN-DARK: #6B9080;
+    --GREEN-DARK40: hsla(154, 15%, 49%, 0.40);
 
     --TEXT-COLOR-LIGHT: white;
     --TEXT-COLOR-DARK: var(--GREEN-DARK);
 
-    --SIDEBAR-BG-COLOR: #f0f0f0;
+    --SIDEBAR-BG-COLOR: #F6FFF8;
+    --SELECTION-COLOR: blue;
+
+    --ERROR-COLOR: hsl(0, 100%, 64%);
 
     --ON-HOVER: rgb(237, 237, 237);
     --ON-ACTIVE: rgb(206, 206, 206);
@@ -61,6 +65,7 @@
 
     /**************** PADDING & MARGIN ****************/
     --PADDING-LARGE: 3rem;
+    --PADDING-MED-LARGE: 2.25rem;
     --PADDING-MED: 1.5rem;
     --PADDING-SMALL: 0.5rem;
     
@@ -68,6 +73,8 @@
     --MARGIN-LARGE: 3rem;
     --MARGIN-MED: 1.5rem;
     --MARGIN-SMALL: 0.5rem;
+
+    --NAVBAR-WIDTH: 240px;
 
 
     /**************** FONT SIZES ****************/
