@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 //import "../../components/employeesmainpage/employeesList.scss";
 import "./employees.scss";
 import EmployeePopup from "../../../components/employeePopup/employeePopup";
@@ -25,19 +25,39 @@ interface EmployeeData {
 }
 
 function Employee() {
-  console.log("Employee component is being rendered"); 
+  console.log("Employee component is being rendered");
+
+
+  const [managers, setManagers] = useState<EmployeeData[]>([
+    { name: 'Manager 1', position: 'Manager', hoursPerWeek: 20, hourlyPay: 15 },
+    { name: 'Manager 2', position: 'Manager', hoursPerWeek: 20, hourlyPay: 15 },
+    { name: 'Manager 3', position: 'Manager', hoursPerWeek: 20, hourlyPay: 15 },
+    { name: 'Man 4', position: 'Manager', hoursPerWeek: 20, hourlyPay: 15 },
+    // Add more manager objects as needed
+  ]);
+
+  const [employees, setEmployees] = useState<EmployeeData[]>([
+    { name: 'Employee 1', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15},
+    { name: 'Employee 2', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
+    { name: 'Employee 3', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
+    { name: 'Employee 4', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
+    { name: 'Employee 2', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
+    { name: 'Employee 3', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
+    { name: 'Employee 4', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
+    // Add more employee objects as needed
+  ]); 
 
   const [selectedEmployee, setSelectedEmployee] = useState<EmployeeData | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const openEmployeePopup = (employeeData: EmployeeData) => {
     setSelectedEmployee(employeeData);
-    setIsPopupOpen(true); // Open the popup when a button is clicked
+    setIsPopupOpen(true);
   };
 
   const closeEmployeePopup = () => {
     setSelectedEmployee(null);
-    setIsPopupOpen(false); // Close the popup
+    setIsPopupOpen(false);
   };
   /*useEffect(() => {
     API.get("/cashier/drinkCategory")
@@ -62,25 +82,6 @@ function Employee() {
       });
   }, []);*/
   //<FontAwesomeIcon icon="fa-solid fa-square-plus" style={{color: "#0d6f06",}} />
-
-  const managers = [
-    { name: 'Manager 1', position: 'Manager', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Manager 2', position: 'Manager', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Manager 3', position: 'Manager', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Man 4', position: 'Manager', hoursPerWeek: 20, hourlyPay: 15 },
-    // Add more manager objects as needed
-  ];
-
-  const employees = [
-    { name: 'Employee 1', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15},
-    { name: 'Employee 2', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Employee 3', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Employee 4', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Employee 2', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Employee 3', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Employee 4', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
-    // Add more employee objects as needed
-  ];
   //        <EmployeesList managers={managers} employees={employees} />
   
   /*const handleIconButtonClick = () => {
@@ -88,6 +89,32 @@ function Employee() {
     // For example, you can open a popup or perform some other action.
     console.log('Icon button clicked');
   };*/
+  const handleConfirmation = (data: EmployeeData) => {
+    if (selectedEmployee) {
+      // Update an existing employee/manager
+      if (selectedEmployee.position === "Manager") {
+        setManagers((prevManagers) =>
+          prevManagers.map((manager) =>
+            manager === selectedEmployee ? { ...data } : manager
+          )
+        );
+      } else {
+        setEmployees((prevEmployees) =>
+          prevEmployees.map((employee) =>
+            employee === selectedEmployee ? { ...data } : employee
+          )
+        );
+      }
+    } else {
+      // Add a new employee/manager
+      if (data.position === "Manager") {
+        setManagers((prevManagers) => [...prevManagers, { ...data }]);
+      } else {
+        setEmployees((prevEmployees) => [...prevEmployees, { ...data }]);
+      }
+    }
+    closeEmployeePopup();
+  };  
 
   return (
       <div>
@@ -127,13 +154,9 @@ function Employee() {
       </div>
       {isPopupOpen && (
         <EmployeePopup
-          isOpen={isPopupOpen} // You can conditionally set it based on your requirements
+          isOpen={isPopupOpen}
           onClose={closeEmployeePopup}
-          onSubmit={(data) => {
-            // Handle the data submission here
-            console.log('Submitted data:', data);
-            closeEmployeePopup(); // Close the popup after submission
-          }}
+          onSubmit={handleConfirmation}
         />
       )}
   </div>
