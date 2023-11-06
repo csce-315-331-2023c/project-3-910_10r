@@ -8,6 +8,7 @@ import Payment from "./pages/Cashier/Payment.tsx";
 import Manager from "./pages/Manager/manager.tsx";
 
 import Login from "./pages/Login/login.tsx";
+import Manager from "./pages/Manager/manager.tsx";
 
 function App() {
   const [payPage, setPayPage] = useState<boolean>(false);
@@ -17,12 +18,15 @@ function App() {
     <>
       <div>
         {isLogin ? (<Login setIsLogin={setIsLogin} setIsManager={setIsManager}></Login>) : 
+          (isManager ? (
+            <Manager></Manager>
+          ) :
           (payPage ? (
             <Payment></Payment>
           ) : (
-            <Manager></Manager>
-          ))
-}
+            <Cashier setPayPage={setPayPage}></Cashier>
+          )))
+        }
       </div>
     </>
   );

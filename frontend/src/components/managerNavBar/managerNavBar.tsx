@@ -1,35 +1,18 @@
-import "./managerNavBar.scss";
-import React from 'react';
+import './managerNavBar.scss';
 
-interface Props {
-  activePage: string;
-  onNavItemClick: (page: string) => void;
-}
-//nav classname: nav-bar
+const ManagerNavBar = () => {
 
-const NavigationBar: React.FC<Props> = ({ activePage, onNavItemClick }) => {
-  return (
-    <nav className="nav-bar"> 
-      <ul>
-        <li className={`nav-category ${activePage === 'employees' ? 'nav-selected' : 'nav'}`}>
-          <button className="nav-link" onClick={() => onNavItemClick('employees')}>Employees</button>
-        </li>
-        <li className={`nav-category ${activePage === 'inventory' ? 'nav-selected' : 'nav'}`}>
-          <button className="nav-link" onClick={() => onNavItemClick('inventory')}>Inventory</button>
-        </li>
-        <li className={`nav-category ${activePage === 'menu' ? 'nav-selected' : 'nav'}`}>
-          <button className="nav-link" onClick={() => onNavItemClick('menu')}>Menus</button>
-        </li>
-        <li className={`nav-category ${activePage === 'reports' ? 'nav-selected' : 'nav'}`}>
-          <button className="nav-link" onClick={() => onNavItemClick('reports')}>Report</button>
-        </li>
-        <li className={`nav-category ${activePage === 'orderHistory' ? 'nav-selected' : 'nav'}`}>
-          <button className="nav-link" onClick={() => onNavItemClick('orderHistory')}>Order History</button>
-        </li>
-      </ul>
-    </nav>
-  );
+    return (
+        <>
+            <div className='navbar'>
+                <button className='navbar__btn active'>Employees</button>
+                <button className='navbar__btn'>Inventory</button>
+                <button className='navbar__btn'>Menus</button>
+                <button className='navbar__btn'>Order History</button>
+                <button className='navbar__btn'>Reports</button>
+            </div>
+        </>
+    );
 };
 
-export default NavigationBar;
-
+export default ManagerNavBar;

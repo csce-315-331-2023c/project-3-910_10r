@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import './login.scss';
 
 interface Props{
@@ -8,32 +9,49 @@ interface Props{
 
 const Login = ({setIsManager, setIsLogin} : Props) => {
     const [formData, setFormData] = useState({ username: '', password: '' });
+    const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+    const [showError, setShowError] = useState(false);
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setIsSubmitClicked(false);
+        const { name, value } = event.target;
+        setFormData({ ...formData, [name]: value });
+        setShowError(false);
+    };
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        const { username, password } = formData;
-        setIsLogin(false);
+        setIsLogin(true);
         setIsManager(false);
-        /* 
-            get username, password, and manager Array from DB
-                [ [user, pass, t/f], [user, pass, t/f], ...]
-                not efficient, but idc
-            check to see if username is a key -> if not show error
-            check the password with the value -> if does not match, show error
-            if the user is manager, show manager page
-            if the user is not a manager, show cashier page
-        */
-
-        console.log(username, " " + password);
+        setIsSubmitClicked(true);
     };
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
-    };
+    useEffect(() => {
+        if (isSubmitClicked && formData.username && formData.password) {
+            const para = `name='${formData.username}' AND password='${formData.password}'`;
+            axios.get(`http://localhost:8000/login?parameter=${para}`)
+                .then((response) => {
+                    if(response.data === -1) {
+                        setShowError(true);
+                    }
+                    else if(response.data) {
+                        setIsManager(true);
+                        setIsLogin(false);
+                    }
+                    else {
+                        setIsLogin(false);
+                    }
+                    console.log("asd");
+                })
+                .catch((err) => {
+                    //console.error(err);
+                    setShowError(true);
+                });
+        }
+    }, [isSubmitClicked, formData.username, formData.password]);
 
     return (
-        <>
+        <div className="login-container">
             <div className="login">
                 <h2 className="login__header">Login</h2>
                 <form className="login__form" onSubmit={handleSubmit}>
@@ -62,7 +80,9 @@ const Login = ({setIsManager, setIsLogin} : Props) => {
                         value={formData.password}
                         onChange={handleInputChange}
                     />
-                    
+
+                    {showError && <div className="login__form-invalid">Invalid Username or Password</div>}
+
                     <button id="loginSubmitBtn" type="submit" className="login__form-login">Login</button>
 
                     <div className='login__form-google'>
@@ -74,7 +94,7 @@ const Login = ({setIsManager, setIsLogin} : Props) => {
                     </div>
                 </form>
             </div>
-        </>
+        </div>
     );
 };
 

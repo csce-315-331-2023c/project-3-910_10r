@@ -1,43 +1,36 @@
-import React, { useState } from 'react';
-import NavigationBar from "../../components/managerNavBar/managerNavBar.tsx";
+import React, { useState, useEffect } from "react";
+import './manager.scss';
+
+import ManagerNavBar from "../../components/managerNavBar/managerNavBar.tsx";
 import Footer from "../../components/footer/footer.tsx";
-import Inventory from '../../pages/Manager/inventory';
-import Menu from '../../pages/Manager/menu';
-import Reports from '../../pages/Manager/reports';
-import OrderHistory from '../../pages/Manager/orderHistory';
-import Employee from '../../pages/Manager/employees';
-import "./manager.scss";
+import Employees from "./Employees/employees.tsx";
+import Inventory from "./Inventory/inventory.tsx";
+import Menus from "./Menus/menus.tsx";
+import OrderHistory from "./OrderHistory/orderhistory.tsx";
+import Reports from "./Reports/reports.tsx";
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+const Manager = () => {
 
-library.add(fas);
+    const [showEmployees, setShowEmployees] = useState(true);
+    const [showInventory, setShowInventory] = useState(false);
+    const [showMenus, setShowMenus] = useState(false);
+    const [showOrderHistory, setShowOrderHistory] = useState(false);
+    const [showReports, setShowReports] = useState(false);
+    
 
-const Manager: React.FC = () => {
-  const [activePage, setActivePage] = useState('employees'); // Default to 'Employee'
-
-  const handleNavItemClick = (page: string) => {
-    setActivePage(page);
-  };
-
-  console.log(activePage);
-  return (
-    <div className="container">
-        <div>
-            <NavigationBar activePage={activePage} onNavItemClick={handleNavItemClick} />
+    return (
+        <div className="manager-container">
+            <div className="manager">
+                <ManagerNavBar></ManagerNavBar>
+                {showEmployees && <Employees></Employees>}
+                {showInventory && <Inventory></Inventory>}
+                {showMenus && <Menus></Menus>}
+                {showOrderHistory && <OrderHistory></OrderHistory>}
+                {showReports && <Reports></Reports>}
+            </div>
+            <Footer></Footer>
         </div>
-      <div className="main-content">
-        {activePage === 'employees' && <Employee/>}
-        {activePage === 'inventory' && <Inventory />}
-        {activePage === 'menu' && <Menu />}
-        {activePage === 'reports' && <Reports />}
-        {activePage === 'orderHistory' && <OrderHistory />}
-      </div>
-      <div className="footer">
-        <Footer />
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Manager;
