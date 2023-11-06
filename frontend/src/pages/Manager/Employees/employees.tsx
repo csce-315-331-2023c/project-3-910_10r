@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 //import "../../components/employeesmainpage/employeesList.scss";
 import "./employees.scss";
 import EmployeePopup from "../../../components/employeePopup/employeePopup";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import "./manager.scss";
-//import axios , { AxiosInstance } from 'axios';
 //import EmployeesList from "../../components/employeesmainpage/employeesList.tsx";
 //import EmployeePopup from "../../components/employeePopup/employeeEdit.tsx";
-/*let baseURL = import.meta.env.VITE_API_URL;
+
+import axios , { AxiosInstance } from 'axios';
+
+let baseURL = import.meta.env.VITE_API_URL;
 
 const API: AxiosInstance = axios.create({
   baseURL: baseURL,
   timeout: 10000
-});*/
+});
 
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -26,31 +28,24 @@ interface EmployeeData {
 
 function Employee() {
   console.log("Employee component is being rendered");
+  //if Managers and Employees loaded
+  const [loadedM, setLoadedM] = useState<boolean>(false);
+  const [loadedE, setLoadedE] = useState<boolean>(false);
 
-
-  const [managers, setManagers] = useState<EmployeeData[]>([
-    { name: 'Manager 1', position: 'Manager', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Manager 2', position: 'Manager', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Manager 3', position: 'Manager', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Man 4', position: 'Manager', hoursPerWeek: 20, hourlyPay: 15 },
-    // Add more manager objects as needed
-  ]);
-
-  const [employees, setEmployees] = useState<EmployeeData[]>([
-    { name: 'Employee 1', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15},
-    { name: 'Employee 2', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Employee 3', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Employee 4', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Employee 2', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Employee 3', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
-    { name: 'Employee 4', position: 'Employee', hoursPerWeek: 20, hourlyPay: 15 },
-    // Add more employee objects as needed
-  ]); 
+  //names of manager and employee
+  const [managersNames, setManagerNames] = useState<string[]>([]);
+  const [employeeNames, setEmployeeNames] = useState<string[]>([]);
 
   const [selectedEmployee, setSelectedEmployee] = useState<EmployeeData | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const openEmployeePopup = (employeeData: EmployeeData) => {
+  const openEmployeePopup = (employeeName: string, position: string) => {
+    const employeeData: EmployeeData = {
+      name: employeeName,
+      position: position,
+      hoursPerWeek: 0,
+      hourlyPay: 0,
+    };
     setSelectedEmployee(employeeData);
     setIsPopupOpen(true);
   };
@@ -59,11 +54,12 @@ function Employee() {
     setSelectedEmployee(null);
     setIsPopupOpen(false);
   };
-  /*useEffect(() => {
-    API.get("/cashier/drinkCategory")
+  useEffect(() => {
+    API.get("/managers/names")
       .then((response) => {
-        setCatogories(response.data);
+        setManagerNames(response.data);
         console.log(response.data);
+        setLoadedM(true);
       })
       .catch((error) => {
         console.error(error);
@@ -71,16 +67,17 @@ function Employee() {
   }, []);
 
   useEffect(() => {
-    API.get("/cashier/drinkAndCategories")
+    API.get("/employees/names")
       .then((response) => {
-        setDrinks(response.data);
+        setEmployeeNames(response.data);
         console.log(response.data);
-        setLoaded(true);
+        setLoadedE(true);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);*/
+  }, []);
+
   //<FontAwesomeIcon icon="fa-solid fa-square-plus" style={{color: "#0d6f06",}} />
   //        <EmployeesList managers={managers} employees={employees} />
   
@@ -93,63 +90,67 @@ function Employee() {
     if (selectedEmployee) {
       // Update an existing employee/manager
       if (selectedEmployee.position === "Manager") {
-        setManagers((prevManagers) =>
-          prevManagers.map((manager) =>
-            manager === selectedEmployee ? { ...data } : manager
-          )
+        setManagerNames((prevNames) =>
+          prevNames.map((name) => (name === selectedEmployee.name ? data.name : name))
         );
       } else {
-        setEmployees((prevEmployees) =>
-          prevEmployees.map((employee) =>
-            employee === selectedEmployee ? { ...data } : employee
-          )
+        setEmployeeNames((prevNames) =>
+          prevNames.map((name) => (name === selectedEmployee.name ? data.name : name))
         );
       }
     } else {
       // Add a new employee/manager
       if (data.position === "Manager") {
-        setManagers((prevManagers) => [...prevManagers, { ...data }]);
+        setManagerNames((prevNames) => [...prevNames, data.name]);
       } else {
-        setEmployees((prevEmployees) => [...prevEmployees, { ...data }]);
+        setEmployeeNames((prevNames) => [...prevNames, data.name]);
       }
     }
     closeEmployeePopup();
   };  
 
   return (
+    <div style={{ position: "relative" }}>
+    {(loadedM && loadedE) ? (
       <div>
       <div className="section">
-          <button className="section-icon-button" onClick={() => openEmployeePopup({name: '', position: 'Employee', hoursPerWeek: 0, hourlyPay: 0})}>
+          <button className="section-icon-button" onClick={() => openEmployeePopup("", "Manager")}>
             <i>
               <FontAwesomeIcon icon="square-plus" size="2x" style={{color: "#0d6f06",}} />
             </i>
           </button>
         <h1>Managers:</h1>
           <ul className="ullabel">
-            {managers.map((manager, index) => (
-              <li key={index} className="lisection">
-                <button className="buttonatr" onClick={() => openEmployeePopup(manager)}>
-                  {manager.name}
-                </button>
-              </li>
-            ))}
+            {managersNames.map((managerName, index) => (
+                  <li key={index} className="lisection">
+                    <button
+                      className="buttonatr"
+                      onClick={() => openEmployeePopup(managerName, "Manager")}
+                    >
+                      {managerName}
+                    </button>
+                  </li>
+                ))}
           </ul>
       </div>
       <div className="section">
-          <button className="section-icon-button" onClick={() => openEmployeePopup({name: '', position: 'Employee', hoursPerWeek: 0, hourlyPay: 0})}>
+          <button className="section-icon-button" onClick={() => openEmployeePopup("", "Employee")}>
             <i>
               <FontAwesomeIcon icon="square-plus" size="2x" style={{color: "#0d6f06",}} />
             </i>
           </button>
         <h2>Employees:</h2>
       <ul className="ullabel">
-        {employees.map((employee, index) => (
-          <li key={index} className="lisection">
-              <button className="buttonatr" onClick={() => openEmployeePopup(employee)}>
-                {employee.name}
-              </button>
-          </li>
-        ))}
+          {employeeNames.map((employeeName, index) => (
+                <li key={index} className="lisection">
+                  <button
+                    className="buttonatr"
+                    onClick={() => openEmployeePopup(employeeName, "Employee")}
+                  >
+                    {employeeName}
+                  </button>
+                </li>
+              ))}
       </ul>
       </div>
       {isPopupOpen && (
@@ -157,9 +158,24 @@ function Employee() {
           isOpen={isPopupOpen}
           onClose={closeEmployeePopup}
           onSubmit={handleConfirmation}
+          initialData={{ name: selectedEmployee?.name || "", position: selectedEmployee?.position || "Employee", hoursPerWeek: 0, hourlyPay: 0 }}
         />
       )}
   </div>
+      ) : (
+        <div
+          style={{
+            height: "100vh",
+            width: "100vw",
+            backgroundColor: "var(--GREEN-MED)",
+            color: "black",
+            fontSize: "30px",
+          }}
+        >
+          Loading
+        </div>
+      )}
+    </div>
   );
 }
 

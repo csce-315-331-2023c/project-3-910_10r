@@ -6,7 +6,7 @@
 
 
 import React, { useState } from "react";
-import DatePicker, { registerLocale } from "react-datepicker";
+import { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB"; // Import a locale for date-fns
 import "./reports.scss";
 import CustomTimePopup from "../../../components/reportsPopup/customTime";

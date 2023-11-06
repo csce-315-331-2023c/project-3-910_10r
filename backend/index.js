@@ -102,6 +102,72 @@ app.get("/login", (req, res) => {
     });
 })
 
+
+// gets all the employees for the employee page
+app.get("/employees/names", (req, res) => {
+  let command = "SELECT * FROM employee WHERE manager = false;";
+  let names = [];
+  pool
+    .query(command)
+    .then((query_res) => {
+      for (let i = 0; i < query_res.rowCount; i++) {
+        names.push(query_res.rows[i].name);
+      }
+      res.send(names);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when retrieving employee names from database",
+      });
+    });
+});
+
+// gets all the managers for the employee page
+app.get("/managers/names", (req, res) => {
+  let command = "SELECT * FROM employee WHERE manager = true;";
+  let names = [];
+  pool
+    .query(command)
+    .then((query_res) => {
+      for (let i = 0; i < query_res.rowCount; i++) {
+        names.push(query_res.rows[i].name);
+      }
+      res.send(names);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when retrieving manager names from database",
+      });
+    });
+});
+
+
+//get the information about an employee for popup on employee page
+app.get("/employees/info", (req, res) => {
+  let command = "SELECT * FROM employee WHERE name = '" + req.query.name + "';";
+  //arraylist of strings
+  let info = {};
+  pool
+    .query(command)
+    .then((query_res) => {
+      if(query_res.rowCount != 0) {
+        res.send(query_res.rows[0]);
+      }
+      else {
+        res.send(-1);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when retrieving employee info from database",
+      });
+    });
+});
+
+
 // app.get("/api", (req, res) => {
 //   res.json("user1");
 // });

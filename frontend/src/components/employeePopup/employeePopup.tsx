@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./employeePopup.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 import IconPopup from "./iconPopup"; // Import the IconPopup component
+import axios , { AxiosInstance } from 'axios';
+
+let baseURL = import.meta.env.VITE_API_URL;
+
+const API: AxiosInstance = axios.create({
+  baseURL: baseURL,
+  timeout: 10000
+});
 
 interface EmployeeData {
   name: string;
@@ -15,14 +23,36 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: EmployeeData) => void;
+  initialData: EmployeeData;
 }
 
-const EmployeePopup: React.FC<Props> = ({ isOpen, onClose, onSubmit }) => {
-  const [name, setName] = useState("");
-  const [position, setPosition] = useState('Employee');
-  const [hoursPerWeek, setHoursPerWeek] = useState("");
-  const [hourlyPay, setHourlyPay] = useState("");
+const EmployeePopup: React.FC<Props> = ({ isOpen, onClose, onSubmit, initialData}) => {
+  const [name, setName] = useState(initialData.name);
+  const [position, setPosition] = useState(initialData.position);
+  const [hoursPerWeek, setHoursPerWeek] = useState(initialData.hoursPerWeek.toString());
+  const [hourlyPay, setHourlyPay] = useState(initialData.hourlyPay.toString());
   const [confirmed, setConfirmed] = useState(false);
+  const [loaded, setLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    API.get('/employees/info',{
+      params: {
+        name: initialData.name,
+      }
+    })
+      .then((response) => {
+        const data = response.data;
+        console.log(data.name);
+        //setName(data[0]);
+        //setPosition(data[1]);
+        setHoursPerWeek(data.hours);
+        setHourlyPay(data.pay);
+        setLoaded(true);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const handleSubmit = () => {
     const data: EmployeeData = {
@@ -48,6 +78,7 @@ const EmployeePopup: React.FC<Props> = ({ isOpen, onClose, onSubmit }) => {
 
   return (
     <div className="popup-overlay">
+      {loaded ? (
     <div className={`popup ${isOpen ? "open" : ""}`}>
       <div className="popup-header">
         {/* Close button (x icon) in the top right */}
@@ -93,6 +124,16 @@ const EmployeePopup: React.FC<Props> = ({ isOpen, onClose, onSubmit }) => {
         )}
       </div>
     </div>
+      ) : (
+        <div
+          style={{
+            color: "black",
+            fontSize: "30px",
+          }}
+        >
+          Loading
+        </div>
+      )}
     </div>
   );
 };
