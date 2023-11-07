@@ -53,6 +53,25 @@ function Employee() {
   const closeEmployeePopup = () => {
     setSelectedEmployee(null);
     setIsPopupOpen(false);
+  //reload
+    API.get("/managers/names")
+    .then((response) => {
+      setManagerNames(response.data);
+      console.log(response.data);
+      setLoadedM(true);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+    API.get("/employees/names")
+      .then((response) => {
+        setEmployeeNames(response.data);
+        console.log(response.data);
+        setLoadedE(true);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   useEffect(() => {
     API.get("/managers/names")
@@ -88,27 +107,44 @@ function Employee() {
     console.log('Icon button clicked');
   };*/
   const handleConfirmation = (data: EmployeeData) => {
-    if (selectedEmployee) {
-      // Update an existing employee/manager
-      if (selectedEmployee.position === "Manager") {
-        setManagerNames((prevNames) =>
-          prevNames.map((name) => (name === selectedEmployee.name ? data.name : name))
-        );
+    if (data.name) {
+      // Name is present, so it's an update or addition
+      if (selectedEmployee) {
+        // Update an existing employee/manager
+        if (selectedEmployee.position === "Manager") {
+          setManagerNames((prevNames) =>
+            prevNames.map((name) => (name === selectedEmployee.name ? data.name : name))
+          );
+        } else {
+          setEmployeeNames((prevNames) =>
+            prevNames.map((name) => (name === selectedEmployee.name ? data.name : name))
+          );
+        }
       } else {
-        setEmployeeNames((prevNames) =>
-          prevNames.map((name) => (name === selectedEmployee.name ? data.name : name))
-        );
+        // Add a new employee/manager
+        if (data.position === "Manager") {
+          setManagerNames((prevNames) => [...prevNames, data.name]);
+        } else {
+          setEmployeeNames((prevNames) => [...prevNames, data.name]);
+        }
       }
     } else {
-      // Add a new employee/manager
-      if (data.position === "Manager") {
-        setManagerNames((prevNames) => [...prevNames, data.name]);
-      } else {
-        setEmployeeNames((prevNames) => [...prevNames, data.name]);
+      // Name is not present, so remove
+      if (selectedEmployee) {
+        if (selectedEmployee.position === "Manager") {
+          setManagerNames((prevNames) =>
+            prevNames.filter((name) => name !== selectedEmployee.name)
+          );
+        } else {
+          setEmployeeNames((prevNames) =>
+            prevNames.filter((name) => name !== selectedEmployee.name)
+          );
+        }
       }
     }
     closeEmployeePopup();
-  };  
+  };
+    
 
   return (
     <div style={{ position: "relative" }}>
@@ -156,7 +192,6 @@ function Employee() {
       </div>
       {isPopupOpen && (
         <EmployeePopup
-          isOpen={isPopupOpen}
           isOpen={isPopupOpen}
           onClose={closeEmployeePopup}
           onSubmit={handleConfirmation}

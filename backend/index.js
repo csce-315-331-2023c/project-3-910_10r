@@ -167,6 +167,80 @@ app.get("/employees/info", (req, res) => {
     });
 });
 
+//update employee database for edited employee
+app.put("/employees/edit", (req, res) => {
+  // Extract the updated data from the request body
+  const { name, position, hoursPerWeek, hourlyPay } = req.body;
+
+  // Construct an SQL query to update the employee's information
+  const command = "UPDATE employee SET hours = " + hoursPerWeek + ", pay = " + hourlyPay + ", manager = " + position + " WHERE name = '"
+  + name + "'";
+
+  pool
+    .query(command) //, [hoursPerWeek, hourlyPay, position, name]
+    .then((query_res) => {
+      if (query_res.rowCount === 1) {
+        // The update was successful
+        res.sendStatus(204); // No Content
+      } else {
+        res.status(404).json({
+          error: "Employee not found",
+        });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when updating employee info in the database",
+      });
+    });
+});
+
+//add new employee
+app.put("/employees/add", (req, res) => {
+  // Extract the updated data from the request body
+  const { name, position, password, hoursPerWeek, hourlyPay } = req.body;
+
+  // Construct an SQL query to update the employee's information
+  const command = "SELECT setval(pg_get_serial_sequence('employee','id'), coalesce(max(id)+1, 1), false) FROM employee;" 
+           + " INSERT INTO employee (name, password, pay, hours, manager) VALUES ('" + name
+          + "','" + password + "'," + hourlyPay + "," + hoursPerWeek + "," + position + ")";
+
+  pool
+    .query(command) //, [hoursPerWeek, hourlyPay, position, name]
+    .then((query_res) => {
+        res.sendStatus(204); // No Content
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when adding employee info in the database",
+      });
+    });
+});
+
+//remove employee
+app.put("/employees/remove", (req, res) => {
+  // Extract the updated data from the request body
+  const { name } = req.body;
+
+  // Construct an SQL query to update the employee's information
+  const command = "DELETE FROM employee WHERE name ='" + name + "'";
+
+  pool
+    .query(command) //, [hoursPerWeek, hourlyPay, position, name]
+    .then((query_res) => {
+        res.sendStatus(204); // No Content
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when removing employee from the database",
+      });
+    });
+});
+
+
 
 // app.get("/api", (req, res) => {
 //   res.json("user1");

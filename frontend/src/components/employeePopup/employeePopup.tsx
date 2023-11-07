@@ -26,49 +26,95 @@ interface Props {
   initialData: EmployeeData;
 }
 
-const EmployeePopup: React.FC<Props> = ({ isOpen, onClose, onSubmit, initialData}) => {
+const EmployeePopup: React.FC<Props> = ({ isOpen, onClose, initialData}) => {
   const [name, setName] = useState(initialData.name);
   const [position, setPosition] = useState(initialData.position);
   const [hoursPerWeek, setHoursPerWeek] = useState(initialData.hoursPerWeek.toString());
   const [hourlyPay, setHourlyPay] = useState(initialData.hourlyPay.toString());
   const [confirmed, setConfirmed] = useState(false);
   const [loaded, setLoaded] = useState<boolean>(false);
+  const [updatedDB, setUpdatedDB] = useState<boolean>(false);
+  const [newEmployee, setNew] = useState<boolean>(false);
 
   useEffect(() => {
-    API.get('/employees/info',{
-      params: {
-        name: initialData.name,
-      }
-    })
+    if (initialData.name.trim() === "") {
+      // Handle the case where name is empty
+      setNew(true);
+      setLoaded(true); // Set loaded to true to avoid unnecessary loading
+    } else {
+      // Make the API request only if the name is not empty
+      API.get('/employees/info', {
+        params: {
+          name: initialData.name,
+        }
+      })
+        .then((response) => {
+          const data = response.data;
+          console.log(data.name);
+          //setName(data[0]);
+          //setPosition(data[1]);
+          setHoursPerWeek(data.hours);
+          setHourlyPay(data.pay);
+          setLoaded(true);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [initialData.name]);
+  
+
+  const handleRemove = () => {
+    API.put('/employees/remove', {name,})
       .then((response) => {
-        const data = response.data;
-        console.log(data.name);
-        //setName(data[0]);
-        //setPosition(data[1]);
-        setHoursPerWeek(data.hours);
-        setHourlyPay(data.pay);
-        setLoaded(true);
+        console.log(response);
+        setUpdatedDB(true);
+        setConfirmed(true);
       })
       .catch((error) => {
         console.error(error);
-      });
-  }, []);
+      })
+  };
 
   const handleSubmit = () => {
-    const data: EmployeeData = {
-      name,
-      position,
-      hoursPerWeek: parseInt(hoursPerWeek),
-      hourlyPay: parseFloat(hourlyPay),
-    };
+    // Make the PUT request to update the database
+    const isManager = position === "Manager";
+    const positionParam = isManager ? "true" : "false";
 
-    // If not confirmed, mark it as confirmed
-    if (!confirmed) {
-      setConfirmed(true);
-    } else {
-      // If already confirmed, submit the data and close the popup
-      onSubmit(data);
-      onClose();
+    if (newEmployee){
+      API.put('/employees/add', {
+        name,
+        position: positionParam,
+        password: "password",
+        hourlyPay,
+        hoursPerWeek,
+      })
+        .then((response) => {
+          console.log(response);
+          setUpdatedDB(true);
+          setConfirmed(true);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+    else {
+      API.put('/employees/edit', {
+          name,
+          position: positionParam,
+          hourlyPay,
+          hoursPerWeek,
+      })
+        .then((response) => {
+          console.log(response);
+          setUpdatedDB(true);
+          setConfirmed(true);
+          // You can also call the onSubmit function here if needed
+          // onSubmit({ name, position, hoursPerWeek, hourlyPay });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   };
 
@@ -79,51 +125,56 @@ const EmployeePopup: React.FC<Props> = ({ isOpen, onClose, onSubmit, initialData
   return (
     <div className="popup-overlay">
       {loaded ? (
-    <div className={`popup ${isOpen ? "open" : ""}`}>
-      <div className="popup-header">
-        {/* Close button (x icon) in the top right */}
-        <button className="close-button" onClick={onClose}>
-          <FontAwesomeIcon icon={faTimes} />
-        </button>
-      </div>
-      <div className="popup-content">
-        {confirmed ? (
-          // Show confirmation icon if confirmed
-          <IconPopup isOpen={confirmed} onClose={onClose} icon={faCheckCircle} color="green" />
-        ) : (
-          // Show input fields and buttons if not confirmed
-          <>
-            <label>
-              Name:
-              <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-            </label>
-            <label>
-              Position:
-              <select value={position} onChange={(e) => setPosition(e.target.value)}>
-                <option value="Manager">Manager</option>
-                <option value="Employee">Employee</option>
-              </select>
-            </label>
-            <label>
-              Hours per Week:
-              <input type="number" value={hoursPerWeek} onChange={(e) => setHoursPerWeek(e.target.value)} />
-            </label>
-            <label>
-              Hourly Pay:
-              <input type="number" value={hourlyPay} onChange={(e) => setHourlyPay(e.target.value)} />
-            </label>
-            <div className="popup-buttons">
-              <button onClick={onClose}>
-                Remove
-              </button>
-              <button onClick={handleSubmit} disabled={confirmed}>
-                Confirm
-              </button>
-            </div>
-          </>
-        )}
-      </div>
-    </div>
+        <div className={`popup ${isOpen ? "open" : ""}`}>
+          <div className="popup-header">
+            {/* Close button (x icon) in the top right */}
+            <button className="close-button" onClick={onClose}>
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+          </div>
+          <div className="popup-content">
+            {confirmed ? (
+              // Show confirmation icon if confirmed
+              <IconPopup
+                isOpen={updatedDB}
+                onClose={onClose}
+                icon={faCheckCircle}
+                color="green"
+              />
+            ) : (
+              // Show input fields and buttons if not confirmed
+              <>
+                <label>
+                  Name:
+                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                </label>
+                <label>
+                  Position:
+                  <select value={position} onChange={(e) => setPosition(e.target.value)}>
+                    <option value="Manager">Manager</option>
+                    <option value="Employee">Employee</option>
+                  </select>
+                </label>
+                <label>
+                  Hours per Week:
+                  <input type="number" value={hoursPerWeek} onChange={(e) => setHoursPerWeek(e.target.value)} />
+                </label>
+                <label>
+                  Hourly Pay:
+                  <input type="number" value={hourlyPay} onChange={(e) => setHourlyPay(e.target.value)} />
+                </label>
+                <div className="popup-buttons">
+                  <button onClick={handleRemove} disabled={confirmed}>
+                    Remove
+                  </button>
+                  <button onClick={handleSubmit} disabled={confirmed}>
+                    Confirm
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
       ) : (
         <div
           style={{
