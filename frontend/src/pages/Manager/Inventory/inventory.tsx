@@ -35,102 +35,85 @@ const Inventory = () => {
           {/* THESE ARE JUST EXAMPLE - NEED TO USE A COMPONENTS AND FETCH FROM DB */}
 
           <div className="inventory__items-item">
-            <div>
+            <button>
               <p>90%</p>
-            </div>
+            </button>
             <p>Milk</p>
           </div>
 
           <div className="inventory__items-item">
-            <div>
+            <button>
               <p>60%</p>
-            </div>
+            </button>
             <p>Ice</p>
           </div>
           <div className="inventory__items-item">
-            <div>
+            <button>
               <p>60%</p>
-            </div>
+            </button>
             <p>Ice</p>
           </div>
           <div className="inventory__items-item">
-            <div>
+            <button>
               <p>60%</p>
-            </div>
+            </button>
             <p>Ice</p>
           </div>
           <div className="inventory__items-item">
-            <div>
+            <button>
               <p>60%</p>
-            </div>
+            </button>
             <p>Ice</p>
           </div>
           <div className="inventory__items-item">
-            <div>
+            <button>
               <p>60%</p>
-            </div>
+            </button>
             <p>Ice</p>
           </div>
           <div className="inventory__items-item">
-            <div>
+            <button>
               <p>60%</p>
-            </div>
+            </button>
             <p>Ice</p>
           </div>
           <div className="inventory__items-item">
-            <div>
+            <button>
               <p>60%</p>
-            </div>
+            </button>
             <p>Ice</p>
           </div>
           <div className="inventory__items-item">
-            <div>
+            <button>
               <p>60%</p>
-            </div>
+            </button>
             <p>Ice</p>
           </div>
           <div className="inventory__items-item">
-            <div>
+            <button>
               <p>60%</p>
-            </div>
+            </button>
             <p>Ice</p>
           </div>
           <div className="inventory__items-item">
-            <div>
+            <button>
               <p>60%</p>
-            </div>
+            </button>
             <p>Ice</p>
           </div>
           <div className="inventory__items-item">
-            <div>
+            <button>
               <p>60%</p>
-            </div>
+            </button>
             <p>Ice</p>
           </div>
           <div className="inventory__items-item">
-            <div>
+            <button>
               <p>60%</p>
-            </div>
+            </button>
             <p>Ice</p>
           </div>
-          <div className="inventory__items-item">
-            <div>
-              <p>60%</p>
-            </div>
-            <p>Ice</p>
-          </div>
-          <div className="inventory__items-item">
-            <div>
-              <p>60%</p>
-            </div>
-            <p>Ice</p>
-          </div>
-          <div className="inventory__items-item">
-            <div>
-              <p>60%</p>
-            </div>
-            <p>Ice</p>
-          </div>
+
 
         </div>
       </div>

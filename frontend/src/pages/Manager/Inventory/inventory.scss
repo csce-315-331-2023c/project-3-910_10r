@@ -1,5 +1,5 @@
 .inventory {
-    margin: 30px 100px 30px 100px;
+    margin: 30px 100px;
     display: flex;
     flex-flow: column nowrap;
 
@@ -18,16 +18,17 @@
         padding-top: var(--PADDING-SMALL);
 
         &-item {
-            flex-basis: clamp(125px, 16vw, 155px);
+            flex-basis: 200px;
 
-            div {
-                border-radius: var(--BUTTON-BORDER-RADIUS);
-                border: var(--BORDER-DARK);
+            button {
+                border-radius: 10px;
                 display: grid;
                 place-content: center;
                 width: 100%;
-                height: clamp(90px, 12vh, 120px);
-                background-color: var(--WHITE);
+                height: 136px;
+                background-color: white;
+                cursor: pointer;
+                font-size: 18px;
             }
             
             p {

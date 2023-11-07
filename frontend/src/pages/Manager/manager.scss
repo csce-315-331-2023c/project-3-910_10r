@@ -14,9 +14,8 @@
     height: 100%;
     width: 100%;
     background-color: var(--GREEN-MED);
-    display: grid;
-    grid-template-columns: clamp(155px, 20vw, 175px) auto;
     overflow: auto;
+    padding-left: 210px;
 }/*.manager-grid{
     display: grid;
     grid-template-rows: 94vh 6vh;
