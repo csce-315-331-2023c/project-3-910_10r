@@ -131,24 +131,6 @@ const Inventory = () => {
             </div>
             <p>Ice</p>
           </div>
-          <div className="inventory__items-item">
-            <div>
-              <p>60%</p>
-            </div>
-            <p>Ice</p>
-          </div>
-          <div className="inventory__items-item">
-            <div>
-              <p>60%</p>
-            </div>
-            <p>Ice</p>
-          </div>
-          <div className="inventory__items-item">
-            <div>
-              <p>60%</p>
-            </div>
-            <p>Ice</p>
-          </div>
 
         </div>
       </div>
