@@ -30,8 +30,8 @@ UPDATE inventory AS i \
 SET amount = amount - 10 * subquery.amount \
 FROM ( \
     SELECT \
-        unnest($1) AS topping, \
-        unnest($2) AS amount \
+        unnest($1::text[]) AS topping, \
+        unnest($2::int[]) AS amount \
 ) AS subquery \
 WHERE i.name = subquery.topping;";
 
@@ -65,8 +65,8 @@ UPDATE inventory AS i \
 SET amount = amount + 10 * subquery.amount \
 FROM ( \
     SELECT \
-        unnest($1) AS topping, \
-        unnest($2) AS amount \
+        unnest($1::test[]) AS topping, \
+        unnest($2::int[]) AS amount \
 ) AS subquery \
 WHERE i.name = subquery.topping;";
 
