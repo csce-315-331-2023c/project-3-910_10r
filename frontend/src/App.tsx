@@ -13,6 +13,7 @@ function App() {
   const [payPage, setPayPage] = useState<boolean>(false);
   const [isManager, setIsManager] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(true);
+
   return (
     <>
       <div>

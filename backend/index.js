@@ -91,7 +91,7 @@ app.get("/login", (req, res) => {
         res.send(query_res.rows[0].manager);
       }
       else {
-        res.send(-1);
+        res.sendStatus(500);
       } 
     })
     .catch((err) => {
@@ -101,6 +101,8 @@ app.get("/login", (req, res) => {
       });
     });
 })
+
+// gets all inventory items' names and alerts in a 
 
 // app.get("/api", (req, res) => {
 //   res.json("user1");

@@ -1,0 +1,39 @@
+.inventory {
+    margin: 30px 100px 30px 100px;
+    display: flex;
+    flex-flow: column nowrap;
+
+    &__header {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__items {
+        display: flex;
+        justify-content: flex-start;
+        flex-flow: row wrap;
+        gap: 0.75rem;
+        padding-top: var(--PADDING-SMALL);
+
+        &-item {
+            flex-basis: clamp(125px, 16vw, 155px);
+
+            div {
+                border-radius: var(--BUTTON-BORDER-RADIUS);
+                border: var(--BORDER-DARK);
+                display: grid;
+                place-content: center;
+                width: 100%;
+                height: clamp(90px, 12vh, 120px);
+                background-color: var(--WHITE);
+            }
+            
+            p {
+                text-align: center;
+                color: black;
+            }
+        }
+    }
+}
