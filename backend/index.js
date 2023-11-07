@@ -15,7 +15,7 @@ process.on("SIGINT", function () {
 });
 
 app.get('/', (req, res) => {
-  req.send('Server running!');
+  res.send('Server running!');
 });
 
 app.use('/cashier', cashierRouter)
