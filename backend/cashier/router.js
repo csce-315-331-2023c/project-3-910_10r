@@ -1,7 +1,9 @@
 const {Router} = require('express')
 const controller = require('./controller')
-
+const pool = require('../db')
 const router = Router()
+
+router.use(express.json())
 
 router.get('/price', controller.getPriceByDrink)
   
