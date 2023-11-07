@@ -99,7 +99,7 @@ const OrderHistory: React.FC = () => {
     if (loading) {
       return; // Don't make another request while one is in progress
     }
-  
+    console.log(drink);
     setLoading(true);
     console.log("StartDate:");
     console.log(typeof startDate);
