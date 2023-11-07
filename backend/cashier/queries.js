@@ -27,7 +27,7 @@ WHERE name = 'ice';";
 
 const updateToppings = "\
 UPDATE inventory AS i \
-SET i.amount = i.amount - 10 * subquery.amount \
+SET amount = amount - 10 * subquery.amount \
 FROM ( \
     SELECT \
         unnest($1::text[]) AS topping, \
@@ -62,7 +62,7 @@ WHERE name = 'ice';";
 
 const restoreToppings = "\
 UPDATE inventory AS i \
-SET i.amount = i.amount + 10 * subquery.amount \
+SET amount = amount + 10 * subquery.amount \
 FROM ( \
     SELECT \
         unnest($1::test[]) AS topping, \
