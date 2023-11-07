@@ -16,10 +16,10 @@ library.add(fas);
 
 const Manager = () => {
 
-    const [showEmployees] = useState(true);
+    const [showEmployees] = useState(false);
     const [showInventory] = useState(false);
     const [showMenus] = useState(false);
-    const [showOrderHistory] = useState(false);
+    const [showOrderHistory] = useState(true);
     const [showReports] = useState(false);
     
 

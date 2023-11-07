@@ -1,37 +1,32 @@
 import "./orderhistory.scss";
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 import OrderInfo from "../../../components/orderInfoSidebar/orderInfo";
-
-import DatePicker, { registerLocale } from "react-datepicker";
-import enGB from "date-fns/locale/en-GB"; // Import a locale for date-fns
+import { registerLocale } from "react-datepicker";
+import enGB from "date-fns/locale/en-GB";
 import FilterPopup from "../../../components/orderHistoryFilter/filter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import axios, { AxiosInstance } from 'axios';
+
+let baseURL = import.meta.env.VITE_API_URL;
+
+const API: AxiosInstance = axios.create({
+  baseURL: baseURL,
+  timeout: 10000
+});
 
 // Register the locale to use with react-datepicker
 registerLocale("en-GB", enGB);
 
 interface Order {
-  orderId: number;
-  name: string;
+  orderId: string;
+  name: string[];
+  date: string;
   time: string;
-  total: number;
+  total: string;
 }
 
-const orderData:  Order[] = [
-  { orderId: 10, name: "Name, Mango Ice, Green Tea", time: "10", total: 100},
-  { orderId: 12, name: "Name", time: "10", total: 100},
-  { orderId: 20, name: "Name", time: "10", total: 100},
-  { orderId: 120, name: "Name", time: "10", total: 100},
-  { orderId: 200, name: "Name", time: "10", total: 100},
-  { orderId: 30, name: "Name", time: "10", total: 100},
-  { orderId: 400, name: "Name", time: "10", total: 100},
-  { orderId: 13, name: "Name", time: "10", total: 100},
-  { orderId: 1, name: "Name", time: "10", total: 100},
-  { orderId: 999, name: "Name", time: "10", total: 100},
-  { orderId: 123, name: "Name", time: "10", total: 100},
-  { orderId: 8, name: "Name", time: "10", total: 100},
-];
+const PAGE_SIZE = 100; // Number of orders per page
 
 const OrderHistory: React.FC = () => {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
@@ -39,19 +34,126 @@ const OrderHistory: React.FC = () => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [drink, setDrinkName] = useState<string | null>(null);
-  const [isFilterActive, setIsFilterActive] = useState(false);
   const [minPrice, setMinPrice] = useState<number>(0.00);
   const [maxPrice, setMaxPrice] = useState<number>(0.00);
+  const [orderData, setOrderData] = useState<Order[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [isFilterActive, setIsFilterActive] = useState(false);
+  const [id, setId] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchOrders(currentPage);
+  }, []);
+
+  const fetchOrders = (page: number) => {
+    if (loading) {
+      return; // Don't make another request while one is in progress
+    }
+  
+    setLoading(true);
+  
+    API.get('/orderHistory/total', {
+      params: {
+        page: page,
+        pageSize: PAGE_SIZE
+      }
+    })
+      .then((response) => {
+        const data = response.data;
+        const extractedOrderData = data.map((item: any) => ({
+          orderId: item.order_id as string,
+          name: item.drink_id,
+          date: item.date.slice(0, 10),
+          time: item.time,
+          total: item.cost as string,
+        }));
+  
+        // Append the data from the current page to the existing orderData
+        setOrderData((prevData) => [...prevData, ...extractedOrderData]);
+  
+        setCurrentPage(page + 1);
+        setLoading(false);
+  
+        if (data.length < PAGE_SIZE) {
+          setHasMore(false); // If the last page has fewer items than PAGE_SIZE, there are no more pages.
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  };
+
+  const fetchOrdersFilter = (
+    page: number,
+    startDate: Date | null,
+    endDate: Date | null,
+    drink: string | null,
+    minPrice: number,
+    maxPrice: number,
+    id: string | null,
+  ) => {
+    if (loading) {
+      return; // Don't make another request while one is in progress
+    }
+  
+    setLoading(true);
+    
+    console.log(id);
+    // Clear existing data before fetching the filtered data
+    setOrderData([]);
+  
+    API.get('/orderHistory/filter', {
+      params: {
+        startDate: startDate ? startDate.toString().slice(0, 10) : "NULL",
+        endDate: endDate ? endDate.toString().slice(0, 10) : "NULL",
+        drink: id || "NULL",
+        minPrice: minPrice !== 0 ? minPrice.toString() : "NULL",
+        maxPrice: maxPrice !== 0 ? maxPrice.toString() : "NULL",
+        page: page,
+        pageSize: PAGE_SIZE,
+      }
+    })
+      .then((response) => {
+        const data = response.data;
+        const extractedOrderData = data.map((item: any) => ({
+          orderId: item.order_id as string,
+          name: item.drink_id,
+          date: item.date.slice(0, 10),
+          time: item.time,
+          total: item.cost as string,
+        }));
+  
+        // Set the data from the current page as the filtered data
+        setOrderData(extractedOrderData);
+  
+        setCurrentPage(page + 1);
+        setLoading(false);
+  
+        if (data.length < PAGE_SIZE) {
+          setHasMore(false); // If the last page has fewer items than PAGE_SIZE, there are no more pages.
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  };
+  
+  
+  
   
 
   const handleClearFilter = () => {
     setIsFilterActive(false);
-    // Clear any filter-related state, such as drink, startDate, and endDate.
     setDrinkName(null);
     setStartDate(null);
     setEndDate(null);
     setMinPrice(0.00);
     setMaxPrice(0.00);
+    setId(null);
   };
 
   const handleOrderClick = (data: Order) => {
@@ -60,95 +162,99 @@ const OrderHistory: React.FC = () => {
 
   const handleFilterButtonClick = () => {
     setSelectedOrder(null);
-    setShowFilterPopup(true); // Show the filter popup when the button is clicked
+    setShowFilterPopup(true);
   };
 
-const handleFilterSubmit = () => {
-  if (drink) {
-    console.log("Selected Drink: ", drink);
-  }
-  // Handle custom time selection
-  if (startDate && endDate) {
-    console.log("Selected Start Date:", startDate.toLocaleDateString());
-    console.log("Selected End Date:", endDate.toLocaleDateString());
-  }
-  if (maxPrice > 0.00) {
-    console.log("Min Price: ", minPrice);
-    console.log("Max Price: ", maxPrice);
-  }
-  setShowFilterPopup(false); // Close the filter popup when submitted
-  //only if something was changed:
-  if (drink || (startDate && endDate) || maxPrice > 0.00){
-      setIsFilterActive(true); // Set the filter as active
-  }
-};
+  const handleFilterSubmit = () => {
 
-const filteredOrderData = isFilterActive
+  // Call the fetchOrdersFilter function with the updated parameter types
+  fetchOrdersFilter(currentPage, startDate, endDate, drink, minPrice, maxPrice, id);
+  
+    // Close the filter popup when submitted
+    setShowFilterPopup(false);
+    // Only set isFilterActive to true if needed
+    if (id || startDate || endDate || minPrice > 0.00 || maxPrice > 0.00) {
+      setIsFilterActive(true);
+    }
+  };
+  
+
+  const filteredOrderData = isFilterActive
   ? orderData.filter((data) => {
+    console.log(id);
       // Apply filter conditions based on drink, startDate, and endDate
       return (
-        (!drink || data.name.includes(drink)) &&
-        (!startDate || data.time >= startDate.toLocaleDateString()) &&
-        (!endDate || data.time <= endDate.toLocaleDateString()) &&
-        (!minPrice || data.total >= minPrice) && // Check for minPrice
-        (!maxPrice || data.total <= maxPrice) // Check for maxPrice
+        (!id || data.name.some((name) => name.toLowerCase().includes(id.toLowerCase()))) &&
+        (!startDate || data.date >= startDate.toLocaleDateString()) &&
+        (!endDate || data.date <= endDate.toLocaleDateString()) &&
+        (!minPrice || parseFloat(data.total) >= minPrice) && // Check for minPrice
+        (!maxPrice || parseFloat(data.total) <= maxPrice) // Check for maxPrice
       );
     })
   : orderData;
+
 
   return (
     <div className="order-history-container">
       <div className="header">
         <h2>Order History</h2>
         <div>
-        {isFilterActive && (
-          <button className="close-button" onClick={handleClearFilter}>
-            <FontAwesomeIcon icon={faTimes} />
-          </button>
-        )}
+          {isFilterActive && (
+            <button className="close-button" onClick={handleClearFilter}>
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+          )}
         </div>
         <div className="filter-button-container">
-        <button className="filter-button" onClick={handleFilterButtonClick}>
-          Filter
-        </button>
+          <button className="filter-button" onClick={handleFilterButtonClick}>
+            Filter
+          </button>
         </div>
       </div>
-      <div>
-        <div className="main-container">
-          <h3>Id    Name     Time     Total</h3>
-          <div className="scrollable-content">
-            {filteredOrderData.map((data, index) => (
-              <button
-                className={`data-box ${
-                  selectedOrder === data ? "selected" : ""
-                } ${isFilterActive ? "inactive" : ""}`}
-                key={index}
-                onClick={() => handleOrderClick(data)}
-              >
-                <div className="data-entry">{data.orderId}</div>
-                <div className="data-entry">{data.name}</div>
-                <div className="data-entry">{data.time}</div>
-                <div className="data-entry">{data.total}</div>
-              </button>
-            ))}
-          </div>
+      <div className="main-container">
+        <h3>Id    Name     Date/Time     Total</h3>
+        <div className="scrollable-content">
+          {filteredOrderData.map((data, index) => (
+            <button
+              className={`data-box ${
+                selectedOrder === data ? "selected" : ""
+              }`}
+              key={index}
+              onClick={() => handleOrderClick(data)}
+            >
+              <div className="data-entry">{data.orderId}</div>
+              <div className="data-entry">{data.name}</div>
+              <div className="data-entry">{data.date}</div>
+              <div className="data-entry">{data.time}</div>
+              <div className="data-entry">{data.total}</div>
+            </button>
+          ))}
         </div>
-        {selectedOrder && <OrderInfo order={selectedOrder} />}
       </div>
+      {selectedOrder && <OrderInfo order={selectedOrder} />}
       {showFilterPopup && (
-        <FilterPopup drink={drink}
-        isOpen={showFilterPopup}
-        onDrinkNameChange={(newDrink) => setDrinkName(newDrink)}
-        startDate={startDate}
-        endDate={endDate}
-        minPrice={minPrice}
-        maxPrice={maxPrice}
-        onStartDateChange={(newStartDate) => setStartDate(newStartDate)}
-        onEndDateChange={(newEndDate) => setEndDate(newEndDate)}
-        onMinPriceChange= {(newMinPrice) => setMinPrice(newMinPrice)}
-        onMaxPriceChange= {(newMaxPrice) => setMaxPrice(newMaxPrice)}
-        onSubmit={handleFilterSubmit}
-        onClose={() => setShowFilterPopup(false)} />
+        <FilterPopup
+          fetchOrdersFilter={fetchOrdersFilter}
+          drink={drink}
+          id={drink}
+          isOpen={showFilterPopup}
+          onDrinkNameChange={(newDrink) => setDrinkName(newDrink)}
+          startDate={startDate}
+          endDate={endDate}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          onStartDateChange={(newStartDate) => setStartDate(newStartDate)}
+          onEndDateChange={(newEndDate) => setEndDate(newEndDate)}
+          onMinPriceChange= {(newMinPrice) => setMinPrice(newMinPrice)}
+          onMaxPriceChange= {(newMaxPrice) => setMaxPrice(newMaxPrice)}
+          onSubmit={handleFilterSubmit}
+          onClose={() => setShowFilterPopup(false)}
+        />
+      )}
+      {hasMore && (
+        <button onClick={() => fetchOrders(currentPage)} disabled={loading}>
+          {loading ? "Loading..." : "Load More"}
+        </button>
       )}
     </div>
   );

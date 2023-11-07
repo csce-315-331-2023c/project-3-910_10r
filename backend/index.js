@@ -240,6 +240,109 @@ app.put("/employees/remove", (req, res) => {
     });
 });
 
+//get order history from filter
+app.get("/orderHistory/filter", (req, res) => {
+  const { startDate, endDate, drink, minPrice, maxPrice, page, pageSize } = req.query;
+  const offset = (page - 1) * pageSize;
+  
+
+  // Use parameterized queries and logical operators
+  let command = "SELECT * FROM orders WHERE " +
+    "(" + startDate + " IS NULL OR date BETWEEN " + startDate + " AND " + endDate + ") " +
+    "AND (" + drink + " IS NULL OR " + drink + " = ANY(drink_id)) " +
+    "AND (" + minPrice + " IS NULL OR cost >= " + minPrice + ") " +
+    "AND (" + maxPrice + " IS NULL OR cost <= " + maxPrice + ") " +
+    "LIMIT " + pageSize + " OFFSET " +  offset;
+
+  // array to hold results
+  let filtered = [];
+
+  pool
+    .query(command)
+    .then((query_res) => {
+      filtered.push(...query_res.rows); // Push all rows into the 'filtered' array
+      res.send(filtered);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when retrieving order history filtered from the database",
+      });
+    });
+});
+
+//get all order history from db
+app.get("/orderHistory/total", (req, res) => {
+  const { page, pageSize } = req.query;
+  const offset = (page - 1) * pageSize; // Calculate the offset for pagination
+
+  // Adjust SQL query to include pagination
+  let command = "SELECT * FROM orders";
+  command += ` LIMIT ${pageSize} OFFSET ${offset}`; // Add LIMIT and OFFSET
+
+  const filtered = [];
+
+  pool
+    .query(command)
+    .then((query_res) => {
+      filtered.push(...query_res.rows); // Use push to add rows to the array
+      res.send(filtered);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when retrieving order history from the database",
+      });
+    });
+});
+
+
+//gets drinkNames from recipes
+app.get("/managers/drinknames", (req, res) => {
+  let command = "SELECT drinkname, recipeid FROM recipes;";
+  const drinks = [];
+  pool
+    .query(command)
+    .then((query_res) => {
+      drinks.push(...query_res.rows);
+      res.send(drinks);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when getting drinks from recipes",
+      });
+    });
+});
+
+//gets specific drinkid
+app.get("/managers/drinkid", (req, res) => {
+  const { drink } = req.query;
+  let command = "SELECT recipeid FROM recipes WHERE drinkname = '" + drink + "'";
+
+  pool
+    .query(command)
+    .then((query_res) => {
+      if (query_res.rows.length === 0) {
+        res.status(404).json({
+          error: "Drink not found",
+        });
+      } else {
+        const drinkid = query_res.rows[0].recipeid;
+        res.send({ drinkid });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when getting the drink id from recipes",
+      });
+    });
+});
+
+
+
+
 
 
 // app.get("/api", (req, res) => {

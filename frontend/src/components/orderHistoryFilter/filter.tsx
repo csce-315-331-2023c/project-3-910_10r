@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./filter.scss"; // Import the custom styles
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios, { AxiosInstance } from 'axios';
+
+let baseURL = import.meta.env.VITE_API_URL;
+
+const API: AxiosInstance = axios.create({
+  baseURL: baseURL,
+  timeout: 10000
+});
 
 interface FilterPopupProps {
+  fetchOrdersFilter: (page: 1, startDate: Date | null, endDate: Date | null, drink: string | null, minPrice: number, maxPrice: number, id: string | null) => void;
   drink: string | null;
   isOpen: boolean;
+  id: string | null;
   startDate: Date | null;
   endDate: Date | null;
   minPrice: number;
   maxPrice: number;
-  onDrinkNameChange: (drinkName: string | null) => void;
+  onDrinkNameChange: (drink: string | null) => void;
   onStartDateChange: (date: Date | null) => void;
   onEndDateChange: (date: Date | null) => void;
   onMinPriceChange: (minPrice: number) => void;
@@ -22,6 +32,7 @@ interface FilterPopupProps {
 }
 
 const FilterPopup: React.FC<FilterPopupProps> = ({
+  fetchOrdersFilter,
   drink,
   isOpen,
   startDate,
@@ -36,9 +47,78 @@ const FilterPopup: React.FC<FilterPopupProps> = ({
   onClose,
   onSubmit,
 }) => {
+  const [id, setId] = useState<string | null>(null);
+  const [drinks, setDrinks] = useState<string[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
   if (!isOpen) {
     return null;
   }
+
+  const handleFilterSubmit = () => {
+    const page = 1;
+  
+    // Make an API call to fetch the id for the selected drinkName
+    if (drink !== null) {
+      API.get("/managers/drinkid", { params: { drink: drink } })
+        .then((response) => {
+          const newId = response.data.drinkid;
+          setId(newId); // Update the id state with the new id
+          console.log(newId);
+          // Now, you can call fetchOrdersFilter with the updated parameters
+          fetchOrdersFilter(page, startDate, endDate, drink, minPrice, maxPrice, newId);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      // If drink is null, you should still update the id state with a default value
+      setId(null);
+      // Then, call fetchOrdersFilter with the updated parameters
+      fetchOrdersFilter(page, startDate, endDate, drink, minPrice, maxPrice, null);
+    }
+  
+    // Close the popup when submitted
+    onSubmit();
+  };
+  
+
+  useEffect(() => {
+    if (!loaded) {
+      API.get("/managers/drinknames")
+        .then((response) => {
+          const drinkData = response.data.map((item: any) => ({
+            drink: item.drinkname,
+            id: item.recipeid
+          }));
+          // Extract the first id (assuming it's an array of data)
+          const firstId = drinkData.length > 0 ? drinkData[0].id : null;
+          setId(firstId);
+          setDrinks(drinkData.map((item: any) => item.drink));
+          setLoaded(true);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [loaded]);
+
+  /*useEffect(() => {
+    if (drink !== null) {
+      console.log(drink);
+      // Make an API call to fetch the id for the selected drinkName
+      API.get("/managers/drinkid", { params: { drink: drink } })
+        .then((response) => {
+          const newId = response.data.drinkid;
+          setId(newId); // Update the id state with the new id
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [drink]);*/
+  
+  
 
   // Initialize minPrice and maxPrice with "0.00"
   const [localMinPrice, setLocalMinPrice] = useState("0.00");
@@ -55,13 +135,16 @@ const FilterPopup: React.FC<FilterPopupProps> = ({
         </div>
         <label>
           Drink Name:
-          <select value={drink || ""} onChange={(e) => onDrinkNameChange(e.target.value || null)}>
+          <select defaultValue="" onChange={(e) => onDrinkNameChange(e.target.value || null)}>
             <option value="">Select a drink</option>
-            <option value="Drink 1">Drink 1</option>
-            <option value="Drink 2">Drink 2</option>
-            {/* Add more options for drinks as needed */}
+            {drinks.map((drink, index) => (
+              <option key={index} value={drink}>
+                {drink}
+              </option>
+            ))}
           </select>
         </label>
+
         <label>
           Start Date:
           <DatePicker
@@ -109,7 +192,7 @@ const FilterPopup: React.FC<FilterPopupProps> = ({
           />
         </label>
         <div className="popup-buttons">
-          <button onClick={onSubmit}>Confirm</button>
+          <button onClick={handleFilterSubmit}>Confirm</button>
         </div>
       </div>
     </div>

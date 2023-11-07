@@ -3,25 +3,30 @@ import "./orderInfo.scss";
 
 interface OrderInfoProps {
   order: {
-    orderId: number;
-    name: string;
+    orderId: string;
+    name: string[];
+    date: string;
     time: string;
-    total: number;
+    total: string;
   };
 }
 
 const OrderInfo: React.FC<OrderInfoProps> = ({ order }) => {
-    const namesArray = order.name.split(',');
+    //console.log(order.name);
+    //const namesArray = order.name.split(',');
+    //console.log(namesArray);
+    //console.log(order.name);
   return (
     <div className="order-info-container">
       <div className="order-id-box">
         <p>Order ID: {order.orderId}</p>
       </div>
       <div className="order-time-box">
+        <p>Date: {order.date}</p>
         <p>Time: {order.time}</p>
       </div>
       <div className="scrollable-content">
-            {namesArray.map((data, index) => (
+            {order.name.map((data, index) => (
               <div className="data-box" key={index}>
                 <div className="data-entry">{data}</div>
                 <div className="data-entry">Price</div>
