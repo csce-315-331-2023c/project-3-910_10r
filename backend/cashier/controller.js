@@ -86,19 +86,19 @@ const restoreInventory = (req, res) => {
     //update inventory based on ingredients, ice, sugar, topping array
     pool.query(queries.restoreRecipeItems, [sugar, name], (error, results) => {
         if(error) throw error;
-        res.send('Recipe ingredients updated successfully');
+        // res.send('Recipe ingredients updated successfully');
         console.log(results);
     })
 
     pool.query(queries.restoreIce, [ice], (error, results) => {
         if(error) throw error;
-        res.send('Updated ice successfully');
+        // res.send('Updated ice successfully');
         console.log(results);
     })
 
     pool.query(queries.restoreToppings, [topping, count], (error, results) => {
         if(error) throw error;
-        res.send('Toppings updated successfully');
+        // res.send('Toppings updated successfully');
         console.log(results)
     })
 }
