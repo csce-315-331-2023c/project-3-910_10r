@@ -14,8 +14,8 @@ const getPriceByDrink = (req, res) => {
             console.error("Error fetching price:", error);
             res.status(500).json({ error: "An error occurred while fetching the price." });
         } else {
-            if (results.length > 0) {
-                const price = results[0].price;
+            if (results.rows.length > 0) {
+                const price = results.rows[0].price;
                 res.status(200).json({ price });
             } else {
                 res.status(404).json({ error: "Drink not found" });

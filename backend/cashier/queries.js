@@ -1,4 +1,4 @@
-const getPriceByDrink = 'SELECT price FROM recipes where drinkname = $1;';
+const getPriceByDrink = 'SELECT price FROM recipes where lower(drinkname) = $1;';
 
 const updateRecipeItems = "\
 UPDATE inventory AS i\
@@ -15,7 +15,7 @@ FROM (\
             unnest(ingredient_names) AS ingredient,\
             unnest(ingredient_values) AS amount\
         FROM recipes\
-        WHERE drinkname = $1\
+        WHERE lower(drinkname) = $1\
     ) AS subquery\
 ) AS subquery\
 WHERE i.name = subquery.ingredient;";
@@ -50,7 +50,7 @@ FROM (\
             unnest(ingredient_names) AS ingredient,\
             unnest(ingredient_values) AS amount\
         FROM recipes\
-        WHERE drinkname = $1\
+        WHERE lower(drinkname) = $1\
     ) AS subquery\
 ) AS subquery\
 WHERE i.name = subquery.ingredient;";
@@ -69,3 +69,13 @@ FROM (\
         unnest($2) AS amount\
 ) AS subquery\
 WHERE i.name = subquery.topping;";
+
+module.exports = {
+    getPriceByDrink,
+    updateRecipeItems,
+    updateIce,
+    updateToppings,
+    restoreRecipeItems,
+    restoreIce,
+    restoreToppingsx
+};
