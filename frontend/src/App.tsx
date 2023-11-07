@@ -19,7 +19,7 @@ function App() {
       <div>
         {isLogin ? (<Login setIsLogin={setIsLogin} setIsManager={setIsManager}></Login>) : 
           (isManager ? (
-            <Manager setIsLogin={setIsLogin}></Manager>
+            <Manager></Manager>
           ) :
           (payPage ? (
             <Payment></Payment>
