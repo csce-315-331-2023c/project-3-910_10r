@@ -52,7 +52,7 @@ pool
     });
 });
 
-router.post("/updateInventory", controller.updateInventory);
-router.post("/restoreInventory", controller.restoreInventory);
+router.put("/updateInventory", controller.updateInventory);
+router.put("/restoreInventory", controller.restoreInventory);
 
 module.exports = router
