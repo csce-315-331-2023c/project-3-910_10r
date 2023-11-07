@@ -3,8 +3,9 @@ const queries = require('./queries')
 
 // gets the price for a specific drink whose name is passed in via parameter
 const getPriceByDrink = (req, res) => {
-    const drink = req.query.drink
+    const drink = req.query.drink;
     pool.query(queries.getPriceByDrink, [drink], (error, results) => {
+        console.log(queries.getPriceByDrink);
         // if(error) throw error;
         // res.send(results.rows[0].price);
         // console.log(results);
@@ -13,8 +14,8 @@ const getPriceByDrink = (req, res) => {
             console.error("Error fetching price:", error);
             res.status(500).json({ error: "An error occurred while fetching the price." });
         } else {
-            if (results.rows.length > 0) {
-                const price = results.rows[0].price;
+            if (results.length > 0) {
+                const price = results[0].price;
                 res.status(200).json({ price });
             } else {
                 res.status(404).json({ error: "Drink not found" });
@@ -35,21 +36,36 @@ const updateInventory = (req, res) => {
     //get recipe from drink name
     //update inventory based on ingredients, ice, sugar, topping array
     pool.query(queries.updateRecipeItems, [name, sugar], (error, results) => {
-        if(error) throw error;
+        if (error) {
+            // Handle the error gracefully, e.g., by sending an error response
+            console.error("Error fetching price:", error);
+            res.status(500).json({ error: "An error occurred while fetching the price." });
+        } else {
         res.send('Recipe ingredients updated successfully');
         console.log(results);
+        }
     })
 
     pool.query(queries.updateIce, [ice], (error, results) => {
-        if(error) throw error;
+        if (error) {
+            // Handle the error gracefully, e.g., by sending an error response
+            console.error("Error fetching price:", error);
+            res.status(500).json({ error: "An error occurred while fetching the price." });
+        } else {
         res.send('Updated ice successfully');
         console.log(results);
+        }
     })
 
     pool.query(queries.updateToppings, [topping, count], (error, results) => {
-        if(error) throw error;
+        if (error) {
+            // Handle the error gracefully, e.g., by sending an error response
+            console.error("Error fetching price:", error);
+            res.status(500).json({ error: "An error occurred while fetching the price." });
+        } else {
         res.send('Toppings updated successfully');
         console.log(results)
+        }
     })
 }
 
