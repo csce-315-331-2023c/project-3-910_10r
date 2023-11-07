@@ -7,7 +7,7 @@ FROM (\
     SELECT\
         subquery.ingredient,\
         CASE\
-            WHEN subquery.ingredient IN ('brown sugar', 'fructose', 'honey', 'sugar') THEN amount - subquery.amount - $2\
+            WHEN subquery.ingredient IN ('brown sugar', 'fructose', 'honey', 'sugar') THEN amount - subquery.amount - $1\
             ELSE amount - subquery.amount\
         END AS new_amount\
     FROM (\
@@ -15,7 +15,7 @@ FROM (\
             unnest(ingredient_names) AS ingredient,\
             unnest(ingredient_values) AS amount\
         FROM recipes\
-        WHERE lower(drinkname) = $1\
+        WHERE lower(drinkname) = $2\
     ) AS subquery\
 ) AS subquery\
 WHERE i.name = subquery.ingredient;";
@@ -42,7 +42,7 @@ FROM (\
     SELECT\
         subquery.ingredient,\
         CASE\
-            WHEN subquery.ingredient IN ('brown sugar', 'fructose', 'honey', 'sugar') THEN amount + subquery.amount + $2\
+            WHEN subquery.ingredient IN ('brown sugar', 'fructose', 'honey', 'sugar') THEN amount + subquery.amount + $1\
             ELSE amount + subquery.amount\
         END AS new_amount\
     FROM (\
@@ -50,7 +50,7 @@ FROM (\
             unnest(ingredient_names) AS ingredient,\
             unnest(ingredient_values) AS amount\
         FROM recipes\
-        WHERE lower(drinkname) = $1\
+        WHERE lower(drinkname) = $2\
     ) AS subquery\
 ) AS subquery\
 WHERE i.name = subquery.ingredient;";
@@ -70,6 +70,12 @@ FROM (\
 ) AS subquery\
 WHERE i.name = subquery.topping;";
 
+const makeOrder = "\
+INSERT INTO orders (drink_id, order_date, order_time, totalcost)\
+SELECT id, $1::date, $2::time, $3\
+FROM recipes\
+WHERE lower(drink_name) IN ($4:csv);";
+
 module.exports = {
     getPriceByDrink,
     updateRecipeItems,
@@ -77,5 +83,6 @@ module.exports = {
     updateToppings,
     restoreRecipeItems,
     restoreIce,
-    restoreToppingsx
+    restoreToppings,
+    makeOrder,
 };

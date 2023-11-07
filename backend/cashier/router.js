@@ -54,5 +54,6 @@ pool
 
 router.put("/updateInventory", controller.updateInventory);
 router.put("/restoreInventory", controller.restoreInventory);
+router.post('/makeOrder', controller.makeOrder);
 
 module.exports = router

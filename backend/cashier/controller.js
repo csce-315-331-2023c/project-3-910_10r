@@ -35,11 +35,11 @@ const updateInventory = (req, res) => {
     const {name, ice, sugar, topping, count} = req.body;
     //get recipe from drink name
     //update inventory based on ingredients, ice, sugar, topping array
-    pool.query(queries.updateRecipeItems, [name, sugar], (error, results) => {
+    pool.query(queries.updateRecipeItems, [sugar, name], (error, results) => {
         if (error) {
             // Handle the error gracefully, e.g., by sending an error response
-            console.error("Error fetching price:", error);
-            res.status(500).json({ error: "An error occurred while fetching the price." });
+            console.error("Error subtracting recipe ingredients", error);
+            res.status(500).json({ error: "An error occurred while subtracting recipe ingredients." });
         } else {
         res.send('Recipe ingredients updated successfully');
         console.log(results);
@@ -49,8 +49,8 @@ const updateInventory = (req, res) => {
     pool.query(queries.updateIce, [ice], (error, results) => {
         if (error) {
             // Handle the error gracefully, e.g., by sending an error response
-            console.error("Error fetching price:", error);
-            res.status(500).json({ error: "An error occurred while fetching the price." });
+            console.error("Error updating ice:", error);
+            res.status(500).json({ error: "An error occurred while updating ice." });
         } else {
         res.send('Updated ice successfully');
         console.log(results);
@@ -60,8 +60,8 @@ const updateInventory = (req, res) => {
     pool.query(queries.updateToppings, [topping, count], (error, results) => {
         if (error) {
             // Handle the error gracefully, e.g., by sending an error response
-            console.error("Error fetching price:", error);
-            res.status(500).json({ error: "An error occurred while fetching the price." });
+            console.error("Error updating toppings:", error);
+            res.status(500).json({ error: "An error occurred while updating toppings." });
         } else {
         res.send('Toppings updated successfully');
         console.log(results)
@@ -73,7 +73,7 @@ const restoreInventory = (req, res) => {
     const {name, ice, sugar, topping, count} = req.body;
     //get recipe from drink name
     //update inventory based on ingredients, ice, sugar, topping array
-    pool.query(queries.restoreRecipeItems, [name, sugar], (error, results) => {
+    pool.query(queries.restoreRecipeItems, [sugar, name], (error, results) => {
         if(error) throw error;
         res.send('Recipe ingredients updated successfully');
         console.log(results);
@@ -92,9 +92,25 @@ const restoreInventory = (req, res) => {
     })
 }
 
+const makeOrder = (req, res) => {
+    const {drinks, date, time, cost} = req.body;
+
+    pool.query(queries.makeOrder, [date, time, cost, drinks], (error, results) => {
+        if (error) {
+            // Handle the error gracefully, e.g., by sending an error response
+            console.error("Error inserting new order:", error);
+            res.status(500).json({ error: "An error occurred while inserting new order." });
+        } else {
+            res.send('Inserted new order successfully');
+            console.log(results);
+        }
+    })
+}
+
 module.exports = {
     getPriceByDrink,
     updateInventory,
     restoreInventory,
+    makeOrder
 };
 
