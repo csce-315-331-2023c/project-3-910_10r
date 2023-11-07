@@ -86,22 +86,37 @@ const restoreInventory = (req, res) => {
     //get recipe from drink name
     //update inventory based on ingredients, ice, sugar, topping array
     pool.query(queries.restoreRecipeItems, [sugar, name], (error, results) => {
-        if(error) throw error;
+        if (error) {
+            // Handle the error gracefully, e.g., by sending an error response
+            console.error("Error restoring recipe ingredients", error);
+            res.status(500).json({ error: "An error occurred while restoring recipe ingredients." });
+        } else {
         // res.send('Recipe ingredients updated successfully');
         console.log(results);
+        }
     })
 
     pool.query(queries.restoreIce, [ice], (error, results) => {
-        if(error) throw error;
+        if (error) {
+            // Handle the error gracefully, e.g., by sending an error response
+            console.error("Error restoring ice:", error);
+            res.status(500).json({ error: "An error occurred while restoring ice." });
+        } else {
         // res.send('Updated ice successfully');
         console.log(results);
+        }
     })
 
     pool.query(queries.restoreToppings, [topping, count], (error, results) => {
-        if(error) throw error;
-        // res.send('Toppings updated successfully');
+        if (error) {
+            // Handle the error gracefully, e.g., by sending an error response
+            console.error("Error restoring toppings:", error);
+            res.status(500).json({ error: "An error occurred while restoring toppings." });
+        } else {
         console.log(results)
+        }
     })
+    res.status(200).send("Restoring successful")
 }
 
 const makeOrder = (req, res) => {
