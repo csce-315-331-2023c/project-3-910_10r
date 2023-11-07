@@ -50,7 +50,7 @@ const updateInventory = (req, res) => {
             console.error("Error subtracting recipe ingredients", error);
             res.status(500).json({ error: "An error occurred while subtracting recipe ingredients." });
         } else {
-            res.send('Recipe ingredients updated successfully');
+            // res.send('Recipe ingredients updated successfully');
             console.log(results);
         }
     })
@@ -62,7 +62,7 @@ const updateInventory = (req, res) => {
             console.error("Error updating ice:", error);
             res.status(500).json({ error: "An error occurred while updating ice." });
         } else {
-            res.send('Updated ice successfully');
+            // res.send('Updated ice successfully');
             console.log(results);
         }
     })
@@ -74,7 +74,7 @@ const updateInventory = (req, res) => {
             console.error("Error updating toppings:", error);
             res.status(500).json({ error: "An error occurred while updating toppings." });
         } else {
-            res.send('Toppings updated successfully');
+            // res.send('Toppings updated successfully');
             console.log(results)
         }
     })
