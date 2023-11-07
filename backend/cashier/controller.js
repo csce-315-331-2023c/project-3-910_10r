@@ -35,9 +35,12 @@ const updateInventory = (req, res) => {
     const {name, ice, sugar, topping, count} = req.body;
     console.log(name)
     console.log(ice)
-    console.log(sugar)
+    console.log(sugar)  
     console.log(topping)
     console.log(count)
+    console.log(queries.updateRecipeItems)
+    console.log(queries.updateIce)
+    console.log(queries.updateToppings)
     //get recipe from drink name
     //update inventory based on ingredients, ice, sugar, topping array
     pool.query(queries.updateRecipeItems, [sugar, name], (error, results) => {
