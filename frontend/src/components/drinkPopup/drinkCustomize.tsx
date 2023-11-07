@@ -221,7 +221,11 @@ function DrinkCustomize({
   useEffect(() => {
     // Make a GET request to your backend API
     API
-      .get('/cashier/price/' + name)
+      .get('/cashier/price', {
+        params: {
+          drink: name
+        }
+      })
       .then((response) => {
         setData(response.data);
       })

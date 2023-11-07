@@ -7,6 +7,7 @@ const getPriceByDrink = (req, res) => {
     pool.query(queries.getPriceByDrink, [drink], (error, results) => {
         if(error) throw error;
         res.send(results.rows[0].price);
+        console.log(results);
     });
 };
 

@@ -3,7 +3,7 @@ const controller = require('./controller')
 
 const router = Router()
 
-router.get('/price/:drink', controller.getPriceByDrink)
+router.get('/price', controller.getPriceByDrink)
   
 // gets all the categories for the display bar
 router.get("/drinkCategory", (req, res) => {
