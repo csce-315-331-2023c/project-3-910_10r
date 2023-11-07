@@ -5,6 +5,7 @@ import "./filter.scss"; // Import the custom styles
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios, { AxiosInstance } from 'axios';
+import { format} from 'date-fns';
 
 let baseURL = import.meta.env.VITE_API_URL;
 
@@ -14,17 +15,17 @@ const API: AxiosInstance = axios.create({
 });
 
 interface FilterPopupProps {
-  fetchOrdersFilter: (page: 1, startDate: Date | null, endDate: Date | null, drink: string | null, minPrice: number, maxPrice: number, id: string | null) => void;
+  fetchOrdersFilter: (page: 1, startDate: string | null, endDate: string | null, drink: string | null, minPrice: number, maxPrice: number, id: string | null) => void;
   drink: string | null;
   isOpen: boolean;
   id: string | null;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: string | null;
+  endDate: string | null;
   minPrice: number;
   maxPrice: number;
   onDrinkNameChange: (drink: string | null) => void;
-  onStartDateChange: (date: Date | null) => void;
-  onEndDateChange: (date: Date | null) => void;
+  onStartDateChange: (date: string | null) => void;
+  onEndDateChange: (date: string | null) => void;
   onMinPriceChange: (minPrice: number) => void;
   onMaxPriceChange: (maxPrice: number) => void;
   onClose: () => void;
@@ -57,31 +58,47 @@ const FilterPopup: React.FC<FilterPopupProps> = ({
 
   const handleFilterSubmit = () => {
     const page = 1;
-  
-    // Make an API call to fetch the id for the selected drinkName
+
+    console.log(drink);
+    // Rest of the code remains the same
     if (drink !== null) {
       API.get("/managers/drinkid", { params: { drink: drink } })
         .then((response) => {
           const newId = response.data.drinkid;
-          setId(newId); // Update the id state with the new id
-          console.log(newId);
-          // Now, you can call fetchOrdersFilter with the updated parameters
-          fetchOrdersFilter(page, startDate, endDate, drink, minPrice, maxPrice, newId);
+          setId(newId);
+          fetchOrdersFilter(page, startDate, endDate,drink, minPrice, maxPrice, newId);
         })
         .catch((error) => {
           console.error(error);
         });
     } else {
-      // If drink is null, you should still update the id state with a default value
       setId(null);
-      // Then, call fetchOrdersFilter with the updated parameters
-      fetchOrdersFilter(page, startDate, endDate, drink, minPrice, maxPrice, null);
-    }
+      fetchOrdersFilter(page, startDate, endDate,drink, minPrice, maxPrice, null);
+}
+
+// Close the popup when submitted
+onSubmit();
+};
   
-    // Close the popup when submitted
-    onSubmit();
-  };
-  
+
+  useEffect(() => {
+      
+      if (drink !== null) {
+        API.get("/managers/drinkid", { params: { drink: drink } })
+          .then((response) => {
+            const newId = response.data.drinkid;
+            setId(newId);
+            fetchOrdersFilter(1, startDate, endDate,drink, minPrice, maxPrice, newId);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
+        setId(null);
+        fetchOrdersFilter(1, startDate, endDate,drink, minPrice, maxPrice, null);
+      }
+  }, [startDate, endDate, drink, minPrice, maxPrice]);
+
 
   useEffect(() => {
     if (!loaded) {
@@ -144,26 +161,25 @@ const FilterPopup: React.FC<FilterPopupProps> = ({
             ))}
           </select>
         </label>
-
         <label>
           Start Date:
           <DatePicker
-            selected={startDate}
-            onChange={(date) => onStartDateChange(date)}
+            selected={startDate ? new Date(startDate) : null}
+            onChange={(date) => onStartDateChange(date ? format(date, "yyyy-MM-dd") : null)}
             selectsStart
-            startDate={startDate}
-            endDate={endDate}
+            startDate={startDate ? new Date(startDate) : null}
+            endDate={endDate ? new Date(endDate) : null}
             showTimeSelect
           />
         </label>
         <label>
           End Date:
           <DatePicker
-            selected={endDate}
-            onChange={(date) => onEndDateChange(date)}
+            selected={endDate ? new Date(endDate) : null}
+            onChange={(date) => onEndDateChange(date ? format(date, "yyyy-MM-dd") : null)}
             selectsEnd
-            startDate={startDate}
-            endDate={endDate}
+            startDate={startDate ? new Date(startDate) : null}
+            endDate={endDate ? new Date(endDate) : null}
             showTimeSelect
           />
         </label>

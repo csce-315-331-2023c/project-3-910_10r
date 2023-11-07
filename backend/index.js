@@ -244,11 +244,10 @@ app.put("/employees/remove", (req, res) => {
 app.get("/orderHistory/filter", (req, res) => {
   const { startDate, endDate, drink, minPrice, maxPrice, page, pageSize } = req.query;
   const offset = (page - 1) * pageSize;
-  
 
   // Use parameterized queries and logical operators
   let command = "SELECT * FROM orders WHERE " +
-    "(" + startDate + " IS NULL OR date BETWEEN " + startDate + " AND " + endDate + ") " +
+    "( (" + startDate + " IS NULL OR date >= " + startDate + ") AND (" + endDate + " IS NULL OR date <= " + endDate + ") ) " +
     "AND (" + drink + " IS NULL OR " + drink + " = ANY(drink_id)) " +
     "AND (" + minPrice + " IS NULL OR cost >= " + minPrice + ") " +
     "AND (" + maxPrice + " IS NULL OR cost <= " + maxPrice + ") " +

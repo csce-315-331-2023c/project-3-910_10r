@@ -8,8 +8,12 @@ interface OrderInfoProps {
     date: string;
     time: string;
     total: string;
+    drinkNames: string[];
   };
 }
+
+
+
 
 const OrderInfo: React.FC<OrderInfoProps> = ({ order }) => {
     //console.log(order.name);
@@ -26,7 +30,7 @@ const OrderInfo: React.FC<OrderInfoProps> = ({ order }) => {
         <p>Time: {order.time}</p>
       </div>
       <div className="scrollable-content">
-            {order.name.map((data, index) => (
+            {order.drinkNames.map((data, index) => (
               <div className="data-box" key={index}>
                 <div className="data-entry">{data}</div>
                 <div className="data-entry">Price</div>
