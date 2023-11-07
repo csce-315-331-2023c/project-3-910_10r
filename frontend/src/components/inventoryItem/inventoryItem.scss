@@ -1,0 +1,21 @@
+.inventory__items-item {
+    button {
+        border-radius: 10px;
+        display: grid;
+        place-content: center;
+        width: 100%;
+        height: 136px;
+        background-color: white;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    p {
+        text-align: center;
+        color: black;
+    }
+
+    &.alert {
+        background-color: yellow;
+    }
+}

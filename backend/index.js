@@ -102,7 +102,42 @@ app.get("/login", (req, res) => {
     });
 })
 
-// gets all inventory items' names and alerts in a 
+// gets all inventory items
+app.get("/inventory", (req, res) => {
+  let command = "SELECT name, alert, amount, capacity FROM inventory;";
+    
+  pool.query(command)
+  .then((query_res) => {
+    res.send(query_res.rows);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).json({
+      error: "An error occurred when retrieving inventory items",
+    });
+  });
+})
+
+// updates alerts appropiately
+app.put("/inventory/updateAlert", (req, res) => {
+  const itemName = req.query.parameter;
+  const newAlertValue = req.body.alert; // Assuming you pass the new alert value in the request body as JSON
+
+  const command = `UPDATE inventory SET alert=$1 WHERE name=$2;`;
+  const values = [newAlertValue, itemName];
+
+  pool.query(command, values)
+    .then((query_res) => {
+      //console.log(query_res);
+      res.status(200).json({ message: 'Alert updated successfully' });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({
+        error: "An error occurred when updating the alert of an inventory item",
+      });
+    });
+});
 
 // app.get("/api", (req, res) => {
 //   res.json("user1");
