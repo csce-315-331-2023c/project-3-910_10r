@@ -195,7 +195,8 @@ function DrinkCustomize({
     // topping: string[];
     // count: number[];
     // }
-    API.post('/cashier/updateInventory', {backend_order})
+    API
+      .post('/cashier/updateInventory', {backend_order})
 
     resetCount();
   };
