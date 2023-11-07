@@ -22,8 +22,7 @@ const Manager = () => {
     const [showMenus, setShowMenus] = useState(false);
     const [showOrderHistory, setShowOrderHistory] = useState(false);
     const [showReports, setShowReports] = useState(false);
-    const [showLogout, setShowLogout] = useState(false);
-    const [/* isLogout */, setIsLogout] = useState(true);
+    const [isLogout, setIsLogout] = useState(false);
 
     return (
         <div className="manager-container">
@@ -77,8 +76,8 @@ const Manager = () => {
                 {showOrderHistory && <OrderHistory></OrderHistory>}
                 {showReports && <Reports></Reports>}
             </div>
-            <Footer setShowLogout={setShowLogout}></Footer>
-            {showLogout && <LogoutPopup setIsLogout={setIsLogout}></LogoutPopup>}
+            <Footer setShowLogout={setIsLogout}></Footer>
+            {isLogout && <LogoutPopup setIsLogout={setIsLogout}></LogoutPopup>}
         </div>
     );
 };

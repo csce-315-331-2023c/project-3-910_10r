@@ -46,8 +46,7 @@ function Cashier({ setPayPage }: Props) {
   const [categories, setCatogories] = useState<string[]>([]);
   const [loaded, setLoaded] = useState<boolean>(false);
 
-  const [showLogout, setShowLogout] = useState(false);
-  const [/* isLogout */, setIsLogout] = useState(true);
+  const [isLogout, setIsLogout] = useState(false);
 
   const updateOrder = (newOrder: order) => {
     setOrders((prevArray) => [...prevArray, newOrder]);
@@ -101,8 +100,8 @@ function Cashier({ setPayPage }: Props) {
                 setPayPage={setPayPage}
               ></Cart>
             </div>
-            <Footer setShowLogout={setShowLogout}></Footer>
-            {showLogout && <LogoutPopup setIsLogout={setIsLogout}></LogoutPopup>}
+            <Footer setShowLogout={setIsLogout}></Footer>
+            {isLogout && <LogoutPopup setIsLogout={setIsLogout}></LogoutPopup>}
           </div>
           {showCustomizationPage && (
             <DrinkCustomize
