@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import './manager.scss';
 
 import ManagerNavBar from "../../components/managerNavBar/managerNavBar.tsx";
@@ -16,11 +16,11 @@ library.add(fas);
 
 const Manager = () => {
 
-    const [showEmployees, setShowEmployees] = useState(true);
-    const [showInventory, setShowInventory] = useState(false);
-    const [showMenus, setShowMenus] = useState(false);
-    const [showOrderHistory, setShowOrderHistory] = useState(false);
-    const [showReports, setShowReports] = useState(false);
+    const [showEmployees] = useState(true);
+    const [showInventory] = useState(false);
+    const [showMenus] = useState(false);
+    const [showOrderHistory] = useState(false);
+    const [showReports] = useState(false);
     
 
     return (
