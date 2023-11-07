@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import './login.scss';
+
+import axios , { AxiosInstance } from 'axios';
+
+let baseURL = import.meta.env.VITE_API_URL;
+
+const API: AxiosInstance = axios.create({
+  baseURL: baseURL,
+  timeout: 10000
+});
 
 interface Props{
     setIsManager: React.Dispatch<React.SetStateAction<boolean>>
@@ -29,7 +37,7 @@ const Login = ({setIsManager, setIsLogin} : Props) => {
     useEffect(() => {
         if (isSubmitClicked && formData.username && formData.password) {
             const para = `name='${formData.username}' AND password='${formData.password}'`;
-            axios.get(`http://localhost:8000/login?parameter=${para}`)
+            API.get(`/login?parameter=${para}`)
                 .then((response) => {
                     if(response.data === -1) {
                         setShowError(true);
@@ -43,7 +51,7 @@ const Login = ({setIsManager, setIsLogin} : Props) => {
                     }
                 })
                 .catch((err) => {
-                    //console.error(err);
+                    console.error(err);
                     setShowError(true);
                 });
         }

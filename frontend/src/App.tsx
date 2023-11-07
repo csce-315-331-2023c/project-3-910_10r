@@ -5,9 +5,9 @@ import Cashier from "./pages/Cashier/cashier.tsx";
 import Payment from "./pages/Cashier/Payment.tsx";
 // import axios from "axios";
 // import React, { useEffect } from "react";
+import Manager from "./pages/Manager/manager.tsx";
 
 import Login from "./pages/Login/login.tsx";
-import Manager from "./pages/Manager/employees.tsx";
 
 function App() {
   const [payPage, setPayPage] = useState<boolean>(false);
@@ -26,7 +26,7 @@ function App() {
           ) : (
             <Cashier setPayPage={setPayPage}></Cashier>
           )))
-}
+        }
       </div>
     </>
   );

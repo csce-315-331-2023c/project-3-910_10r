@@ -1,7 +1,14 @@
 import Topping from "./topping";
 import "./drinkCustomize.scss";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios , { AxiosInstance } from 'axios';
+
+let baseURL = import.meta.env.VITE_API_URL;
+
+const API: AxiosInstance = axios.create({
+  baseURL: baseURL,
+  timeout: 10000
+});
 
 interface order {
   name: string;
@@ -9,6 +16,14 @@ interface order {
   sugar: string;
   topping: string[];
   price: string;
+}
+
+interface back_end_order {
+  name: string;
+  ice: number;
+  sugar: number;
+  topping: string[];
+  price: number;
 }
 
 interface Props {
@@ -51,6 +66,15 @@ function DrinkCustomize({
     topping: [],
     price: "0.00",
   };
+
+  let backend_order: back_end_order = {
+    name: name,
+    ice: 0,
+    sugar: 0.0,
+    topping: [],
+    price: 0.0,
+  };
+
   const calculateSelections = () => {
     setShowCustomizationPage(false);
     console.log(selectedButton, selectedSugarButton);
@@ -66,64 +90,83 @@ function DrinkCustomize({
 
     if (selectedButton === 1) {
       _order.ice = "regular ice";
+      backend_order.ice = 10;
     } else if (selectedButton === 2) {
       _order.ice = "light ice";
+      backend_order.ice = 5;
     } else if (selectedButton === 3) {
       _order.ice = "no ice";
+      backend_order.ice = 0;
     } else {
       _order.ice = "extra ice";
+      backend_order.ice = 15;
     }
 
     if (selectedSugarButton === 1) {
       _order.sugar = "100% sugar";
+      backend_order.sugar = 1;
     } else if (selectedSugarButton === 2) {
       _order.sugar = "80% sugar";
+      backend_order.sugar = 8;
     } else if (selectedSugarButton === 3) {
       _order.sugar = "50% sugar";
+      backend_order.sugar = 5;
     } else if (selectedSugarButton === 4) {
       _order.sugar = "30% sugar";
+      backend_order.sugar = 3;
     } else if (selectedSugarButton === 5) {
       _order.sugar = "0% sugar";
+      backend_order.sugar = 0;
     } else {
       _order.sugar = "120% sugar";
+      backend_order.sugar = 12;
     }
 
     let toppingPrice: number = 0.0;
     if (pcount > 0) {
       _order.topping.push("pearls x" + pcount);
+      backend_order.topping.push("pearls");
       toppingPrice += pcount * 0.75;
     }
     if (avcount > 0) {
       _order.topping.push("aloe vera x" + avcount);
+      backend_order.topping.push("aloe vera");
       toppingPrice += avcount * 0.75;
     }
 
     if (hjcount > 0) {
       _order.topping.push("herb jelly x" + hjcount);
+      backend_order.topping.push("herb jelly");
       toppingPrice += hjcount * 0.75;
     }
     if (pucount > 0) {
       _order.topping.push("pudding x" + pucount);
+      backend_order.topping.push("pudding");
       toppingPrice += pucount * 0.75;
     }
     if (mpcount > 0) {
       _order.topping.push("mini pearls x" + mpcount);
+      backend_order.topping.push("mini pearls");
       toppingPrice += mpcount * 0.75;
     }
     if (cbcount > 0) {
       _order.topping.push("crystal boba x" + cbcount);
+      backend_order.topping.push("crystal boba");
       toppingPrice += cbcount * 0.75;
     }
     if (ljcount > 0) {
       _order.topping.push("lychee jelly x" + ljcount);
+      backend_order.topping.push("lychee jelly");
       toppingPrice += ljcount * 0.75;
     }
     if (rbcount > 0) {
       _order.topping.push("red bean x" + rbcount);
+      backend_order.topping.push("red bean");
       toppingPrice += rbcount * 0.75;
     }
     if (ajcount > 0) {
       _order.topping.push("aiyu jelly x" + ajcount);
+      backend_order.topping.push("aiyu jelly");
       toppingPrice += ajcount * 0.75;
     }
 
@@ -132,6 +175,16 @@ function DrinkCustomize({
     _order.price = "" + toppingPrice.toFixed(2);
 
     updateOrder(_order);
+
+    // EUNSOO HERE IS WHAT YOU CAN POST TO THE BACKEND
+    // interface back_end_order {
+    // name: string;
+    // ice: number;
+    // sugar: number;
+    // topping: string[];
+    // price: number;
+    // }
+
     resetCount();
   };
 
@@ -155,8 +208,8 @@ function DrinkCustomize({
 
   useEffect(() => {
     // Make a GET request to your backend API
-    axios
-      .get("http://localhost:8000/cashier/price?parameter=" + name)
+    API
+      .get('/cashier/price/' + name)
       .then((response) => {
         setData(response.data);
       })
