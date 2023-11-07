@@ -25,7 +25,6 @@ interface Order {
   date: string;
   time: string;
   total: string;
-  drinkNames: string[];
 }
 
 const PAGE_SIZE = 100; // Number of orders per page
@@ -134,7 +133,6 @@ const OrderHistory: React.FC = () => {
           date: item.date.slice(0, 10),
           time: item.time,
           total: item.cost as string,
-          drinkNames: null,
         }));
   
         // Set the data from the current page as the filtered data

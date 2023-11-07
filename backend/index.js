@@ -339,6 +339,67 @@ app.get("/managers/drinkid", (req, res) => {
     });
 });
 
+//gets specific drinkName
+app.get("/managers/drinkNameandPrice", (req, res) => {
+  const { drink } = req.query;
+  let command = "SELECT drinkname, price FROM recipes WHERE recipeid = '" + drink + "'";
+  pool
+    .query(command)
+    .then((query_res) => {
+      if (query_res.rows.length === 0) {
+        res.status(404).json({
+          error: "Drink not found",
+        });
+      } else {
+        res.send(query_res.rows[0]);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when getting the drink id from recipes",
+      });
+    });
+});
+
+//gets multiple:
+app.get("/managers/drinkids", (req, res) => {
+  const { drinks } = req.query;
+  // Ensure that "drinks" is an array
+  if (!Array.isArray(drinks)) {
+    return res.status(400).json({
+      error: "Invalid request. 'drinks' should be an array of drink names.",
+    });
+  }
+
+  // Create a parameterized query with the IN clause
+  const values = drinks.map((drink) => `'${drink}'`).join(", ");
+  const command = `SELECT recipeid, drinkname FROM recipes WHERE drinkname IN (${values})`;
+
+  pool
+    .query(command)
+    .then((query_res) => {
+      if (query_res.rows.length === 0) {
+        res.status(404).json({
+          error: "Drinks not found",
+        });
+      } else {
+        const drinkData = query_res.rows.map((row) => ({
+          recipeid: row.recipeid,
+          drinkname: row.drinkname,
+        }));
+        res.send(drinkData);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when getting the drink IDs from recipes",
+      });
+    });
+});
+
+
 
 
 

@@ -75,7 +75,7 @@ const FilterPopup: React.FC<FilterPopupProps> = ({
       setId(null);
       fetchOrdersFilter(page, startDate, endDate,drink, minPrice, maxPrice, null);
 }
-
+console.log(id);
 // Close the popup when submitted
 onSubmit();
 };
