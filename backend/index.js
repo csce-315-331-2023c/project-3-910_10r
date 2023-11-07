@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const app = express();
 const cashierRouter = require('./cashier/router')
+const reportRouter = require('./reports/router')
 
 app.use(cors());
 app.use(express.json());
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/cashier', cashierRouter)
+app.use('/report', reportRouter)
 
 // gets the manager boolean based on a given username and password
 app.get("/login", (req, res) => {
