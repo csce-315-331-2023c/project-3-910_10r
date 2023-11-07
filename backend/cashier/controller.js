@@ -41,8 +41,32 @@ const updateInventory = (req, res) => {
     })
 }
 
+const restoreInventory = (req, res) => {
+    const {name, ice, sugar, topping, count} = req.body;
+    //get recipe from drink name
+    //update inventory based on ingredients, ice, sugar, topping array
+    pool.query(queries.restoreRecipeItems, [name, sugar], (error, results) => {
+        if(error) throw error;
+        res.send('Recipe ingredients updated successfully');
+        console.log(results);
+    })
+
+    pool.query(queries.restoreIce, [ice], (error, results) => {
+        if(error) throw error;
+        res.send('Updated ice successfully');
+        console.log(results);
+    })
+
+    pool.query(queries.restoreToppings, [topping, count], (error, results) => {
+        if(error) throw error;
+        res.send('Toppings updated successfully');
+        console.log(results)
+    })
+}
+
 module.exports = {
     getPriceByDrink,
     updateInventory,
+    restoreInventory,
 };
 

@@ -3,8 +3,6 @@ const controller = require('./controller')
 const pool = require('../db')
 const router = Router()
 
-router.use(express.json())
-
 router.get('/price', controller.getPriceByDrink)
   
 // gets all the categories for the display bar
@@ -55,5 +53,6 @@ pool
 });
 
 router.post("/updateInventory", controller.updateInventory);
+router.post("/restoreInventory", controller.restoreInventory);
 
 module.exports = router
