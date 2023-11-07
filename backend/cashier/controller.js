@@ -33,9 +33,15 @@ const getPriceByDrink = (req, res) => {
     // }
 const updateInventory = (req, res) => {
     const {name, ice, sugar, topping, count} = req.body;
+    console.log(name)
+    console.log(ice)
+    console.log(sugar)
+    console.log(topping)
+    console.log(count)
     //get recipe from drink name
     //update inventory based on ingredients, ice, sugar, topping array
     pool.query(queries.updateRecipeItems, [sugar, name], (error, results) => {
+        console.log(queries.updateRecipeItems)
         if (error) {
             // Handle the error gracefully, e.g., by sending an error response
             console.error("Error subtracting recipe ingredients", error);
@@ -47,6 +53,7 @@ const updateInventory = (req, res) => {
     })
 
     pool.query(queries.updateIce, [ice], (error, results) => {
+        console.log(queries.updateIce)
         if (error) {
             // Handle the error gracefully, e.g., by sending an error response
             console.error("Error updating ice:", error);
@@ -58,6 +65,7 @@ const updateInventory = (req, res) => {
     })
 
     pool.query(queries.updateToppings, [topping, count], (error, results) => {
+        console.log(queries.updateToppings)
         if (error) {
             // Handle the error gracefully, e.g., by sending an error response
             console.error("Error updating toppings:", error);
