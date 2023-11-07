@@ -1,17 +1,20 @@
 import ".//logoutPopup.scss";
 
 interface Props{
-    setIsLogout: React.Dispatch<React.SetStateAction<boolean>>
+    setIsLogout: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LogoutPopup = ({setIsLogout} : Props) => {
+const LogoutPopup = ({setIsLogout, setIsLogin} : Props) => {
 
     const confirmLogout = () => {
         setIsLogout(true);
+        setIsLogin(true);
     }
 
     const cancelLogout = () => {
         setIsLogout(false);
+        setIsLogin(false);
     }
 
   return (

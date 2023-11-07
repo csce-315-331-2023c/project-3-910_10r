@@ -15,7 +15,11 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 
 library.add(fas);
 
-const Manager = () => {
+interface Props {
+    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Manager = ({setIsLogin} : Props) => {
 
     const [showEmployees, setShowEmployees] = useState(true);
     const [showInventory, setShowInventory] = useState(false);
@@ -77,7 +81,7 @@ const Manager = () => {
                 {showReports && <Reports></Reports>}
             </div>
             <Footer setShowLogout={setIsLogout}></Footer>
-            {isLogout && <LogoutPopup setIsLogout={setIsLogout}></LogoutPopup>}
+            {isLogout && <LogoutPopup setIsLogout={setIsLogout} setIsLogin={setIsLogin}></LogoutPopup>}
         </div>
     );
 };
