@@ -220,6 +220,7 @@ function DrinkCustomize({
   let [backendData, setData] = useState<string>("");
 
   let query_drinkname: string = name.toLowerCase();
+  console.log(query_drinkname);
 
   useEffect(() => {
     // Make a GET request to your backend API
