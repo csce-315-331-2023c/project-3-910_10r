@@ -23,7 +23,8 @@ interface back_end_order {
   ice: number;
   sugar: number;
   topping: string[];
-  price: number;
+  count: number[];
+  // price: number;
 }
 
 interface Props {
@@ -72,7 +73,8 @@ function DrinkCustomize({
     ice: 0,
     sugar: 0.0,
     topping: [],
-    price: 0.0,
+    count: [],
+    // price: 0.0,
   };
 
   const calculateSelections = () => {
@@ -82,7 +84,7 @@ function DrinkCustomize({
     avcount > 0 && console.log("aloe vera : " + avcount);
     hjcount > 0 && console.log("herb jelly : " + hjcount);
     pucount > 0 && console.log("pudding : " + pucount);
-    mpcount > 0 && console.log("mini pearls : " + mpcount);
+    mpcount > 0 && console.log("mini pearl : " + mpcount);
     cbcount > 0 && console.log("crystal boba : " + cbcount);
     ljcount > 0 && console.log("lychee jelly : " + ljcount);
     rbcount > 0 && console.log("red bean : " + rbcount);
@@ -104,7 +106,7 @@ function DrinkCustomize({
 
     if (selectedSugarButton === 1) {
       _order.sugar = "100% sugar";
-      backend_order.sugar = 1;
+      backend_order.sugar = 10;
     } else if (selectedSugarButton === 2) {
       _order.sugar = "80% sugar";
       backend_order.sugar = 8;
@@ -126,47 +128,56 @@ function DrinkCustomize({
     if (pcount > 0) {
       _order.topping.push("pearls x" + pcount);
       backend_order.topping.push("pearls");
+      backend_order.count.push(pcount);
       toppingPrice += pcount * 0.75;
     }
     if (avcount > 0) {
       _order.topping.push("aloe vera x" + avcount);
       backend_order.topping.push("aloe vera");
+      backend_order.count.push(avcount);
       toppingPrice += avcount * 0.75;
     }
 
     if (hjcount > 0) {
       _order.topping.push("herb jelly x" + hjcount);
       backend_order.topping.push("herb jelly");
+      backend_order.count.push(hjcount);
       toppingPrice += hjcount * 0.75;
     }
     if (pucount > 0) {
       _order.topping.push("pudding x" + pucount);
       backend_order.topping.push("pudding");
+      backend_order.count.push(pucount);
       toppingPrice += pucount * 0.75;
     }
     if (mpcount > 0) {
-      _order.topping.push("mini pearls x" + mpcount);
-      backend_order.topping.push("mini pearls");
+      _order.topping.push("mini pearl x" + mpcount);
+      backend_order.topping.push("mini pearl");
+      backend_order.count.push(mpcount);
       toppingPrice += mpcount * 0.75;
     }
     if (cbcount > 0) {
       _order.topping.push("crystal boba x" + cbcount);
       backend_order.topping.push("crystal boba");
+      backend_order.count.push(cbcount);
       toppingPrice += cbcount * 0.75;
     }
     if (ljcount > 0) {
       _order.topping.push("lychee jelly x" + ljcount);
       backend_order.topping.push("lychee jelly");
+      backend_order.count.push(ljcount);
       toppingPrice += ljcount * 0.75;
     }
     if (rbcount > 0) {
       _order.topping.push("red bean x" + rbcount);
       backend_order.topping.push("red bean");
+      backend_order.count.push(rbcount);
       toppingPrice += rbcount * 0.75;
     }
     if (ajcount > 0) {
       _order.topping.push("aiyu jelly x" + ajcount);
       backend_order.topping.push("aiyu jelly");
+      backend_order.count.push(ajcount);
       toppingPrice += ajcount * 0.75;
     }
 
@@ -182,8 +193,10 @@ function DrinkCustomize({
     // ice: number;
     // sugar: number;
     // topping: string[];
-    // price: number;
+    // count: number[];
     // }
+    API
+      .put('/cashier/updateInventory', {backend_order})
 
     resetCount();
   };
@@ -209,7 +222,11 @@ function DrinkCustomize({
   useEffect(() => {
     // Make a GET request to your backend API
     API
-      .get('/cashier/price/' + name)
+      .get('/cashier/price', {
+        params: {
+          drink: name
+        }
+      })
       .then((response) => {
         setData(response.data);
       })
