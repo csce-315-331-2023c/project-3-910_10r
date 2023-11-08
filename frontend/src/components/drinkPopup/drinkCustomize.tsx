@@ -219,12 +219,14 @@ function DrinkCustomize({
   //query database
   let [backendData, setData] = useState<string>("");
 
+  let query_drinkname: string = name.toLowerCase();
+
   useEffect(() => {
     // Make a GET request to your backend API
     API
       .get('/cashier/price', {
         params: {
-          drink: name
+          drink: query_drinkname
         }
       })
       .then((response) => {
