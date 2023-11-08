@@ -1,0 +1,98 @@
+/* all variables go here */
+
+//    Sass variables start with $
+//    ex: $BG-COLOR: #000;
+//    |
+//    |    But thing is that Sass variables are not dynamic, meaning once compiled, they cannot be changed.
+//    |    Instead, they get replaced by their values.
+//    |
+//    CSS variables are found in :root starting with --
+//    ex: --BG-COLOR: #000;
+//    |
+//    |    CSS are dynamic, meaning they can be changed while the app is running and the app will reflect those changes.
+//    |
+//    Kevin much prefers to use CSS variables
+
+:root {
+    // Most of these variables that use units (px, rem, em, etc) 
+    // should use the clamp function to minimize the amount of responsive code, 
+    // but we're not there yet - idk if we wanna do mobile-friendly design
+
+    /**************** COLORS ****************/
+    --ACCENT-COLOR-DARK: hsl(0, 45%, 56%);
+    --ACCENT-COLOR: hsl(0, 86%, 81%);
+    --ACCENT-COLOR-LIGHT: hsl(0, 100%, 91%);
+
+    --GREEN-LIGHT: #F6FFF8;
+    --GREEN-MED: #CCE3DE;
+    --GREEN-MED60: hsla(167, 29%, 85%, 0.60);
+    --GREEN-DARK: #6B9080;
+    --GREEN-DARK40: hsla(154, 15%, 49%, 0.40);
+
+    --GRAY-LIGHT: #D9D9D9;
+
+    --TEXT-COLOR-LIGHT: white;
+    --TEXT-COLOR-DARK: var(--GREEN-DARK);
+
+    --SIDEBAR-BG-COLOR: #F6FFF8;
+    --SELECTION-COLOR: blue;
+
+    --ERROR-COLOR: hsl(0, 100%, 64%);
+
+    --POPUP-OVERLAY: rgba(0, 0, 0, 0.7);
+
+    --ON-HOVER: rgb(237, 237, 237);
+    --ON-ACTIVE: rgb(206, 206, 206);
+
+    --WHITE: #f9f9f9;
+
+    /* more colors for transparency and stuff */
+
+    
+    /**************** SHADOWS ****************/
+    --LOGIN-SHADOW: 0px 0px 30px var(--GREEN-DARK);
+    --LOGOUT-SHADOW: 0px 0px 15px var(--ACCENT-COLOR-DARK);
+    
+    --BUTTON-SHADOW: 0px 0px 5px var(--GREEN-DARK);
+    --BUTTON-SHADOW-ACCENT: 0px 0px 5px var(--ACCENT-COLOR-DARK);
+
+    --TEXT-SHADOW-LIGHT: 0px 0px 3px var(--GREEN-MED);
+    --TEXT-SHADOW-DARK: 0px 0px 3px var(--GREEN-DARK);
+    --TEXT-SHADOW-ACCENT: 0px 0px 3px var(--ACCENT-COLOR-LIGHT);
+
+
+    /**************** BORDERS ****************/
+    --LOGIN-BORDER-RADIUS: 10px;
+    --BUTTON-BORDER-RADIUS: 5px;
+
+    --BORDER-MED: 2px solid var(--GREEN-MED);
+    --BORDER-DARK: 2px solid var(--GREEN-DARK);
+    --BORDER-ACCENT: 2px solid var(--ACCENT-COLOR);
+    --BORDER-ACCENT-DARK: 2px solid var(--ACCENT-COLOR-DARK);
+    --BORDER-HELP: 1px solid red;
+
+
+    /**************** PADDING & MARGIN ****************/
+    --PADDING-LARGE: 3rem;
+    --PADDING-MED-LARGE: 2.25rem;
+    --PADDING-MED: 1.5rem;
+    --PADDING-SMALL: 0.5rem;
+    
+    --MARGIN-CENTER: 0 auto;
+    --MARGIN-LARGE: 3rem;
+    --MARGIN-MED: 1.5rem;
+    --MARGIN-SMALL: 0.5rem;
+
+    --NAVBAR-WIDTH: 240px;
+
+
+    /**************** FONT SIZES ****************/
+    --FONT-LARGE: 4rem;
+    --FONT-MED-LARGE: 3rem;
+    --FONT-MED: 2rem;
+    --FONT-MED-NORMAL: 1.5rem;
+    --FONT-NORMAL: 1rem;
+    --FONT-SMALL: 0.5rem;
+
+    /* etc */
+}

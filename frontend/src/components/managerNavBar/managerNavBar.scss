@@ -1,0 +1,29 @@
+@import './../../scss/main.scss';
+
+.navbar {
+    background-color: var(--SIDEBAR-BG-COLOR);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 var(--PADDING-MED);
+    position: fixed;
+    height: 94vh;
+    top: 0;
+    left: 0;
+
+    &__btn {
+        font-size: var(--FONT-MED-NORMAL);
+        color: var(--TEXT-COLOR-DARK);
+        background-color: transparent;
+        border: none;
+
+        @include button-interact(none, var(--TEXT-SHADOW-LIGHT));
+
+        &.active {
+            font-weight: bold;
+            color:var(--ACCENT-COLOR);
+            @include button-interact(none, var(--TEXT-SHADOW-ACCENT));
+        }
+    }
+}

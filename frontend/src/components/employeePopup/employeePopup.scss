@@ -1,0 +1,94 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup {
+    transform: translate(-50%, -50%);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-color: var(--GREEN-MED);
+    border: 2px solid #000;
+    border-radius: 10px;
+    width: 700px;
+    height: 600px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  .close-button {
+    cursor: pointer;
+    font-size: 24px;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .popup.open {
+    display: block;
+  }
+  
+  .popup-content {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column; // Stack input labels and fields vertically 
+  }
+  
+  .popup h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .popup label {
+    display: flex; // make labels and input fields inline
+    align-items: center; //Center the text vertically
+    margin-bottom: 10px;
+  }
+  
+  .popup input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .popup-buttons {
+    display: flex;
+    justify-content: flex-end; //right buttons
+    margin-top: 20px;
+  }
+  
+  .popup button {
+    padding: 10px 20px;
+    background: var(--SIDEBAR-BG-COLOR);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .popup button:first-child {
+    background: #ccc;
+    background-color: rgb(230, 189, 189);
+    color: white;
+  }
+  

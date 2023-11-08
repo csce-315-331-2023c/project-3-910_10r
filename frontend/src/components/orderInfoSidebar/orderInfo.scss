@@ -1,0 +1,54 @@
+// orderInfo.scss
+
+.order-info-container {
+    position: fixed;
+    top: 55px;
+    right: 30px;
+    width: 350px;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    height: 585px;
+    .scrollable-content {
+        max-height: 500px;
+        overflow-y: auto;
+        width: 100%;
+        .data-box {
+            display: flex;
+            align-items: center;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px 0;
+            width: 100%; // Ensure the button spans the entire width
+            padding: 10px; // Add padding within the button
+        }
+          .data-entry {
+            flex: 1; //Distribute available space equally
+            padding: 5px;
+            text-align: center;
+          }
+          
+      }
+  }
+  
+  .order-id-box {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  
+  .order-time-box {
+    //position: fixed;
+    text-align: right;
+    margin-bottom: 10px;
+    //top: 65px;
+    //right: 40px;
+  }
+  
+  .order-total-box {
+    text-align: right;
+    margin-top: 10px;
+    font-size:larger;
+  }
+  

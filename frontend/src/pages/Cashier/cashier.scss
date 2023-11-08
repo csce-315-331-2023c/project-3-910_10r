@@ -1,0 +1,11 @@
+@import './../../scss/main.scss';
+
+.cashier-grid{
+    display: grid;
+    grid-template-rows: 94vh 6vh;
+}
+
+.cashier-grid-main{
+    display: grid;
+    grid-template-columns: 180px 1fr 300px;
+}
