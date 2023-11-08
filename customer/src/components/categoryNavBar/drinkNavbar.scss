@@ -1,0 +1,30 @@
+.nav{
+    width: 180px;
+    z-index: 200;
+    height: 94vh;
+  }
+
+  .nav-selected{
+    width: 180px;
+    z-index: 200;
+    filter: brightness(20%);
+    height: 94vh;
+  }
+
+  .nav-bar{
+    overflow: auto;
+    font-size: 25px;
+    position: fixed;
+    height: 100%;
+    width: 180px;
+  }
+
+  .nav-category{
+    background-color: #F6FFF8;
+    height: 136px;
+    width: 100%;
+  }
+
+  .nav-category:hover{
+    background-color: #d5e7d9;
+  }

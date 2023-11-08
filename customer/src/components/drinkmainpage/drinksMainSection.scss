@@ -1,0 +1,41 @@
+.drinks{
+    height: 100%;
+    width: 100%;
+    padding-left: 80px;
+    padding-top: 50px;
+    background-color: var(--GREEN-MED);
+
+}
+
+.drinks-selected{
+    height: 100%;
+    width: 100%;
+    background-color: var(--GREEN-MED); 
+    padding-left: 80px;
+    padding-top: 50px;
+    filter:brightness(20%);
+}
+
+.drinks-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+   
+    row-gap: 40px;
+    column-gap: 20px;
+}
+
+.drinks-grid-drink{
+    //background-image: url('../../assets/drinkImgs/Coffee creama.png');
+    background-position: center;
+    background-size:cover;
+
+    //background-color: white;
+    height: 136px;
+    width: 200px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.drinks-grid-drink:hover {
+    background-color: rgb(244, 244, 244);
+  }

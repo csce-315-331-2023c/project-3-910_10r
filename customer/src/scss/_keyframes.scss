@@ -1,0 +1,15 @@
+/* All animations and their keyframes go here */
+
+// may include mixins 
+
+/* ex: 
+
+@keyframes fade-out {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+@mixin fade-out($duration) { 
+    animation: fade-out $duration ease forwards; 
+}
+
+*/
