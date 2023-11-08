@@ -181,6 +181,31 @@ app.put("/inventory/editItem", (req, res) => {
     });
 });
 
+// Create a route for adding a new item to the inventory
+app.post("/inventory/addItem", (req, res) => {
+  const { name, amount, capacity, unit, alert } = req.body;
+
+  // Construct the SQL query to insert a new item into the inventory
+  const command = `
+    INSERT INTO inventory (name, amount, capacity, unit, alert)
+    VALUES ($1, $2, $3, $4, $5);
+  `;
+  const values = [name, amount, capacity, unit, alert];
+
+  // Execute the query
+  pool.query(command, values)
+    .then((query_res) => {
+      // Send a success response or any other data you need
+      res.status(200).json({ message: "Item added successfully" });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({
+        error: "An error occurred when adding an item to the inventory",
+      });
+    });
+});
+
 // Get all categories and their associated drinks
 app.get("/menus/drinkCategoryAndDrinks", (req, res) => {
   let command = "SELECT category, drinkname FROM recipes;";

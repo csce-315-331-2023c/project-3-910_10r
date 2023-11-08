@@ -10,6 +10,15 @@
         flex-flow: row nowrap;
         justify-content: space-between;
         align-items: center;
+
+        > button {
+            color: var(--GREEN-DARK);
+            display: grid;
+            place-content: center;
+            background-color: transparent;
+            border: none;
+            @include button-interact(transparent, var(--TEXT-SHADOW-DARK));
+        }
     }
 
     &__items {

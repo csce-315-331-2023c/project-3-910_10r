@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InventoryItem from "../../../components/inventoryItem/inventoryItem";
 import { useState, useEffect } from "react";
 import axios , { AxiosInstance } from 'axios';
+import InventoryPopup from "../../../components/inventoryItem/inventoryPopup";
 
 let baseURL = import.meta.env.VITE_API_URL;
 
@@ -12,6 +13,7 @@ baseURL: baseURL,
 });
 
 const Inventory = () => {
+  const [showPopup, setShowPopup] = useState(false);
   const [inventory, setInventory] = useState<{
     name: string;
     alert: boolean;
@@ -69,13 +71,18 @@ const Inventory = () => {
     });
   }, [inventory]);
 
+  const handlePopup = () => {
+    setShowPopup(true)
+  }
+
   return (
     <div className="inventory">
       <div className="inventory__header">
+        {showPopup && <InventoryPopup setShowPopup={setShowPopup}/>}
         <h1>Ingredients</h1>
-        <i>
-          <FontAwesomeIcon icon="square-plus" size="2x" style={{ color: '#0d6f06' }} />
-        </i>
+        <button><i>
+          <FontAwesomeIcon icon="square-plus" size="2x" style={{ color: '#0d6f06' }} onClick={handlePopup}/>
+        </i></button>
       </div>
 
       <div className="inventory__items">
