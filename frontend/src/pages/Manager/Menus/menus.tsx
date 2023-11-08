@@ -1,32 +1,41 @@
 import "./menus.scss";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState, useEffect } from "react";
+import axios, { AxiosInstance } from "axios";
+import MenusCategory from "../../../components/menusCategory/menusCategory.tsx";
+
+let baseURL = import.meta.env.VITE_API_URL;
+
+const API: AxiosInstance = axios.create({
+  baseURL: baseURL,
+  timeout: 10000,
+});
 
 const Menus = () => {
+  const [categories, setCategories] = useState([]);
+  const [drinks, setDrinks] = useState({});
+
+  useEffect(() => {
+    API.get("/menus/drinkCategoryAndDrinks")
+      .then((response) => {
+        const data = response.data;
+        setCategories(data.categories);
+        setDrinks(data.drinks);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
-    <>
-      <div className="menu">
-
-        <div className="menu__category">
-          <div className="menu__category-header">
-            <h1>Milk Tea</h1>
-            <i>
-              <FontAwesomeIcon icon="square-plus" size="2x" style={{color: "#0d6f06",}} />
-            </i>
-          </div>
-          <div className="menu__category-drinks">
-            <button className="menu__category-drinks-drink">
-              <p>Drink Name</p>
-            </button>
-            <button className="menu__category-drinks-drink">
-              <p>Drink Name</p>
-            </button>
-          </div>
-        </div>
-
-
-      </div>
-    </>
+    <div className="menu">
+      {categories.map((category) => (
+        <MenusCategory
+          key={category}
+          categoryName={category}
+          drinks={drinks[category]}
+        />
+      ))}
+    </div>
   );
 };
 
