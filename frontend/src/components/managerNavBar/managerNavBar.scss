@@ -7,6 +7,10 @@
     justify-content: space-around;
     align-items: center;
     padding: 0 var(--PADDING-MED);
+    position: fixed;
+    height: 94vh;
+    top: 0;
+    left: 0;
 
     &__btn {
         font-size: var(--FONT-MED-NORMAL);

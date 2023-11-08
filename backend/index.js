@@ -33,7 +33,7 @@ app.get("/login", (req, res) => {
         res.send(query_res.rows[0].manager);
       }
       else {
-        res.send(-1);
+        res.sendStatus(500);
       } 
     })
     .catch((err) => {
@@ -43,6 +43,143 @@ app.get("/login", (req, res) => {
       });
     });
 })
+
+// gets all inventory items
+app.get("/inventory", (req, res) => {
+  let command = "SELECT name, alert, amount, capacity, unit FROM inventory;";
+    
+  pool.query(command)
+  .then((query_res) => {
+    res.send(query_res.rows);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).json({
+      error: "An error occurred when retrieving inventory items",
+    });
+  });
+})
+
+// updates alerts appropiately
+app.put("/inventory/updateAlert", (req, res) => {
+  const itemName = req.query.parameter;
+  const newAlertValue = req.body.alert; // Assuming you pass the new alert value in the request body as JSON
+
+  const command = `UPDATE inventory SET alert=$1 WHERE name=$2;`;
+  const values = [newAlertValue, itemName];
+
+  pool.query(command, values)
+    .then((query_res) => {
+      //console.log(query_res);
+      res.status(200).json({ message: 'Alert updated successfully' });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({
+        error: "An error occurred when updating the alert of an inventory item",
+      });
+    });
+});
+
+// Delete an item from the inventory
+app.delete("/inventory/deleteItem", (req, res) => {
+  const itemName = req.query.parameter; // Get the item name from the query parameter
+
+  const command = `DELETE FROM inventory WHERE name = $1;`;
+  const values = [itemName]; // Use an array to specify the parameter values
+
+  pool.query(command, values)
+    .then((query_res) => {
+      res.status(200).json({ message: 'Item deleted successfully' });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({
+        error: "An error occurred when deleting the inventory item",
+      });
+    });
+});
+
+// edit an item in the invetory
+app.put("/inventory/editItem", (req, res) => {
+  const itemName = req.query.parameter; // The name of the item to be edited
+  const editedItem = req.body; // Assuming you pass the edited item data in the request body as JSON
+
+  const { name, amount, capacity, unit } = editedItem;
+
+  // Create a SQL command to update the inventory item
+  const command = `UPDATE inventory SET name=$1, amount=$2, capacity=$3, unit=$4 WHERE name=$5;`;
+  const values = [name, amount, capacity, unit, itemName];
+
+  pool.query(command, values)
+    .then((query_res) => {
+      res.status(200).json({ message: 'Inventory item updated successfully' });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({
+        error: "An error occurred when updating the inventory item",
+      });
+    });
+});
+
+// Create a route for adding a new item to the inventory
+app.post("/inventory/addItem", (req, res) => {
+  const { name, amount, capacity, unit, alert } = req.body;
+
+  // Construct the SQL query to insert a new item into the inventory
+  const command = `
+    INSERT INTO inventory (name, amount, capacity, unit, alert)
+    VALUES ($1, $2, $3, $4, $5);
+  `;
+  const values = [name, amount, capacity, unit, alert];
+
+  // Execute the query
+  pool.query(command, values)
+    .then((query_res) => {
+      // Send a success response or any other data you need
+      res.status(200).json({ message: "Item added successfully" });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({
+        error: "An error occurred when adding an item to the inventory",
+      });
+    });
+});
+
+// Get all categories and their associated drinks
+app.get("/menus/drinkCategoryAndDrinks", (req, res) => {
+  let command = "SELECT category, drinkname FROM recipes;";
+  const categoryMap = {};
+
+  pool
+    .query(command)
+    .then((query_res) => {
+      query_res.rows.forEach((row) => {
+        const category = row.category;
+        const drinkname = row.drinkname;
+
+        if (category in categoryMap) {
+          categoryMap[category].push(drinkname);
+        } else {
+          categoryMap[category] = [drinkname];
+        }
+      });
+
+      // Send both categories and drinks as a response
+      res.send({
+        categories: Object.keys(categoryMap),
+        drinks: categoryMap,
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when selecting categories and drinks from recipes",
+      });
+    });
+});
 
 
 // gets all the employees for the employee page

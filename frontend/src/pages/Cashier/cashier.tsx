@@ -4,6 +4,7 @@ import Cart from "../../components/cart/cart.tsx";
 import Footer from "../../components/footer/footer.tsx";
 import DrinkCustomize from "../../components/drinkPopup/drinkCustomize.tsx";
 import React, { useState, useEffect } from "react";
+import LogoutPopup from "../../components/logoutPopup/logoutPopup.tsx";
 
 import "./cashier.scss";
 
@@ -27,9 +28,10 @@ interface order {
 
 interface Props {
   setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Cashier({ setPayPage }: Props) {
+function Cashier({ setPayPage, setIsLogin }: Props) {
   // keeps track of orders in the cart
   const [orders, setOrders] = useState<order[]>([]);
   // keeps track of if drink is selected in order to dim other pages
@@ -44,6 +46,8 @@ function Cashier({ setPayPage }: Props) {
   // keeps track of all categories
   const [categories, setCatogories] = useState<string[]>([]);
   const [loaded, setLoaded] = useState<boolean>(false);
+
+  const [isLogout, setIsLogout] = useState(false);
 
   const updateOrder = (newOrder: order) => {
     setOrders((prevArray) => [...prevArray, newOrder]);
@@ -97,7 +101,8 @@ function Cashier({ setPayPage }: Props) {
                 setPayPage={setPayPage}
               ></Cart>
             </div>
-            <Footer></Footer>
+            <Footer setShowLogout={setIsLogout}></Footer>
+            {isLogout && <LogoutPopup setIsLogout={setIsLogout} setIsLogin={setIsLogin}></LogoutPopup>}
           </div>
           {showCustomizationPage && (
             <DrinkCustomize
