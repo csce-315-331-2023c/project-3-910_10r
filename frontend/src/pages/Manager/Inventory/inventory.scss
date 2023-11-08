@@ -122,25 +122,21 @@
 
                 button {
                     height: 60px;
-                }
-        
-                button:first-child {
+                    border-radius: var(--BUTTON-BORDER-RADIUS);
                     width: 25%;
                     margin-top: var(--MARGIN-MED);
                     padding: var(--PADDING-SMALL);
+                }
+        
+                button:first-child {
                     border: var(--BORDER-ACCENT-DARK);
-                    border-radius: var(--BUTTON-BORDER-RADIUS);
                     @include button-interact(var(--BUTTON-SHADOW-ACCENT), var(--TEXT-SHADOW-LIGHT));
                     background-color: var(--ACCENT-COLOR-DARK);
                     color: var(--TEXT-COLOR-LIGHT);
                 }
         
                 button:last-child {
-                    width: 25%;
-                    margin-top: var(--MARGIN-MED);
-                    padding: var(--PADDING-SMALL);
                     border: var(--BORDER-DARK);
-                    border-radius: var(--BUTTON-BORDER-RADIUS);
                     @include button-interact(var(--BUTTON-SHADOW), var(--TEXT-SHADOW-LIGHT));
                     background-color: var(--GREEN-DARK);
                     color: var(--TEXT-COLOR-LIGHT);

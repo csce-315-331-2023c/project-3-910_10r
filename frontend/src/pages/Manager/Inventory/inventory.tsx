@@ -46,8 +46,8 @@ const Inventory = () => {
     // Fetch inventory data initially
     fetchInventoryData();
 
-    // Periodically update inventory data every 5 seconds
-    const updateInterval =  5000;
+    // Periodically update inventory data every 2 seconds
+    const updateInterval =  2000;
     const updateTimer = setInterval(fetchInventoryData, updateInterval);
 
     // Clear the timer when the component unmounts
