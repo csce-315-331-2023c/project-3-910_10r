@@ -4,6 +4,7 @@ const queries = require('./queries')
 // gets the price for a specific drink whose name is passed in via parameter
 const getPriceByDrink = (req, res) => {
     const drink = req.query.drink;
+    console.log(drink);
     pool.query(queries.getPriceByDrink, [drink], (error, results) => {
         console.log(queries.getPriceByDrink);
         // if(error) throw error;
