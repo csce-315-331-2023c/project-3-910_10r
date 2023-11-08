@@ -104,7 +104,7 @@ app.get("/login", (req, res) => {
 
 // gets all inventory items
 app.get("/inventory", (req, res) => {
-  let command = "SELECT name, alert, amount, capacity FROM inventory;";
+  let command = "SELECT name, alert, amount, capacity, unit FROM inventory;";
     
   pool.query(command)
   .then((query_res) => {
@@ -135,6 +135,48 @@ app.put("/inventory/updateAlert", (req, res) => {
       console.error(err);
       res.status(500).json({
         error: "An error occurred when updating the alert of an inventory item",
+      });
+    });
+});
+
+// Delete an item from the inventory
+app.delete("/inventory/deleteItem", (req, res) => {
+  const itemName = req.query.parameter; // Get the item name from the query parameter
+
+  const command = `DELETE FROM inventory WHERE name = $1;`;
+  const values = [itemName]; // Use an array to specify the parameter values
+
+  pool.query(command, values)
+    .then((query_res) => {
+      res.status(200).json({ message: 'Item deleted successfully' });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({
+        error: "An error occurred when deleting the inventory item",
+      });
+    });
+});
+
+// edit an item in the invetory
+app.put("/inventory/editItem", (req, res) => {
+  const itemName = req.query.parameter; // The name of the item to be edited
+  const editedItem = req.body; // Assuming you pass the edited item data in the request body as JSON
+
+  const { name, amount, capacity, unit } = editedItem;
+
+  // Create a SQL command to update the inventory item
+  const command = `UPDATE inventory SET name=$1, amount=$2, capacity=$3, unit=$4 WHERE name=$5;`;
+  const values = [name, amount, capacity, unit, itemName];
+
+  pool.query(command, values)
+    .then((query_res) => {
+      res.status(200).json({ message: 'Inventory item updated successfully' });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({
+        error: "An error occurred when updating the inventory item",
       });
     });
 });

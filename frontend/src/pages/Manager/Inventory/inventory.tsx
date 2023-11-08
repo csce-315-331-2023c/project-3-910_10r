@@ -1,7 +1,6 @@
 import "./inventory.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InventoryItem from "../../../components/inventoryItem/inventoryItem";
-
 import { useState, useEffect } from "react";
 import axios , { AxiosInstance } from 'axios';
 
@@ -18,6 +17,7 @@ const Inventory = () => {
     alert: boolean;
     amount: number;
     capacity: number;
+    unit: string;
   }[]>([]);
 
   useEffect(() => {
@@ -29,6 +29,7 @@ const Inventory = () => {
           alert: boolean;
           amount: number;
           capacity: number;
+          unit: string;
         }) => ({
           ...item,
           alert: (item.amount / item.capacity) <= 0.1,
@@ -43,8 +44,8 @@ const Inventory = () => {
     // Fetch inventory data initially
     fetchInventoryData();
 
-    // Periodically update inventory data every 10 seconds
-    const updateInterval =  10000;
+    // Periodically update inventory data every 5 seconds
+    const updateInterval =  5000;
     const updateTimer = setInterval(fetchInventoryData, updateInterval);
 
     // Clear the timer when the component unmounts
@@ -85,6 +86,7 @@ const Inventory = () => {
             alert={item.alert}
             amount={item.amount}
             capacity={item.capacity}
+            unit={item.unit}
           />
         ))}
       </div>
