@@ -1,59 +1,79 @@
-const {Router} = require('express')
-const controller = require('./controller')
-const pool = require('../db')
-const router = Router()
+const { Router } = require("express");
+const controller = require("./controller");
+const pool = require("../db");
+const router = Router();
 
-router.get('/price', controller.getPriceByDrink)
-  
+router.get("/price", controller.getPriceByDrink);
+
 // gets all the categories for the display bar
 router.get("/drinkCategory", (req, res) => {
-let command = "SELECT DISTINCT category from recipes;";
-let categories = [];
-pool
+  let command = "SELECT DISTINCT category from recipes;";
+  let categories = [];
+  pool
     .query(command)
     .then((query_res) => {
-    for (let i = 0; i < query_res.rowCount; i++) {
+      for (let i = 0; i < query_res.rowCount; i++) {
         categories.push(query_res.rows[i].category);
-    }
-    res.send(categories);
+      }
+      res.send(categories);
     })
     .catch((error) => {
-    console.error(error);
-    res.status(500).json({
+      console.error(error);
+      res.status(500).json({
         error: "An error occurred when selecting categories from recipes",
-    });
+      });
     });
 });
-  
+
 // gets all the categories and drinks and send it as a dictionary
 router.get("/drinkAndCategories", (req, res) => {
-let command = "SELECT category, drinkname FROM recipes;";
-const categoryMap = {};
-pool
+  let command = "SELECT category, drinkname FROM recipes;";
+  const categoryMap = {};
+  pool
     .query(command)
     .then((query_res) => {
-    query_res.rows.forEach((row) => {
+      query_res.rows.forEach((row) => {
         const category = row.category;
         const drinkname = row.drinkname;
 
         if (category in categoryMap) {
-        categoryMap[category].push(drinkname);
+          categoryMap[category].push(drinkname);
         } else {
-        categoryMap[category] = [drinkname];
+          categoryMap[category] = [drinkname];
         }
-    });
-    res.send(categoryMap);
+      });
+      res.send(categoryMap);
     })
     .catch((error) => {
-    console.error(error);
-    res.status(500).json({
+      console.error(error);
+      res.status(500).json({
         error: "An error occurred when selecting categories from recipes",
+      });
     });
+});
+
+router.get("/drinknames", (req, res) => {
+  let command = "SELECT drinkname FROM recipes;";
+  const drinknames = [];
+  pool
+    .query(command)
+    .then((query_res) => {
+      query_res.rows.forEach((row) => {
+        const drinkname = row.drinkname;
+        drinknames.push(drinkname);
+      });
+      res.send(drinknames);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when selecting categories from recipes",
+      });
     });
 });
 
 router.put("/updateInventory", controller.updateInventory);
 router.put("/restoreInventory", controller.restoreInventory);
-router.post('/makeOrder', controller.makeOrder);
+router.post("/makeOrder", controller.makeOrder);
 
-module.exports = router
+module.exports = router;
