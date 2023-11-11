@@ -13,7 +13,7 @@ const MenusCategory: React.FC<MenusCategoryProps> = ({ categoryName, drinks }) =
       <div className="menu__category-header">
         <h1>{categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}</h1>
         <i>
-          <FontAwesomeIcon icon="square-plus" size="2x" style={{ color: "#0d6f06" }} />
+          <FontAwesomeIcon icon="square-plus" size="2x" style={{ color: "#0d6f06", cursor: "pointer" }} />
         </i>
       </div>
       <div className="menu__category-drinks">

@@ -401,7 +401,7 @@ app.get("/managers/drinkid", (req, res) => {
   pool
     .query(command)
     .then((query_res) => {
-      if (query_res.rows.length === 0) {
+      if (Array.from(query_res.rows).length === 0) {
         res.status(404).json({
           error: "Drink not found",
         });
