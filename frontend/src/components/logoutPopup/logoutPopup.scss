@@ -1,0 +1,61 @@
+@import './../../scss/main.scss';
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1001; // yall use COLOSSAL numbers for z-index
+    background-color: var(--POPUP-OVERLAY);
+}
+
+.logout {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1002; // So kevins gotta do this :)))))))
+    background-color: var(--TEXT-COLOR-LIGHT);
+    width: clamp(300px, 70vw, 600px);
+    box-shadow: var(--LOGOUT-SHADOW);
+    border-radius: var(--LOGIN-BORDER-RADIUS);
+    padding-inline: var(--PADDING-LARGE);
+    padding-top: var(--PADDING-MED);
+    padding-bottom: var(--PADDING-MED-LARGE);
+
+    h1 {
+        color: var(--ACCENT-COLOR-DARK);
+        text-align: center;
+        padding-bottom: var(--PADDING-MED);
+        font-size: var(--FONT-MED-LARGE);
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: center;
+        flex-flow: row nowrap;
+        gap: 1rem;
+
+        button:first-child {
+            width: 50%;
+            margin-top: var(--MARGIN-MED);
+            padding: var(--PADDING-SMALL);
+            border: var(--BORDER-ACCENT-DARK);
+            border-radius: var(--BUTTON-BORDER-RADIUS);
+            @include button-interact(var(--BUTTON-SHADOW-ACCENT), var(--TEXT-SHADOW-ACCENT));
+            background-color: var(--TEXT-COLOR-LIGHT);
+            color: var(--ACCENT-COLOR-DARK);
+        }
+
+        button:last-child {
+            width: 50%;
+            margin-top: var(--MARGIN-MED);
+            padding: var(--PADDING-SMALL);
+            border: var(--BORDER-ACCENT-DARK);
+            border-radius: var(--BUTTON-BORDER-RADIUS);
+            @include button-interact(var(--BUTTON-SHADOW-ACCENT), var(--TEXT-SHADOW-LIGHT));
+            background-color: var(--ACCENT-COLOR-DARK);
+            color: var(--TEXT-COLOR-LIGHT);
+        }
+    }
+}

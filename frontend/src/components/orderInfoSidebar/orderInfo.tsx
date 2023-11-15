@@ -20,7 +20,7 @@ interface OrderInfoProps {
 }
 
 const OrderInfo: React.FC<OrderInfoProps> = ({ order }) => {
-  const [drinkData, setDrinkData] = useState<{ drinkname: string; price: string }[]>([]);
+  const [drinkData, setDrinkData] = useState<{ drinkname: string; price: number }[]>([]);
 
   useEffect(() => {
     // Create a temporary function to fetch drinkNames and prices for each name

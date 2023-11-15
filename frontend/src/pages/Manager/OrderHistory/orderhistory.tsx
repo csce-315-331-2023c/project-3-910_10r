@@ -225,7 +225,13 @@ const OrderHistory: React.FC = () => {
         </div>
       </div>
       <div className="main-container">
-        <h3>Id    DrinkID     Date/Time     Total</h3>
+        <div className="main-container-header">
+          <h3>Id</h3>
+          <h3>DrinkID</h3>
+          <h3>Date</h3>
+          <h3>Time</h3>
+          <h3>Total</h3>
+        </div>
         <div className="scrollable-content">
           {filteredOrderData.map((data, index) => (
             <button
@@ -239,7 +245,7 @@ const OrderHistory: React.FC = () => {
               <div className="data-entry">{data.name.join(',')}</div>
               <div className="data-entry">{data.date}</div>
               <div className="data-entry">{data.time}</div>
-              <div className="data-entry">{data.total}</div>
+              <div className="data-entry">{`$${Number(data.total).toFixed(2)}`}</div>
             </button>
           ))}
         </div>

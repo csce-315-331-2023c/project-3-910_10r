@@ -1,13 +1,13 @@
 import Topping from "./topping";
 import "./drinkCustomize.scss";
 import React, { useState, useEffect } from "react";
-import axios , { AxiosInstance } from 'axios';
+import axios, { AxiosInstance } from "axios";
 
 let baseURL = import.meta.env.VITE_API_URL;
 
 const API: AxiosInstance = axios.create({
   baseURL: baseURL,
-  timeout: 10000
+  timeout: 10000,
 });
 
 interface order {
@@ -184,6 +184,9 @@ function DrinkCustomize({
     let tmpPrice: number = +_order.price;
     toppingPrice += tmpPrice;
     _order.price = "" + toppingPrice.toFixed(2);
+    console.log("tmpPrice: " + tmpPrice);
+    console.log("toppingPrice: " + toppingPrice);
+    console.log("order price: " + _order.price);
 
     updateOrder(_order);
 
@@ -195,8 +198,7 @@ function DrinkCustomize({
     // topping: string[];
     // count: number[];
     // }
-    API
-      .put('/cashier/updateInventory', {backend_order})
+    API.put("/cashier/updateInventory", { backend_order });
 
     resetCount();
   };
@@ -219,16 +221,18 @@ function DrinkCustomize({
   //query database
   let [backendData, setData] = useState<string>("");
 
+  let query_drinkname: string = name.toLowerCase();
+  console.log(query_drinkname);
+
   useEffect(() => {
     // Make a GET request to your backend API
-    API
-      .get('/cashier/price', {
-        params: {
-          drink: name
-        }
-      })
+    API.get("/cashier/price", {
+      params: {
+        drink: query_drinkname,
+      },
+    })
       .then((response) => {
-        setData(response.data);
+        setData(response.data.price);
       })
       .catch((error) => {
         console.error(error);

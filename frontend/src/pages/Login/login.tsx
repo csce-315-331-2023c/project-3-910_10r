@@ -49,7 +49,6 @@ const Login = ({setIsManager, setIsLogin} : Props) => {
                     else {
                         setIsLogin(false);
                     }
-                    console.log("asd");
                 })
                 .catch((err) => {
                     console.error(err);

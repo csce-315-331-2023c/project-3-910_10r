@@ -39,14 +39,20 @@
 
     --ERROR-COLOR: hsl(0, 100%, 64%);
 
+    --POPUP-OVERLAY: rgba(0, 0, 0, 0.7);
+
     --ON-HOVER: rgb(237, 237, 237);
     --ON-ACTIVE: rgb(206, 206, 206);
+
+    --WHITE: #f9f9f9;
 
     /* more colors for transparency and stuff */
 
     
     /**************** SHADOWS ****************/
     --LOGIN-SHADOW: 0px 0px 30px var(--GREEN-DARK);
+    --LOGOUT-SHADOW: 0px 0px 15px var(--ACCENT-COLOR-DARK);
+    
     --BUTTON-SHADOW: 0px 0px 5px var(--GREEN-DARK);
     --BUTTON-SHADOW-ACCENT: 0px 0px 5px var(--ACCENT-COLOR-DARK);
 
@@ -62,6 +68,7 @@
     --BORDER-MED: 2px solid var(--GREEN-MED);
     --BORDER-DARK: 2px solid var(--GREEN-DARK);
     --BORDER-ACCENT: 2px solid var(--ACCENT-COLOR);
+    --BORDER-ACCENT-DARK: 2px solid var(--ACCENT-COLOR-DARK);
     --BORDER-HELP: 1px solid red;
 
 
@@ -81,6 +88,7 @@
 
     /**************** FONT SIZES ****************/
     --FONT-LARGE: 4rem;
+    --FONT-MED-LARGE: 3rem;
     --FONT-MED: 2rem;
     --FONT-MED-NORMAL: 1.5rem;
     --FONT-NORMAL: 1rem;

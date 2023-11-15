@@ -79,16 +79,14 @@
   
   .popup button {
     padding: 10px 20px;
-    background: var(--SIDEBAR-BG-COLOR);
-    color: black;
+    background: var(--GREEN-DARK);
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
   
   .popup button:first-child {
-    background: #ccc;
-    background-color: rgb(230, 189, 189);
-    color: white;
+    background-color: var(--ACCENT-COLOR-DARK);
   }
   

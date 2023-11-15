@@ -1,6 +1,15 @@
 import "./footer.scss";
 
-const footer = () => {
+interface Props{
+  setShowLogout: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const footer = ({ setShowLogout } : Props) => {
+
+  const showLogout  = () => {
+    setShowLogout(true);
+  }
+
   const date = new Date();
   const showTime =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -8,7 +17,7 @@ const footer = () => {
     <>
       <div className="footer">
         <div className="footer-button">
-          <button className="footer-logout">Logout</button>
+          <button className="footer-logout" onClick={showLogout}>Logout</button>
         </div>
         <div className="footer-time">{showTime}</div>
       </div>

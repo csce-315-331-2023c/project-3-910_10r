@@ -13,17 +13,18 @@ function App() {
   const [payPage, setPayPage] = useState<boolean>(false);
   const [isManager, setIsManager] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(true);
+
   return (
     <>
       <div>
         {isLogin ? (<Login setIsLogin={setIsLogin} setIsManager={setIsManager}></Login>) : 
           (isManager ? (
-            <Manager></Manager>
+            <Manager setIsLogin={setIsLogin}></Manager>
           ) :
           (payPage ? (
             <Payment></Payment>
           ) : (
-            <Cashier setPayPage={setPayPage}></Cashier>
+            <Cashier setPayPage={setPayPage} setIsLogin={setIsLogin}></Cashier>
           )))
         }
       </div>
