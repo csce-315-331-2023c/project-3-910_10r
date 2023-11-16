@@ -60,7 +60,7 @@ function Cart({ orders, setOrders, setPayPage }: Props) {
       ></Checkout>
       <div className="cart-buttons">
         <button className="cart-buttons-1" onClick={navigateToPayPage}>
-          Charge
+          Checkout
         </button>
         <button className="cart-buttons-2">Print Ticket</button>
       </div>

@@ -4,6 +4,7 @@ import Cart from "../../components/cart/cart.tsx";
 import Footer from "../../components/footer/footer.tsx";
 import DrinkCustomize from "../../components/drinkPopup/drinkCustomize.tsx";
 import React, { useState, useEffect } from "react";
+import CustomerHeader from "../../components/header/header.tsx";
 
 import "./cashier.scss";
 
@@ -75,7 +76,8 @@ function Cashier({ setPayPage }: Props) {
     <div style={{ position: "relative" }}>
       {loaded ? (
         <>
-          <div className="cashier-grid">
+          {/* <div className="cashier-grid"> */}
+          <div className="customer-header"><CustomerHeader></CustomerHeader>
             <div className="cashier-grid-main">
               <Navigationbar
                 showCustomizationPage={showCustomizationPage}

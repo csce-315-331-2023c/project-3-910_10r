@@ -2,9 +2,9 @@
     height: 100%;
     width: 100%;
     padding-left: 80px;
-    padding-top: 50px;
+    padding-top: 30px;
     background-color: var(--GREEN-MED);
-
+    overflow-y: hidden;
 }
 
 .drinks-selected{
@@ -19,13 +19,13 @@
 .drinks-grid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-   
     row-gap: 40px;
     column-gap: 20px;
+
 }
 
 .drinks-grid-drink{
-    //background-image: url('../../assets/drinkImgs/Coffee creama.png');
+    //what da drink look like
     background-position: center;
     background-size:cover;
 
@@ -39,3 +39,4 @@
 .drinks-grid-drink:hover {
     background-color: rgb(244, 244, 244);
   }
+
