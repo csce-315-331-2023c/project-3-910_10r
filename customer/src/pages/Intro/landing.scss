@@ -1,0 +1,23 @@
+/* IntroPage.css */
+@import './../../scss/main.scss';
+body .intro-page {
+    background-color: #CCE3DE;;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+  }
+.intro-grid-main{
+    color: black;
+}
+
+.header-image{
+    width: auto;
+    height: 176px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}

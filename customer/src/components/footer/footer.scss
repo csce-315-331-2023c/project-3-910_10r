@@ -1,0 +1,29 @@
+.footer{
+    background-color: var(--GREEN-DARK) ;
+    width: 100vw;
+    position: fixed;
+    min-height: 50px;
+    // z-index: 1000;
+    // margin-top: 94vh;
+    align-items: center;
+    display: flex;
+    bottom: 0;
+    z-index: 300;
+}
+
+.footer-button{
+    flex: 1;
+    min-height: 30px;
+}
+
+.footer-logout{
+    margin-left: 20px;
+    width: 100px;
+    font-size: 20px;
+}
+.footer-time{
+   width: 150px;
+   color: white;
+   font-size: 20px;
+   min-height: 30px;
+}

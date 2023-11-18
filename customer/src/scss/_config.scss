@@ -1,0 +1,30 @@
+/* basic helper functions, mixins, and placeholders go here */
+
+%offscreen {
+    position: absolute;
+    left: -10000px;
+}
+
+%nowrap {
+    white-space: nowrap;
+}
+
+@mixin flexbox($justify) {
+    display: flex;
+    align-items: center;
+    justify-content: $justify;
+}
+
+@mixin button-interact($box-shadow, $text-shadow) {
+    cursor: pointer;
+    transition: box-shadow 0.25s, text-shadow 0.25s, filter 0.075s;
+    
+    &:hover, &:focus-visible {
+        box-shadow: $box-shadow;
+        text-shadow: $text-shadow;
+    }
+
+    &:active {
+        filter: brightness(0.9);
+    }
+}
