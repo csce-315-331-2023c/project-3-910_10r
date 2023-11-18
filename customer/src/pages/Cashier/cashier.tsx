@@ -1,7 +1,6 @@
 import Navigationbar from "../../components/categoryNavBar/drinkNavbar.tsx";
 import Drinks from "../../components/drinkmainpage/drinks.tsx";
 import Cart from "../../components/cart/cart.tsx";
-import Footer from "../../components/footer/footer.tsx";
 import DrinkCustomize from "../../components/drinkPopup/drinkCustomize.tsx";
 import React, { useState, useEffect } from "react";
 import CustomerHeader from "../../components/header/header.tsx";
@@ -73,11 +72,11 @@ function Cashier({ setPayPage }: Props) {
   }, []);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div className="cashier-grid">
       {loaded ? (
         <>
-          {/* <div className="cashier-grid"> */}
-          <div className="customer-header"><CustomerHeader></CustomerHeader>
+          <CustomerHeader></CustomerHeader>
+
             <div className="cashier-grid-main">
               <Navigationbar
                 showCustomizationPage={showCustomizationPage}
@@ -98,8 +97,6 @@ function Cashier({ setPayPage }: Props) {
                 setPayPage={setPayPage}
               ></Cart>
             </div>
-            <Footer></Footer>
-          </div>
           {showCustomizationPage && (
             <DrinkCustomize
               name={drinkName}

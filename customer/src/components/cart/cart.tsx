@@ -62,7 +62,6 @@ function Cart({ orders, setOrders, setPayPage }: Props) {
         <button className="cart-buttons-1" onClick={navigateToPayPage}>
           Checkout
         </button>
-        <button className="cart-buttons-2">Print Ticket</button>
       </div>
     </div>
   );

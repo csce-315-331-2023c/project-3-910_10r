@@ -1,6 +1,47 @@
-.header-title{
+.header{
     color: white;
-    text-align: center;
-    height: 42px;
-    background-color: var(--GREEN-DARK)
+    background-color: var(--GRAY-DARK);
+    height: 8vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-content: center;
+    place-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    font-size: var(--FONT-MED-NORMAL);
+    font-weight: normal;
+
+    &__weather {
+        justify-self: flex-start;
+        display: flex;
+        align-items: center;
+        padding-right: 1.5rem;
+
+        i {
+            padding-right: 0.75rem;
+            font-size: var(--FONT-MED);
+        }
+
+        #time {
+            padding-left: 1.5rem;
+        }
+    }
+
+    &__title {
+        flex-grow: 1;
+        text-align: center;
+
+        span {
+            color: var(--ACCENT-COLOR);
+        }
+    }
+
+    &__accessibility {
+        justify-self: flex-end;
+        display: flex;
+        gap: 0.5rem;
+        font-size: var(--FONT-MED);
+
+        i { cursor: pointer; }
+    }
 }

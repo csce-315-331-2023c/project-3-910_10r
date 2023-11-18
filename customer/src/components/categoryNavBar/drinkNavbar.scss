@@ -1,7 +1,7 @@
 .nav{
     width: 180px;
     z-index: 200;
-    height: 94vh;
+    height: 92vh;
   }
 
   .nav-selected{
@@ -14,18 +14,17 @@
   .nav-bar{
     overflow: auto;
     font-size: 25px;
-    position: fixed;
-    height: 87%;
+    height: 100%;
     width: 180px;
 
   }
 
   .nav-category{
-    background-color: #F6FFF8;
+    background-color: var(--GRAY-XLIGHT);
     height: 136px;
     width: 100%;
   }
 
   .nav-category:hover{
-    background-color: #d5e7d9;
+    background-color: var(--GRAY-LIGHT);
   }
