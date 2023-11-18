@@ -44,7 +44,7 @@ const MenuItemPopup: React.FC<MenuItemPopupProps> = ({
     useEffect(() => {
         API.get("/cashier/drinkCategory")
           .then((response) => {
-            setCategories(response.data);
+            setCategories(response.data.sort());
           })
           .catch((error) => {
             console.error(error);
