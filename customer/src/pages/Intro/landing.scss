@@ -1,7 +1,8 @@
 /* IntroPage.css */
 @import './../../scss/main.scss';
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
 body .intro-page {
-    background-color: #CCE3DE;;
+    
     text-align: center;
     top: 0;
     left: 0;
@@ -21,3 +22,4 @@ body .intro-page {
     margin-right: auto;
     width: 50%;
 }
+

@@ -1,14 +1,13 @@
 // IntroPage.jsx
 import './landing.scss'; // Import the CSS file
+import CustomerHeader from "../../components/header/header.tsx";
+import { Carousel } from '../../components/carousel/Carousel.tsx';
+import {slides} from "../../assets/carouselData.json";
 
 function IntroPage() {
   return (
     <div className="intro-page">
-        <img
-            className="header-image"
-            src="../../src/assets/drinkImgs/logo.png" // Replace with the actual path to your image
-            alt="Boba Tea Image"
-          />
+        <CustomerHeader></CustomerHeader>
       <div className="customer-header">
         <div className="intro-grid-main">
         
@@ -17,6 +16,7 @@ function IntroPage() {
           {/* Your buttons or additional content can go here */}
         </div>
         <div>
+            <Carousel data = {{slides}}/>
             <button>Ready to order?</button>
         </div>
       </div>
