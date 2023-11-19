@@ -6,7 +6,7 @@ const getPriceByDrink = (req, res) => {
     const drink = req.query.drink;
     pool.query(queries.getPriceByDrink, [drink], (error, results) => {
         console.log(queries.getPriceByDrink);
-        // if(error) throw error;
+                // if(error) throw error;
         // res.send(results.rows[0].price);
         // console.log(results);
         if (error) {
@@ -16,7 +16,7 @@ const getPriceByDrink = (req, res) => {
         } else {
             if (results.rows.length > 0) {
                 const price = results.rows[0].price;
-                res.status(200).json({ price });
+                                res.status(200).json({ price });
             } else {
                 res.status(404).json({ error: "Drink not found" });
             }

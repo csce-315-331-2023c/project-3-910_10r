@@ -239,7 +239,7 @@ function DrinkCustomize({
   }, []);
 
   _order.price = backendData;
-  console.log(backendData);
+    console.log(backendData);
 
   return (
     <div className="customize">
