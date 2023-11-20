@@ -4,6 +4,7 @@ const pool = require("../db");
 const router = Router();
 
 router.get("/price", controller.getPriceByDrink);
+router.get("/getDefaultToppingsByDrink", controller.getDefaultToppingsByDrink);
 
 // gets all the categories for the display bar
 router.get("/drinkCategory", (req, res) => {
