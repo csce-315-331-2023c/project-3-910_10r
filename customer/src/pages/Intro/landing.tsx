@@ -3,11 +3,16 @@ import './landing.scss'; // Import the CSS file
 import CustomerHeader from "../../components/header/header.tsx";
 import { Carousel } from '../../components/carousel/Carousel.tsx';
 import {slides} from "../../assets/carouselData.json";
+import OrderButton from './orderButton.tsx';
 
-function IntroPage() {
+interface IntroPageProps {
+  isReadyToOrder: React.Dispatch<React.SetStateAction<boolean>>;
+  setWhichPage : React.Dispatch<React.SetStateAction<boolean>>;
+}
+function IntroPage({isReadyToOrder, setWhichPage} : IntroPageProps) {
   return (
     <div className="intro-page">
-        <CustomerHeader></CustomerHeader>
+        <CustomerHeader setWhichPage={setWhichPage}></CustomerHeader>
       <div className="customer-header">
         <div className="intro-grid-main">
         
@@ -17,7 +22,8 @@ function IntroPage() {
         </div>
         <div>
             <Carousel data = {{slides}}/>
-            <button>Ready to order?</button>
+            <p className='orderParagraph'>Ready to Order?</p>
+            <OrderButton  setOrderPage={isReadyToOrder}></OrderButton>
         </div>
       </div>
       

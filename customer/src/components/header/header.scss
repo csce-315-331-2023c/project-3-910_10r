@@ -48,3 +48,16 @@
         i { cursor: pointer; }
     }
 }
+
+.home-button{
+    background-color:var(--GRAY-DARK);
+    color: white;
+    border: none;
+    margin-left: 1px;
+    margin-right: 50px;
+}
+
+.home-button:hover{
+    background-color: black;
+    cursor: pointer;
+}
