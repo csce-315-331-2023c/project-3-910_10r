@@ -52,6 +52,18 @@ router.get("/drinkAndCategories", (req, res) => {
     });
 });
 
+router.get("/toppings", (req, res) => {
+  let command = "SELECT name FROM inventory WHERE topping = true;";
+  const toppings = [];
+  pool.query(command).then((query_res) => {
+    query_res.rows.forEach((row) => {
+      const topping = row.name;
+      toppings.push(topping);
+    });
+    res.send(toppings);
+  });
+});
+
 router.get("/drinknames", (req, res) => {
   let command = "SELECT drinkname FROM recipes;";
   const drinknames = [];
