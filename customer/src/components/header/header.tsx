@@ -1,11 +1,14 @@
 import "./header.scss"
 import { useState, useEffect } from 'react';
+import IntroButton from "./IntroButton";
+interface Props{
+  setWhichPage : React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-
-function CustomerHeader() {
+function CustomerHeader({setWhichPage}:Props) {
   const [weatherCond, /* setWeatherCond */] = useState<string>("sunny");
   const [formattedTime, setFormattedTime] = useState<string>("");
-
+  
   useEffect(() => {
     const intervalId = setInterval(updateTime, 1000);
     return () => clearInterval(intervalId);
@@ -24,7 +27,9 @@ function CustomerHeader() {
 
   return (
     <div className="header">
+      
       <div className="header__weather">
+        <IntroButton setWhichPage={setWhichPage}></IntroButton>
         {(weatherCond === "sunny") && <i className="fa-solid fa-sun"></i>}
         {(weatherCond === "cloudy") && <i className="fa-solid fa-cloud"></i>}
         {(weatherCond === "rainy") && <i className="fa-solid fa-cloud-rain"></i>}
@@ -33,6 +38,7 @@ function CustomerHeader() {
         {(weatherCond === "night") && <i className="fa-solid fa-moon"></i>}
         <p>73&deg;F</p>
         <p id="time">{formattedTime}</p>
+        
       </div>
 
 

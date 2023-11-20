@@ -26,9 +26,10 @@ interface order {
 
 interface Props {
   setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
+  setWhichPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Cashier({ setPayPage }: Props) {
+function Cashier({ setPayPage, setWhichPage}: Props) {
   // keeps track of orders in the cart
   const [orders, setOrders] = useState<order[]>([]);
   // keeps track of if drink is selected in order to dim other pages
@@ -75,7 +76,7 @@ function Cashier({ setPayPage }: Props) {
     <div className="cashier-grid">
       {loaded ? (
         <>
-          <CustomerHeader></CustomerHeader>
+          <CustomerHeader setWhichPage={setWhichPage}></CustomerHeader>
 
             <div className="cashier-grid-main">
               <Navigationbar
