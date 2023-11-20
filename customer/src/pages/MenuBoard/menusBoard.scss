@@ -1,0 +1,9 @@
+.menu {
+    padding: 0.5rem 1rem;
+
+    &__title {
+        font-family: 'Rock Salt', cursive;
+        font-weight: bolder;
+        font-size: var(--FONT-MED-LARGE);
+    }
+}

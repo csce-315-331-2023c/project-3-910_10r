@@ -4,7 +4,7 @@ import { useState } from "react";
 import Cashier from "./pages/Cashier/cashier.tsx";
 import Payment from "./pages/Cashier/Payment.tsx";
 import IntroPage from "./pages/Intro/landing.tsx";
-// import IntroPage from "./pages/Intro/landing.tsx";
+import MenuBoard from "./pages/MenuBoard/menuBoard.tsx";
 
 function App() {
   const [payPage, setPayPage] = useState<boolean>(false);
@@ -18,8 +18,8 @@ function App() {
         ) : (
           <Cashier setPayPage={setPayPage}></Cashier>
         )} */}
-        <IntroPage></IntroPage>
-
+        {/* <IntroPage></IntroPage> */}
+        <MenuBoard></MenuBoard>
       </div>
     </>
   );

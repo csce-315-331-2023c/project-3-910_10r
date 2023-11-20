@@ -1,13 +1,13 @@
 .header{
     color: white;
     background-color: var(--GRAY-DARK);
-    height: 8vh;
+    height: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     place-content: center;
     place-items: center;
     gap: 1rem;
-    padding: 1.25rem;
+    padding: 0 1.25rem;
     font-size: var(--FONT-MED-NORMAL);
     font-weight: normal;
 
@@ -30,6 +30,9 @@
     &__title {
         flex-grow: 1;
         text-align: center;
+        font-family: 'Rock Salt', cursive;
+        font-weight: 100;
+        font-size: var(--FONT-MED);
 
         span {
             color: var(--ACCENT-COLOR);
