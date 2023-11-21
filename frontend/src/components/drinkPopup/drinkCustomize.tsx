@@ -125,15 +125,18 @@ function DrinkCustomize({
     }
 
     let toppingPrice: number = 0.0;
-    // for (let i = 0; i < toppings.length; i++) {
-    //   let count = allToppingInfos[i].count;
-    //   if (count > 0) {
-    //     _order.topping.push(allToppingInfos[i].name + " x" + count);
-    //     backend_order.topping.push(allToppingInfos[i].name);
-    //     backend_order.count.push(count);
-    //     toppingPrice += count * 0.75;
-    //   }
-    // }
+    for (let i = 0; i < toppings.length; i++) {
+      let count = toppingCount[i];
+      if (count > 0) {
+        _order.topping.push(toppings[i] + " x" + count);
+        backend_order.topping.push(toppings[i]);
+        backend_order.count.push(count);
+        toppingPrice += count * 0.75;
+      }
+    }
+    let tmpPrice: number = +_order.price;
+    toppingPrice += tmpPrice;
+    _order.price = "" + toppingPrice.toFixed(2);
 
     // if (pcount > 0) {
     //   _order.topping.push("pearls x" + pcount);
@@ -191,13 +194,6 @@ function DrinkCustomize({
     //   toppingPrice += ajcount * 0.75;
     // }
 
-    // let tmpPrice: number = +_order.price;
-    // toppingPrice += tmpPrice;
-    // _order.price = "" + toppingPrice.toFixed(2);
-    // console.log("tmpPrice: " + tmpPrice);
-    // console.log("toppingPrice: " + toppingPrice);
-    // console.log("order price: " + _order.price);
-
     updateOrder(_order);
 
     // EUNSOO HERE IS WHAT YOU CAN POST TO THE BACKEND
@@ -224,9 +220,7 @@ function DrinkCustomize({
     // setLJCount(0);
     // setRBCount(0);
     // setAJCount(0);
-    for (let i = 0; i < toppings.length; i++) {
-      //allToppingInfos[i].setCount(0);
-    }
+    setToppingCount(new Array(toppings.length).fill(0));
     setSelectedButton(1);
     setSelectedSugarButton(1);
   };
