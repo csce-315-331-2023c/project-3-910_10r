@@ -85,7 +85,7 @@ function Cashier({ setPayPage, setIsLogin }: Props) {
         console.log(response.data);
         //setLoaded(true);
         const fetchData = async () => {
-          const result = await (Object.keys(drinks).length > 1);
+          // const result = await (Object.keys(drinks).length > 1);
           setLoaded(true);
         };
         fetchData();

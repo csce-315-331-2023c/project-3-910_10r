@@ -9,7 +9,8 @@ function App() {
   const [/* isLanding */, setIsLanding] = useState<boolean>(false);
   const [isOrder, setIsOrder] = useState<boolean>(false);
   const [isMenu, setIsMenu] = useState<boolean>(false);
-  //const [isHome, setIsHome] = useState<boolean>(true);
+  const [isHome, setIsHome] = useState<boolean>(true);
+  
   return (
     <>
       <div>

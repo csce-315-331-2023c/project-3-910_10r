@@ -12,6 +12,27 @@
     border-top: 2px solid white;
     flex-grow: 1;
     height: 100%;
+    position: relative;
+    
+
+    > img {
+        width: clamp(100px, 40vw, 600px);
+        height: auto;
+    }
+    
+    .drinks_left {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(7%, 10%);
+    }
+
+    .drinks_right {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-7%, 10%);
+    }
 
     &__title {
         font-family: 'Rock Salt', cursive;
@@ -20,6 +41,7 @@
         text-align: center;
         color:white;
         column-span: all;
+        padding-bottom: var(--PADDING-SMALL);
     }
 
     &__category {
@@ -29,13 +51,16 @@
         align-items: flex-start;
         width: 100%;
         break-inside:avoid;
+        padding: var(--PADDING-SMALL);
+        padding-top: 0;
 
         &-header {
             color: var(--ACCENT-COLOR);
             font-style: italic;
             font-size: var(--FONT-NORMAL);
-            padding-top: var(--PADDING-SMALL);
             text-decoration: 2px underline solid var(--ACCENT-COLOR);
+            // text-align: center;
+            // width: 100%;
         }
 
         &-drinks {
@@ -51,6 +76,7 @@
                 color:white;
                 text-align:start;
                 font-size: var(--FONT-NORMAL);
+                // text-align: center;
             }
         }
     }
@@ -58,14 +84,15 @@
     &__options {
         background-color: var(--ACCENT-COLOR-LIGHT);
         padding: var(--PADDING-SMALL) var(--PADDING-MED);
-        margin: var(--MARGIN-MED) 0 ;
+        margin: var(--MARGIN-MED) 0 0 0;
         column-span: all;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 1rem;
+        gap: 3rem;
 
         &-ice, &-sweetness, &-toppings {
+            flex-grow: 1;
             padding-bottom: var(--PADDING-SMALL);
 
             h2 {
@@ -108,6 +135,22 @@
                 grid-template-columns: repeat(3, 1fr) !important;
                 text-align: start;
             }            
+        }
+
+        &-ice {
+
+            .ice-option {
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: center;
+                align-items: center;
+                width: 90px;
+
+                img {
+                    width: 40px;
+                    height: auto;
+                }
+            }
         }
     }
 }
