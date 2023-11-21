@@ -33,7 +33,7 @@ const Topping = ({ name, count, onIncrement, onDecrement, index }: Props) => {
             -
           </button>
         </div>
-        <div className="topping-count">{count}</div>
+        <div className="topping-count">{count == undefined ? 0 : count}</div>
       </div>
     </>
   );
