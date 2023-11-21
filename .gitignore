@@ -2,6 +2,8 @@
 *.txt
 backend/node_modules/
 frontend/node_modules/
+customer/src/assets/drinkImgs/*.svg
+node_modules/
 .env
 
 .vercel

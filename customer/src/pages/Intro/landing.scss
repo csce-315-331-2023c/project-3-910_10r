@@ -1,0 +1,62 @@
+/* IntroPage.css */
+@import './../../scss/main.scss';
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+.intro-page {
+    
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+.intro-grid-main{
+    color: black;
+}
+
+.header-image{
+    width: auto;
+    height: 176px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.menuButton{
+    position: absolute;
+    top: 50%;
+    left: 240px;
+    transform: translateY(-50%);
+    width: 120px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+}
+
+.order-button{
+    position: absolute;
+    top: 50%;
+    right: 150px;
+    transform: translateY(-50%);
+    width: 254px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+    background-image: url('../../assets/drinkImgs/checkout.png');
+    background-size: cover; /* Cover the entire button */
+    background-repeat: no-repeat; /* Prevent image from repeating */
+    background-position: center; /* Center the image within the button */
+    border:none;
+    transition: background-color 0.3s, opacity 0.3s, color 0.3s; /* Smooth transition effects */
+    opacity: .7;
+    cursor: pointer;
+}
+
+.order-button:hover{
+    opacity: 1;
+}
+.orderParagraph{
+    position: absolute;
+    top: 34%;
+    right: 200px;
+    transform: translateY(-50%);
+}
