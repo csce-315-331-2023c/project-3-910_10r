@@ -4,6 +4,7 @@ const pool = require("../db");
 const router = Router();
 
 router.get("/price", controller.getPriceByDrink);
+router.get("/getDefaultToppingsByDrink", controller.getDefaultToppingsByDrink);
 
 // gets all the categories for the display bar
 router.get("/drinkCategory", (req, res) => {
@@ -50,6 +51,18 @@ router.get("/drinkAndCategories", (req, res) => {
         error: "An error occurred when selecting categories from recipes",
       });
     });
+});
+
+router.get("/toppings", (req, res) => {
+  let command = "SELECT name FROM inventory WHERE topping = true;";
+  const toppings = [];
+  pool.query(command).then((query_res) => {
+    query_res.rows.forEach((row) => {
+      const topping = row.name;
+      toppings.push(topping);
+    });
+    res.send(toppings);
+  });
 });
 
 router.get("/drinknames", (req, res) => {

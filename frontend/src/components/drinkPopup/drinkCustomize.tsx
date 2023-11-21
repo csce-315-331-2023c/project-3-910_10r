@@ -32,6 +32,7 @@ interface Props {
   updateOrder: (newOrder: order) => void;
   setShowCustomizationPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 function DrinkCustomize({
   name,
   updateOrder,
@@ -41,16 +42,6 @@ function DrinkCustomize({
   const [selectedSugarButton, setSelectedSugarButton] = useState<number | null>(
     1
   );
-
-  const [pcount, setPCount] = useState(0);
-  const [avcount, setAVCount] = useState(0);
-  const [hjcount, setHJCount] = useState(0);
-  const [pucount, setPUCount] = useState(0);
-  const [mpcount, setMPCount] = useState(0);
-  const [cbcount, setCBCount] = useState(0);
-  const [ljcount, setLJCount] = useState(0);
-  const [rbcount, setRBCount] = useState(0);
-  const [ajcount, setAJCount] = useState(0);
 
   const handleButtonClick = (buttonId: number) => {
     setSelectedButton(buttonId);
@@ -80,16 +71,6 @@ function DrinkCustomize({
   const calculateSelections = () => {
     setShowCustomizationPage(false);
     console.log(selectedButton, selectedSugarButton);
-    pcount > 0 && console.log("pearls : " + pcount);
-    avcount > 0 && console.log("aloe vera : " + avcount);
-    hjcount > 0 && console.log("herb jelly : " + hjcount);
-    pucount > 0 && console.log("pudding : " + pucount);
-    mpcount > 0 && console.log("mini pearl : " + mpcount);
-    cbcount > 0 && console.log("crystal boba : " + cbcount);
-    ljcount > 0 && console.log("lychee jelly : " + ljcount);
-    rbcount > 0 && console.log("red bean : " + rbcount);
-    ajcount > 0 && console.log("aiyu jelly : " + ajcount);
-
     if (selectedButton === 1) {
       _order.ice = "regular ice";
       backend_order.ice = 10;
@@ -125,105 +106,99 @@ function DrinkCustomize({
     }
 
     let toppingPrice: number = 0.0;
-    if (pcount > 0) {
-      _order.topping.push("pearls x" + pcount);
-      backend_order.topping.push("pearls");
-      backend_order.count.push(pcount);
-      toppingPrice += pcount * 0.75;
+    for (let i = 0; i < toppings.length; i++) {
+      let count = toppingCount[i];
+      if (count > 0) {
+        _order.topping.push(toppings[i] + " x" + count);
+        backend_order.topping.push(toppings[i]);
+        backend_order.count.push(count);
+        toppingPrice += count * 0.75;
+      }
     }
-    if (avcount > 0) {
-      _order.topping.push("aloe vera x" + avcount);
-      backend_order.topping.push("aloe vera");
-      backend_order.count.push(avcount);
-      toppingPrice += avcount * 0.75;
-    }
-
-    if (hjcount > 0) {
-      _order.topping.push("herb jelly x" + hjcount);
-      backend_order.topping.push("herb jelly");
-      backend_order.count.push(hjcount);
-      toppingPrice += hjcount * 0.75;
-    }
-    if (pucount > 0) {
-      _order.topping.push("pudding x" + pucount);
-      backend_order.topping.push("pudding");
-      backend_order.count.push(pucount);
-      toppingPrice += pucount * 0.75;
-    }
-    if (mpcount > 0) {
-      _order.topping.push("mini pearl x" + mpcount);
-      backend_order.topping.push("mini pearl");
-      backend_order.count.push(mpcount);
-      toppingPrice += mpcount * 0.75;
-    }
-    if (cbcount > 0) {
-      _order.topping.push("crystal boba x" + cbcount);
-      backend_order.topping.push("crystal boba");
-      backend_order.count.push(cbcount);
-      toppingPrice += cbcount * 0.75;
-    }
-    if (ljcount > 0) {
-      _order.topping.push("lychee jelly x" + ljcount);
-      backend_order.topping.push("lychee jelly");
-      backend_order.count.push(ljcount);
-      toppingPrice += ljcount * 0.75;
-    }
-    if (rbcount > 0) {
-      _order.topping.push("red bean x" + rbcount);
-      backend_order.topping.push("red bean");
-      backend_order.count.push(rbcount);
-      toppingPrice += rbcount * 0.75;
-    }
-    if (ajcount > 0) {
-      _order.topping.push("aiyu jelly x" + ajcount);
-      backend_order.topping.push("aiyu jelly");
-      backend_order.count.push(ajcount);
-      toppingPrice += ajcount * 0.75;
-    }
-
     let tmpPrice: number = +_order.price;
     toppingPrice += tmpPrice;
     _order.price = "" + toppingPrice.toFixed(2);
-    console.log("tmpPrice: " + tmpPrice);
-    console.log("toppingPrice: " + toppingPrice);
-    console.log("order price: " + _order.price);
 
     updateOrder(_order);
 
-    // EUNSOO HERE IS WHAT YOU CAN POST TO THE BACKEND
-    // interface back_end_order {
-    // name: string;
-    // ice: number;
-    // sugar: number;
-    // topping: string[];
-    // count: number[];
-    // }
     API.put("/cashier/updateInventory", { backend_order });
 
     resetCount();
   };
 
   const resetCount = () => {
-    setPCount(0);
-    setAVCount(0);
-    setHJCount(0);
-    setPUCount(0);
-    setMPCount(0);
-    setMPCount(0);
-    setCBCount(0);
-    setLJCount(0);
-    setRBCount(0);
-    setAJCount(0);
+    setToppingCount(new Array(toppings.length).fill(0));
     setSelectedButton(1);
     setSelectedSugarButton(1);
   };
 
+  const increment = (index: number) => {
+    const newToppingCount = [...toppingCount];
+    newToppingCount[index]++;
+    setToppingCount(newToppingCount);
+  };
+
+  const decrement = (index: number) => {
+    const newToppingCount = [...toppingCount];
+    newToppingCount[index] > 0 && newToppingCount[index]--;
+    setToppingCount(newToppingCount);
+  };
+
   //query database
   let [backendData, setData] = useState<string>("");
+  const [toppings, setToppings] = useState<string[]>([]);
+  const [toppingCount, setToppingCount] = useState<number[]>([]);
+  const [loading, setLoading] = useState(true);
 
   let query_drinkname: string = name.toLowerCase();
-  console.log(query_drinkname);
+  let top: string[] = [];
+  let defaultTop: string[] = [];
 
+  const updateTopping = () => {
+    let tmpToppingCount: number[] = [];
+    for (let i = 0; i < top.length; i++) {
+      tmpToppingCount.push(0);
+    }
+    defaultTop.forEach((item) => {
+      const toppingIndex = top.indexOf(item);
+      if (toppingIndex < 0) {
+        console.log("error: topping in drink does not exist in inventory");
+      } else {
+        //newToppingCount[toppingIndex] = 1;
+        tmpToppingCount[toppingIndex] = 1;
+      }
+    });
+
+    setToppingCount(tmpToppingCount);
+  };
+
+  useEffect(() => {
+    // Make a GET request to your backend API
+    setLoading(true);
+    API.get("/cashier/toppings")
+      .then((response) => {
+        setToppings(response.data);
+        top = response.data;
+        API.get("/cashier/getDefaultToppingsByDrink", {
+          params: {
+            drink: query_drinkname,
+          },
+        })
+          .then((response) => {
+            defaultTop = response.data;
+            updateTopping();
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  // getting price for the drink
   useEffect(() => {
     // Make a GET request to your backend API
     API.get("/cashier/price", {
@@ -238,177 +213,146 @@ function DrinkCustomize({
         console.error(error);
       });
   }, []);
-
   _order.price = backendData;
-    console.log(backendData);
 
   return (
     <div className="customize">
-      <button
-        className="customize-exit"
-        onClick={() => setShowCustomizationPage(false)}
-      >
-        X
-      </button>
-      <div className="customize-grid">
-        <div className="customize-drink">{name}</div>
-        <div className="ice">
-          <div className="ice-title">Ice</div>
-          <div className="ice-buttons">
-            <button
-              className={`${
-                selectedButton === 1 ? "ice-button-selected" : "ice-button"
-              }`}
-              onClick={() => handleButtonClick(1)}
-            >
-              Regular Ice
-            </button>
-            <button
-              className={`${
-                selectedButton === 2 ? "ice-button-selected" : "ice-button"
-              }`}
-              onClick={() => handleButtonClick(2)}
-            >
-              Light Ice
-            </button>
-            <button
-              className={`${
-                selectedButton === 3 ? "ice-button-selected" : "ice-button"
-              }`}
-              onClick={() => handleButtonClick(3)}
-            >
-              No Ice
-            </button>
-            <button
-              className={`${
-                selectedButton === 4 ? "ice-button-selected" : "ice-button"
-              }`}
-              onClick={() => handleButtonClick(4)}
-            >
-              Extra Ice
-            </button>
-          </div>
-        </div>
+      {loading ? (
+        <></>
+      ) : (
+        <>
+          <button
+            className="customize-exit"
+            onClick={() => setShowCustomizationPage(false)}
+          >
+            X
+          </button>
+          <div className="customize-grid">
+            <div className="customize-drink">{name}</div>
+            <div className="ice">
+              <div className="ice-title">Ice</div>
+              <div className="ice-buttons">
+                <button
+                  className={`${
+                    selectedButton === 1 ? "ice-button-selected" : "ice-button"
+                  }`}
+                  onClick={() => handleButtonClick(1)}
+                >
+                  Regular Ice
+                </button>
+                <button
+                  className={`${
+                    selectedButton === 2 ? "ice-button-selected" : "ice-button"
+                  }`}
+                  onClick={() => handleButtonClick(2)}
+                >
+                  Light Ice
+                </button>
+                <button
+                  className={`${
+                    selectedButton === 3 ? "ice-button-selected" : "ice-button"
+                  }`}
+                  onClick={() => handleButtonClick(3)}
+                >
+                  No Ice
+                </button>
+                <button
+                  className={`${
+                    selectedButton === 4 ? "ice-button-selected" : "ice-button"
+                  }`}
+                  onClick={() => handleButtonClick(4)}
+                >
+                  Extra Ice
+                </button>
+              </div>
+            </div>
 
-        <div className="sugar">
-          <div className="sugar-title">Sugar</div>
-          <div className="sugar-buttons">
-            <button
-              className={`${
-                selectedSugarButton === 1
-                  ? "sugar-button-selected"
-                  : "sugar-button"
-              }`}
-              onClick={() => handleSugarButtonClick(1)}
-            >
-              100%
-            </button>
-            <button
-              className={`${
-                selectedSugarButton === 2
-                  ? "sugar-button-selected"
-                  : "sugar-button"
-              }`}
-              onClick={() => handleSugarButtonClick(2)}
-            >
-              80%
-            </button>
-            <button
-              className={`${
-                selectedSugarButton === 3
-                  ? "sugar-button-selected"
-                  : "sugar-button"
-              }`}
-              onClick={() => handleSugarButtonClick(3)}
-            >
-              50%
-            </button>
-            <button
-              className={`${
-                selectedSugarButton === 4
-                  ? "sugar-button-selected"
-                  : "sugar-button"
-              }`}
-              onClick={() => handleSugarButtonClick(4)}
-            >
-              30%
-            </button>
-            <button
-              className={`${
-                selectedSugarButton === 5
-                  ? "sugar-button-selected"
-                  : "sugar-button"
-              }`}
-              onClick={() => handleSugarButtonClick(5)}
-            >
-              0%
-            </button>
-            <button
-              className={`${
-                selectedSugarButton === 6
-                  ? "sugar-button-selected"
-                  : "sugar-button"
-              }`}
-              onClick={() => handleSugarButtonClick(6)}
-            >
-              120%
-            </button>
+            <div className="sugar">
+              <div className="sugar-title">Sugar</div>
+              <div className="sugar-buttons">
+                <button
+                  className={`${
+                    selectedSugarButton === 1
+                      ? "sugar-button-selected"
+                      : "sugar-button"
+                  }`}
+                  onClick={() => handleSugarButtonClick(1)}
+                >
+                  100%
+                </button>
+                <button
+                  className={`${
+                    selectedSugarButton === 2
+                      ? "sugar-button-selected"
+                      : "sugar-button"
+                  }`}
+                  onClick={() => handleSugarButtonClick(2)}
+                >
+                  80%
+                </button>
+                <button
+                  className={`${
+                    selectedSugarButton === 3
+                      ? "sugar-button-selected"
+                      : "sugar-button"
+                  }`}
+                  onClick={() => handleSugarButtonClick(3)}
+                >
+                  50%
+                </button>
+                <button
+                  className={`${
+                    selectedSugarButton === 4
+                      ? "sugar-button-selected"
+                      : "sugar-button"
+                  }`}
+                  onClick={() => handleSugarButtonClick(4)}
+                >
+                  30%
+                </button>
+                <button
+                  className={`${
+                    selectedSugarButton === 5
+                      ? "sugar-button-selected"
+                      : "sugar-button"
+                  }`}
+                  onClick={() => handleSugarButtonClick(5)}
+                >
+                  0%
+                </button>
+                <button
+                  className={`${
+                    selectedSugarButton === 6
+                      ? "sugar-button-selected"
+                      : "sugar-button"
+                  }`}
+                  onClick={() => handleSugarButtonClick(6)}
+                >
+                  120%
+                </button>
+              </div>
+            </div>
+            <div className="toppings">
+              <div className="toppings-title">Toppings</div>
+              <div className="toppings-box">
+                {toppings.map((item, index) => (
+                  <Topping
+                    key={index}
+                    name={item}
+                    count={toppingCount[index]}
+                    onDecrement={decrement}
+                    onIncrement={increment}
+                    index={index}
+                  ></Topping>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="toppings">
-          <div className="toppings-title">Toppings</div>
-          <div className="toppings-box">
-            <Topping
-              name="pearls"
-              count={pcount}
-              setCount={setPCount}
-            ></Topping>
-            <Topping
-              name="aloe vera"
-              count={avcount}
-              setCount={setAVCount}
-            ></Topping>
-            <Topping
-              name="herb jelly"
-              count={hjcount}
-              setCount={setHJCount}
-            ></Topping>
-            <Topping
-              name="pudding"
-              count={pucount}
-              setCount={setPUCount}
-            ></Topping>
-            <Topping
-              name="mini pearl"
-              count={mpcount}
-              setCount={setMPCount}
-            ></Topping>
-            <Topping
-              name="crystal boba"
-              count={cbcount}
-              setCount={setCBCount}
-            ></Topping>
-            <Topping
-              name="lychee jelly"
-              count={ljcount}
-              setCount={setLJCount}
-            ></Topping>
-            <Topping
-              name="red bean"
-              count={rbcount}
-              setCount={setRBCount}
-            ></Topping>
-            <Topping
-              name="aiyu jelly"
-              count={ajcount}
-              setCount={setAJCount}
-            ></Topping>
-          </div>
-        </div>
-      </div>
-      <button className="customize-confirm" onClick={calculateSelections}>
-        Confirm
-      </button>
+          <button className="customize-confirm" onClick={calculateSelections}>
+            Confirm
+          </button>
+        </>
+      )}
     </div>
   );
 }
