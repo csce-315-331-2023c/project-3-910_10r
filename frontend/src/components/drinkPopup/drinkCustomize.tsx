@@ -231,10 +231,23 @@ function DrinkCustomize({
     setSelectedSugarButton(1);
   };
 
+  const increment = (index: number) => {
+    const newToppingCount = [...toppingCount];
+    newToppingCount[index]++;
+    setToppingCount(newToppingCount);
+  };
+
+  const decrement = (index: number) => {
+    const newToppingCount = [...toppingCount];
+    newToppingCount[index] > 0 && newToppingCount[index]--;
+    setToppingCount(newToppingCount);
+  };
+
   //query database
   let [backendData, setData] = useState<string>("");
   let [defaultToppings, setDefaultToppings] = useState<string[]>([]);
   let [toppings, setToppings] = useState<string[]>([]);
+  let [toppingCount, setToppingCount] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
 
   let query_drinkname: string = name.toLowerCase();
@@ -246,6 +259,9 @@ function DrinkCustomize({
     API.get("/cashier/toppings")
       .then((response) => {
         setToppings(response.data);
+        setToppingCount(new Array(response.data.length).fill(0));
+        console.log("topping count" + toppingCount);
+        console.log("topping 0 " + toppingCount[0]);
         setLoading(false);
       })
       .catch((error) => {
@@ -408,8 +424,15 @@ function DrinkCustomize({
             <div className="toppings">
               <div className="toppings-title">Toppings</div>
               <div className="toppings-box">
-                {toppings.map((item) => (
-                  <Topping name={item} count={0}></Topping>
+                {toppings.map((item, index) => (
+                  <Topping
+                    key={index}
+                    name={item}
+                    count={toppingCount[index]}
+                    onDecrement={decrement}
+                    onIncrement={increment}
+                    index={index}
+                  ></Topping>
                 ))}
 
                 {/* <Topping
