@@ -15,10 +15,18 @@ interface MenuBoardProps {
   setWhichPage : React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface Topping {
+  name: string;
+}
+
 function MenuBoard({setWhichPage} : MenuBoardProps) {
 
   const [categories, setCategories] = useState([]);
   const [drinks, setDrinks] = useState<{ [category: string]: string[] | undefined }>({});
+
+  const iceLevels = ["Regular Ice", "Light Ice", "No Ice", "Extra Ice"];
+  const sweetnessLevels = ["100%\nNormal", "80%\nLess", "50%\nHalf", '30%\nLight', '0%\nNone', "120%\nExtra"];
+  const [toppings, setToppings] = useState<Topping[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,9 +44,6 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
         }
         setDrinks(sortedDrinks);
 
-
-
-        
       } catch (error) {
         console.error(error);
       }
@@ -55,8 +60,18 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
   }, []);
 
 
+  useEffect(() => {
+    API.get("/customer/toppings")
+      .then((response) => {
+        setToppings(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
-    <div>
+    <div className='outer-container'>
         <CustomerHeader setWhichPage={setWhichPage}></CustomerHeader>
         <div className='menu'>
             <h1 className='menu__title'>MENU</h1>
@@ -67,6 +82,32 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
               drinks={drinks[category] || []}
             />
             ))}
+            <div className='menu__options'>
+              <div className='menu__options-ice'>
+                <h2>Ice level</h2>
+                <div>
+                  {iceLevels.map((level, index) => (
+                    <div key={index}>{level}</div>
+                  ))}
+                </div>
+              </div>
+              <div className='menu__options-sweetness'>
+                <h2>Sweetness level</h2>
+                <div>
+                  {sweetnessLevels.map((level, index) => (
+                    <div key={index}>{level}</div>
+                  ))}
+                </div>
+              </div>
+              <div className='menu__options-toppings'>
+                <h2>Toppings <span>+ $0.75 for each extra topping</span></h2>
+                <div>
+                  {toppings.map((topping, index) => (
+                    <div key={index}>{topping.name}</div>
+                  ))}
+                </div>
+              </div>
+            </div>
         </div>
     </div>
   );

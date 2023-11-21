@@ -168,7 +168,7 @@ function DrinkCustomize({
 
   //query database
   let [backendData, setData] = useState<string>("");
-  //let [defaultToppings, setDefaultToppings] = useState<string[]>([]);
+  let [defaultToppings, setDefaultToppings] = useState<string[]>([]);
   let [toppings, setToppings] = useState<string[]>([]);
   let [toppingCount, setToppingCount] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);

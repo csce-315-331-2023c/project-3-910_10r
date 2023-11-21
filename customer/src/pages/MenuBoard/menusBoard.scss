@@ -1,11 +1,25 @@
+.outer-container {
+    min-height: 100vh;
+    height: max(100vh, auto);
+    display: flex;
+    flex-flow: column nowrap;
+}
+
 .menu {
-    padding: 0.5rem 1rem;
+    padding: var(--PADDING-SMALL) var(--PADDING-LARGE);
     column-count: 3;
+    background-color: var(--GRAY-DARK);
+    border-top: 2px solid white;
+    flex-grow: 1;
+    height: 100%;
 
     &__title {
         font-family: 'Rock Salt', cursive;
         font-weight: bolder;
         font-size: var(--FONT-MED-LARGE);
+        text-align: center;
+        color:white;
+        column-span: all;
     }
 
     &__category {
@@ -20,6 +34,8 @@
             color: var(--ACCENT-COLOR);
             font-style: italic;
             font-size: var(--FONT-NORMAL);
+            padding-top: var(--PADDING-SMALL);
+            text-decoration: 2px underline solid var(--ACCENT-COLOR);
         }
 
         &-drinks {
@@ -27,15 +43,71 @@
             display: flex;
             justify-content: flex-start;
             flex-flow: column wrap;
-            gap: 0.75rem;
-            padding-top: var(--PADDING-SMALL);
+            padding: 0 0 0 var(--PADDING-SMALL);
+            list-style-position: inside;
 
             &-drink {
                 border: none;
+                color:white;
                 text-align:start;
-                background-color: white;
                 font-size: var(--FONT-NORMAL);
             }
+        }
+    }
+
+    &__options {
+        background-color: var(--ACCENT-COLOR-LIGHT);
+        padding: var(--PADDING-SMALL) var(--PADDING-MED);
+        margin: var(--MARGIN-MED) 0 ;
+        column-span: all;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+
+        &-ice, &-sweetness, &-toppings {
+            padding-bottom: var(--PADDING-SMALL);
+
+            h2 {
+                font-family: 'Rock Salt', cursive;
+                font-weight: bolder;
+                font-size: var(--FONT-MED);
+
+                span {
+                    font-family: "Poppins", "Montserrat", 'Times New Roman', Times, serif;
+                    font-size: clamp(2px, var(--FONT-NORMAL), 24px);
+                    
+                }
+            }
+
+            h2:has(span) {
+                display: flex;
+                align-items: center;
+                gap: 0.25rem;
+            }
+
+            > div {
+                display: grid;
+                grid-auto-flow: column;
+                justify-content: space-between;
+                gap: 1rem;
+                text-align: center;
+                white-space: pre-line;
+            }
+        }
+
+        &-toppings {
+            h2 {
+                transform: translateX(-15px);
+            }
+
+            > div {
+                display: grid;
+                grid-auto-flow:unset;
+                row-gap: 0.1rem;
+                grid-template-columns: repeat(3, 1fr) !important;
+                text-align: start;
+            }            
         }
     }
 }
