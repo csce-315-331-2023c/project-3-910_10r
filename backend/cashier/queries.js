@@ -2,8 +2,7 @@ const getPriceByDrink =
   "SELECT price FROM recipes where lower(drinkname) = $1;";
 
 const getDefaultToppingsByDrink =
-  "SELECT inventory.name from inventory JOIN recipes ON inventory.name = ANY(recipes.ingredient_names)";
-("WHERE lower(recipes.drinkname) = $1 AND inventory.topping = true;");
+  "SELECT inventory.name from inventory JOIN recipes ON inventory.name = ANY(recipes.ingredient_names) WHERE lower(recipes.drinkname) = $1 AND inventory.topping = true;";
 
 const updateRecipeItems =
   "\

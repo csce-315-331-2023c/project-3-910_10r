@@ -8,15 +8,14 @@ import LogoutPopup from "../../components/logoutPopup/logoutPopup.tsx";
 
 import "./cashier.scss";
 
-import axios , { AxiosInstance } from 'axios';
+import axios, { AxiosInstance } from "axios";
 
 let baseURL = import.meta.env.VITE_API_URL;
 
 const API: AxiosInstance = axios.create({
   baseURL: baseURL,
-  timeout: 10000
+  timeout: 10000,
 });
-
 
 interface order {
   name: string;
@@ -69,7 +68,12 @@ function Cashier({ setPayPage, setIsLogin }: Props) {
       .then((response) => {
         setDrinks(response.data);
         console.log(response.data);
-        setLoaded(true);
+        //setLoaded(true);
+        const fetchData = async () => {
+          const result = await (Object.keys(drinks).length > 1);
+          setLoaded(true);
+        };
+        fetchData();
       })
       .catch((error) => {
         console.error(error);
@@ -102,7 +106,12 @@ function Cashier({ setPayPage, setIsLogin }: Props) {
               ></Cart>
             </div>
             <Footer setShowLogout={setIsLogout}></Footer>
-            {isLogout && <LogoutPopup setIsLogout={setIsLogout} setIsLogin={setIsLogin}></LogoutPopup>}
+            {isLogout && (
+              <LogoutPopup
+                setIsLogout={setIsLogout}
+                setIsLogin={setIsLogin}
+              ></LogoutPopup>
+            )}
           </div>
           {showCustomizationPage && (
             <DrinkCustomize

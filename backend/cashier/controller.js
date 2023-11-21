@@ -29,23 +29,19 @@ const getPriceByDrink = (req, res) => {
 const getDefaultToppingsByDrink = (req, res) => {
   const drink = req.query.drink;
   pool.query(queries.getDefaultToppingsByDrink, [drink], (error, results) => {
-    console.log(queries.getPriceByDrink);
+    console.log(queries.getDefaultToppingsByDrink);
     if (error) {
       // Handle the error gracefully, e.g., by sending an error response
       console.error("Error fetching default toppings:", error);
-      res
-        .status(500)
-        .json({ error: "An error occurred while fetching the price." });
+      res.status(500).json({
+        error: "An error occurred while fetching the default toppings.",
+      });
     } else {
-      if (results.rows.length > 0) {
-        let toppings = [];
-        for (let i = 0; i < results.rowCount; i++) {
-          toppings.push(results.rows[i].name);
-        }
-        res.status(200).send(toppings);
-      } else {
-        res.status(404).json({ error: "Drink not found" });
+      let toppings = [];
+      for (let i = 0; i < results.rowCount; i++) {
+        toppings.push(results.rows[i].name);
       }
+      res.status(200).send(toppings);
     }
   });
 };

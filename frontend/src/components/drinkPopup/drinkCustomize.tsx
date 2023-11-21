@@ -42,16 +42,6 @@ function DrinkCustomize({
     1
   );
 
-  // const [pcount, setPCount] = useState(0);
-  // const [avcount, setAVCount] = useState(0);
-  // const [hjcount, setHJCount] = useState(0);
-  // const [pucount, setPUCount] = useState(0);
-  // const [mpcount, setMPCount] = useState(0);
-  // const [cbcount, setCBCount] = useState(0);
-  // const [ljcount, setLJCount] = useState(0);
-  // const [rbcount, setRBCount] = useState(0);
-  // const [ajcount, setAJCount] = useState(0);
-
   const handleButtonClick = (buttonId: number) => {
     setSelectedButton(buttonId);
   };
@@ -80,16 +70,6 @@ function DrinkCustomize({
   const calculateSelections = () => {
     setShowCustomizationPage(false);
     console.log(selectedButton, selectedSugarButton);
-    // pcount > 0 && console.log("pearls : " + pcount);
-    // avcount > 0 && console.log("aloe vera : " + avcount);
-    // hjcount > 0 && console.log("herb jelly : " + hjcount);
-    // pucount > 0 && console.log("pudding : " + pucount);
-    // mpcount > 0 && console.log("mini pearl : " + mpcount);
-    // cbcount > 0 && console.log("crystal boba : " + cbcount);
-    // ljcount > 0 && console.log("lychee jelly : " + ljcount);
-    // rbcount > 0 && console.log("red bean : " + rbcount);
-    // ajcount > 0 && console.log("aiyu jelly : " + ajcount);
-
     if (selectedButton === 1) {
       _order.ice = "regular ice";
       backend_order.ice = 10;
@@ -138,73 +118,9 @@ function DrinkCustomize({
     toppingPrice += tmpPrice;
     _order.price = "" + toppingPrice.toFixed(2);
 
-    // if (pcount > 0) {
-    //   _order.topping.push("pearls x" + pcount);
-    //   backend_order.topping.push("pearls");
-    //   backend_order.count.push(pcount);
-    //   toppingPrice += pcount * 0.75;
-    // }
-    // if (avcount > 0) {
-    //   _order.topping.push("aloe vera x" + avcount);
-    //   backend_order.topping.push("aloe vera");
-    //   backend_order.count.push(avcount);
-    //   toppingPrice += avcount * 0.75;
-    // }
-
-    // if (hjcount > 0) {
-    //   _order.topping.push("herb jelly x" + hjcount);
-    //   backend_order.topping.push("herb jelly");
-    //   backend_order.count.push(hjcount);
-    //   toppingPrice += hjcount * 0.75;
-    // }
-    // if (pucount > 0) {
-    //   _order.topping.push("pudding x" + pucount);
-    //   backend_order.topping.push("pudding");
-    //   backend_order.count.push(pucount);
-    //   toppingPrice += pucount * 0.75;
-    // }
-    // if (mpcount > 0) {
-    //   _order.topping.push("mini pearl x" + mpcount);
-    //   backend_order.topping.push("mini pearl");
-    //   backend_order.count.push(mpcount);
-    //   toppingPrice += mpcount * 0.75;
-    // }
-    // if (cbcount > 0) {
-    //   _order.topping.push("crystal boba x" + cbcount);
-    //   backend_order.topping.push("crystal boba");
-    //   backend_order.count.push(cbcount);
-    //   toppingPrice += cbcount * 0.75;
-    // }
-    // if (ljcount > 0) {
-    //   _order.topping.push("lychee jelly x" + ljcount);
-    //   backend_order.topping.push("lychee jelly");
-    //   backend_order.count.push(ljcount);
-    //   toppingPrice += ljcount * 0.75;
-    // }
-    // if (rbcount > 0) {
-    //   _order.topping.push("red bean x" + rbcount);
-    //   backend_order.topping.push("red bean");
-    //   backend_order.count.push(rbcount);
-    //   toppingPrice += rbcount * 0.75;
-    // }
-    // if (ajcount > 0) {
-    //   _order.topping.push("aiyu jelly x" + ajcount);
-    //   backend_order.topping.push("aiyu jelly");
-    //   backend_order.count.push(ajcount);
-    //   toppingPrice += ajcount * 0.75;
-    // }
-
     updateOrder(_order);
 
-    // EUNSOO HERE IS WHAT YOU CAN POST TO THE BACKEND
-    // interface back_end_order {
-    // name: string;
-    // ice: number;
-    // sugar: number;
-    // topping: string[];
-    // count: number[];
-    // }
-    API.put("/cashier/updateInventory", { backend_order });
+    //API.put("/cashier/updateInventory", { backend_order });
 
     resetCount();
   };
@@ -237,12 +153,26 @@ function DrinkCustomize({
     setToppingCount(newToppingCount);
   };
 
+  const updateTopping = (defaults: string[]) => {
+    const newToppingCount = [...toppingCount];
+    defaults.forEach((item) => {
+      const toppingIndex = toppings.indexOf(item);
+      if (toppingIndex < 0) {
+        console.log("error: topping in drink does not exist in inventory");
+      } else {
+        newToppingCount[toppingIndex] = 1;
+      }
+    });
+    setToppingCount(newToppingCount);
+  };
+
   //query database
   let [backendData, setData] = useState<string>("");
   let [defaultToppings, setDefaultToppings] = useState<string[]>([]);
   let [toppings, setToppings] = useState<string[]>([]);
   let [toppingCount, setToppingCount] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
 
   let query_drinkname: string = name.toLowerCase();
   console.log(query_drinkname);
@@ -254,8 +184,21 @@ function DrinkCustomize({
       .then((response) => {
         setToppings(response.data);
         setToppingCount(new Array(response.data.length).fill(0));
-        console.log("topping count" + toppingCount);
-        console.log("topping 0 " + toppingCount[0]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    API.get("/cashier/getDefaultToppingsByDrink", {
+      params: {
+        drink: query_drinkname,
+      },
+    })
+      .then((response) => {
+        setDefaultToppings(response.data);
+        updateTopping(response.data);
+        console.log(response.data);
+        setLoading2(false);
         setLoading(false);
       })
       .catch((error) => {
@@ -281,6 +224,7 @@ function DrinkCustomize({
 
   // getting default topping for the drink
   // useEffect(() => {
+  //   setLoading2(true);
   //   // Make a GET request to your backend API
   //   API.get("/cashier/getDefaultToppingsByDrink", {
   //     params: {
@@ -289,6 +233,9 @@ function DrinkCustomize({
   //   })
   //     .then((response) => {
   //       setDefaultToppings(response.data);
+  //       updateTopping(response.data);
+  //       console.log(response.data);
+  //       setLoading2(false);
   //     })
   //     .catch((error) => {
   //       console.error(error);
@@ -296,11 +243,10 @@ function DrinkCustomize({
   // }, []);
 
   _order.price = backendData;
-  console.log(backendData);
 
   return (
     <div className="customize">
-      {loading ? (
+      {loading || loading2 ? (
         <></>
       ) : (
         <>
@@ -428,52 +374,6 @@ function DrinkCustomize({
                     index={index}
                   ></Topping>
                 ))}
-
-                {/* <Topping
-              name="pearls"
-              count={pcount}
-              setCount={setPCount}
-            ></Topping>
-            <Topping
-              name="aloe vera"
-              count={avcount}
-              setCount={setAVCount}
-            ></Topping>
-            <Topping
-              name="herb jelly"
-              count={hjcount}
-              setCount={setHJCount}
-            ></Topping>
-            <Topping
-              name="pudding"
-              count={pucount}
-              setCount={setPUCount}
-            ></Topping>
-            <Topping
-              name="mini pearl"
-              count={mpcount}
-              setCount={setMPCount}
-            ></Topping>
-            <Topping
-              name="crystal boba"
-              count={cbcount}
-              setCount={setCBCount}
-            ></Topping>
-            <Topping
-              name="lychee jelly"
-              count={ljcount}
-              setCount={setLJCount}
-            ></Topping>
-            <Topping
-              name="red bean"
-              count={rbcount}
-              setCount={setRBCount}
-            ></Topping>
-            <Topping
-              name="aiyu jelly"
-              count={ajcount}
-              setCount={setAJCount}
-            ></Topping> */}
               </div>
             </div>
           </div>
