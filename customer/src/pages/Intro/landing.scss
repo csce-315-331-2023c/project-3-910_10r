@@ -48,6 +48,7 @@
     border:none;
     transition: background-color 0.3s, opacity 0.3s, color 0.3s; /* Smooth transition effects */
     opacity: .7;
+    cursor: pointer;
 }
 
 .order-button:hover{
