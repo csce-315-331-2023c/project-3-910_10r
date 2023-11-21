@@ -1,6 +1,11 @@
-const getPriceByDrink = 'SELECT price FROM recipes where lower(drinkname) = $1;';
+const getPriceByDrink =
+  "SELECT price FROM recipes where lower(drinkname) = $1;";
 
-const updateRecipeItems = "\
+const getDefaultToppingsByDrink =
+  "SELECT inventory.name from inventory JOIN recipes ON inventory.name = ANY(recipes.ingredient_names) WHERE lower(recipes.drinkname) = $1 AND inventory.topping = true;";
+
+const updateRecipeItems =
+  "\
 UPDATE inventory AS i \
 SET amount = new_amount \
 FROM ( \
@@ -20,12 +25,14 @@ FROM ( \
 ) AS subquery \
 WHERE i.name = subquery.ingredient;";
 
-const updateIce = "\
+const updateIce =
+  "\
 UPDATE inventory \
 SET amount = amount - $1 \
 WHERE name = 'ice';";
 
-const updateToppings = "\
+const updateToppings =
+  "\
 UPDATE inventory AS i \
 SET amount = i.amount - 10 * subquery.amount \
 FROM ( \
@@ -35,7 +42,8 @@ FROM ( \
 ) AS subquery \
 WHERE i.name = subquery.topping;";
 
-const restoreRecipeItems = "\
+const restoreRecipeItems =
+  "\
 UPDATE inventory AS i \
 SET amount = new_amount \
 FROM ( \
@@ -55,12 +63,14 @@ FROM ( \
 ) AS subquery \
 WHERE i.name = subquery.ingredient;";
 
-const restoreIce = "\
+const restoreIce =
+  "\
 UPDATE inventory \
 SET amount = amount + $1 \
 WHERE name = 'ice';";
 
-const restoreToppings = "\
+const restoreToppings =
+  "\
 UPDATE inventory AS i \
 SET amount = i.amount + 10 * subquery.amount \
 FROM ( \
@@ -70,19 +80,21 @@ FROM ( \
 ) AS subquery \
 WHERE i.name = subquery.topping;";
 
-const makeOrder = "\
+const makeOrder =
+  "\
 INSERT INTO orders (drink_id, order_date, order_time, totalcost) \
 SELECT id, $1::date, $2::time, $3 \
 FROM recipes \
 WHERE lower(drink_name) IN ($4:csv);";
 
 module.exports = {
-    getPriceByDrink,
-    updateRecipeItems,
-    updateIce,
-    updateToppings,
-    restoreRecipeItems,
-    restoreIce,
-    restoreToppings,
-    makeOrder,
+  getPriceByDrink,
+  getDefaultToppingsByDrink,
+  updateRecipeItems,
+  updateIce,
+  updateToppings,
+  restoreRecipeItems,
+  restoreIce,
+  restoreToppings,
+  makeOrder,
 };

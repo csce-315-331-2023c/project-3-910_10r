@@ -6,14 +6,14 @@ interface Props {
   setShowCustomizationPage: React.Dispatch<React.SetStateAction<boolean>>;
   showCustomizationPage: boolean;
   setDrinkName: React.Dispatch<React.SetStateAction<string>>;
-  drinks: string[];
+  drinknames: string[];
 }
 
 function drinks({
   setShowCustomizationPage,
   showCustomizationPage,
   setDrinkName,
-  drinks,
+  drinknames,
 }: Props) {
   // let drinkNames = [
   //   "Classic milk tea",
@@ -32,10 +32,10 @@ function drinks({
     >
       <div className="drinks-bound">
         <div className="drinks-grid">
-          {drinks.length === 0 ? (
+          {drinknames === undefined ? (
             <div>Loading</div>
           ) : (
-            drinks.map((item) => (
+            drinknames.map((item) => (
               <Drink
                 key={item}
                 setShowCustomizationPage={setShowCustomizationPage}

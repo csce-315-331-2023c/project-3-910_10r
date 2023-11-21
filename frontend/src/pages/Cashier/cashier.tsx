@@ -8,15 +8,14 @@ import LogoutPopup from "../../components/logoutPopup/logoutPopup.tsx";
 
 import "./cashier.scss";
 
-import axios , { AxiosInstance } from 'axios';
+import axios, { AxiosInstance } from "axios";
 
 let baseURL = import.meta.env.VITE_API_URL;
 
 const API: AxiosInstance = axios.create({
   baseURL: baseURL,
-  timeout: 10000
+  timeout: 10000,
 });
-
 
 interface order {
   name: string;
@@ -56,7 +55,22 @@ function Cashier({ setPayPage, setIsLogin }: Props) {
   useEffect(() => {
     API.get("/cashier/drinkCategory")
       .then((response) => {
-        setCatogories(response.data);
+        let tmpCategories: string[] = response.data;
+        let index = tmpCategories.indexOf("milk tea");
+        let tmpName = tmpCategories[0];
+        tmpCategories[0] = "milk tea";
+        tmpCategories[index] = tmpName;
+        index = tmpCategories.indexOf("fruit tea");
+        tmpName = tmpCategories[1];
+        tmpCategories[1] = "fruit tea";
+        tmpCategories[index] = tmpName;
+        index = tmpCategories.indexOf("fresh milk");
+        tmpName = tmpCategories[2];
+        tmpCategories[2] = "fresh milk";
+        tmpCategories[index] = tmpName;
+
+        //setCatogories(response.data);
+        setCatogories(tmpCategories);
         console.log(response.data);
       })
       .catch((error) => {
@@ -69,7 +83,12 @@ function Cashier({ setPayPage, setIsLogin }: Props) {
       .then((response) => {
         setDrinks(response.data);
         console.log(response.data);
-        setLoaded(true);
+        //setLoaded(true);
+        const fetchData = async () => {
+          const result = await (Object.keys(drinks).length > 1);
+          setLoaded(true);
+        };
+        fetchData();
       })
       .catch((error) => {
         console.error(error);
@@ -91,7 +110,7 @@ function Cashier({ setPayPage, setIsLogin }: Props) {
                 setShowCustomizationPage={setShowCustomizationPage}
                 showCustomizationPage={showCustomizationPage}
                 setDrinkName={setDrinkName}
-                drinks={
+                drinknames={
                   category === "" ? drinks[categories[0]] : drinks[category]
                 }
               ></Drinks>
@@ -102,7 +121,12 @@ function Cashier({ setPayPage, setIsLogin }: Props) {
               ></Cart>
             </div>
             <Footer setShowLogout={setIsLogout}></Footer>
-            {isLogout && <LogoutPopup setIsLogout={setIsLogout} setIsLogin={setIsLogin}></LogoutPopup>}
+            {isLogout && (
+              <LogoutPopup
+                setIsLogout={setIsLogout}
+                setIsLogin={setIsLogin}
+              ></LogoutPopup>
+            )}
           </div>
           {showCustomizationPage && (
             <DrinkCustomize
