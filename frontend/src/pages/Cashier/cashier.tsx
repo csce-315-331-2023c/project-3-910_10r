@@ -95,7 +95,7 @@ function Cashier({ setPayPage, setIsLogin }: Props) {
                 setShowCustomizationPage={setShowCustomizationPage}
                 showCustomizationPage={showCustomizationPage}
                 setDrinkName={setDrinkName}
-                drinks={
+                drinknames={
                   category === "" ? drinks[categories[0]] : drinks[category]
                 }
               ></Drinks>
