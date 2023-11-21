@@ -55,6 +55,7 @@
     grid-template-rows: 0.1fr 1fr 1fr 1fr;
     align-items: center;
     justify-content: center;
+    overflow: auto;
 }
 
 .ice, .sugar, .toppings{
@@ -90,7 +91,7 @@
 
 .customize-drink{
     text-align: center;
-    font-size: 30px;
+    font-size: 25px;
     margin-top: 10px;
 }
 

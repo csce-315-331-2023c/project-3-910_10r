@@ -55,7 +55,22 @@ function Cashier({ setPayPage, setIsLogin }: Props) {
   useEffect(() => {
     API.get("/cashier/drinkCategory")
       .then((response) => {
-        setCatogories(response.data);
+        let tmpCategories: string[] = response.data;
+        let index = tmpCategories.indexOf("milk tea");
+        let tmpName = tmpCategories[0];
+        tmpCategories[0] = "milk tea";
+        tmpCategories[index] = tmpName;
+        index = tmpCategories.indexOf("fruit tea");
+        tmpName = tmpCategories[1];
+        tmpCategories[1] = "fruit tea";
+        tmpCategories[index] = tmpName;
+        index = tmpCategories.indexOf("fresh milk");
+        tmpName = tmpCategories[2];
+        tmpCategories[2] = "fresh milk";
+        tmpCategories[index] = tmpName;
+
+        //setCatogories(response.data);
+        setCatogories(tmpCategories);
         console.log(response.data);
       })
       .catch((error) => {

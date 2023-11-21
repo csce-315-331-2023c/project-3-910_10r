@@ -159,11 +159,8 @@ function DrinkCustomize({
     for (let i = 0; i < top.length; i++) {
       tmpToppingCount.push(0);
     }
-    console.log("top: " + top);
-
     defaultTop.forEach((item) => {
       const toppingIndex = top.indexOf(item);
-      console.log("default topping: " + item);
       if (toppingIndex < 0) {
         console.log("error: topping in drink does not exist in inventory");
       } else {
@@ -173,7 +170,6 @@ function DrinkCustomize({
     });
 
     setToppingCount(tmpToppingCount);
-    console.log("current topping count: " + toppingCount);
   };
 
   useEffect(() => {
@@ -183,20 +179,12 @@ function DrinkCustomize({
       .then((response) => {
         setToppings(response.data);
         top = response.data;
-        // let tmpToppingCount: number[] = [];
-        // for (let i = 0; i < response.data.length; i++) {
-        //   tmpToppingCount.push(0);
-        // }
-        // // setToppingCount(new Array(response.data.length).fill(0));
-        // setToppingCount(tmpToppingCount);
-
         API.get("/cashier/getDefaultToppingsByDrink", {
           params: {
             drink: query_drinkname,
           },
         })
           .then((response) => {
-            //setDefaultToppings(response.data);
             defaultTop = response.data;
             updateTopping();
             setLoading(false);
