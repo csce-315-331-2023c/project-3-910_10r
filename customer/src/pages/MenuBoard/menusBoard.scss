@@ -1,0 +1,176 @@
+.outer-container {
+    min-height: 100vh;
+    height: max(100vh, auto);
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.menu {
+    padding: var(--PADDING-SMALL) var(--PADDING-LARGE);
+    column-count: 3;
+    background-color: var(--GRAY-DARK);
+    border-top: 2px solid white;
+    flex-grow: 1;
+    height: 100%;
+    position: relative;
+    
+
+    > img {
+        width: clamp(100px, 40vw, 600px);
+        height: auto;
+    }
+    
+    .drinks_left {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(7%, 10%);
+    }
+
+    .drinks_right {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-7%, 10%);
+    }
+
+    &__title {
+        font-family: 'Rock Salt', cursive;
+        font-weight: bolder;
+        font-size: var(--FONT-MED-LARGE);
+        text-align: center;
+        color:white;
+        column-span: all;
+        padding-bottom: var(--PADDING-SMALL);
+    }
+
+    &__category {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        break-inside:avoid;
+        padding: var(--PADDING-SMALL);
+        padding-top: 0;
+
+        &-header {
+            color: var(--ACCENT-COLOR);
+            font-style: italic;
+            font-size: var(--FONT-NORMAL);
+            text-decoration: 2px underline solid var(--ACCENT-COLOR);
+            // text-align: center;
+            // width: 100%;
+        }
+
+        &-drinks {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            flex-flow: column wrap;
+            padding: 0 0 0 var(--PADDING-SMALL);
+            list-style-position: inside;
+
+            &-drink {
+                border: none;
+                color:white;
+                text-align:start;
+                font-size: var(--FONT-NORMAL);
+                line-height: 1.45rem;
+                // text-align: center;
+            }
+        }
+    }
+
+    &__options {
+        background-color: var(--ACCENT-COLOR-LIGHT);
+        padding: var(--PADDING-SMALL) var(--PADDING-MED);
+        padding-top: 0;
+        margin: var(--MARGIN-MED) 0 0 0;
+        column-span: all;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 3rem;
+
+        &-ice, &-sweetness, &-toppings {
+            flex-grow: 1;
+            flex-basis: 100px;
+            padding-bottom: var(--PADDING-SMALL);
+
+            h2 {
+                font-family: 'Rock Salt', cursive;
+                font-weight: bolder;
+                font-size: var(--FONT-MED);
+
+                span {
+                    font-family: "Poppins", "Montserrat", 'Times New Roman', Times, serif;
+                    font-size: var(--FONT-NORMAL-SMALL);
+                    white-space: nowrap;
+                }
+            }
+
+            h2:has(span) {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            > div {
+                display: grid;
+                grid-auto-flow: column;
+                justify-content: space-between;
+                gap: 1rem;
+                text-align: center;
+                white-space: pre-line;
+                line-height: 1rem;
+            }
+        }
+
+        &-toppings {
+            h2 {
+                transform: translateX(-15px);
+            }
+
+            > div {
+                display: grid;
+                grid-auto-flow:unset;
+                row-gap: 0.5rem;
+                grid-template-columns: repeat(3, 1fr) !important;
+                text-align: start;
+            }            
+        }
+
+        &-ice {
+
+            .ice-option {
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: center;
+                align-items: center;
+                width: 90px;
+
+                img {
+                    width: 40px;
+                    height: auto;
+                }
+            }
+        }
+
+        &-sweetness {
+
+            .sweetness-option {
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: center;
+                align-items: center;
+                width: 70px;
+
+                img {
+                    width: 70px;
+                    height: auto;
+                }
+            }
+        }
+    }
+}

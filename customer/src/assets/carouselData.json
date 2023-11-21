@@ -1,0 +1,17 @@
+
+{
+    "slides":[
+        {
+        "imageName": "/carouselImgs/carousel1.png",
+        "alt":"Image 1 for carousel"
+        },
+        {
+            "imageName":"/carouselImgs/carousel2.png",
+            "alt":"Image 2 for carousel"
+        },
+        {
+            "imageName":"/carouselImgs/carousel3.png",
+            "alt":"Image 3 for carousel"
+        }
+    ]
+}

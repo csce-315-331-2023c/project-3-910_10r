@@ -579,6 +579,22 @@ app.post("/recipes/add", (req, res) => {
     });
 });
 
+// gets all toppings
+app.get("/customer/toppings", (req, res) => {
+
+  const command = "SELECT name FROM inventory WHERE topping = true;";
+  pool
+    .query(command)
+    .then((query_res) => {
+      res.send(query_res.rows);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when getting toppings from inventory",
+      });
+    });
+});
 
 
 
