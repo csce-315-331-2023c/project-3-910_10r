@@ -121,7 +121,7 @@ function DrinkCustomize({
 
     updateOrder(_order);
 
-    //API.put("/cashier/updateInventory", { backend_order });
+    API.put("/cashier/updateInventory", { backend_order });
 
     resetCount();
   };
