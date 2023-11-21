@@ -4,31 +4,27 @@ import "./drinkCustomize.scss";
 interface Props {
   name: string;
   count: number;
-  setCount: React.Dispatch<React.SetStateAction<number>>;
+  // setCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Topping = ({ name, count, setCount }: Props) => {
+const Topping = ({ name, count }: Props) => {
   //const [count, setCount] = useState(0);
 
-  const handlePlus = () => {
-    setCount(count + 1);
-  };
+  // const handlePlus = () => {
+  //   setCount(count + 1);
+  // };
 
-  const handleMinus = () => {
-    count - 1 >= 0 ? setCount(count - 1) : setCount(0);
-  };
+  // const handleMinus = () => {
+  //   count - 1 >= 0 ? setCount(count - 1) : setCount(0);
+  // };
 
   return (
     <>
       <div>
         <div className="topping">
           <div className="topping-name">{name}</div>
-          <button className="topping-button" onClick={handlePlus}>
-            +
-          </button>
-          <button className="topping-button" onClick={handleMinus}>
-            -
-          </button>
+          <button className="topping-button">+</button>
+          <button className="topping-button">-</button>
         </div>
         <div className="topping-count">{count}</div>
       </div>

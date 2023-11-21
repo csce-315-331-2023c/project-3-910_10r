@@ -17,16 +17,15 @@ function App() {
   return (
     <>
       <div>
-        {isLogin ? (<Login setIsLogin={setIsLogin} setIsManager={setIsManager}></Login>) : 
-          (isManager ? (
-            <Manager setIsLogin={setIsLogin}></Manager>
-          ) :
-          (payPage ? (
-            <Payment></Payment>
-          ) : (
-            <Cashier setPayPage={setPayPage} setIsLogin={setIsLogin}></Cashier>
-          )))
-        }
+        {isLogin ? (
+          <Login setIsLogin={setIsLogin} setIsManager={setIsManager}></Login>
+        ) : isManager ? (
+          <Manager setIsLogin={setIsLogin}></Manager>
+        ) : payPage ? (
+          <Payment></Payment>
+        ) : (
+          <Cashier setPayPage={setPayPage} setIsLogin={setIsLogin}></Cashier>
+        )}
       </div>
     </>
   );

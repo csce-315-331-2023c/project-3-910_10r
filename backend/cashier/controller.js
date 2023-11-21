@@ -32,7 +32,7 @@ const getDefaultToppingsByDrink = (req, res) => {
     console.log(queries.getPriceByDrink);
     if (error) {
       // Handle the error gracefully, e.g., by sending an error response
-      console.error("Error fetching price:", error);
+      console.error("Error fetching default toppings:", error);
       res
         .status(500)
         .json({ error: "An error occurred while fetching the price." });
