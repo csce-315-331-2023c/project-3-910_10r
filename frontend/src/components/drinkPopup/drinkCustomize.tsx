@@ -184,22 +184,22 @@ function DrinkCustomize({
       .then((response) => {
         setToppings(response.data);
         setToppingCount(new Array(response.data.length).fill(0));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
 
-    API.get("/cashier/getDefaultToppingsByDrink", {
-      params: {
-        drink: query_drinkname,
-      },
-    })
-      .then((response) => {
-        setDefaultToppings(response.data);
-        updateTopping(response.data);
-        console.log(response.data);
-        setLoading2(false);
-        setLoading(false);
+        API.get("/cashier/getDefaultToppingsByDrink", {
+          params: {
+            drink: query_drinkname,
+          },
+        })
+          .then((response) => {
+            setDefaultToppings(response.data);
+            //updateTopping(response.data);
+            console.log(response.data);
+            setLoading2(false);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       })
       .catch((error) => {
         console.error(error);
@@ -221,27 +221,6 @@ function DrinkCustomize({
         console.error(error);
       });
   }, []);
-
-  // getting default topping for the drink
-  // useEffect(() => {
-  //   setLoading2(true);
-  //   // Make a GET request to your backend API
-  //   API.get("/cashier/getDefaultToppingsByDrink", {
-  //     params: {
-  //       drink: query_drinkname,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       setDefaultToppings(response.data);
-  //       updateTopping(response.data);
-  //       console.log(response.data);
-  //       setLoading2(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
-
   _order.price = backendData;
 
   return (
