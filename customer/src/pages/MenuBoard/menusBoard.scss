@@ -76,6 +76,7 @@
                 color:white;
                 text-align:start;
                 font-size: var(--FONT-NORMAL);
+                line-height: 1.45rem;
                 // text-align: center;
             }
         }
@@ -84,6 +85,7 @@
     &__options {
         background-color: var(--ACCENT-COLOR-LIGHT);
         padding: var(--PADDING-SMALL) var(--PADDING-MED);
+        padding-top: 0;
         margin: var(--MARGIN-MED) 0 0 0;
         column-span: all;
         display: flex;
@@ -93,6 +95,7 @@
 
         &-ice, &-sweetness, &-toppings {
             flex-grow: 1;
+            flex-basis: 100px;
             padding-bottom: var(--PADDING-SMALL);
 
             h2 {
@@ -102,15 +105,15 @@
 
                 span {
                     font-family: "Poppins", "Montserrat", 'Times New Roman', Times, serif;
-                    font-size: clamp(2px, var(--FONT-NORMAL), 24px);
-                    
+                    font-size: var(--FONT-NORMAL-SMALL);
+                    white-space: nowrap;
                 }
             }
 
             h2:has(span) {
                 display: flex;
                 align-items: center;
-                gap: 0.25rem;
+                gap: 0.5rem;
             }
 
             > div {
@@ -120,6 +123,7 @@
                 gap: 1rem;
                 text-align: center;
                 white-space: pre-line;
+                line-height: 1rem;
             }
         }
 
@@ -131,7 +135,7 @@
             > div {
                 display: grid;
                 grid-auto-flow:unset;
-                row-gap: 0.1rem;
+                row-gap: 0.5rem;
                 grid-template-columns: repeat(3, 1fr) !important;
                 text-align: start;
             }            
@@ -148,6 +152,22 @@
 
                 img {
                     width: 40px;
+                    height: auto;
+                }
+            }
+        }
+
+        &-sweetness {
+
+            .sweetness-option {
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: center;
+                align-items: center;
+                width: 70px;
+
+                img {
+                    width: 70px;
                     height: auto;
                 }
             }

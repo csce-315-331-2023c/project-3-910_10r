@@ -74,8 +74,8 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
     <div className='outer-container'>
         <CustomerHeader setWhichPage={setWhichPage}></CustomerHeader>
         <div className='menu'>
-            <img src="../../src/assets/drinkImgs/menuBoard_leftside.png" alt="drinks_left" width="650" className='drinks_left'/>
-            <img src="../../src/assets/drinkImgs/menuBoard_rightside.png" alt="drinks_right" width="650" className='drinks_right'/>
+            <img src="../../src/assets/drinkImgs/menuBoard_leftside.png" alt="drinks_left" width="3200" height="600" className='drinks_left'/>
+            <img src="../../src/assets/drinkImgs/menuBoard_rightside.png" alt="drinks_right" width="3200" height="600" className='drinks_right'/>
             <h1 className='menu__title'>MENU</h1>
             {categories.map((category) => (
             <MenusCategory
@@ -100,12 +100,15 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
                 <h2>Sweetness level</h2>
                 <div>
                   {sweetnessLevels.map((level, index) => (
-                    <div key={index}>{level}</div>
+                    <div key={index} className='sweetness-option'>
+                      <img src={`../../src/assets/drinkImgs/${level.substring(0, level.indexOf('%'))}sweetness.png`} alt="sweetness_icons" width="400" height="400" className='sweetness_icons'/>
+                      <p>{level}</p>
+                    </div>
                   ))}
                 </div>
               </div>
               <div className='menu__options-toppings'>
-                <h2>Toppings <span>+ $0.75 for each extra topping</span></h2>
+                <h2>Toppings <span>+</span><span>$0.75 for each <br/>extra topping</span></h2>
                 <div>
                   {toppings.map((topping, index) => (
                     <div key={index}>{topping.name}</div>
