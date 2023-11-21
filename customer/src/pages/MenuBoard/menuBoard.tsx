@@ -74,6 +74,8 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
     <div className='outer-container'>
         <CustomerHeader setWhichPage={setWhichPage}></CustomerHeader>
         <div className='menu'>
+            <img src="../../src/assets/drinkImgs/menuBoard_leftside.png" alt="drinks_left" width="650" className='drinks_left'/>
+            <img src="../../src/assets/drinkImgs/menuBoard_rightside.png" alt="drinks_right" width="650" className='drinks_right'/>
             <h1 className='menu__title'>MENU</h1>
             {categories.map((category) => (
             <MenusCategory
@@ -87,7 +89,10 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
                 <h2>Ice level</h2>
                 <div>
                   {iceLevels.map((level, index) => (
-                    <div key={index}>{level}</div>
+                    <div key={index} className='ice-option'>
+                      <img src={`../../src/assets/drinkImgs/${level}.png`} alt="ice_icons" width="400" height="600" className='ice_icons'/>
+                      <p>{level}</p>
+                    </div>
                   ))}
                 </div>
               </div>
