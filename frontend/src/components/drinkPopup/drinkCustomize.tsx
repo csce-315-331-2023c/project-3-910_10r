@@ -32,6 +32,7 @@ interface Props {
   updateOrder: (newOrder: order) => void;
   setShowCustomizationPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 function DrinkCustomize({
   name,
   updateOrder,
@@ -120,22 +121,12 @@ function DrinkCustomize({
 
     updateOrder(_order);
 
-    //API.put("/cashier/updateInventory", { backend_order });
+    API.put("/cashier/updateInventory", { backend_order });
 
     resetCount();
   };
 
   const resetCount = () => {
-    // setPCount(0);
-    // setAVCount(0);
-    // setHJCount(0);
-    // setPUCount(0);
-    // setMPCount(0);
-    // setMPCount(0);
-    // setCBCount(0);
-    // setLJCount(0);
-    // setRBCount(0);
-    // setAJCount(0);
     setToppingCount(new Array(toppings.length).fill(0));
     setSelectedButton(1);
     setSelectedSugarButton(1);
@@ -153,29 +144,33 @@ function DrinkCustomize({
     setToppingCount(newToppingCount);
   };
 
-  const updateTopping = (defaults: string[]) => {
-    const newToppingCount = [...toppingCount];
-    defaults.forEach((item) => {
-      const toppingIndex = toppings.indexOf(item);
+  //query database
+  let [backendData, setData] = useState<string>("");
+  const [toppings, setToppings] = useState<string[]>([]);
+  const [toppingCount, setToppingCount] = useState<number[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  let query_drinkname: string = name.toLowerCase();
+  let top: string[] = [];
+  let defaultTop: string[] = [];
+
+  const updateTopping = () => {
+    let tmpToppingCount: number[] = [];
+    for (let i = 0; i < top.length; i++) {
+      tmpToppingCount.push(0);
+    }
+    defaultTop.forEach((item) => {
+      const toppingIndex = top.indexOf(item);
       if (toppingIndex < 0) {
         console.log("error: topping in drink does not exist in inventory");
       } else {
-        newToppingCount[toppingIndex] = 1;
+        //newToppingCount[toppingIndex] = 1;
+        tmpToppingCount[toppingIndex] = 1;
       }
     });
-    setToppingCount(newToppingCount);
+
+    setToppingCount(tmpToppingCount);
   };
-
-  //query database
-  let [backendData, setData] = useState<string>("");
-  let [defaultToppings, setDefaultToppings] = useState<string[]>([]);
-  let [toppings, setToppings] = useState<string[]>([]);
-  let [toppingCount, setToppingCount] = useState<number[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [loading2, setLoading2] = useState(true);
-
-  let query_drinkname: string = name.toLowerCase();
-  console.log(query_drinkname);
 
   useEffect(() => {
     // Make a GET request to your backend API
@@ -183,18 +178,15 @@ function DrinkCustomize({
     API.get("/cashier/toppings")
       .then((response) => {
         setToppings(response.data);
-        setToppingCount(new Array(response.data.length).fill(0));
-
+        top = response.data;
         API.get("/cashier/getDefaultToppingsByDrink", {
           params: {
             drink: query_drinkname,
           },
         })
           .then((response) => {
-            setDefaultToppings(response.data);
-            //updateTopping(response.data);
-            console.log(response.data);
-            setLoading2(false);
+            defaultTop = response.data;
+            updateTopping();
             setLoading(false);
           })
           .catch((error) => {
@@ -225,7 +217,7 @@ function DrinkCustomize({
 
   return (
     <div className="customize">
-      {loading || loading2 ? (
+      {loading ? (
         <></>
       ) : (
         <>

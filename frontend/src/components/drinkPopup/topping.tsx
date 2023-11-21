@@ -20,7 +20,6 @@ const Topping = ({ name, count, onIncrement, onDecrement, index }: Props) => {
   // const handleMinus = () => {
   //   count - 1 >= 0 ? setCount(count - 1) : setCount(0);
   // };
-  console.log("index; " + index + " count " + count);
   return (
     <>
       <div>
@@ -33,7 +32,7 @@ const Topping = ({ name, count, onIncrement, onDecrement, index }: Props) => {
             -
           </button>
         </div>
-        <div className="topping-count">{count == undefined ? 0 : count}</div>
+        <div className="topping-count">{count}</div>
       </div>
     </>
   );
