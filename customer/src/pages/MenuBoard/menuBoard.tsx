@@ -39,7 +39,7 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
   const iceLevels = ["Regular Ice", "Light Ice", "No Ice", "Extra Ice"];
   const sweetnessLevels = ["100%\nNormal", "80%\nLess", "50%\nHalf", '30%\nLight', '0%\nNone', "120%\nExtra"];
 
-  const iceImgs = [no_ice, light_ice, regular_ice, extra_ice];
+  const iceImgs = [regular_ice, light_ice, no_ice, extra_ice];
   const sweetnessImgs = [sweetness100, sweetness80, sweetness50, sweetness30, sweetness0, sweetness120];
 
   const [toppings, setToppings] = useState<Topping[]>([]);
