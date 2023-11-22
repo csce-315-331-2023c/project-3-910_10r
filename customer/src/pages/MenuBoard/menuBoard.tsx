@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios, { AxiosInstance } from "axios";
 import CustomerHeader from "../../components/header/header.tsx";
 import MenusCategory from "../../components/menusCategory/menusCategory.tsx";
+// import left_image from '../../assets/drinkImgs/menuBoard_leftside.png';
 
 let baseURL = import.meta.env.VITE_API_URL;
 
@@ -74,8 +75,8 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
     <div className='outer-container'>
         <CustomerHeader setWhichPage={setWhichPage}></CustomerHeader>
         <div className='menu'>
-            <img src="../../src/assets/drinkImgs/menuBoard_leftside.png" alt="drinks_left" width="3200" height="600" className='drinks_left'/>
-            <img src="../../src/assets/drinkImgs/menuBoard_rightside.png" alt="drinks_right" width="3200" height="600" className='drinks_right'/>
+            <img src="../../assets/drinkImgs/menuBoard_lefttside.png" alt="drinks_left" width="3200" height="600" className='drinks_left'/>
+            <img src="../../assets/drinkImgs/menuBoard_rightside.png" alt="drinks_right" width="3200" height="600" className='drinks_right'/>
             <h1 className='menu__title'>MENU</h1>
             {categories.map((category) => (
             <MenusCategory
@@ -90,7 +91,7 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
                 <div>
                   {iceLevels.map((level, index) => (
                     <div key={index} className='ice-option'>
-                      <img src={`../../src/assets/drinkImgs/${level}.png`} alt="ice_icons" width="400" height="600" className='ice_icons'/>
+                      <img src={`../../assets/drinkImgs/${level}.png`} alt="ice_icons" width="400" height="600" className='ice_icons'/>
                       <p>{level}</p>
                     </div>
                   ))}
@@ -101,7 +102,7 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
                 <div>
                   {sweetnessLevels.map((level, index) => (
                     <div key={index} className='sweetness-option'>
-                      <img src={`../../src/assets/drinkImgs/${level.substring(0, level.indexOf('%'))}sweetness.png`} alt="sweetness_icons" width="400" height="400" className='sweetness_icons'/>
+                      <img src={`../../assets/drinkImgs/${level.substring(0, level.indexOf('%'))}sweetness.png`} alt="sweetness_icons" width="400" height="400" className='sweetness_icons'/>
                       <p>{level}</p>
                     </div>
                   ))}
