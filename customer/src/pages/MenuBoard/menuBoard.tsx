@@ -5,6 +5,16 @@ import CustomerHeader from "../../components/header/header.tsx";
 import MenusCategory from "../../components/menusCategory/menusCategory.tsx";
 import left_image from "../../assets/drinkImgs/menuBoard_leftside.png";
 import right_image from "../../assets/drinkImgs/menuBoard_rightside.png";
+import sweetness0 from "../../assets/drinkImgs/0sweetness.png";
+import sweetness30 from "../../assets/drinkImgs/30sweetness.png";
+import sweetness50 from "../../assets/drinkImgs/50sweetness.png";
+import sweetness80 from "../../assets/drinkImgs/80sweetness.png";
+import sweetness100 from "../../assets/drinkImgs/100sweetness.png";
+import sweetness120 from "../../assets/drinkImgs/120sweetness.png";
+import no_ice from "../../assets/drinkImgs/No_Ice.png"
+import light_ice from "../../assets/drinkImgs/Light_Ice.png"
+import regular_ice from "../../assets/drinkImgs/Regular_Ice.png"
+import extra_ice from "../../assets/drinkImgs/Extra_Ice.png"
 
 let baseURL = import.meta.env.VITE_API_URL;
 
@@ -28,6 +38,10 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
 
   const iceLevels = ["Regular Ice", "Light Ice", "No Ice", "Extra Ice"];
   const sweetnessLevels = ["100%\nNormal", "80%\nLess", "50%\nHalf", '30%\nLight', '0%\nNone', "120%\nExtra"];
+
+  const iceImgs = [no_ice, light_ice, regular_ice, extra_ice];
+  const sweetnessImgs = [sweetness100, sweetness80, sweetness50, sweetness30, sweetness0, sweetness120];
+
   const [toppings, setToppings] = useState<Topping[]>([]);
 
   useEffect(() => {
@@ -92,7 +106,7 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
                 <div>
                   {iceLevels.map((level, index) => (
                     <div key={index} className='ice-option'>
-                      <img src={`../../assets/drinkImgs/${level}.png`} alt="ice_icons" width="400" height="600" className='ice_icons'/>
+                      <img src={iceImgs[index]} alt="ice_icons" width="400" height="600" className='ice_icons'/>
                       <p>{level}</p>
                     </div>
                   ))}
@@ -103,7 +117,7 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
                 <div>
                   {sweetnessLevels.map((level, index) => (
                     <div key={index} className='sweetness-option'>
-                      <img src={`../../assets/drinkImgs/${level.substring(0, level.indexOf('%'))}sweetness.png`} alt="sweetness_icons" width="400" height="400" className='sweetness_icons'/>
+                      <img src={sweetnessImgs[index]} alt="sweetness_icons" width="400" height="400" className='sweetness_icons'/>
                       <p>{level}</p>
                     </div>
                   ))}
