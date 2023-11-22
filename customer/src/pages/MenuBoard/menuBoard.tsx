@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import axios, { AxiosInstance } from "axios";
 import CustomerHeader from "../../components/header/header.tsx";
 import MenusCategory from "../../components/menusCategory/menusCategory.tsx";
-// import left_image from '../../assets/drinkImgs/menuBoard_leftside.png';
+import left_image from "../../assets/drinkImgs/menuBoard_leftside.png";
+import right_image from "../../assets/drinkImgs/menuBoard_rightside.png";
 
 let baseURL = import.meta.env.VITE_API_URL;
 
@@ -75,8 +76,8 @@ function MenuBoard({setWhichPage} : MenuBoardProps) {
     <div className='outer-container'>
         <CustomerHeader setWhichPage={setWhichPage}></CustomerHeader>
         <div className='menu'>
-            <img src="../../assets/drinkImgs/menuBoard_lefttside.png" alt="drinks_left" width="3200" height="600" className='drinks_left'/>
-            <img src="../../assets/drinkImgs/menuBoard_rightside.png" alt="drinks_right" width="3200" height="600" className='drinks_right'/>
+            <img src={left_image} alt="drinks_left" width="3200" height="600" className='drinks_left'/>
+            <img src={right_image} alt="drinks_right" width="3200" height="600" className='drinks_right'/>
             <h1 className='menu__title'>MENU</h1>
             {categories.map((category) => (
             <MenusCategory
