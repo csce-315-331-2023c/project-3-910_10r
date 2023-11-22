@@ -1,4 +1,10 @@
-function Payment() {
+import "./cashier.scss";
+
+interface Props {
+  setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Payment({ setPayPage }: Props) {
   return (
     <>
       <div
@@ -18,6 +24,14 @@ function Payment() {
         >
           Your number is 034
         </div>
+        <button
+          className="back_to_order_button"
+          onClick={() => {
+            setPayPage(false);
+          }}
+        >
+          Order
+        </button>
       </div>
     </>
   );

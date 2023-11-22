@@ -22,7 +22,7 @@ function App() {
         ) : isManager ? (
           <Manager setIsLogin={setIsLogin}></Manager>
         ) : payPage ? (
-          <Payment></Payment>
+          <Payment setPayPage={setPayPage}></Payment>
         ) : (
           <Cashier setPayPage={setPayPage} setIsLogin={setIsLogin}></Cashier>
         )}
