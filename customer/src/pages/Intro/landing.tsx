@@ -8,12 +8,11 @@ import MenuBoardButton from './menuBoardButton.tsx';
 interface IntroPageProps {
   isReadyToOrder: React.Dispatch<React.SetStateAction<boolean>>;
   isLookingAtMenu: React.Dispatch<React.SetStateAction<boolean>>;
-  setWhichPage : React.Dispatch<React.SetStateAction<boolean>>;
 }
-function IntroPage({isReadyToOrder, isLookingAtMenu, setWhichPage} : IntroPageProps) {
+function IntroPage({isReadyToOrder, isLookingAtMenu} : IntroPageProps) {
   return (
     <div className="intro-page">
-        <CustomerHeader setWhichPage={setWhichPage}></CustomerHeader>
+        <CustomerHeader setOrderFalse={isReadyToOrder} setMenuFalse={isLookingAtMenu}></CustomerHeader>
       <div className="customer-header">
         <div className="intro-grid-main">
         

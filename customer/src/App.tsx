@@ -11,11 +11,12 @@ function App() {
   const [isMenu, setIsMenu] = useState<boolean>(false);
   
   return (
+    
     <>
       <div>
-          { isOrder ? (<Cashier setPayPage = {setIsLanding} setWhichPage={setIsOrder}></Cashier>):
-            isMenu ? (<MenuBoard setWhichPage={setIsMenu}></MenuBoard>):
-            (<IntroPage isReadyToOrder={() => setIsOrder(true)} isLookingAtMenu={() => setIsMenu(true)} setWhichPage={setIsOrder}></IntroPage>) //If it is order, change page to "order"
+          { isOrder? (<Cashier setPayPage = {setIsLanding} setMenuFalse={setIsMenu} setOrderFalse={setIsOrder}></Cashier>):
+            isMenu ? (<MenuBoard setMenuFalse={setIsMenu} setOrderFalse={setIsOrder} menuToOrderPage = {setIsOrder}></MenuBoard>):
+            (<IntroPage isReadyToOrder={setIsOrder} isLookingAtMenu={setIsMenu}></IntroPage>) //If it is order, change page to "order"
                                       //Else, keep it at introPage 
          } 
          
