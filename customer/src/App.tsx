@@ -1,6 +1,4 @@
 import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
 import Cashier from "./pages/Cashier/cashier.tsx";
 import IntroPage from "./pages/Intro/landing.tsx";
 import MenuBoard from "./pages/MenuBoard/menuBoard.tsx";

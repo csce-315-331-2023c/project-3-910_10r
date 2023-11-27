@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const pool = require("./db");
+const queries = require("./reports/queries");
 
 const app = express();
 const cashierRouter = require('./cashier/router')
@@ -474,6 +475,216 @@ app.get("/managers/drinkids", (req, res) => {
       console.error(error);
       res.status(500).json({
         error: "An error occurred when getting the drink IDs from recipes",
+      });
+    });
+});
+
+
+//get drinkids in specific time range for what sales together
+app.get("/managers/whatSalesTogether", (req, res) => {
+  const { beginningDate, endDate } = req.query;
+  let command = "SELECT drink_id FROM orders WHERE date >= '" + beginningDate + "' AND date <= '"
+  + endDate + "' GROUP BY drink_id HAVING array_length(drink_id, 1) > 1"; 
+  pool
+    .query(command)
+    .then((query_res) => {
+      if (query_res.rows.length === 0) {
+        res.status(404).json({
+          error: "Drink not found",
+        });
+      } else {
+        const orderData = [];
+        orderData.push(...query_res.rows);
+        res.send(orderData);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when getting the drink id from recipes",
+      });
+    });
+});
+
+app.get("/reports/getExcessReport/orderData", (req, res) => {
+  const { beginningDate, endDate } = req.query;
+  let command = "SELECT drink_id FROM orders WHERE date >= '" + beginningDate + "' AND date <= '"
+  + endDate + "'"; 
+  pool
+    .query(command)
+    .then((query_res) => {
+      if (query_res.rows.length === 0) {
+        res.status(404).json({
+          error: "Drink not",
+        });
+      } else {
+        const orderData = [];
+        orderData.push(...query_res.rows);
+        res.send(orderData);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when getting the order data",
+      });
+    });
+});
+
+app.get("/reports/getExcessReport/recipeData", (req, res) => {
+  const { drink } = req.query;
+  let command =  "SELECT ingredient_names, ingredient_values FROM recipes WHERE recipeid = "
+  + drink;
+  pool
+    .query(command)
+    .then((query_res) => {
+      if (query_res.rows.length === 0) {
+        res.status(404).json({
+          error: "Drink not found",
+        });
+      } else {
+        const recipeData = query_res.rows.map((row) => ({
+          ingredientNames: row.ingredient_names,
+          ingredientValues: row.ingredient_values,
+        }));
+        res.send(recipeData);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when getting the ingredients from recipes",
+      });
+    });
+});
+
+app.get("/reports/getExcessReport/inventoryInfo", (req, res) => {
+  const { drink } = req.query;
+  let command =  "SELECT name, amount FROM inventory";
+  pool
+    .query(command)
+    .then((query_res) => {
+      if (query_res.rows.length === 0) {
+        res.status(404).json({
+          error: "Inventory error",
+        });
+      } else {
+        const inventoryData = query_res.rows.map((row) => ({
+          name: row.name,
+          amount: row.amount,
+        }));
+        res.send(inventoryData);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when getting inventory info",
+      });
+    });
+});
+
+
+//get drinkids in specific time range for what sales together
+app.get("/managers/whatSalesTogether", (req, res) => {
+  const { beginningDate, endDate } = req.query;
+  let command = "SELECT drink_id FROM orders WHERE date >= '" + beginningDate + "' AND date <= '"
+  + endDate + "' GROUP BY drink_id HAVING array_length(drink_id, 1) > 1"; 
+  pool
+    .query(command)
+    .then((query_res) => {
+      if (query_res.rows.length === 0) {
+        res.status(404).json({
+          error: "Drink not found",
+        });
+      } else {
+        const orderData = [];
+        orderData.push(...query_res.rows);
+        res.send(orderData);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when getting the drink id from recipes",
+      });
+    });
+});
+
+app.get("/reports/getExcessReport/orderData", (req, res) => {
+  const { beginningDate, endDate } = req.query;
+  let command = "SELECT drink_id FROM orders WHERE date >= '" + beginningDate + "' AND date <= '"
+  + endDate + "'"; 
+  pool
+    .query(command)
+    .then((query_res) => {
+      if (query_res.rows.length === 0) {
+        res.status(404).json({
+          error: "Drink not",
+        });
+      } else {
+        const orderData = [];
+        orderData.push(...query_res.rows);
+        res.send(orderData);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when getting the order data",
+      });
+    });
+});
+
+app.get("/reports/getExcessReport/recipeData", (req, res) => {
+  const { drink } = req.query;
+  let command =  "SELECT ingredient_names, ingredient_values FROM recipes WHERE recipeid = "
+  + drink;
+  pool
+    .query(command)
+    .then((query_res) => {
+      if (query_res.rows.length === 0) {
+        res.status(404).json({
+          error: "Drink not found",
+        });
+      } else {
+        const recipeData = query_res.rows.map((row) => ({
+          ingredientNames: row.ingredient_names,
+          ingredientValues: row.ingredient_values,
+        }));
+        res.send(recipeData);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when getting the ingredients from recipes",
+      });
+    });
+});
+
+app.get("/reports/getExcessReport/inventoryInfo", (req, res) => {
+  const { drink } = req.query;
+  let command =  "SELECT name, amount FROM inventory";
+  pool
+    .query(command)
+    .then((query_res) => {
+      if (query_res.rows.length === 0) {
+        res.status(404).json({
+          error: "Inventory error",
+        });
+      } else {
+        const inventoryData = query_res.rows.map((row) => ({
+          name: row.name,
+          amount: row.amount,
+        }));
+        res.send(inventoryData);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error: "An error occurred when getting inventory info",
       });
     });
 });

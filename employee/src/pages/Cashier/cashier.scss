@@ -1,0 +1,19 @@
+@import './../../scss/main.scss';
+
+.cashier-grid{
+    display: grid;
+    grid-template-rows: 94vh 6vh;
+}
+
+.cashier-grid-main{
+    display: grid;
+    grid-template-columns: 180px 1fr 300px;
+}
+
+.back_to_order_button{
+    margin-left: 50px;
+    margin-top: 50px;
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+}
