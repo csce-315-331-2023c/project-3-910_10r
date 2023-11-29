@@ -12,10 +12,12 @@ interface WeatherData {
 }
 
 interface Props{
-  setWhichPage : React.Dispatch<React.SetStateAction<boolean>>;
+  setOrderFalse : React.Dispatch<React.SetStateAction<boolean>>;
+  setMenuFalse : React.Dispatch<React.SetStateAction<boolean>>;
+
 }
 
-function CustomerHeader({setWhichPage}:Props) {
+function CustomerHeader({setMenuFalse, setOrderFalse}:Props) {
   const [formattedTime, setFormattedTime] = useState<string>("");
   const [weatherIcon, setWeatherIcon] = useState<string>('');
   const [temperature, setTemperature] = useState<number>(0);
@@ -71,7 +73,7 @@ function CustomerHeader({setWhichPage}:Props) {
     <div className="header">
       
       <div className="header__weather">
-        <IntroButton setWhichPage={setWhichPage}></IntroButton>
+        <IntroButton setWhichPage1={setMenuFalse} setWhichPage2 = {setOrderFalse}></IntroButton>
         {weatherIcon && <img src={`http:${weatherIcon}`} alt="Weather Icon" />}
         <p>{temperature}&deg;F</p>
         <p id="time">{formattedTime}</p>
