@@ -54,7 +54,7 @@ function Cart({ orders, setOrders, setPayPage }: Props) {
       </div>
       <Checkout
         price={"$" + totalPrice.toFixed(2)}
-        tax={"$" + (totalPrice * 0.0625).toFixed(2)}
+        tax={"$" + (totalPrice * 0.0825).toFixed(2)}
         total={"$" + (totalPrice * 1.0625).toFixed(2)}
       ></Checkout>
       <div className="cart-buttons">
