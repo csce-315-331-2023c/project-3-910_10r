@@ -8,7 +8,7 @@ interface Props {
 function OrderButton({setOrderPage}: Props) {
 
   const navigateToOrderPage = () => {
-    setOrderPage(false);
+    setOrderPage(true);
     
   };
 
