@@ -63,6 +63,13 @@ const footer = ({ setShowLogout }: Props) => {
             Logout
           </button>
         </div>
+        <div className="footer-weather">
+          {weatherIcon && <img src={`http:${weatherIcon}`} alt="Weather Icon" />}
+          <p>{temperature}&deg;F</p>
+        </div>
+        <div className="footer-time">
+          {date.toLocaleTimeString()}
+        </div>
         <div className="accessibility">
           {/* <i className="fa-solid fa-font" onClick={showTextSlider}>
             <TextSlider></TextSlider>
@@ -74,13 +81,6 @@ const footer = ({ setShowLogout }: Props) => {
           {/* <i className="fa-solid fa-language"></i> */}
           <span className="material-symbols-outlined">g_translate</span>
           <i className="fa-solid fa-circle-half-stroke"></i>
-        </div>
-        <div className="footer-weather">
-          {weatherIcon && <img src={`http:${weatherIcon}`} alt="Weather Icon" />}
-          <p>{temperature}&deg;F</p>
-        </div>
-        <div className="footer-time">
-          {date.toLocaleTimeString()}
         </div>
       </div>
     </>
