@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./filter.scss"; // Import the custom styles
+import "./filter.scss";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios, { AxiosInstance } from 'axios';
@@ -145,7 +145,6 @@ onSubmit();
     <div className={`custom-time-popup-overlay ${isOpen ? "open" : ""}`}>
       <div className="custom-time-popup">
         <div className="popup-header">
-          {/* Close button (x icon) in the top right */}
           <button className="close-button" onClick={onClose}>
             <FontAwesomeIcon icon={faTimes} />
           </button>
