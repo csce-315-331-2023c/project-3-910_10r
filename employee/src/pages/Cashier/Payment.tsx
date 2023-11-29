@@ -1,5 +1,4 @@
 import "./cashier.scss";
-import { useState } from "react";
 
 interface Props {
   setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
