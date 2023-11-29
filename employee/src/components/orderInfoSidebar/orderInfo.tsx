@@ -54,7 +54,7 @@ const OrderInfo: React.FC<OrderInfoProps> = ({ order }) => {
   }, [order.name]);
 
   return (
-    <div className="order-info-container">
+    <div>
       <div className="order-id-box">
         <p>Order ID: {order.orderId}</p>
       </div>
@@ -71,7 +71,7 @@ const OrderInfo: React.FC<OrderInfoProps> = ({ order }) => {
         ))}
       </div>
       <div className="order-total-box">
-        <p>Total: ${order.total}</p>
+        <p>Total: ${Number(order.total).toFixed(2)}</p>
       </div>
     </div>
   );

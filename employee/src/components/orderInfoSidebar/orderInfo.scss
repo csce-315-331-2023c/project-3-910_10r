@@ -51,4 +51,18 @@
     margin-top: 10px;
     font-size:larger;
   }
+
+  .filter-info {
+    font: var(--FONT-MED);
+  }
+  .filter-info p {
+    margin-top: 8px;
+    margin-bottom: 8px; 
+  }
+
+  .filter-title {
+    font: var(--FONT-MED-LARGE);
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
   
