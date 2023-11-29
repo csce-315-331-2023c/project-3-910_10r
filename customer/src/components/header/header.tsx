@@ -43,7 +43,7 @@ function CustomerHeader({setWhichPage}:Props) {
   async function fetchWeatherData() {
     try {
       const response = await fetch(
-        'http://api.weatherapi.com/v1/current.json?key=6407a4a683f54d9ba1f165350232911&q=77840&aqi=no'
+        'https://api.weatherapi.com/v1/current.json?key=6407a4a683f54d9ba1f165350232911&q=77840&aqi=no'
       );
       if (!response.ok) {
         throw new Error('Failed to fetch weather data');
