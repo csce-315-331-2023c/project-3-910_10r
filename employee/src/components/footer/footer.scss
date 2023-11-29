@@ -27,3 +27,15 @@
    font-size: 20px;
    min-height: 30px;
 }
+
+.footer-weather{
+    justify-self: flex-start;
+    display: flex;
+    align-items: center;
+    padding-right: 1.5rem;
+
+    i {
+        padding-right: 0.75rem;
+        font-size: var(--FONT-MED);
+    }
+}

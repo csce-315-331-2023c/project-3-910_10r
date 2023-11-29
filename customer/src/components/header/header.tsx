@@ -1,18 +1,33 @@
 import "./header.scss"
 import { useState, useEffect } from 'react';
 import IntroButton from "./IntroButton";
+
+interface WeatherData {
+  current: {
+    temp_f: number;
+    condition: {
+      icon: string;
+    };
+  };
+}
+
 interface Props{
   setWhichPage : React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function CustomerHeader({setWhichPage}:Props) {
-  const [weatherCond, /* setWeatherCond */] = useState<string>("sunny");
   const [formattedTime, setFormattedTime] = useState<string>("");
+  const [weatherIcon, setWeatherIcon] = useState<string>('');
+  const [temperature, setTemperature] = useState<number>(0);
   
   useEffect(() => {
     const intervalId = setInterval(updateTime, 1000);
     return () => clearInterval(intervalId);
   }, []); 
+
+  useEffect(() => {
+    fetchWeatherData();
+  }, []);
 
   function updateTime() {
     const currentDate = new Date();
@@ -23,6 +38,22 @@ function CustomerHeader({setWhichPage}:Props) {
       second: "2-digit",
     });
     setFormattedTime(newFormattedTime);
+  }
+
+  async function fetchWeatherData() {
+    try {
+      const response = await fetch(
+        'http://api.weatherapi.com/v1/current.json?key=6407a4a683f54d9ba1f165350232911&q=77840&aqi=no'
+      );
+      if (!response.ok) {
+        throw new Error('Failed to fetch weather data');
+      }
+      const data: WeatherData = await response.json();
+      setWeatherIcon(data.current.condition.icon);
+      setTemperature(data.current.temp_f);
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
   }
 
 
@@ -41,13 +72,8 @@ function CustomerHeader({setWhichPage}:Props) {
       
       <div className="header__weather">
         <IntroButton setWhichPage={setWhichPage}></IntroButton>
-        {(weatherCond === "sunny") && <i className="fa-solid fa-sun"></i>}
-        {(weatherCond === "cloudy") && <i className="fa-solid fa-cloud"></i>}
-        {(weatherCond === "rainy") && <i className="fa-solid fa-cloud-rain"></i>}
-        {(weatherCond === "thunderstorm") && <i className="fa-solid fa-cloud-bolt"></i>}
-        {(weatherCond === "snowy") && <i className="fa-solid fa-snowflake"></i>}
-        {(weatherCond === "night") && <i className="fa-solid fa-moon"></i>}
-        <p>73&deg;F</p>
+        {weatherIcon && <img src={`http:${weatherIcon}`} alt="Weather Icon" />}
+        <p>{temperature}&deg;F</p>
         <p id="time">{formattedTime}</p>
         
       </div>
