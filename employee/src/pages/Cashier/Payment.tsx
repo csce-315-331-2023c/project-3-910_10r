@@ -1,10 +1,12 @@
 import "./cashier.scss";
+import { useState } from "react";
 
 interface Props {
   setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
+  num: Number;
 }
 
-function Payment({ setPayPage }: Props) {
+function Payment({ setPayPage, num }: Props) {
   return (
     <>
       <div
@@ -22,7 +24,7 @@ function Payment({ setPayPage }: Props) {
         <div
           style={{ fontSize: "25px", marginLeft: "50px", paddingTop: "50px" }}
         >
-          Your number is 034
+          Your number is {num.toString()}
         </div>
         <button
           className="back_to_order_button"

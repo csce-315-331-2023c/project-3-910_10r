@@ -13,6 +13,7 @@ function App() {
   const [payPage, setPayPage] = useState<boolean>(false);
   const [isManager, setIsManager] = useState<boolean>(false);
   const [isLogin, setIsLogin] = useState<boolean>(true);
+  const [num, setNumber] = useState<number>(1);
 
   return (
     <>
@@ -22,9 +23,14 @@ function App() {
         ) : isManager ? (
           <Manager setIsLogin={setIsLogin}></Manager>
         ) : payPage ? (
-          <Payment setPayPage={setPayPage}></Payment>
+          <Payment setPayPage={setPayPage} num={num}></Payment>
         ) : (
-          <Cashier setPayPage={setPayPage} setIsLogin={setIsLogin}></Cashier>
+          <Cashier
+            setPayPage={setPayPage}
+            setIsLogin={setIsLogin}
+            setNumber={setNumber}
+            num={num}
+          ></Cashier>
         )}
       </div>
     </>

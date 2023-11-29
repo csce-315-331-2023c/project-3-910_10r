@@ -15,9 +15,11 @@ interface Props {
   orders: order[];
   setOrders: React.Dispatch<React.SetStateAction<order[]>>;
   setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
+  num: number;
+  setNumber: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function Cart({ orders, setOrders, setPayPage }: Props) {
+function Cart({ orders, setOrders, setPayPage, setNumber, num }: Props) {
   let totalPrice = 0;
   const updatePrice = (price: number) => {
     totalPrice += price;
@@ -25,6 +27,8 @@ function Cart({ orders, setOrders, setPayPage }: Props) {
 
   const navigateToPayPage = () => {
     setPayPage(true);
+    if (num > 200) num = 0;
+    setNumber(num + 1);
   };
 
   const removeChild = (index: number) => {

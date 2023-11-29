@@ -28,9 +28,11 @@ interface order {
 interface Props {
   setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
+  setNumber: React.Dispatch<React.SetStateAction<number>>;
+  num: number;
 }
 
-function Cashier({ setPayPage, setIsLogin }: Props) {
+function Cashier({ setPayPage, setIsLogin, setNumber, num }: Props) {
   // keeps track of orders in the cart
   const [orders, setOrders] = useState<order[]>([]);
   // keeps track of if drink is selected in order to dim other pages
@@ -118,6 +120,8 @@ function Cashier({ setPayPage, setIsLogin }: Props) {
                 orders={orders}
                 setOrders={setOrders}
                 setPayPage={setPayPage}
+                setNumber={setNumber}
+                num={num}
               ></Cart>
             </div>
             <Footer setShowLogout={setIsLogout}></Footer>
