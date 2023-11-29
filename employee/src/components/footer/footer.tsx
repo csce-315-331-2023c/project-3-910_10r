@@ -37,7 +37,7 @@ const footer = ({ setShowLogout }: Props) => {
   async function fetchWeatherData() {
     try {
       const response = await fetch(
-        'http://api.weatherapi.com/v1/current.json?key=6407a4a683f54d9ba1f165350232911&q=77840&aqi=no'
+        'https://api.weatherapi.com/v1/current.json?key=6407a4a683f54d9ba1f165350232911&q=77840&aqi=no'
       );
       if (!response.ok) {
         throw new Error('Failed to fetch weather data');
@@ -53,11 +53,9 @@ const footer = ({ setShowLogout }: Props) => {
   return (
     <>
       <div className="footer">
-        <div className="footer-weather">
+        <div className="footer-button">
           {weatherIcon && <img src={`http:${weatherIcon}`} alt="Weather Icon" />}
           <p>{temperature}&deg;F</p>
-        </div>
-        <div className="footer-button">
           <button className="footer-logout" onClick={showLogout}>
             Logout
           </button>
