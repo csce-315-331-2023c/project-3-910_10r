@@ -1,5 +1,6 @@
 import "./footer.scss";
 import { useState, useEffect } from "react";
+import TextSlider from "./textSlider";
 
 interface WeatherData {
   current: {
@@ -50,14 +51,8 @@ const footer = ({ setShowLogout }: Props) => {
     }
   }
   
-  const increaseFont = () => {
-    const fontSizes = ["--FONT-LARGE", "--FONT-MED-LARGE", "--FONT-MED", "--FONT-MED-NORMAL", "--FONT-NORMAL", "--FONT-SMALL"];
-    fontSizes.forEach((font) => {
-      let currValue = String(getComputedStyle(document.documentElement).getPropertyValue(font));
-      currValue = currValue.substring(0, currValue.indexOf("r"));
-      let newValue = Number(currValue) + 0.25;
-      document.documentElement.style.setProperty(font, `${newValue}rem`);
-    });
+  function showTextSlider() {
+    document.querySelector(".textslider")?.classList.toggle("active")
   }
 
   return (
@@ -68,11 +63,19 @@ const footer = ({ setShowLogout }: Props) => {
             Logout
           </button>
         </div>
-        <div className="footer-weather">
-          <i className="fa-solid fa-font" onClick={increaseFont}></i>
-          <i className="fa-solid fa-language"></i>
+        <div className="accessibility">
+          {/* <i className="fa-solid fa-font" onClick={showTextSlider}>
+            <TextSlider></TextSlider>
+          </i> */}
+          <span id="textSliderIcon" className="material-symbols-outlined" onClick={showTextSlider}>text_fields
+            <TextSlider></TextSlider>
+          </span>
+          
+          {/* <i className="fa-solid fa-language"></i> */}
+          <span className="material-symbols-outlined">g_translate</span>
           <i className="fa-solid fa-circle-half-stroke"></i>
-          <i className="fa-solid fa-magnifying-glass-plus"></i>
+        </div>
+        <div className="footer-weather">
           {weatherIcon && <img src={`http:${weatherIcon}`} alt="Weather Icon" />}
           <p>{temperature}&deg;F</p>
         </div>

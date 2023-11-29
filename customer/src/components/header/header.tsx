@@ -1,6 +1,8 @@
 import "./header.scss"
 import { useState, useEffect } from 'react';
 import IntroButton from "./IntroButton";
+import TextSlider from "./textSlider";
+
 
 interface WeatherData {
   current: {
@@ -41,7 +43,6 @@ function CustomerHeader({setMenuFalse, setOrderFalse}:Props) {
     });
     setFormattedTime(newFormattedTime);
   }
-
   async function fetchWeatherData() {
     try {
       const response = await fetch(
@@ -59,14 +60,8 @@ function CustomerHeader({setMenuFalse, setOrderFalse}:Props) {
   }
 
 
-  const increaseFont = () => {
-    const fontSizes = ["--FONT-LARGE", "--FONT-MED-LARGE", "--FONT-MED", "--FONT-MED-NORMAL", "--FONT-NORMAL", "--FONT-SMALL"];
-    fontSizes.forEach((font) => {
-      let currValue = String(getComputedStyle(document.documentElement).getPropertyValue(font));
-      currValue = currValue.substring(0, currValue.indexOf("r"));
-      let newValue = Number(currValue) + 0.25;
-      document.documentElement.style.setProperty(font, `${newValue}rem`);
-    });
+  function showTextSlider() {
+    document.querySelector(".textslider")?.classList.toggle("active")
   }
 
   return (
@@ -84,15 +79,17 @@ function CustomerHeader({setMenuFalse, setOrderFalse}:Props) {
       <h1 className="header__title">Share<span>Tea</span></h1>
 
       <div className="header__accessibility">
-        <i className="fa-solid fa-font" onClick={increaseFont}></i>
-        <i className="fa-solid fa-language"></i>
-        <i className="fa-solid fa-circle-half-stroke"></i>
-        <i className="fa-solid fa-magnifying-glass-plus"></i>
+        {/* <i className="fa-solid fa-font" onClick={showTextSlider}>
+          <TextSlider></TextSlider>
+        </i> */}
+        <span id="textSliderIcon" className="material-symbols-outlined" onClick={showTextSlider}>text_fields
+          <TextSlider></TextSlider>
+        </span>
         
-        {/* BETTER ICONS KEVIN FOUND - https://fonts.google.com/icons?preview.text=MENU&selected=Material+Symbols+Outlined:g_translate:FILL@0;wght@400;GRAD@0;opsz@24
+        {/* <i className="fa-solid fa-language"></i> */}
+        <span className="material-symbols-outlined">g_translate</span>
+        <i className="fa-solid fa-circle-half-stroke"></i>
 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <span className="material-symbols-outlined">g_translate</span> */}
       </div>
     </div>
   )

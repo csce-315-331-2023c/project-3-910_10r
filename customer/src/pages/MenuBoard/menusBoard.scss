@@ -16,7 +16,7 @@
     
 
     > img {
-        width: clamp(100px, 40vw, 600px);
+        width: clamp(100px, 40%, 600px);
         height: auto;
     }
     
