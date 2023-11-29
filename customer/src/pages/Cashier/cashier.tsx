@@ -8,7 +8,6 @@ import CustomerHeader from "../../components/header/header.tsx";
 import "./cashier.scss";
 
 import axios, { AxiosInstance } from "axios";
-
 let baseURL = import.meta.env.VITE_API_URL;
 
 const API: AxiosInstance = axios.create({
@@ -26,10 +25,11 @@ interface order {
 
 interface Props {
   setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
-  setWhichPage: React.Dispatch<React.SetStateAction<boolean>>;
+  setOrderFalse: React.Dispatch<React.SetStateAction<boolean>>;
+  setMenuFalse:  React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Cashier({ setPayPage, setWhichPage}: Props) {
+function Cashier({ setPayPage, setMenuFalse, setOrderFalse}: Props) {
   // keeps track of orders in the cart
   const [orders, setOrders] = useState<order[]>([]);
   // keeps track of if drink is selected in order to dim other pages
@@ -76,7 +76,7 @@ function Cashier({ setPayPage, setWhichPage}: Props) {
     <div className="cashier-grid">
       {loaded ? (
         <>
-          <CustomerHeader setWhichPage={setWhichPage}></CustomerHeader>
+          <CustomerHeader setMenuFalse={setMenuFalse} setOrderFalse={setOrderFalse}></CustomerHeader>
 
             <div className="cashier-grid-main">
               <Navigationbar

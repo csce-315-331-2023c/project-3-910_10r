@@ -2,10 +2,12 @@ import "./header.scss"
 import { useState, useEffect } from 'react';
 import IntroButton from "./IntroButton";
 interface Props{
-  setWhichPage : React.Dispatch<React.SetStateAction<boolean>>;
+  setOrderFalse : React.Dispatch<React.SetStateAction<boolean>>;
+  setMenuFalse : React.Dispatch<React.SetStateAction<boolean>>;
+
 }
 
-function CustomerHeader({setWhichPage}:Props) {
+function CustomerHeader({setMenuFalse, setOrderFalse}:Props) {
   const [weatherCond, /* setWeatherCond */] = useState<string>("sunny");
   const [formattedTime, setFormattedTime] = useState<string>("");
   
@@ -40,7 +42,7 @@ function CustomerHeader({setWhichPage}:Props) {
     <div className="header">
       
       <div className="header__weather">
-        <IntroButton setWhichPage={setWhichPage}></IntroButton>
+        <IntroButton setWhichPage1={setMenuFalse} setWhichPage2 = {setOrderFalse}></IntroButton>
         {(weatherCond === "sunny") && <i className="fa-solid fa-sun"></i>}
         {(weatherCond === "cloudy") && <i className="fa-solid fa-cloud"></i>}
         {(weatherCond === "rainy") && <i className="fa-solid fa-cloud-rain"></i>}
