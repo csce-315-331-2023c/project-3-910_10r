@@ -54,13 +54,15 @@ const footer = ({ setShowLogout }: Props) => {
     <>
       <div className="footer">
         <div className="footer-button">
-          {weatherIcon && <img src={`http:${weatherIcon}`} alt="Weather Icon" />}
-          <p>{temperature}&deg;F</p>
           <button className="footer-logout" onClick={showLogout}>
             Logout
           </button>
         </div>
-        <div className="footer-time">{date.toLocaleTimeString()}</div>
+        <div className="footer-time">
+          {date.toLocaleTimeString()}
+          {weatherIcon && <img src={`http:${weatherIcon}`} alt="Weather Icon" />}
+          <p>{temperature}&deg;F</p>
+        </div>
       </div>
     </>
   );
