@@ -9,6 +9,8 @@
     display: flex;
     bottom: 0;
     z-index: 300;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .footer-button{
@@ -21,21 +23,37 @@
     width: 100px;
     font-size: 20px;
 }
-.footer-time{
-   width: 140px;
-   color: white;
-   font-size: 20px;
-   min-height: 30px;
-}
 
-.footer-weather{
-    justify-self: flex-start;
+.footer-time {
+    color: white;
+    font-size: var(--FONT-MED);
+    //min-height: 30px;
     display: flex;
     align-items: center;
-    padding-right: 1.5rem;
+    width: 180px;
+    padding-right: 10px;
+}
 
-    i {
-        padding-right: 0.75rem;
-        font-size: var(--FONT-MED);
-    }
+.footer-weather {
+    color: white;
+    font-size: var(--FONT-MED);
+    //min-height: 20px;
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+}
+
+.footer-weather i {
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: var(--FONT-MED); 
+}
+
+.footer-weather img {
+    margin-left: 20px; 
+}
+
+.footer-weather p {
+    margin-left: 10px;
+    margin-right: 10px;
 }

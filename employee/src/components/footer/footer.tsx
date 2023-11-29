@@ -49,6 +49,16 @@ const footer = ({ setShowLogout }: Props) => {
       console.error('Error fetching weather data:', error);
     }
   }
+  
+  const increaseFont = () => {
+    const fontSizes = ["--FONT-LARGE", "--FONT-MED-LARGE", "--FONT-MED", "--FONT-MED-NORMAL", "--FONT-NORMAL", "--FONT-SMALL"];
+    fontSizes.forEach((font) => {
+      let currValue = String(getComputedStyle(document.documentElement).getPropertyValue(font));
+      currValue = currValue.substring(0, currValue.indexOf("r"));
+      let newValue = Number(currValue) + 0.25;
+      document.documentElement.style.setProperty(font, `${newValue}rem`);
+    });
+  }
 
   return (
     <>
@@ -58,10 +68,16 @@ const footer = ({ setShowLogout }: Props) => {
             Logout
           </button>
         </div>
-        <div className="footer-time">
-          {date.toLocaleTimeString()}
+        <div className="footer-weather">
+          <i className="fa-solid fa-font" onClick={increaseFont}></i>
+          <i className="fa-solid fa-language"></i>
+          <i className="fa-solid fa-circle-half-stroke"></i>
+          <i className="fa-solid fa-magnifying-glass-plus"></i>
           {weatherIcon && <img src={`http:${weatherIcon}`} alt="Weather Icon" />}
           <p>{temperature}&deg;F</p>
+        </div>
+        <div className="footer-time">
+          {date.toLocaleTimeString()}
         </div>
       </div>
     </>
