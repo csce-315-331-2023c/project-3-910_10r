@@ -12,10 +12,19 @@ function TextSlider() {
     });
   }
 
+  const handleFormSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+  };
+
+  const handleClick = (event: React.FormEvent) => {
+    event.stopPropagation();
+  };
+
+
   return (
-    <form className="textslider" action="">
-        <label htmlFor="slider"></label>
-        <input type="range" id="slider" name="slider" onChange={updateFont}/>
+    <form className="textslider" action="" onSubmit={handleFormSubmit}>
+        <label htmlFor="slider" className="offscreen"></label>
+        <input type="range" id="slider" name="slider" onChange={updateFont} onClick={handleClick}/>
     </form>
   )
 }

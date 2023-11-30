@@ -1,14 +1,11 @@
 .footer {
+    position: static;
     background-color: var(--GREEN-DARK);
-    width: 100vw;
-    position: fixed;
-    min-height: 50px;
+    width: 100%;
     align-items: center;
     display: flex;
-    bottom: 0;
     z-index: 300;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    padding: 0 1rem;
 }
 
 .footer-button {
@@ -17,7 +14,6 @@
 }
 
 .footer-logout {
-    margin-left: 20px;
     width: 100px;
     font-size: 20px;
 }
@@ -27,8 +23,9 @@
     font-size: var(--FONT-MED);
     display: flex;
     align-items: center;
-    width: 180px;
-    padding-right: 10px;
+    padding-right: 30px;
+    white-space: nowrap;
+    height: 100%;
 }
 
 .footer-weather {
@@ -36,7 +33,12 @@
     font-size: var(--FONT-MED);
     display: flex;
     align-items: center;
-    margin-right: 30px;
+    margin-right: 20px;
+    height: 100%;
+    
+    img {
+        height: 100%;
+    }
 }
 
 .footer-weather i {
@@ -89,6 +91,11 @@
             justify-content: center;
             align-items: center;
             filter: drop-shadow(0px 0px 5px black);
+
+            label {
+                position: absolute;
+                left: -10000px;
+            }
 
             input {
                 width: 90%;
