@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './login.scss';
-// import {gapi} from "gapi-script";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import OAuth from './oauth';
-
-// const clientID = "103248661019-a5si5aktn333l2v7q2qrooc0l8d32c7r.apps.googleusercontent.com";
-// const clientID = "103248661019-ucbot5uusvdfhdkdblppphb4ghltk0ge.apps.googleusercontent.com";
 
 import axios , { AxiosInstance } from 'axios';
 
@@ -28,7 +24,6 @@ interface Props{
 const Login = ({setIsManager, setIsLogin, setIsCashier, setPayPage} : Props) => {
     const [formData, setFormData] = useState({ username: '', password: '' });
     const [isSubmitClicked, setIsSubmitClicked] = useState(false);
-    // const [isOAuthClicked, setIsOAuthClicked] = useState(false);
     const [showError, setShowError] = useState(false);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,22 +40,8 @@ const Login = ({setIsManager, setIsLogin, setIsCashier, setPayPage} : Props) => 
         setIsCashier(false);
         setIsSubmitClicked(true);
     };
-
-    // const handleOAuth = () => {
-    //     setIsOAuthClicked(true);
-    //     console.log("OAuth true");
-    // };
-    // const handleCallbackResponse = (response) => {
-    //     console.log("Encoded JWT ID token: " + response.credential);
-    // };
-
+    
     useEffect(() => {
-        // gapi.load('client:auth2', start);
-        // google.accounts.id.initialize({
-        //     client_id: "103248661019-ucbot5uusvdfhdkdblppphb4ghltk0ge.apps.googleusercontent.com",
-        //     callback: handleCallbackResponse
-        // });
-
         if (isSubmitClicked && formData.username && formData.password) {
             const para = `name='${formData.username}' AND password='${formData.password}'`;
             API.get(`/login?parameter=${para}`)
