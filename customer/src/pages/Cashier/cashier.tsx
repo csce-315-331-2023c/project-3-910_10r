@@ -26,10 +26,10 @@ interface order {
 interface Props {
   setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
   setOrderFalse: React.Dispatch<React.SetStateAction<boolean>>;
-  setMenuFalse:  React.Dispatch<React.SetStateAction<boolean>>;
+  setMenuFalse: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Cashier({ setPayPage, setMenuFalse, setOrderFalse}: Props) {
+function Cashier({ setPayPage, setMenuFalse, setOrderFalse }: Props) {
   // keeps track of orders in the cart
   const [orders, setOrders] = useState<order[]>([]);
   // keeps track of if drink is selected in order to dim other pages
@@ -44,6 +44,7 @@ function Cashier({ setPayPage, setMenuFalse, setOrderFalse}: Props) {
   // keeps track of all categories
   const [categories, setCatogories] = useState<string[]>([]);
   const [loaded, setLoaded] = useState<boolean>(false);
+  const [drinksWithLowStock, setDrinksWithLowStock] = useState<string[]>([]);
 
   const updateOrder = (newOrder: order) => {
     setOrders((prevArray) => [...prevArray, newOrder]);
@@ -70,34 +71,47 @@ function Cashier({ setPayPage, setMenuFalse, setOrderFalse}: Props) {
       .catch((error) => {
         console.error(error);
       });
+
+    API.get("/cashier/getLowDrinkNames")
+      .then((response) => {
+        setDrinksWithLowStock(response.data);
+        console.log("drinks with low stock: ", response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (
     <div className="cashier-grid">
       {loaded ? (
         <>
-          <CustomerHeader setMenuFalse={setMenuFalse} setOrderFalse={setOrderFalse}></CustomerHeader>
+          <CustomerHeader
+            setMenuFalse={setMenuFalse}
+            setOrderFalse={setOrderFalse}
+          ></CustomerHeader>
 
-            <div className="cashier-grid-main">
-              <Navigationbar
-                showCustomizationPage={showCustomizationPage}
-                setCatogory={setCatogory}
-                category={categories}
-              ></Navigationbar>
-              <Drinks
-                setShowCustomizationPage={setShowCustomizationPage}
-                showCustomizationPage={showCustomizationPage}
-                setDrinkName={setDrinkName}
-                drinks={
-                  category === "" ? drinks[categories[0]] : drinks[category]
-                }
-              ></Drinks>
-              <Cart
-                orders={orders}
-                setOrders={setOrders}
-                setPayPage={setPayPage}
-              ></Cart>
-            </div>
+          <div className="cashier-grid-main">
+            <Navigationbar
+              showCustomizationPage={showCustomizationPage}
+              setCatogory={setCatogory}
+              category={categories}
+            ></Navigationbar>
+            <Drinks
+              setShowCustomizationPage={setShowCustomizationPage}
+              showCustomizationPage={showCustomizationPage}
+              setDrinkName={setDrinkName}
+              drinks={
+                category === "" ? drinks[categories[0]] : drinks[category]
+              }
+              drinksWithLowStock={drinksWithLowStock}
+            ></Drinks>
+            <Cart
+              orders={orders}
+              setOrders={setOrders}
+              setPayPage={setPayPage}
+            ></Cart>
+          </div>
           {showCustomizationPage && (
             <DrinkCustomize
               name={drinkName}
