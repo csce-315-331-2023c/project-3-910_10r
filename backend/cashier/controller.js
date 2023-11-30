@@ -26,6 +26,31 @@ const getPriceByDrink = (req, res) => {
   });
 };
 
+const getLowIngredientForDrink = (req, res) => {
+  const drink = req.query.drink;
+  pool.query(queries.getLowIngredientForDrink, [drink], (error, results) => {
+    console.log(queries.getLowIngredientForDrink);
+    if (error) {
+      // Handle the error gracefully, e.g., by sending an error response
+      console.error(
+        "Error fetching low ingredients for drink",
+        drink,
+        ": ",
+        error
+      );
+      res.status(500).json({
+        error: "An error occurred while fetching the low inventory for drink.",
+      });
+    } else {
+      let ingredients = {};
+      for (let i = 0; i < results.rowCount; i++) {
+        ingredients[results.rows[i].name] = ingredients[results.rows[i].ratio];
+      }
+      res.status(200).send(ingredients);
+    }
+  });
+};
+
 const getDefaultToppingsByDrink = (req, res) => {
   const drink = req.query.drink;
   pool.query(queries.getDefaultToppingsByDrink, [drink], (error, results) => {
@@ -176,4 +201,5 @@ module.exports = {
   updateInventory,
   restoreInventory,
   makeOrder,
+  getLowIngredientForDrink,
 };

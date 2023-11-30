@@ -5,6 +5,7 @@ const router = Router();
 
 router.get("/price", controller.getPriceByDrink);
 router.get("/getDefaultToppingsByDrink", controller.getDefaultToppingsByDrink);
+router.get("/getLowIngredientForDrink", controller.getLowIngredientForDrink);
 
 // gets all the categories for the display bar
 router.get("/drinkCategory", (req, res) => {
@@ -22,6 +23,28 @@ router.get("/drinkCategory", (req, res) => {
       console.error(error);
       res.status(500).json({
         error: "An error occurred when selecting categories from recipes",
+      });
+    });
+});
+
+router.get("/getLowDrinkNames", (req, res) => {
+  let command =
+    "SELECT DISTINCT drinkname FROM recipes JOIN inventory ON inventory.name = ANY(recipes.ingredient_names) WHERE inventory.alert = true;";
+
+  let names = [];
+  pool
+    .query(command)
+    .then((query_res) => {
+      for (let i = 0; i < query_res.rowCount; i++) {
+        names.push(query_res.rows[i].drinkname);
+      }
+      res.send(names);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        error:
+          "An error occurred when getting drink names whose ingredients are low",
       });
     });
 });

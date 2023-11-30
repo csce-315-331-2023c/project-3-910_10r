@@ -38,6 +38,8 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num }: Props) {
   // keeps track of if drink is selected in order to dim other pages
   const [showCustomizationPage, setShowCustomizationPage] =
     useState<boolean>(false);
+  // keeps track of if the drink selected is low in ingredient to change pop up
+  const [showLowPage, setShowLowPage] = useState<boolean>(false);
   // keeps track of the drink selected
   const [drinkName, setDrinkName] = useState<string>("");
   // keeps track of the selected category
@@ -47,6 +49,7 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num }: Props) {
   // keeps track of all categories
   const [categories, setCatogories] = useState<string[]>([]);
   const [loaded, setLoaded] = useState<boolean>(false);
+  const [drinksWithLowStock, setDrinksWithLowStock] = useState<string[]>([]);
 
   const [isLogout, setIsLogout] = useState(false);
 
@@ -74,6 +77,15 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num }: Props) {
         //setCatogories(response.data);
         setCatogories(tmpCategories);
         console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    API.get("/cashier/getLowDrinkNames")
+      .then((response) => {
+        setDrinksWithLowStock(response.data);
+        console.log("drinks with low stock: ", response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -115,6 +127,8 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num }: Props) {
                 drinknames={
                   category === "" ? drinks[categories[0]] : drinks[category]
                 }
+                setShowLowPage={setShowLowPage}
+                drinksWithLowStock={drinksWithLowStock}
               ></Drinks>
               <Cart
                 orders={orders}
