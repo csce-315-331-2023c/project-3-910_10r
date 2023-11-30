@@ -17,18 +17,24 @@ interface Props {
   setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
   num: number;
   setNumber: React.Dispatch<React.SetStateAction<number>>;
+  setIsManager: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsCashier: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Cart({ orders, setOrders, setPayPage, setNumber, num }: Props) {
+function Cart({ orders, setOrders, setPayPage, setNumber, num, setIsManager, setIsCashier}: Props) {
   let totalPrice = 0;
   const updatePrice = (price: number) => {
     totalPrice += price;
   };
 
-  const navigateToPayPage = () => {
-    setPayPage(true);
-    if (num > 200) num = 0;
-    setNumber(num + 1);
+  const navigateToPayPage = (price: number) => {
+    if (price > 0) {
+      setPayPage(true);
+      setIsManager(false);
+      setIsCashier(false);
+      if (num > 200) num = 0;
+      setNumber(num + 1);
+    }
   };
 
   const removeChild = (index: number) => {
@@ -62,7 +68,10 @@ function Cart({ orders, setOrders, setPayPage, setNumber, num }: Props) {
         total={"$" + (totalPrice * 1.0625).toFixed(2)}
       ></Checkout>
       <div className="cart-buttons">
-        <button className="cart-buttons-1" onClick={navigateToPayPage}>
+        <button
+          className="cart-buttons-1"
+          onClick={() => navigateToPayPage(totalPrice)}
+        >
           Charge
         </button>
         <button className="cart-buttons-2">Print Ticket</button>

@@ -5,6 +5,8 @@ interface Props {
   children: string;
   setShowCustomizationPage: React.Dispatch<React.SetStateAction<boolean>>;
   setDrinkName: React.Dispatch<React.SetStateAction<string>>;
+  setShowLowPage: React.Dispatch<React.SetStateAction<boolean>>;
+  drinksWithLowStock: string[];
 }
 
 const Show = (
@@ -16,14 +18,41 @@ const Show = (
   setDrinkName(children);
 };
 
-const drink = ({ children, setShowCustomizationPage, setDrinkName }: Props) => {
+const ShowLow = (
+  setDrinkName: React.Dispatch<React.SetStateAction<string>>,
+  setShowLowPage: React.Dispatch<React.SetStateAction<boolean>>,
+  children: string
+) => {
+  setShowLowPage(true);
+  setDrinkName(children);
+};
+
+const drink = ({
+  children,
+  setShowCustomizationPage,
+  setDrinkName,
+  setShowLowPage,
+  drinksWithLowStock,
+}: Props) => {
+  let low = drinksWithLowStock.indexOf(children) > -1;
   return (
-    <button
-      className="drinks-grid-drink"
-      onClick={() => Show(setShowCustomizationPage, setDrinkName, children)}
-    >
-      {children}
-    </button>
+    <div>
+      {low ? (
+        <button
+          className="drinks-grid-drink-low"
+          onClick={() => ShowLow(setDrinkName, setShowLowPage, children)}
+        >
+          {children}
+        </button>
+      ) : (
+        <button
+          className="drinks-grid-drink"
+          onClick={() => Show(setShowCustomizationPage, setDrinkName, children)}
+        >
+          {children}
+        </button>
+      )}
+    </div>
   );
 };
 

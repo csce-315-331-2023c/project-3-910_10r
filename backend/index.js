@@ -45,6 +45,27 @@ app.get("/login", (req, res) => {
     });
 })
 
+//check log in name for oauth
+app.get("/oauth", (req, res) => {
+  let command = "SELECT manager FROM employee WHERE " + req.query.parameter +";";
+    
+  pool.query(command)
+  .then((query_res) => {
+    if(query_res.rowCount != 0) {
+      res.send(query_res.rows[0].manager);
+    }
+    else {
+      res.sendStatus(500);
+    } 
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).json({
+      error: "An error occurred when determining manager status from employees",
+    });
+  });
+})
+
 // gets all inventory items
 app.get("/inventory", (req, res) => {
   let command = "SELECT name, alert, amount, capacity, unit FROM inventory;";

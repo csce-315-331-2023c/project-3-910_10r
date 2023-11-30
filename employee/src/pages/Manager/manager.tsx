@@ -17,9 +17,11 @@ library.add(fas);
 
 interface Props {
     setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsManager: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsCashier: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Manager = ({setIsLogin} : Props) => {
+const Manager = ({setIsLogin, setIsManager, setIsCashier} : Props) => {
 
     const [showEmployees, setShowEmployees] = useState(true);
     const [showInventory, setShowInventory] = useState(false);
@@ -81,7 +83,7 @@ const Manager = ({setIsLogin} : Props) => {
                 {showReports && <Reports></Reports>}
             </div>
             <Footer setShowLogout={setIsLogout}></Footer>
-            {isLogout && <LogoutPopup setIsLogout={setIsLogout} setIsLogin={setIsLogin}></LogoutPopup>}
+            {isLogout && <LogoutPopup setIsLogout={setIsLogout} setIsLogin={setIsLogin} setIsManager={setIsManager} setIsCashier={setIsCashier}></LogoutPopup>}
         </div>
     );
 };
