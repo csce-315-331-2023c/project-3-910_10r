@@ -33,9 +33,11 @@ const Reports = () => {
   const [ingredientsMap, setIngredientsMap] = useState<{[key: string]: number}>({});
   const [inventoryInfo, setInventoryInfo] = useState<{[key: string]: number}>({});
   const [loadingExcess, setLoadingExcess] = useState(false);
+  const [drinksList, setDrinkList] = useState<{[key: string]:string}>({})
 
   useEffect(() => {
     fetch24HoursData(); // Fetch data for last 24 hours on component mount
+    fetchDrinkNames();
   }, []);
 
   /*const clearData = () => {
@@ -329,6 +331,25 @@ const Reports = () => {
     //setLoadingExcess(false);
   }
 
+  const fetchDrinkNames = async () => {
+    try {
+      const response = await API.get("/managers/drinknames");
+      const data = response.data;
+  
+      if (data && Array.isArray(data) && data.length > 0) {
+        const drinksList1: { [key: string]: string } = {};
+  
+        data.forEach((item: any) => {
+          drinksList1[item.recipeid] = item.drinkname;
+        });
+  
+        console.log(drinksList); 
+        setDrinkList(drinksList1);
+      }
+    } catch (error) {
+      console.error("Error fetching drink names:", error);
+    }
+  };  
 
   const fetchData = (beginningDate: string, endDate: string) => {
     API.get("/managers/whatSalesTogether", {
@@ -345,11 +366,10 @@ const Reports = () => {
   
             if (Array.isArray(drinkIds) && drinkIds.length > 1) {
               const sortedIds = drinkIds.sort(); // Sort the IDs to ensure consistent combinations
-  
               for (let i = 0; i < sortedIds.length; i++) {
                 for (let j = i + 1; j < sortedIds.length; j++) {
                   if (sortedIds[i] !== sortedIds[j]) { // Exclude pairs with the same ID
-                    const pair = `${sortedIds[i]}-${sortedIds[j]}`;
+                    const pair = `${drinksList[sortedIds[i]]}-${drinksList[sortedIds[j]]}`;
                     drinkCountMap[pair] = (drinkCountMap[pair] || 0) + 1;
                   }
                 }
@@ -358,7 +378,7 @@ const Reports = () => {
               console.error('Drink IDs are not in the expected format or length');
             }
           });
-  
+          console.log(drinkCountMap);
           // Convert drinkCountMap to an array of key-value pairs and sort by count
           const sortedDrinkCountArray = Object.entries(drinkCountMap)
             .sort((a, b) => b[1] - a[1]);
@@ -368,7 +388,7 @@ const Reports = () => {
           sortedDrinkCountArray.forEach(([pair, count]) => {
             sortedDrinkCountMap[pair] = count;
           });
-
+          
           setPairCount(sortedDrinkCountMap);
         } else {
           console.error('Data is empty or not in the expected format');
