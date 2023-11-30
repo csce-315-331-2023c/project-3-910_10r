@@ -5,20 +5,22 @@
     top: 55px;
     right: 30px;
     width: 350px;
-    background: #ffffff;
-    border: 1px solid #ccc;
+    background: var(--WHITE);
+    border: 1px solid var(--TEXT-COLOR-LIGHT);
     border-radius: 10px;
     padding: 10px;
     height: 585px;
+    font-size: var(--FONT-NORMAL);
     .scrollable-content {
         max-height: 500px;
         overflow-y: auto;
         width: 100%;
+        font-size: var(--FONT-NORMAL);
         .data-box {
             display: flex;
             align-items: center;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
+            background-color: var(--GRAY-LIGHT);
+            border: 1px solid var(--GREEN-LIGHT);
             border-radius: 5px;
             margin: 10px 0;
             width: 100%; // Ensure the button spans the entire width
@@ -53,7 +55,7 @@
   }
 
   .filter-info {
-    font: var(--FONT-MED);
+    font-size: var(--FONT-MED-NORMAL);
   }
   .filter-info p {
     margin-top: 8px;
@@ -61,7 +63,7 @@
   }
 
   .filter-title {
-    font: var(--FONT-MED-LARGE);
+    font-size: var(--FONT-MED-NORMAL);
     font-weight: bold;
     margin-bottom: 10px;
   }

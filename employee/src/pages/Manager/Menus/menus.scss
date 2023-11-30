@@ -17,6 +17,10 @@
             justify-content: flex-start;
             align-items: center;
             gap: 1.5rem;
+
+            h1 {
+                font-size: var(--FONT-MED);
+            }
         }
 
         &-drinks {
@@ -38,6 +42,7 @@
                 cursor: pointer;
                 font-size: 18px;
                 padding: var(--PADDING-SMALL);
+                font-size: var(--FONT-NORMAL);
             }
         }
     }

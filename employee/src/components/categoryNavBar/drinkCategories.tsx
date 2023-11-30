@@ -36,11 +36,13 @@ import "./drinkNavbar.scss";
 interface Props {
   children: string;
   onClick: () => void;
+  index: number;
 }
 
-const drinkCategories = ({ children, onClick }: Props) => {
+const drinkCategories = ({ children, onClick, index }: Props) => {
+  const ClassName = `nav-category nav-category-${index}`;
   return (
-    <button className="nav-category" onClick={onClick}>
+    <button className={ClassName} onClick={onClick}>
       {children}
     </button>
   );

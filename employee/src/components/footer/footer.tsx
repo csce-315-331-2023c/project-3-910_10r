@@ -2,6 +2,8 @@ import "./footer.scss";
 import { useState, useEffect } from "react";
 import TextSlider from "./textSlider";
 
+import {employeeColors, employeeColorsDark, employeeColorsLight, getOrigColors, setOrigColors, setContrast} from "./../../../../contrast.ts";
+
 interface WeatherData {
   current: {
     temp_f: number;
@@ -30,6 +32,22 @@ const footer = ({ setShowLogout }: Props) => {
 
   const [weatherIcon, setWeatherIcon] = useState<string>('');
   const [temperature, setTemperature] = useState<number>(0);
+  const [contrastApplied, setContrastApplied] = useState(false);
+  const [origColors] = useState(getOrigColors(employeeColors));
+
+  function changeContrast() {
+    console.log(origColors);
+
+    if(contrastApplied) {
+      setOrigColors(employeeColors, origColors);
+      setContrastApplied(false);
+    }
+    else {
+      setContrast(employeeColorsDark, employeeColorsLight);
+      setContrastApplied(true);
+    }
+  }
+  
 
   useEffect(() => {
     fetchWeatherData();
@@ -80,7 +98,7 @@ const footer = ({ setShowLogout }: Props) => {
           
           {/* <i className="fa-solid fa-language"></i> */}
           <span className="material-symbols-outlined">g_translate</span>
-          <i className="fa-solid fa-circle-half-stroke"></i>
+          <i className="fa-solid fa-circle-half-stroke" onClick={changeContrast}></i>
         </div>
       </div>
     </>

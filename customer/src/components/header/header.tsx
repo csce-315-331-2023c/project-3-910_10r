@@ -2,6 +2,9 @@ import "./header.scss"
 import { useState, useEffect } from 'react';
 import IntroButton from "./IntroButton";
 import TextSlider from "./textSlider";
+
+import {customerColors, customerColorsDark, customerColorsLight, getOrigColors, setOrigColors, setContrast} from "./../../../../contrast.ts";
+
 interface WeatherData {
   current: {
     temp_f: number;
@@ -21,6 +24,8 @@ function CustomerHeader({setMenuFalse, setOrderFalse}:Props) {
   const [formattedTime, setFormattedTime] = useState<string>("");
   const [weatherIcon, setWeatherIcon] = useState<string>('');
   const [temperature, setTemperature] = useState<number>(0);
+  const [contrastApplied, setContrastApplied] = useState(false);
+  const [origColors] = useState(getOrigColors(customerColors));
   
   useEffect(() => {
     const intervalId = setInterval(updateTime, 1000);
@@ -62,6 +67,20 @@ function CustomerHeader({setMenuFalse, setOrderFalse}:Props) {
     document.querySelector(".textslider")?.classList.toggle("active")
   }
 
+  function changeContrast() {
+    console.log(origColors);
+
+    if(contrastApplied) {
+      setOrigColors(customerColors, origColors);
+      setContrastApplied(false);
+    }
+    else {
+      setContrast(customerColorsDark, customerColorsLight);
+      setContrastApplied(true);
+    }
+  }
+
+
   return (
     <div className="header">
       
@@ -85,7 +104,7 @@ function CustomerHeader({setMenuFalse, setOrderFalse}:Props) {
         </span>
         {/* <i className="fa-solid fa-language"></i> */}
         <span className="material-symbols-outlined">g_translate</span>
-        <i className="fa-solid fa-circle-half-stroke" ></i>
+        <i className="fa-solid fa-circle-half-stroke" onClick={changeContrast}></i>
 
       </div>
     </div>

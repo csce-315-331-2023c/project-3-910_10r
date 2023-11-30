@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: var(--POPUP-OVERLAY);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,7 +17,7 @@
     top: 50%;
     left: 50%;
     background-color: var(--GREEN-MED);
-    border: 2px solid #000;
+    border: 2px solid var(--POPUP-OVERLAY);
     border-radius: 10px;
     width: 700px;
     height: 600px;
@@ -25,6 +25,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    .close-button {
+      background-color: var(--ACCENT-COLOR-DARK) !important;
+    }
   }
   
   .custom-time-popup-header {
@@ -36,7 +40,7 @@
   
   .custom-time-popup-close-button {
     cursor: pointer;
-    font-size: 24px;
+    font-size: var(--FONT-MED-NORMAL);
     padding: 5px;
     display: flex;
     justify-content: flex-end;
@@ -55,7 +59,7 @@
   
   .custom-time-popup h2 {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: var(--FONT-MED-NORMAL);
     margin-bottom: 20px;
   }
   
@@ -72,7 +76,7 @@
   .custom-time-popup input {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--WHITE);
     border-radius: 5px;
   }
   
@@ -85,16 +89,16 @@
   .custom-time-popup button {
     padding: 10px 20px;
     background: var(--SIDEBAR-BG-COLOR);
-    color: black;
+    color: var(--POPUP-OVERLAY);
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
   
   .custom-time-popup button:first-child {
-    background: #ccc;
-    background-color: rgb(128, 253, 128);
-    color: white;
+    background: var(--TEXT-COLOR-LIGHT);
+    background-color: var(--GREEN-DARK);
+    color: var(--WHITE);
   }
 
   label {

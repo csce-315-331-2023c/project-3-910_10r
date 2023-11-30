@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import './login.scss';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import OAuth from './oauth';
 
 import axios , { AxiosInstance } from 'axios';
 
 let baseURL = import.meta.env.VITE_API_URL;
+let clientID = import.meta.env.VITE_CLIENT_ID;
+console.log(clientID);
 
 const API: AxiosInstance = axios.create({
   baseURL: baseURL,
@@ -13,9 +17,11 @@ const API: AxiosInstance = axios.create({
 interface Props{
     setIsManager: React.Dispatch<React.SetStateAction<boolean>>
     setIsLogin: React.Dispatch<React.SetStateAction<boolean>>
+    setIsCashier: React.Dispatch<React.SetStateAction<boolean>>
+    setPayPage: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Login = ({setIsManager, setIsLogin} : Props) => {
+const Login = ({setIsManager, setIsLogin, setIsCashier, setPayPage} : Props) => {
     const [formData, setFormData] = useState({ username: '', password: '' });
     const [isSubmitClicked, setIsSubmitClicked] = useState(false);
     const [showError, setShowError] = useState(false);
@@ -31,9 +37,10 @@ const Login = ({setIsManager, setIsLogin} : Props) => {
         event.preventDefault();
         setIsLogin(true);
         setIsManager(false);
+        setIsCashier(false);
         setIsSubmitClicked(true);
     };
-
+    
     useEffect(() => {
         if (isSubmitClicked && formData.username && formData.password) {
             const para = `name='${formData.username}' AND password='${formData.password}'`;
@@ -43,11 +50,18 @@ const Login = ({setIsManager, setIsLogin} : Props) => {
                         setShowError(true);
                     }
                     else if(response.data) {
+                        console.log("Manager!");
                         setIsManager(true);
+                        setIsCashier(false);
                         setIsLogin(false);
+                        setPayPage(false);
                     }
                     else {
+                        console.log("Cashier!");
+                        setIsCashier(true);
+                        setIsManager(false);
                         setIsLogin(false);
+                        setPayPage(false);
                     }
                 })
                 .catch((err) => {
@@ -94,10 +108,9 @@ const Login = ({setIsManager, setIsLogin} : Props) => {
 
                     <div className='login__form-google'>
                         <div className='login__form-google-cover'>or</div>
-                        <button id="loginGoogle" className='login__form-google-btn'>
-                            <i className="fa-brands fa-google"></i>
-                            Login with Google
-                        </button>
+                        <GoogleOAuthProvider clientId={clientID}>
+                            <OAuth setIsLogin={setIsLogin} setIsManager={setIsManager} setIsCashier={setIsCashier} setPayPage={setPayPage}/>
+                        </GoogleOAuthProvider>
                     </div>
                 </form>
             </div>
