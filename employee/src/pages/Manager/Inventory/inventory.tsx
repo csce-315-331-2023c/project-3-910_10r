@@ -35,7 +35,13 @@ const Inventory = () => {
     const fetchInventoryData = async () => {
       try {
         const response = await API.get(`/inventory`);
-        const updatedInventory = response.data.map((item: {
+        const updatedInventory: {
+          name: string;
+          alert: boolean;
+          amount: number;
+          capacity: number;
+          unit: string;
+        }[] = response.data.map((item: {
           name: string;
           alert: boolean;
           amount: number;

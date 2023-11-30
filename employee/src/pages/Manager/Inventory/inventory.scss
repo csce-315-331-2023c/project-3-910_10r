@@ -45,6 +45,7 @@
                     border: none;
                     outline: none;
                     background-color: transparent;
+                    font-size: var(--FONT-NORMAL);
                 }
             }
 
@@ -84,6 +85,7 @@
             p {
                 text-align: center;
                 color: black;
+                font-size: calc(var(--FONT-NORMAL) + 2px);
             }
         }
 
@@ -137,6 +139,7 @@
                 
                 label {
                     color: var(--GREEN-DARK);
+                    font-size: var(--FONT-NORMAL);
                 }
 
                 input {
@@ -145,6 +148,7 @@
                     color: var(--TEXT-COLOR-DARK);
                     border: none;
                     padding: var(--PADDING-SMALL);
+                    font-size: var(--FONT-NORMAL);
                 }
             }
 
@@ -160,6 +164,7 @@
                     width: 25%;
                     margin-top: var(--MARGIN-MED);
                     padding: var(--PADDING-SMALL);
+                    font-size: var(--FONT-NORMAL);
                 }
         
                 button:first-child {
