@@ -77,12 +77,12 @@ router.get("/drinkAndCategories", (req, res) => {
 });
 
 router.get("/toppings", (req, res) => {
-  let command = "SELECT name FROM inventory WHERE topping = true;";
-  const toppings = [];
+  let command = "SELECT name, alert FROM inventory WHERE topping = true;";
+  const toppings = {};
   pool.query(command).then((query_res) => {
     query_res.rows.forEach((row) => {
       const topping = row.name;
-      toppings.push(topping);
+      toppings[topping] = row.alert;
     });
     res.send(toppings);
   });

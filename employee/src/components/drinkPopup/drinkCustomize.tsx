@@ -106,14 +106,16 @@ function DrinkCustomize({
     }
 
     let toppingPrice: number = 0.0;
-    for (let i = 0; i < toppings.length; i++) {
+    let i: number = 0;
+    for (const [key] of Object.entries(toppings)) {
       let count = toppingCount[i];
       if (count > 0) {
-        _order.topping.push(toppings[i] + " x" + count);
-        backend_order.topping.push(toppings[i]);
+        _order.topping.push(key + " x" + count);
+        backend_order.topping.push(key);
         backend_order.count.push(count);
         toppingPrice += count * 0.75;
       }
+      i++;
     }
     let tmpPrice: number = +_order.price;
     toppingPrice += tmpPrice;
@@ -127,7 +129,7 @@ function DrinkCustomize({
   };
 
   const resetCount = () => {
-    setToppingCount(new Array(toppings.length).fill(0));
+    setToppingCount(new Array(Object.keys(toppings).length).fill(0));
     setSelectedButton(1);
     setSelectedSugarButton(1);
   };
@@ -146,7 +148,7 @@ function DrinkCustomize({
 
   //query database
   let [backendData, setData] = useState<string>("");
-  const [toppings, setToppings] = useState<string[]>([]);
+  const [toppings, setToppings] = useState<{ [key: string]: boolean }>({});
   const [toppingCount, setToppingCount] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -335,10 +337,10 @@ function DrinkCustomize({
             <div className="toppings">
               <div className="toppings-title">Toppings</div>
               <div className="toppings-box">
-                {toppings.map((item, index) => (
+                {Object.entries(toppings).map((item, index) => (
                   <Topping
                     key={index}
-                    name={item}
+                    name={item[0]}
                     count={toppingCount[index]}
                     onDecrement={decrement}
                     onIncrement={increment}
