@@ -28,7 +28,6 @@ const Topping = ({
   // const handleMinus = () => {
   //   count - 1 >= 0 ? setCount(count - 1) : setCount(0);
   // };
-  console.log("count", count);
   return (
     <>
       <div>
