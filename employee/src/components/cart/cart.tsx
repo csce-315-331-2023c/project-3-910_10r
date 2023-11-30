@@ -17,9 +17,11 @@ interface Props {
   setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
   num: number;
   setNumber: React.Dispatch<React.SetStateAction<number>>;
+  setIsManager: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsCashier: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Cart({ orders, setOrders, setPayPage, setNumber, num }: Props) {
+function Cart({ orders, setOrders, setPayPage, setNumber, num, setIsManager, setIsCashier}: Props) {
   let totalPrice = 0;
   const updatePrice = (price: number) => {
     totalPrice += price;
@@ -27,6 +29,8 @@ function Cart({ orders, setOrders, setPayPage, setNumber, num }: Props) {
 
   const navigateToPayPage = () => {
     setPayPage(true);
+    setIsManager(false);
+    setIsCashier(false);
     if (num > 200) num = 0;
     setNumber(num + 1);
   };

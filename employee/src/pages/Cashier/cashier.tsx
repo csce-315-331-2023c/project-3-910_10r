@@ -30,9 +30,11 @@ interface Props {
   setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
   setNumber: React.Dispatch<React.SetStateAction<number>>;
   num: number;
+  setIsManager: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsCashier: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Cashier({ setPayPage, setIsLogin, setNumber, num }: Props) {
+function Cashier({ setPayPage, setIsLogin, setNumber, num, setIsManager, setIsCashier }: Props) {
   // keeps track of orders in the cart
   const [orders, setOrders] = useState<order[]>([]);
   // keeps track of if drink is selected in order to dim other pages
@@ -122,6 +124,8 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num }: Props) {
                 setPayPage={setPayPage}
                 setNumber={setNumber}
                 num={num}
+                setIsManager={setIsManager}
+                setIsCashier={setIsCashier}
               ></Cart>
             </div>
             <Footer setShowLogout={setIsLogout}></Footer>
@@ -129,6 +133,8 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num }: Props) {
               <LogoutPopup
                 setIsLogout={setIsLogout}
                 setIsLogin={setIsLogin}
+                setIsManager={setIsManager}
+                setIsCashier={setIsCashier}
               ></LogoutPopup>
             )}
           </div>
