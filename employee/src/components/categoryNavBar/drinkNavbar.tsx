@@ -26,8 +26,12 @@ function Navigationbar({
       }`}
     >
       <div className="nav-bar">
-        {category.map((item) => (
-          <DrinkCategory key={item} onClick={() => setCatogory(item)}>
+        {category.map((item, index) => (
+          <DrinkCategory
+            key={item}
+            onClick={() => setCatogory(item)}
+            index={index}
+          >
             {item}
           </DrinkCategory>
         ))}
