@@ -304,7 +304,7 @@ const OrderHistory: React.FC = () => {
         />
       )}
       {hasMore && (
-        <button onClick={() => fetchOrders(currentPage)} disabled={loading}>
+        <button className="simple" onClick={() => fetchOrders(currentPage)} disabled={loading}>
           {loading ? "Loading..." : "Load More"}
         </button>
       )}
