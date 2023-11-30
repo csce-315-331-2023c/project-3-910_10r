@@ -180,7 +180,7 @@ function DrinkCustomize({
     API.get("/cashier/toppings")
       .then((response) => {
         setToppings(response.data);
-        top = response.data;
+        top = Object.keys(response.data);
         API.get("/cashier/getDefaultToppingsByDrink", {
           params: {
             drink: query_drinkname,
@@ -345,6 +345,7 @@ function DrinkCustomize({
                     onDecrement={decrement}
                     onIncrement={increment}
                     index={index}
+                    lowStock={item[1]}
                   ></Topping>
                 ))}
               </div>
