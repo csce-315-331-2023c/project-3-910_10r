@@ -4,6 +4,11 @@ const getPriceByDrink =
 const getDefaultToppingsByDrink =
   "SELECT inventory.name from inventory JOIN recipes ON inventory.name = ANY(recipes.ingredient_names) WHERE lower(recipes.drinkname) = $1 AND inventory.topping = true;";
 
+const getLowIngredientForDrink =
+  "\
+  SELECT Inventory.name, ROUND(100 * Inventory.amount/Inventory.capacity) AS ratio FROM recipes, inventory WHERE lower(recipes.drinkname) = $1 AND inventory.name = ANY(recipes.ingredient_names) AND inventory.alert = true\
+  ";
+
 const updateRecipeItems =
   "\
 UPDATE inventory AS i \
@@ -97,4 +102,5 @@ module.exports = {
   restoreIce,
   restoreToppings,
   makeOrder,
+  getLowIngredientForDrink,
 };

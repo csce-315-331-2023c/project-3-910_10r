@@ -27,12 +27,14 @@ function Cart({ orders, setOrders, setPayPage, setNumber, num, setIsManager, set
     totalPrice += price;
   };
 
-  const navigateToPayPage = () => {
-    setPayPage(true);
-    setIsManager(false);
-    setIsCashier(false);
-    if (num > 200) num = 0;
-    setNumber(num + 1);
+  const navigateToPayPage = (price: number) => {
+    if (price > 0) {
+      setPayPage(true);
+      setIsManager(false);
+      setIsCashier(false);
+      if (num > 200) num = 0;
+      setNumber(num + 1);
+    }
   };
 
   const removeChild = (index: number) => {
@@ -66,7 +68,10 @@ function Cart({ orders, setOrders, setPayPage, setNumber, num, setIsManager, set
         total={"$" + (totalPrice * 1.0625).toFixed(2)}
       ></Checkout>
       <div className="cart-buttons">
-        <button className="cart-buttons-1" onClick={navigateToPayPage}>
+        <button
+          className="cart-buttons-1"
+          onClick={() => navigateToPayPage(totalPrice)}
+        >
           Charge
         </button>
         <button className="cart-buttons-2">Print Ticket</button>

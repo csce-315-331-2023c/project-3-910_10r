@@ -5,6 +5,7 @@ import Footer from "../../components/footer/footer.tsx";
 import DrinkCustomize from "../../components/drinkPopup/drinkCustomize.tsx";
 import React, { useState, useEffect } from "react";
 import LogoutPopup from "../../components/logoutPopup/logoutPopup.tsx";
+import LowIngredients from "../../components/drinkPopup/lowIngredients.tsx";
 
 import "./cashier.scss";
 
@@ -40,6 +41,8 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num, setIsManager, setIsCa
   // keeps track of if drink is selected in order to dim other pages
   const [showCustomizationPage, setShowCustomizationPage] =
     useState<boolean>(false);
+  // keeps track of if the drink selected is low in ingredient to change pop up
+  const [showLowPage, setShowLowPage] = useState<boolean>(false);
   // keeps track of the drink selected
   const [drinkName, setDrinkName] = useState<string>("");
   // keeps track of the selected category
@@ -49,6 +52,7 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num, setIsManager, setIsCa
   // keeps track of all categories
   const [categories, setCatogories] = useState<string[]>([]);
   const [loaded, setLoaded] = useState<boolean>(false);
+  const [drinksWithLowStock, setDrinksWithLowStock] = useState<string[]>([]);
 
   const [isLogout, setIsLogout] = useState(false);
 
@@ -80,6 +84,15 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num, setIsManager, setIsCa
       .catch((error) => {
         console.error(error);
       });
+
+    API.get("/cashier/getLowDrinkNames")
+      .then((response) => {
+        setDrinksWithLowStock(response.data);
+        console.log("drinks with low stock: ", response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   useEffect(() => {
@@ -107,6 +120,7 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num, setIsManager, setIsCa
             <div className="cashier-grid-main">
               <Navigationbar
                 showCustomizationPage={showCustomizationPage}
+                showLowPage={showLowPage}
                 setCatogory={setCatogory}
                 category={categories}
               ></Navigationbar>
@@ -117,6 +131,9 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num, setIsManager, setIsCa
                 drinknames={
                   category === "" ? drinks[categories[0]] : drinks[category]
                 }
+                setShowLowPage={setShowLowPage}
+                drinksWithLowStock={drinksWithLowStock}
+                showLowPage={showLowPage}
               ></Drinks>
               <Cart
                 orders={orders}
@@ -144,6 +161,12 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num, setIsManager, setIsCa
               updateOrder={updateOrder}
               setShowCustomizationPage={setShowCustomizationPage}
             ></DrinkCustomize>
+          )}
+          {showLowPage && (
+            <LowIngredients
+              drinkName={drinkName}
+              setShowLowPage={setShowLowPage}
+            ></LowIngredients>
           )}
         </>
       ) : (
