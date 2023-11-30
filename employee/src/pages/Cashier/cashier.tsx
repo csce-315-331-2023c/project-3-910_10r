@@ -5,6 +5,7 @@ import Footer from "../../components/footer/footer.tsx";
 import DrinkCustomize from "../../components/drinkPopup/drinkCustomize.tsx";
 import React, { useState, useEffect } from "react";
 import LogoutPopup from "../../components/logoutPopup/logoutPopup.tsx";
+import LowIngredients from "../../components/drinkPopup/lowIngredients.tsx";
 
 import "./cashier.scss";
 
@@ -117,6 +118,7 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num }: Props) {
             <div className="cashier-grid-main">
               <Navigationbar
                 showCustomizationPage={showCustomizationPage}
+                showLowPage={showLowPage}
                 setCatogory={setCatogory}
                 category={categories}
               ></Navigationbar>
@@ -129,6 +131,7 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num }: Props) {
                 }
                 setShowLowPage={setShowLowPage}
                 drinksWithLowStock={drinksWithLowStock}
+                showLowPage={showLowPage}
               ></Drinks>
               <Cart
                 orders={orders}
@@ -152,6 +155,12 @@ function Cashier({ setPayPage, setIsLogin, setNumber, num }: Props) {
               updateOrder={updateOrder}
               setShowCustomizationPage={setShowCustomizationPage}
             ></DrinkCustomize>
+          )}
+          {showLowPage && (
+            <LowIngredients
+              drinkName={drinkName}
+              setShowLowPage={setShowLowPage}
+            ></LowIngredients>
           )}
         </>
       ) : (

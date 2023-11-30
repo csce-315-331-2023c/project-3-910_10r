@@ -29,7 +29,6 @@ const getPriceByDrink = (req, res) => {
 const getLowIngredientForDrink = (req, res) => {
   const drink = req.query.drink;
   pool.query(queries.getLowIngredientForDrink, [drink], (error, results) => {
-    console.log(queries.getLowIngredientForDrink);
     if (error) {
       // Handle the error gracefully, e.g., by sending an error response
       console.error(
@@ -44,8 +43,10 @@ const getLowIngredientForDrink = (req, res) => {
     } else {
       let ingredients = {};
       for (let i = 0; i < results.rowCount; i++) {
-        ingredients[results.rows[i].name] = ingredients[results.rows[i].ratio];
+        console.log(results.rows[i]);
+        ingredients[results.rows[i].name] = results.rows[i].ratio;
       }
+      console.log("ingredients", ingredients);
       res.status(200).send(ingredients);
     }
   });

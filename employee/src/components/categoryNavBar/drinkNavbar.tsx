@@ -5,12 +5,14 @@ import "./drinkNavbar.scss";
 
 interface Props {
   showCustomizationPage: boolean;
+  showLowPage: boolean;
   setCatogory: React.Dispatch<React.SetStateAction<string>>;
   category: string[];
 }
 
 function Navigationbar({
   showCustomizationPage,
+  showLowPage,
   setCatogory,
   category,
 }: Props) {
@@ -18,7 +20,11 @@ function Navigationbar({
   //
 
   return (
-    <div className={`${showCustomizationPage ? "nav-selected" : "nav"}`}>
+    <div
+      className={`${
+        showCustomizationPage || showLowPage ? "nav-selected" : "nav"
+      }`}
+    >
       <div className="nav-bar">
         {category.map((item) => (
           <DrinkCategory key={item} onClick={() => setCatogory(item)}>

@@ -40,7 +40,7 @@
     justify-items: center;
 }
 
-.customize{
+.customize, .low{
     width: 50vw;
     height: 90vh;
     background-color: var(--GREEN-MED);
@@ -89,7 +89,7 @@
     background-color: var(--ON-ACTIVE);
 }
 
-.customize-drink{
+.customize-drink, .low-title{
     text-align: center;
     font-size: 25px;
     margin-top: 10px;
@@ -124,4 +124,22 @@
     right: 15px;
     top: 0px;
     cursor: pointer;
+}
+.low-subtitle{
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid black;
+}
+.low-items{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.low-item{
+    width: 400px;
+    display: grid;
+    grid-template-columns: 180px 220px;
+    text-align: center;
 }

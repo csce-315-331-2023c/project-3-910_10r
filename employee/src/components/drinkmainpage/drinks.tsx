@@ -9,6 +9,7 @@ interface Props {
   drinknames: string[];
   setShowLowPage: React.Dispatch<React.SetStateAction<boolean>>;
   drinksWithLowStock: string[];
+  showLowPage: boolean;
 }
 
 function drinks({
@@ -17,10 +18,15 @@ function drinks({
   setDrinkName,
   drinknames,
   setShowLowPage,
+  showLowPage,
   drinksWithLowStock,
 }: Props) {
   return (
-    <div className={`${showCustomizationPage ? "drinks-selected" : "drinks"}`}>
+    <div
+      className={`${
+        showCustomizationPage || showLowPage ? "drinks-selected" : "drinks"
+      }`}
+    >
       <div className="drinks-bound">
         <div className="drinks-grid">
           {drinknames === undefined ? (
