@@ -1,3 +1,6 @@
+// Kevin is worried about on-hover, and on-active. I don't think they should be black/white, but a more gray color.
+// Maybe we don't need to change them idk
+
 /**********************************************************************************/
 /*                                    Customer                                    */
 /**********************************************************************************/
@@ -22,15 +25,17 @@ export {customerColors, customerColorsDark, customerColorsLight};
 /**********************************************************************************/
 /*                                    Employee                                    */
 /**********************************************************************************/
-// missing text-color-dark, popup-overlay, white (on purpose)
+// missing text-color-dark, popup-overlay (on purpose)
 const employeeColors: string[] = [
     "--ACCENT-COLOR-DARK", "--ACCENT-COLOR", '--ACCENT-COLOR-LIGHT',
-    "--GREEN-LIGHT", "--GREEN-MED", "--GREEN-MED60", '--GREEN-DARK', "--GREEN-DARK40",
+    "--GREEN-LIGHT", "--GREEN-MED", "--GREEN-MED60", '--GREEN-DARK', "--GREEN-DARK40", "--GREEN-GRAY",
     "--TEXT-COLOR-LIGHT",
     "--SIDEBAR-BG-COLOR", "--SELECTION-COLOR",
     "--ERROR-COLOR",
     "--ON-HOVER", "--ON-ACTIVE",
-    "--GRAY-DARK", "--GRAY-MED", "--GRAY-LIGHT", "--GRAY-XLIGHT"
+    "--WHITE",
+    "--GRAY-DARK", "--GRAY-MEDIAN", "--GRAY-LIGHT",
+    "--RED", "--GREEN", "--BLUE", "--ORANGE", "--PURPLE", "--PINK", "--SKY-BLUE", "--YELLOW"
 ];
 
 /* TODO: Decide which colors go into the black/white arrays */
