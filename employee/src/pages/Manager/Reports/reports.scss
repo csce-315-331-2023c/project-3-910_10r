@@ -21,9 +21,9 @@
         }
     select {
       padding: 5px;
-      border: 1px solid #ccc;
+      border: 1px solid var(--TEXT-COLOR-LIGHT);
       border-radius: 4px;
-      font-size: 16px;
+      font-size: var(--FONT-NORMAL);
     }
   }
 }
@@ -32,9 +32,9 @@
     display: flex;
     gap: 20px;
     width: 95%;
-    border: 1px solid #ccc;
+    border: 1px solid var(--TEXT-COLOR-LIGHT);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 2px var(--POPUP-OVERLAY);
     background-color: var(--GRAY-LIGHT);
   
     .column {
@@ -42,7 +42,7 @@
       padding: 20px;
   
       h2 {
-        font-size: 20px;
+        font-size: var(--FONT-MED-NORMAL);
         margin-bottom: 10px;
       }
   
@@ -52,13 +52,14 @@
         .data-box {
             display: flex;
             align-items: center;
-            background-color: #f0f0f0;
+            background-color: var(--WHITE);
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid var(--TEXT-COLOR-LIGHT);
             border-radius: 5px;
             margin: 10px 0;
+            font-size: var(--FONT-NORMAL);
             .number {
-                font-size: 24px;
+                font-size: var(--FONT-MED-NORMAL);
                 margin-right: 10px;
               }
           }
@@ -71,7 +72,7 @@
           
           .separator {
             padding: 0 10px; // Adjust the space between the two entries
-            color: #666;
+            color: var(--GRAY-LIGHT);
             font-weight: bold;
           }
           

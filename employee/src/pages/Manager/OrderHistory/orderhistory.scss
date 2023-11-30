@@ -5,31 +5,38 @@
     .header {
         display: flex;
         align-items: center;
+        font-size: var(--FONT-MED-NORMAL);
+
+        h2 {
+          font-size: var(--FONT-MED-NORMAL);
+        }
       
         .filter-button-container {
           margin-right: 380px;
         }
       
         .filter-button {
-          background-color: #4CAF50;
-          color: white;
+          background-color: var(--GREEN-DARK);
+          color: var(--WHITE);
           border: none;
           padding: 10px 20px;
           border-radius: 5px;
           cursor: pointer;
+          font-size: var(--FONT-MED-NORMAL);
         }
       
         .close-button {
           margin-left: 500px;
+          font-size: var(--FONT-MED-NORMAL);
         }
       }      
       
   
     .main-container {
       display: flex;
-      border: 1px solid #ccc;
+      border: 1px solid var(--GRAY-LIGHT);
       //padding: 20px;
-      background-color: #f5f5f5;
+      background-color: var(--TEXT-COLOR-LIGHT);
       width: 70%;
       //margin-right: 400px;
       &-header {
@@ -39,6 +46,7 @@
         width: 100%;
         justify-content: center;
         padding: 0 30px;
+        font-size: var(--FONT-NORMAL);
 
         h3 {
           flex-grow: 1;
@@ -53,19 +61,20 @@
         .data-box {
             display: flex;
             align-items: center;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
+            background-color: var(--TEXT-COLOR-LIGHT);
+            border: 1px solid var(--GRAY-LIGHT);
             border-radius: 5px;
             margin: 10px 0;
             width: 100%; // Ensure the button spans the entire width
             padding: 10px; // Add padding within the button
             cursor: pointer; // Change the cursor to indicate it's clickable
+            font-size: var(--FONT-NORMAL);
           
             &:hover {
-              background-color: #e0e0e0; // Change background color on hover
+              background-color: var(--ON-HOVER); // Change background color on hover
             }
             &.selected {
-              background-color: rgb(48, 48, 211);
+              background-color: var(--GREEN-DARK);
             }
             &.inactive{
                 pointer-events: none;
@@ -76,11 +85,12 @@
             flex: 1; //Distribute available space equally
             padding: 5px;
             text-align: center;
+            font: var(--FONT-NORMAL);
           }
           
           .separator {
             padding: 0 10px; // Adjust the space between the two entries
-            color: #666;
+            color: var(--GREEN-DARK40);
             font-weight: bold;
           }
           
@@ -89,12 +99,16 @@
   
     .right-column {
       flex: 1;
-      border: 1px solid #ccc;
+      border: 1px solid var(--GRAY-LIGHT);
       padding: 20px;
   
       h3 {
         margin: 10px 0;
       }
     }
+  }
+
+  .simple{
+    font-size: var(--FONT-NORMAL);
   }
   
