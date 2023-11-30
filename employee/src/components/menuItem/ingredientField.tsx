@@ -22,12 +22,24 @@ const IngredientField: React.FC<IngredientFieldProps> = ({ index, ingredient: in
     const [ingredient, setIngredient] = useState<string>(initialIngredient);
     const [ingredientValue, setIngredientValue] = useState<number>(initialIngredientValue);
     const [unit, setUnit] = useState<string>('');
-  
+    const [inventoryItems, setInventoryItems] = useState<string[]>([]);
+
     useEffect(() => {
       setIngredient(initialIngredient);
       setIngredientValue(initialIngredientValue);
     }, [initialIngredient, initialIngredientValue]);
-  
+
+    useEffect(() => {
+      API.get("/inventory")
+        .then((response) => {
+          const items = response.data.map((item: { name: string }) => item.name);
+          setInventoryItems(items);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }, []);
+
     useEffect(() => {
       API.get("/recipes/drinkItemUnit", {
         params: {
@@ -41,24 +53,28 @@ const IngredientField: React.FC<IngredientFieldProps> = ({ index, ingredient: in
           console.error(error);
         });
     }, [ingredient]);
-  
+
     const handleIngredientChange = (newIngredient: string, newIngredientValue: number) => {
       setIngredient(newIngredient);
       setIngredientValue(newIngredientValue);
       onChange(newIngredient, newIngredientValue, index);
     };
-  
+
     return (
       <div className='ingredients'>
-        <input
-          type="text"
+        <select
           name={`ingredient-${index}`}
           id={`ingredient-${index}`}
           value={ingredient}
           required
           autoComplete="off"
           onChange={(e) => handleIngredientChange(e.target.value, ingredientValue)}
-        />
+        >
+          <option value="" disabled>Select an ingredient</option>
+          {inventoryItems.map((item, i) => (
+            <option key={i} value={item}>{item}</option>
+          ))}
+        </select>
         <input
           type="number"
           name={`ingredient-value-${index}`}

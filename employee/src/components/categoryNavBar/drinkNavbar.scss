@@ -1,14 +1,14 @@
 .nav{
     width: 180px;
     z-index: 200;
-    height: 94vh;
+    height: calc(100vh - 64px);
   }
 
   .nav-selected{
     width: 180px;
     z-index: 200;
     filter: brightness(20%);
-    height: 94vh;
+    height: calc(100vh - 64px);
   }
 
   .nav-bar{

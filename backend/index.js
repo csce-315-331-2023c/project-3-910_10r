@@ -45,6 +45,27 @@ app.get("/login", (req, res) => {
     });
 })
 
+//check log in name for oauth
+app.get("/oauth", (req, res) => {
+  let command = "SELECT manager FROM employee WHERE " + req.query.parameter +";";
+    
+  pool.query(command)
+  .then((query_res) => {
+    if(query_res.rowCount != 0) {
+      res.send(query_res.rows[0].manager);
+    }
+    else {
+      res.sendStatus(500);
+    } 
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).json({
+      error: "An error occurred when determining manager status from employees",
+    });
+  });
+})
+
 // gets all inventory items
 app.get("/inventory", (req, res) => {
   let command = "SELECT name, alert, amount, capacity, unit FROM inventory;";
@@ -325,12 +346,16 @@ app.get("/orderHistory/filter", (req, res) => {
   const { startDate, endDate, drink, minPrice, maxPrice, page, pageSize } = req.query;
   const offset = (page - 1) * pageSize;
 
+  const today = "'" + new Date().toISOString().split('T')[0] + "'";
+  const adjustedEndDate = endDate !== "NULL" ? endDate : today;
+
   // Use parameterized queries and logical operators
   let command = "SELECT * FROM orders WHERE " +
-    "( (" + startDate + " IS NULL OR date >= " + startDate + ") AND (" + endDate + " IS NULL OR date <= " + endDate + ") ) " +
+    "( (" + startDate + " IS NULL OR date >= " + startDate + ") AND (" + adjustedEndDate + " IS NULL OR date <= " + adjustedEndDate + ") ) " +
     "AND (" + drink + " IS NULL OR " + drink + " = ANY(drink_id)) " +
     "AND (" + minPrice + " IS NULL OR cost >= " + minPrice + ") " +
     "AND (" + maxPrice + " IS NULL OR cost <= " + maxPrice + ") " +
+    "ORDER BY date DESC " + 
     "LIMIT " + pageSize + " OFFSET " +  offset;
 
   // array to hold results
@@ -355,8 +380,11 @@ app.get("/orderHistory/total", (req, res) => {
   const { page, pageSize } = req.query;
   const offset = (page - 1) * pageSize; // Calculate the offset for pagination
 
+  const today = new Date().toISOString().split('T')[0];
+
   // Adjust SQL query to include pagination
-  let command = "SELECT * FROM orders";
+  let command = `SELECT * FROM orders WHERE date <= '${today}'`;
+  command += `ORDER BY date DESC`;
   command += ` LIMIT ${pageSize} OFFSET ${offset}`; // Add LIMIT and OFFSET
 
   const filtered = [];

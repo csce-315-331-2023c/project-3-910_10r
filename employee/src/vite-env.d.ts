@@ -4,6 +4,7 @@
 interface ImportMeta {
     readonly env: {
       VITE_API_URL: string; // Define the type of your VITE_API_URL variable
+      VITE_CLIENT_ID: string;
       // Add other environment variables if needed
     };
   }

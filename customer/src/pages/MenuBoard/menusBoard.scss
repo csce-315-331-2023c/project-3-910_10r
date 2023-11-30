@@ -16,7 +16,7 @@
     
 
     > img {
-        width: clamp(100px, 40vw, 600px);
+        width: clamp(100px, calc(var(--FONT-LARGE) * 10), 600px);
         height: auto;
     }
     
@@ -92,6 +92,7 @@
         justify-content: space-between;
         align-items: center;
         gap: 3rem;
+        overflow: auto;
 
         &-ice, &-sweetness, &-toppings {
             flex-grow: 1;
@@ -105,7 +106,7 @@
 
                 span {
                     font-family: "Poppins", "Montserrat", 'Times New Roman', Times, serif;
-                    font-size: var(--FONT-NORMAL-SMALL);
+                    font-size: var(--FONT-NORMAL);
                     white-space: nowrap;
                 }
             }
@@ -138,6 +139,7 @@
                 row-gap: 0.5rem;
                 grid-template-columns: repeat(3, 1fr) !important;
                 text-align: start;
+                font-size: var(--FONT-NORMAL);
             }            
         }
 
@@ -149,6 +151,7 @@
                 justify-content: center;
                 align-items: center;
                 width: 90px;
+                font-size: var(--FONT-NORMAL);
 
                 img {
                     width: 40px;
@@ -165,6 +168,7 @@
                 justify-content: center;
                 align-items: center;
                 width: 70px;
+                font-size: var(--FONT-NORMAL);
 
                 img {
                     width: 70px;

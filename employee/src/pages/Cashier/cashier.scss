@@ -1,11 +1,13 @@
 @import './../../scss/main.scss';
 
 .cashier-grid{
-    display: grid;
-    grid-template-rows: 94vh 6vh;
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100vh;
 }
 
 .cashier-grid-main{
+    overflow: auto;
     display: grid;
     grid-template-columns: 180px 1fr 300px;
 }

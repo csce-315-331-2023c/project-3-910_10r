@@ -36,6 +36,10 @@
         flex-flow: row nowrap;
         gap: 1rem;
 
+        button {
+            font-size: calc(var(--FONT-NORMAL) + 4px);
+        }
+
         button:first-child {
             width: 50%;
             margin-top: var(--MARGIN-MED);

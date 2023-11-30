@@ -1,5 +1,5 @@
 import "./orderhistory.scss";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import OrderInfo from "../../../components/orderInfoSidebar/orderInfo";
 import { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
@@ -103,8 +103,8 @@ const OrderHistory: React.FC = () => {
     setLoading(true);
     console.log("StartDate:");
     console.log(typeof startDate);
-    console.log(startDate);
-    console.log(endDate);
+    //console.log(startDate);
+    //console.log(endDate);
     /*const startDateDate = parse(startDate, 'yyyy-MM-dd', new Date());
     const startDateStr = format(startDateDate, 'yyyy-MM-dd');
     const endDateDate = parse(endDate, 'yyyy-MM-dd', new Date());
@@ -150,6 +150,21 @@ const OrderHistory: React.FC = () => {
         setLoading(false);
       });
   };
+
+  const orderInfoRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (orderInfoRef.current && !orderInfoRef.current.contains(event.target as Node)) {
+        setSelectedOrder(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   
   
   
@@ -194,7 +209,7 @@ const OrderHistory: React.FC = () => {
 
   const filteredOrderData = isFilterActive
   ? orderData.filter((data) => {
-    console.log(id);
+    //console.log(id);
       // Apply filter conditions based on drink, startDate, and endDate
       return (
         (!id || data.name.some((name) => name.toLowerCase().includes(id.toLowerCase()))) &&
@@ -250,7 +265,25 @@ const OrderHistory: React.FC = () => {
           ))}
         </div>
       </div>
-      {selectedOrder && <OrderInfo order={selectedOrder} />}
+      <div className="order-info-container" ref={orderInfoRef}>
+        {selectedOrder ? (
+          <OrderInfo order={selectedOrder} />
+        ) : (
+          isFilterActive ? (
+            <div>
+              <p className = "filter-title">Filter Info:</p>
+              <div className="filter-info">
+                {drink && <p>Drink: {drink}</p>}
+                {startDate && <p>Start Date: {startDate}</p>}
+                {endDate && <p>End Date: {endDate}</p>}
+                {minPrice !== 0 && <p>Min Price: ${minPrice.toFixed(2)}</p>}
+                {maxPrice !== 0 && <p>Max Price: ${maxPrice.toFixed(2)}</p>}
+              </div>  
+            </div>
+          ) : 
+          <p className = "filter-title">Select an order</p>
+        )}
+      </div>
       {showFilterPopup && (
         <FilterPopup
           fetchOrdersFilter={fetchOrdersFilter}
@@ -271,7 +304,7 @@ const OrderHistory: React.FC = () => {
         />
       )}
       {hasMore && (
-        <button onClick={() => fetchOrders(currentPage)} disabled={loading}>
+        <button className="simple" onClick={() => fetchOrders(currentPage)} disabled={loading}>
           {loading ? "Loading..." : "Load More"}
         </button>
       )}

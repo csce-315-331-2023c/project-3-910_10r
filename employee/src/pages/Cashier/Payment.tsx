@@ -3,9 +3,10 @@ import "./cashier.scss";
 interface Props {
   setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
   num: Number;
+  setIsCashier: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Payment({ setPayPage, num }: Props) {
+function Payment({ setPayPage, num, setIsCashier}: Props) {
   return (
     <>
       <div
@@ -29,6 +30,7 @@ function Payment({ setPayPage, num }: Props) {
           className="back_to_order_button"
           onClick={() => {
             setPayPage(false);
+            setIsCashier(true);
           }}
         >
           Order
