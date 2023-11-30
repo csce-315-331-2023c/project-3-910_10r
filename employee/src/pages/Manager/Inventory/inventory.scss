@@ -10,6 +10,7 @@
         flex-flow: row nowrap;
         justify-content: space-between;
         align-items: center;
+        gap: 1rem;
 
         > button {
             color: var(--GREEN-DARK);
@@ -18,6 +19,39 @@
             background-color: transparent;
             border: none;
             @include button-interact(transparent, var(--TEXT-SHADOW-DARK));
+        }
+
+        .inventory__search {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 0.5rem;
+
+            &-box {
+                display: flex;
+                gap: 0.25rem;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+                padding: 0.35rem 0.5rem;
+                border-radius: 20px;
+
+                label {
+                    @extend %offscreen;
+                }
+
+                input {
+                    border: none;
+                    outline: none;
+                    background-color: transparent;
+                }
+            }
+
+            > svg {
+                cursor: pointer;
+                font-size: var(--FONT-MED-NORMAL);
+            }
         }
     }
 
