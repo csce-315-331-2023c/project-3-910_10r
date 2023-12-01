@@ -1,5 +1,5 @@
 import { GoogleLogin } from '@react-oauth/google';
-import { JwtPayload, jwtDecode }from 'jwt-decode';
+import { jwtDecode }from 'jwt-decode';
 import axios , { AxiosInstance } from 'axios';
 import React, { useState } from "react";
 
@@ -15,6 +15,11 @@ interface Props{
     setIsLogin: React.Dispatch<React.SetStateAction<boolean>>
     setIsCashier: React.Dispatch<React.SetStateAction<boolean>>
     setPayPage: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+interface JwtPayload {
+    name: string, 
+    email_verified: boolean
 }
 
 const OAuth = ({setIsManager, setIsLogin, setIsCashier, setPayPage} : Props) => {
