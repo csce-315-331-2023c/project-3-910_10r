@@ -30,9 +30,7 @@ const drink = ({
     backgroundImage: `url('../../src/assets/drinkImgs/${children}.png')`,
     filter: "brightness(30%)",
   };
-  const textStyle = {
-    color: "white",
-  };
+
 
   const low = drinksWithLowStock.indexOf(children) > -1;
   return (
