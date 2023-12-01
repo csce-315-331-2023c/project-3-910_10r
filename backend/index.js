@@ -12,8 +12,6 @@ app.use(cors());
 app.use(express.json());
 const port = 8000;
 
-app.use(express.static(path.join(__dirname, '../employee')));
-
 process.on("SIGINT", function () {
   pool.end();
   console.log("Application successfully shutdown");
@@ -838,7 +836,9 @@ app.get("/customer/toppings", (req, res) => {
     });
 });
 
-app.all('*', (req, res) => {
+app.use(express.static(path.join(__dirname, '../employee')));
+
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../employee/index.html'));
 });
 
