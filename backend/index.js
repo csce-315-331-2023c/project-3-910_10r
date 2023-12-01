@@ -3,6 +3,7 @@ const cors = require("cors");
 const pool = require("./db");
 const queries = require("./reports/queries");
 
+const path = require('path');
 const app = express();
 const cashierRouter = require('./cashier/router')
 const reportRouter = require('./reports/router')
@@ -10,6 +11,8 @@ const reportRouter = require('./reports/router')
 app.use(cors());
 app.use(express.json());
 const port = 8000;
+
+app.use(express.static(path.join(__dirname, '../employee')));
 
 process.on("SIGINT", function () {
   pool.end();
@@ -27,7 +30,7 @@ app.use('/report', reportRouter)
 // gets the manager boolean based on a given username and password
 app.get("/login", (req, res) => {
     let command = "SELECT manager FROM employee WHERE " + req.query.parameter +";";
-    console.log(command);
+
     pool.query(command)
     .then((query_res) => {
       if(query_res.rowCount != 0) {
@@ -835,10 +838,14 @@ app.get("/customer/toppings", (req, res) => {
     });
 });
 
+app.all('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../employee/index.html'));
+});
+
 /* final catch-all route to index.html defined last */
-app.get('/*', (req, res) => {
-  res.sendFile(__dirname + '/../employee/index.html');
-})
+// app.get('/*', (req, res) => {
+//   res.sendFile(__dirname + '/../employee/index.html');
+// })
 
 app.listen(port, () => {
   console.log("server is running on " + port);
