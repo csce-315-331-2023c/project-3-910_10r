@@ -38,17 +38,23 @@ const drink = ({
   return (
     <div>
       {low ? (
+        <div>
         <button style={buttonStyleDimmed} className="drinks-grid-drink">
-          {children}
+          
         </button>
+        <p className="drinkTitle">{children}</p>
+        </div>
       ) : (
+        <div>
         <button
           style={buttonStyle}
           className="drinks-grid-drink"
           onClick={() => Show(setShowCustomizationPage, setDrinkName, children)}
         >
-          <p style={textStyle}>{children}</p>
+          
         </button>
+        <p className="drinkTitle">{children}</p>
+        </div>
       )}
     </div>
   );

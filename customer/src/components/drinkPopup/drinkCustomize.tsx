@@ -65,7 +65,7 @@ function DrinkCustomize({
     sugar: 0.0,
     topping: [],
     count: [],
-    // price: 0.0,
+    // =price: 0.0,
   };
 
   const calculateSelections = () => {
