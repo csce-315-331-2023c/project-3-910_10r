@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Cashier from "./pages/Cashier/cashier.tsx";
 import Payment from "./pages/Cashier/Payment.tsx";
-import { BrowserRouter as Router, Route, Navigate, Routes } from "react-router-dom";
+import { Route, Navigate, Routes } from "react-router-dom";
 import Manager from "./pages/Manager/manager.tsx";
 
 import Login from "./pages/Login/login.tsx";
