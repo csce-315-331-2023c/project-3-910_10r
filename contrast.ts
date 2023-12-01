@@ -12,12 +12,12 @@ const customerColors: string[] = [
     "--SIDEBAR-BG-COLOR", "--SELECTION-COLOR",
     "--ERROR-COLOR",
     "--ON-HOVER", "--ON-ACTIVE",
-    "--GRAY-DARK", "--GRAY-MED", "--GRAY-LIGHT", "--GRAY-XLIGHT"
+    "--GRAY-DARK", "--GRAY-MED", "--GRAY-LIGHT", "--GRAY-XLIGHT", "--CONFIRM-COLOR"
 ];
 
 /* TODO: Decide which colors go into the black/white arrays */
-const customerColorsDark: string[] = [];
-const customerColorsLight: string[] = [];
+const customerColorsDark: string[] = ["--GRAY-DARK"];
+const customerColorsLight: string[] = ["--ACCENT-COLOR", "--ACCENT-COLOR-LIGHT", "--GRAY-XLIGHT", "--GRAY-LIGHT", "--GREEN-MED"];
 
 export {customerColors, customerColorsDark, customerColorsLight};
 
@@ -90,4 +90,5 @@ export const setContrast = (colorDark: string[], colorLight: string[]) => {
     colorLight.forEach((color) => {
         document.documentElement.style.setProperty(color, "#fafafa");
     });
+    document.documentElement.style.setProperty("--CONFIRM-COLOR", "red");
 }
