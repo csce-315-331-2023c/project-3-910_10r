@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
 import Cashier from "./pages/Cashier/cashier.tsx";
 import Payment from "./pages/Cashier/Payment.tsx";
-// import axios from "axios";
-// import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Navigate, Routes } from "react-router-dom";
 import Manager from "./pages/Manager/manager.tsx";
 
@@ -36,7 +32,6 @@ function App() {
   }, [payPage, isManager, isCashier, isLogin, num]);
 
   return (
-    <Router>
       <Routes>
         <Route path='/' element={isLogin ? <Login setIsLogin={setIsLogin} setIsManager={setIsManager} setIsCashier={setIsCashier} setPayPage={setPayPage}/> : <Navigate to="/manager" />} >
         </Route>
@@ -48,7 +43,6 @@ function App() {
         </Route>
         <Route path='/' element={<Login setIsLogin={setIsLogin} setIsManager={setIsManager} setIsCashier={setIsCashier} setPayPage={setPayPage}/>} />
       </Routes>
-    </Router>
   );
 }
 

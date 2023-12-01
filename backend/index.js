@@ -5,8 +5,8 @@ const queries = require("./reports/queries");
 
 const path = require('path');
 const app = express();
-const cashierRouter = require('./cashier/router')
-const reportRouter = require('./reports/router')
+const cashierRouter = require('./cashier/routers')
+const reportRouter = require('./reports/routers')
 
 app.use(cors());
 app.use(express.json());
@@ -836,19 +836,6 @@ app.get("/customer/toppings", (req, res) => {
     });
 });
 
-app.use(express.static(path.join(__dirname, '../employee')));
-
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../employee/index.html'));
-});
-
-/* final catch-all route to index.html defined last */
-// app.get('/*', (req, res) => {
-//   res.sendFile(__dirname + '/../employee/index.html');
-// })
-
 app.listen(port, () => {
   console.log("server is running on " + port);
 });
-
-// module.exports = app;
