@@ -809,9 +809,13 @@ app.get("/customer/toppings", (req, res) => {
 
 
 
-// app.get("/api", (req, res) => {
-//   res.json("user1");
-// });
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'path/to/your/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 app.listen(port, () => {
   console.log("server is running on " + port);
