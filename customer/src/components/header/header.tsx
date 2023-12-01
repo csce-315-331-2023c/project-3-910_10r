@@ -24,7 +24,6 @@ function CustomerHeader({setMenuFalse, setOrderFalse}:Props) {
   const [formattedTime, setFormattedTime] = useState<string>("");
   const [weatherIcon, setWeatherIcon] = useState<string>('');
   const [temperature, setTemperature] = useState<number>(0);
-  const [contrastApplied, setContrastApplied] = useState(false);
   const [origColors] = useState(getOrigColors(customerColors));
   
   useEffect(() => {
@@ -70,13 +69,11 @@ function CustomerHeader({setMenuFalse, setOrderFalse}:Props) {
   function changeContrast() {
     console.log(origColors);
 
-    if(contrastApplied) {
+    if(JSON.parse(sessionStorage.getItem("contrastApplied")!)) {
       setOrigColors(customerColors, origColors);
-      setContrastApplied(false);
     }
     else {
       setContrast(customerColorsDark, customerColorsLight);
-      setContrastApplied(true);
     }
   }
 

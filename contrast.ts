@@ -59,10 +59,17 @@ export {employeeColors, employeeColorsDark, employeeColorsLight};
     NOTE: you must run this function first (and only once) to store the arrays locally
 */
 export const getOrigColors = (colorVar: string[]) => {
-    const origColors: string[] = [];
-    colorVar.forEach((color) => {
-        origColors.push(getComputedStyle(document.documentElement).getPropertyValue(color));
-    });
+    let origColors: string[] = [];
+
+    if(sessionStorage.getItem("origColors")) {
+        origColors = JSON.parse(sessionStorage.getItem("origColors")!);
+    }
+    else {
+        colorVar.forEach((color) => {
+            origColors.push(getComputedStyle(document.documentElement).getPropertyValue(color));
+        });
+        sessionStorage.setItem("origColors", JSON.stringify(origColors));
+    }
 
     return origColors;
 }
@@ -76,6 +83,8 @@ export const setOrigColors = (colorVar: string[], origColors: string[]) => {
     for(let i = 0; i < colorVar.length; i++) {
         document.documentElement.style.setProperty(colorVar[i], origColors[i]);
     }
+
+    sessionStorage.setItem("contrastApplied", JSON.stringify(false));
 }
 
 /* 
@@ -90,4 +99,6 @@ export const setContrast = (colorDark: string[], colorLight: string[]) => {
     colorLight.forEach((color) => {
         document.documentElement.style.setProperty(color, "#fafafa");
     });
+
+    sessionStorage.setItem("contrastApplied", JSON.stringify(true));
 }

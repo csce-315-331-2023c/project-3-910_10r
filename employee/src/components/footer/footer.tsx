@@ -32,19 +32,16 @@ const footer = ({ setShowLogout }: Props) => {
 
   const [weatherIcon, setWeatherIcon] = useState<string>('');
   const [temperature, setTemperature] = useState<number>(0);
-  const [contrastApplied, setContrastApplied] = useState(false);
   const [origColors] = useState(getOrigColors(employeeColors));
 
   function changeContrast() {
     console.log(origColors);
 
-    if(contrastApplied) {
+    if(JSON.parse(sessionStorage.getItem("contrastApplied")!)) {
       setOrigColors(employeeColors, origColors);
-      setContrastApplied(false);
     }
     else {
       setContrast(employeeColorsDark, employeeColorsLight);
-      setContrastApplied(true);
     }
   }
   
