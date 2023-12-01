@@ -7,6 +7,7 @@ interface Props {
   showCustomizationPage: boolean;
   setDrinkName: React.Dispatch<React.SetStateAction<string>>;
   drinks: string[];
+  drinksWithLowStock: string[];
 }
 
 function drinks({
@@ -14,6 +15,7 @@ function drinks({
   showCustomizationPage,
   setDrinkName,
   drinks,
+  drinksWithLowStock,
 }: Props) {
   // let drinkNames = [
   //   "Classic milk tea",
@@ -32,7 +34,7 @@ function drinks({
     >
       <div className="drinks-bound">
         <div className="drinks-grid">
-          {drinks.length === 0 ? (
+          {drinks === undefined ? (
             <div>Loading</div>
           ) : (
             drinks.map((item) => (
@@ -40,6 +42,7 @@ function drinks({
                 key={item}
                 setShowCustomizationPage={setShowCustomizationPage}
                 setDrinkName={setDrinkName}
+                drinksWithLowStock={drinksWithLowStock}
               >
                 {item}
               </Drink>

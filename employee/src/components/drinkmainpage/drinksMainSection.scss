@@ -31,14 +31,15 @@
     font-size: 18px;
 }
 .drinks-grid-drink-low{
-    background-color: gray;
+    filter: brightness(40%);
     height: 136px;
     width: 200px;
     border-radius: 10px;
     font-size: 18px;
 }
 .drinks-grid-drink-low:hover{
-    background-color: rgb(95, 94, 94);
+    //background-color: rgb(95, 94, 94);
+    filter: brightness(30%);
     height: 136px;
     width: 200px;
     border-radius: 10px;

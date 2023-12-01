@@ -99,7 +99,6 @@ function CustomerHeader({setMenuFalse, setOrderFalse}:Props) {
         <span id="textSliderIcon" className="material-symbols-outlined" onClick={showTextSlider}>text_fields
           <TextSlider></TextSlider>
         </span>
-        
         {/* <i className="fa-solid fa-language"></i> */}
         <span className="material-symbols-outlined">g_translate</span>
         <i className="fa-solid fa-circle-half-stroke" onClick={changeContrast}></i>
