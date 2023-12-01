@@ -27,7 +27,7 @@ app.use('/report', reportRouter)
 // gets the manager boolean based on a given username and password
 app.get("/login", (req, res) => {
     let command = "SELECT manager FROM employee WHERE " + req.query.parameter +";";
-      
+    console.log(command);
     pool.query(command)
     .then((query_res) => {
       if(query_res.rowCount != 0) {
@@ -835,11 +835,10 @@ app.get("/customer/toppings", (req, res) => {
     });
 });
 
-
-
-// app.get("/api", (req, res) => {
-//   res.json("user1");
-// });
+/* final catch-all route to index.html defined last */
+app.get('/*', (req, res) => {
+  res.sendFile(__dirname + '/../employee/index.html');
+})
 
 app.listen(port, () => {
   console.log("server is running on " + port);
