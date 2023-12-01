@@ -3,9 +3,10 @@ const cors = require("cors");
 const pool = require("./db");
 const queries = require("./reports/queries");
 
+const path = require('path');
 const app = express();
-const cashierRouter = require('./cashier/router')
-const reportRouter = require('./reports/router')
+const cashierRouter = require('./cashier/routers')
+const reportRouter = require('./reports/routers')
 
 app.use(cors());
 app.use(express.json());
@@ -27,7 +28,7 @@ app.use('/report', reportRouter)
 // gets the manager boolean based on a given username and password
 app.get("/login", (req, res) => {
     let command = "SELECT manager FROM employee WHERE " + req.query.parameter +";";
-      
+
     pool.query(command)
     .then((query_res) => {
       if(query_res.rowCount != 0) {
@@ -835,14 +836,6 @@ app.get("/customer/toppings", (req, res) => {
     });
 });
 
-
-
-// app.get("/api", (req, res) => {
-//   res.json("user1");
-// });
-
 app.listen(port, () => {
   console.log("server is running on " + port);
 });
-
-// module.exports = app;
