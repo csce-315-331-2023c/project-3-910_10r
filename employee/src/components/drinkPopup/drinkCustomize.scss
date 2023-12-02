@@ -1,55 +1,61 @@
 .topping{
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    width: 200px;
-    height: 55px;
+    min-width: 200px;
+    min-height: 55px;
     // background-color: #6B9080;
     background-color: var(--GREEN-DARK);
     border-radius: 5px;
     align-items: center;
     justify-items: center;
     padding-right: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 3px;
 }
 
 .topping-unavailable{
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    width: 200px;
-    height: 55px;
+    min-width: 200px;
+    min-height: 55px;
     background-color: var(--GRAY-DARK);
     border-radius: 5px;
     align-items: center;
     justify-items: center;
     padding-right: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 3px;
 }
 
 .topping-name{
     color: white;
     // font-size: 18px;
-    font-size: var( --FONT-MED);
+    font-size: var( --FONT-NORMAL);
     text-align: center;
-    line-height: 23px;
+    line-height: 30px;
 }
 
 .topping-button{
-    height: 45px;
-    width: 45px;
+    min-height: 45px;
+    min-width: 45px;
     background-color: white;
     color: black;
     border-radius: 12px;
-    font-size: var( --FONT-MED);
+    font-size: var( --FONT-NORMAL);
 }
 .topping-button-unavailable{
-    height: 45px;
-    width: 45px;
+    min-height: 45px;
+    min-width: 45px;
     background-color:  var(--GRAY-MEDIAN);
     color: black;
     border-radius: 12px;
 }
 .topping-count{
-    height: 13px;
+    min-height: 13px;
     text-align: center;
-    font-size: var( --FONT-MED);
+    font-size: var( --FONT-NORMAL);
 }
 
 .toppings-box{
@@ -89,17 +95,17 @@
     grid-template-columns: 1fr 1fr;
     row-gap: 10px;
     column-gap: 10px;
-    font-size: var( --FONT-MED);
+    font-size: var( --FONT-NORMAL);
 }
 
 .ice-button, .sugar-button{
-    height: 45px;
+    min-height: 45px;
     background-color: white;
     color: black;
 }
 
 .ice-button-selected, .sugar-button-selected{
-    height: 45px;
+    min-height: 45px;
     background-color: var(--GREEN-DARK);
     color: white;
 }
@@ -114,13 +120,13 @@
 .customize-drink, .low-title{
     text-align: center;
     // font-size: 25px;
-    font-size: var( --FONT-MED-LARGE);
+    font-size: var( --FONT-MED-NORMAL);
     margin-top: 10px;
 }
 
 .ice-title, .sugar-title, .toppings-title{
     // font-size: 20px;
-    font-size: var( --FONT-MED-LARGE);
+    font-size: var( --FONT-MED-NORMAL);
     margin-bottom: 5px;
     
 }
@@ -128,10 +134,10 @@
 .customize-confirm{
     position: absolute;
     right: 10px;
-    width: 100px;
-    height: 50px;
+    min-width: 100px;
+    min-height: 50px;
     background-color: white;
-    font-size: var( --FONT-MED);
+    font-size: var( --FONT-NORMAL);
 }
 
 .customize-confirm:hover{
@@ -147,14 +153,14 @@
     background-color: var(--GREEN-MED);
     border: none;
     // font-size: 40px;
-    font-size: var( --FONT-LARGE);
+    font-size: var( --FONT-MED);
     right: 15px;
     top: 0px;
     cursor: pointer;
 }
 .low-subtitle{
     // font-size: 20px;
-    font-size: var( --FONT-MED);
+    font-size: var( --FONT-NORMAL);
     margin-top: 30px;
     margin-bottom: 10px;
     border-bottom: 2px solid black;

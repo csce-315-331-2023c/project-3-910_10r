@@ -13,7 +13,8 @@
 
   .nav-bar{
     overflow: auto;
-    font-size: 25px;
+    //font-size: 25px
+    font-size: var(--FONT-MED-NORMAL);
     height: 100%;
     width: 180px;
   }

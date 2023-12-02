@@ -52,7 +52,7 @@ const Topping = ({
             -
           </button>
         </div>
-        <div className="topping-count">{!lowStock && count}</div>
+        <div className="topping-count">{count}</div>
       </div>
     </>
   );
