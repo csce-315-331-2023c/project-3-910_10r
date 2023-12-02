@@ -386,7 +386,7 @@ app.get("/orderHistory/total", (req, res) => {
 
   // Adjust SQL query to include pagination
   let command = `SELECT * FROM orders WHERE date <= '${today}'`;
-  command += `ORDER BY time, date DESC`;
+  command += `ORDER BY date DESC, time ASC`;
   command += ` LIMIT ${pageSize} OFFSET ${offset}`; // Add LIMIT and OFFSET
 
   const filtered = [];
