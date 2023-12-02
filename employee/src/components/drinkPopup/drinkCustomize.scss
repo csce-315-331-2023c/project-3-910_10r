@@ -25,7 +25,8 @@
 
 .topping-name{
     color: white;
-    font-size: 18px;
+    // font-size: 18px;
+    font-size: var( --FONT-MED);
     text-align: center;
     line-height: 23px;
 }
@@ -36,6 +37,7 @@
     background-color: white;
     color: black;
     border-radius: 12px;
+    font-size: var( --FONT-MED);
 }
 .topping-button-unavailable{
     height: 45px;
@@ -47,6 +49,7 @@
 .topping-count{
     height: 13px;
     text-align: center;
+    font-size: var( --FONT-MED);
 }
 
 .toppings-box{
@@ -86,7 +89,7 @@
     grid-template-columns: 1fr 1fr;
     row-gap: 10px;
     column-gap: 10px;
-    
+    font-size: var( --FONT-MED);
 }
 
 .ice-button, .sugar-button{
@@ -110,13 +113,16 @@
 
 .customize-drink, .low-title{
     text-align: center;
-    font-size: 25px;
+    // font-size: 25px;
+    font-size: var( --FONT-MED-LARGE);
     margin-top: 10px;
 }
 
 .ice-title, .sugar-title, .toppings-title{
-    font-size: 20px;
+    // font-size: 20px;
+    font-size: var( --FONT-MED-LARGE);
     margin-bottom: 5px;
+    
 }
 
 .customize-confirm{
@@ -125,6 +131,7 @@
     width: 100px;
     height: 50px;
     background-color: white;
+    font-size: var( --FONT-MED);
 }
 
 .customize-confirm:hover{
@@ -139,13 +146,15 @@
     position: absolute;
     background-color: var(--GREEN-MED);
     border: none;
-    font-size: 40px;
+    // font-size: 40px;
+    font-size: var( --FONT-LARGE);
     right: 15px;
     top: 0px;
     cursor: pointer;
 }
 .low-subtitle{
-    font-size: 20px;
+    // font-size: 20px;
+    font-size: var( --FONT-MED);
     margin-top: 30px;
     margin-bottom: 10px;
     border-bottom: 2px solid black;

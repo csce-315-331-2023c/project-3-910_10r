@@ -2,7 +2,14 @@ import "./footer.scss";
 import { useState, useEffect } from "react";
 import TextSlider from "./textSlider";
 
-import {employeeColors, employeeColorsDark, employeeColorsLight, getOrigColors, setOrigColors, setContrast} from "./../../../../contrast.ts";
+import {
+  employeeColors,
+  employeeColorsDark,
+  employeeColorsLight,
+  getOrigColors,
+  setOrigColors,
+  setContrast,
+} from "./../../../../contrast.ts";
 
 interface WeatherData {
   current: {
@@ -30,7 +37,7 @@ const footer = ({ setShowLogout }: Props) => {
     };
   });
 
-  const [weatherIcon, setWeatherIcon] = useState<string>('');
+  const [weatherIcon, setWeatherIcon] = useState<string>("");
   const [temperature, setTemperature] = useState<number>(0);
   const [contrastApplied, setContrastApplied] = useState(false);
   const [origColors] = useState(getOrigColors(employeeColors));
@@ -38,16 +45,14 @@ const footer = ({ setShowLogout }: Props) => {
   function changeContrast() {
     console.log(origColors);
 
-    if(contrastApplied) {
+    if (contrastApplied) {
       setOrigColors(employeeColors, origColors);
       setContrastApplied(false);
-    }
-    else {
+    } else {
       setContrast(employeeColorsDark, employeeColorsLight);
       setContrastApplied(true);
     }
   }
-  
 
   useEffect(() => {
     fetchWeatherData();
@@ -56,21 +61,21 @@ const footer = ({ setShowLogout }: Props) => {
   async function fetchWeatherData() {
     try {
       const response = await fetch(
-        'https://api.weatherapi.com/v1/current.json?key=6407a4a683f54d9ba1f165350232911&q=77840&aqi=no'
+        "https://api.weatherapi.com/v1/current.json?key=6407a4a683f54d9ba1f165350232911&q=77840&aqi=no"
       );
       if (!response.ok) {
-        throw new Error('Failed to fetch weather data');
+        throw new Error("Failed to fetch weather data");
       }
       const data: WeatherData = await response.json();
       setWeatherIcon(data.current.condition.icon);
       setTemperature(data.current.temp_f);
     } catch (error) {
-      console.error('Error fetching weather data:', error);
+      console.error("Error fetching weather data:", error);
     }
   }
-  
+
   function showTextSlider() {
-    document.querySelector(".textslider")?.classList.toggle("active")
+    document.querySelector(".textslider")?.classList.toggle("active");
   }
 
   return (
@@ -82,23 +87,31 @@ const footer = ({ setShowLogout }: Props) => {
           </button>
         </div>
         <div className="footer-weather">
-          {weatherIcon && <img src={`http:${weatherIcon}`} alt="Weather Icon" />}
+          {weatherIcon && (
+            <img src={`http:${weatherIcon}`} alt="Weather Icon" />
+          )}
           <p>{temperature}&deg;F</p>
         </div>
-        <div className="footer-time">
-          {date.toLocaleTimeString()}
-        </div>
+        <div className="footer-time">{date.toLocaleTimeString()}</div>
         <div className="accessibility">
           {/* <i className="fa-solid fa-font" onClick={showTextSlider}>
             <TextSlider></TextSlider>
           </i> */}
-          <span id="textSliderIcon" className="material-symbols-outlined" onClick={showTextSlider}>text_fields
+          <span
+            id="textSliderIcon"
+            className="material-symbols-outlined"
+            onClick={showTextSlider}
+          >
+            text_fields
             <TextSlider></TextSlider>
           </span>
-          
+
           {/* <i className="fa-solid fa-language"></i> */}
           <span className="material-symbols-outlined">g_translate</span>
-          <i className="fa-solid fa-circle-half-stroke" onClick={changeContrast}></i>
+          <i
+            className="fa-solid fa-circle-half-stroke"
+            onClick={changeContrast}
+          ></i>
         </div>
       </div>
     </>
