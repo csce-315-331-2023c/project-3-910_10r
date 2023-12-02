@@ -28,10 +28,25 @@ const footer = ({ setShowLogout }: Props) => {
   const showLogout = () => {
     setShowLogout(true);
   };
-  var [date, setDate] = useState(new Date());
-  // const [time, setTime] = useState<string>("");
+
+  function getDate() {
+    const date = new Date();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    let second = date.getSeconds();
+    return `${hour}:${minute}:${second}`;
+  }
+
+  //var [date, setDate] = useState(new Date());
+  const [time, setTime] = useState<string>("");
+  // useEffect(() => {
+  //   var timer = setInterval(() => setDate(new Date()), 1000);
+  //   return function cleanup() {
+  //     clearInterval(timer);
+  //   };
+  // });
   useEffect(() => {
-    var timer = setInterval(() => setDate(new Date()), 1000);
+    var timer = setInterval(() => setTime(getDate()), 1000);
     return function cleanup() {
       clearInterval(timer);
     };
@@ -92,7 +107,7 @@ const footer = ({ setShowLogout }: Props) => {
           )}
           <p>{temperature}&deg;F</p>
         </div>
-        <div className="footer-time">{date.toLocaleTimeString()}</div>
+        <div className="footer-time">{time}</div>
         <div className="accessibility">
           {/* <i className="fa-solid fa-font" onClick={showTextSlider}>
             <TextSlider></TextSlider>
