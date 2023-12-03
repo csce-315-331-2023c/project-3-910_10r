@@ -16,7 +16,7 @@ function Payment() {
         <div
           style={{ fontSize: "25px", marginLeft: "50px", paddingTop: "50px" }}
         >
-          Your number is 034
+          Your order number is 034
         </div>
       </div>
     </>

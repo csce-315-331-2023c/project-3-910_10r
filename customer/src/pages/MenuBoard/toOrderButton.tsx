@@ -10,7 +10,7 @@ function ToOrderButton ({ToOrderPage}: Props){
         console.log("fortnite");
     }
   return (
-    <button className='menu-to-order-button' onClick={navigateToOrderPage}>Fortnite</button>
+    <button className='menu-to-order-button' onClick={navigateToOrderPage}>Ready to Order?</button>
   )
 }
 

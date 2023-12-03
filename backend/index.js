@@ -3,9 +3,10 @@ const cors = require("cors");
 const pool = require("./db");
 const queries = require("./reports/queries");
 
+// const path = require('path');
 const app = express();
-const cashierRouter = require('./cashier/router')
-const reportRouter = require('./reports/router')
+const cashierRouter = require('./cashier/routers')
+const reportRouter = require('./reports/routers')
 
 app.use(cors());
 app.use(express.json());
@@ -22,12 +23,13 @@ app.get('/', (req, res) => {
 });
 
 app.use('/cashier', cashierRouter)
+
 app.use('/report', reportRouter)
 
 // gets the manager boolean based on a given username and password
 app.get("/login", (req, res) => {
     let command = "SELECT manager FROM employee WHERE " + req.query.parameter +";";
-      
+
     pool.query(command)
     .then((query_res) => {
       if(query_res.rowCount != 0) {
@@ -68,7 +70,7 @@ app.get("/oauth", (req, res) => {
 
 // gets all inventory items
 app.get("/inventory", (req, res) => {
-  let command = "SELECT name, alert, amount, capacity, unit FROM inventory;";
+  let command = "SELECT name, alert, amount, capacity, unit, topping FROM inventory ORDER BY name;";
     
   pool.query(command)
   .then((query_res) => {
@@ -127,11 +129,11 @@ app.put("/inventory/editItem", (req, res) => {
   const itemName = req.query.parameter; // The name of the item to be edited
   const editedItem = req.body; // Assuming you pass the edited item data in the request body as JSON
 
-  const { name, amount, capacity, unit } = editedItem;
+  const { name, amount, capacity, unit, topping } = editedItem;
 
   // Create a SQL command to update the inventory item
-  const command = `UPDATE inventory SET name=$1, amount=$2, capacity=$3, unit=$4 WHERE name=$5;`;
-  const values = [name, amount, capacity, unit, itemName];
+  const command = `UPDATE inventory SET name=$1, amount=$2, capacity=$3, unit=$4, topping=$5 WHERE name=$6;`;
+  const values = [name, amount, capacity, unit, topping, itemName];
 
   pool.query(command, values)
     .then((query_res) => {
@@ -147,14 +149,14 @@ app.put("/inventory/editItem", (req, res) => {
 
 // Create a route for adding a new item to the inventory
 app.post("/inventory/addItem", (req, res) => {
-  const { name, amount, capacity, unit, alert } = req.body;
+  const { name, amount, capacity, unit, alert, topping } = req.body;
 
   // Construct the SQL query to insert a new item into the inventory
   const command = `
-    INSERT INTO inventory (name, amount, capacity, unit, alert)
-    VALUES ($1, $2, $3, $4, $5);
+    INSERT INTO inventory (name, amount, capacity, unit, alert, topping)
+    VALUES ($1, $2, $3, $4, $5, $6);
   `;
-  const values = [name, amount, capacity, unit, alert];
+  const values = [name, amount, capacity, unit, alert, topping];
 
   // Execute the query
   pool.query(command, values)
@@ -384,7 +386,7 @@ app.get("/orderHistory/total", (req, res) => {
 
   // Adjust SQL query to include pagination
   let command = `SELECT * FROM orders WHERE date <= '${today}'`;
-  command += `ORDER BY date DESC`;
+  command += `ORDER BY date DESC, time ASC`;
   command += ` LIMIT ${pageSize} OFFSET ${offset}`; // Add LIMIT and OFFSET
 
   const filtered = [];
@@ -794,28 +796,42 @@ app.put("/recipes/edit", (req, res) => {
 });
 
 // Create a route for adding a new item to the inventory
-app.post("/recipes/add", (req, res) => {
-  const { drinkname, ingredient_names, ingredient_values, price, category } = req.body;
+app.post("/recipes/add", async (req, res) => {
+  try {
+    // Get the count of items in the recipes table
+    const countQuery = 'SELECT COUNT(*) AS recipecount FROM recipes';
+    const countResult = await pool.query(countQuery);
+    const recipeCount = parseInt(countResult.rows[0].recipecount);
 
-  // Construct the SQL query to insert a new item into the inventory
-  const command = `
-    INSERT INTO recipes (drinkname, ingredient_names, ingredient_values, price, category)
-    VALUES ($1, $2, $3, $4, $5);
-  `;
-  const values = [drinkname, ingredient_names, ingredient_values, price, category];
+    console.log("Type of countResult:", typeof countResult);
+    console.log("Count of recipes:", countResult.rows[0].recipeCount);
+    if (isNaN(recipeCount)) {
+      throw new Error('Count of recipes is not a valid number');
+    }
 
-  // Execute the query
-  pool.query(command, values)
-    .then((query_res) => {
-      // Send a success response or any other data you need
-      res.status(200).json({ message: "Item added successfully" });
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).json({
-        error: "An error occurred when adding an item to the inventory",
-      });
+    const nextRecipeId = recipeCount + 1;
+    
+
+    const { drinkname, ingredient_names, ingredient_values, price, category } = req.body;
+
+    // Construct the SQL query to insert a new item into the inventory
+    const command = `
+      INSERT INTO recipes (recipeid, drinkname, ingredient_names, ingredient_values, price, category)
+      VALUES ($1, $2, $3, $4, $5, $6);
+    `;
+    const values = [nextRecipeId, drinkname, ingredient_names, ingredient_values, price, category];
+
+    // Execute the query
+    await pool.query(command, values);
+
+    // Send a success response
+    res.status(200).json({ message: "Item added successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: "An error occurred when adding an item to the inventory",
     });
+  }
 });
 
 // gets all toppings
@@ -835,14 +851,6 @@ app.get("/customer/toppings", (req, res) => {
     });
 });
 
-
-
-// app.get("/api", (req, res) => {
-//   res.json("user1");
-// });
-
 app.listen(port, () => {
   console.log("server is running on " + port);
 });
-
-// module.exports = app;
