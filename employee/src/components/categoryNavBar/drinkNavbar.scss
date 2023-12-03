@@ -13,15 +13,17 @@
 
   .nav-bar{
     overflow: auto;
-    font-size: 25px;
+    //font-size: 25px
+    font-size: var(--FONT-MED-NORMAL);
     height: 100%;
     width: 180px;
   }
 
   .nav-category{
-    background-color: #F6FFF8;
+    background-color: var(--GREEN-LIGHT);
     height: 136px;
     width: 100%;
+    color: var(--BLACK);
   }
 
   .nav-category-0{

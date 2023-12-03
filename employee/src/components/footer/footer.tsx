@@ -1,8 +1,16 @@
 import "./footer.scss";
 import { useState, useEffect } from "react";
 import TextSlider from "./textSlider";
+import GoogleTranslate from "./translate.tsx";
 
-import {employeeColors, employeeColorsDark, employeeColorsLight, getOrigColors, setOrigColors, setContrast} from "./../../../../contrast.ts";
+import {
+  employeeColors,
+  employeeColorsDark,
+  employeeColorsLight,
+  getOrigColors,
+  setOrigColors,
+  setContrast,
+} from "./../../../../contrast.ts";
 
 interface WeatherData {
   current: {
@@ -21,21 +29,33 @@ const footer = ({ setShowLogout }: Props) => {
   const showLogout = () => {
     setShowLogout(true);
   };
-  var [date, setDate] = useState(new Date());
-  // const [time, setTime] = useState<string>("");
+
+  function getDate() {
+    const date = new Date();
+    let hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+    let minute =
+      date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    let second =
+      date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+    return `${hour}:${minute}:${second}`;
+  }
+
+  const [time, setTime] = useState<string>("");
+
   useEffect(() => {
-    var timer = setInterval(() => setDate(new Date()), 1000);
+    var timer = setInterval(() => setTime(getDate()), 1000);
     return function cleanup() {
       clearInterval(timer);
     };
   });
 
-  const [weatherIcon, setWeatherIcon] = useState<string>('');
+  const [weatherIcon, setWeatherIcon] = useState<string>("");
   const [temperature, setTemperature] = useState<number>(0);
   const [origColors] = useState(getOrigColors(employeeColors));
 
   function changeContrast() {
     console.log(origColors);
+
 
     if(JSON.parse(sessionStorage.getItem("contrastApplied")!)) {
       setOrigColors(employeeColors, origColors);
@@ -44,7 +64,6 @@ const footer = ({ setShowLogout }: Props) => {
       setContrast(employeeColorsDark, employeeColorsLight);
     }
   }
-  
 
   useEffect(() => {
     fetchWeatherData();
@@ -53,21 +72,21 @@ const footer = ({ setShowLogout }: Props) => {
   async function fetchWeatherData() {
     try {
       const response = await fetch(
-        'https://api.weatherapi.com/v1/current.json?key=6407a4a683f54d9ba1f165350232911&q=77840&aqi=no'
+        "https://api.weatherapi.com/v1/current.json?key=6407a4a683f54d9ba1f165350232911&q=77840&aqi=no"
       );
       if (!response.ok) {
-        throw new Error('Failed to fetch weather data');
+        throw new Error("Failed to fetch weather data");
       }
       const data: WeatherData = await response.json();
       setWeatherIcon(data.current.condition.icon);
       setTemperature(data.current.temp_f);
     } catch (error) {
-      console.error('Error fetching weather data:', error);
+      console.error("Error fetching weather data:", error);
     }
   }
-  
+
   function showTextSlider() {
-    document.querySelector(".textslider")?.classList.toggle("active")
+    document.querySelector(".textslider")?.classList.toggle("active");
   }
 
   return (
@@ -79,12 +98,12 @@ const footer = ({ setShowLogout }: Props) => {
           </button>
         </div>
         <div className="footer-weather">
-          {weatherIcon && <img src={`http:${weatherIcon}`} alt="Weather Icon" />}
+          {weatherIcon && (
+            <img src={`http:${weatherIcon}`} alt="Weather Icon" />
+          )}
           <p>{temperature}&deg;F</p>
         </div>
-        <div className="footer-time">
-          {date.toLocaleTimeString()}
-        </div>
+        <div className="footer-time">{time}</div>
         <div className="accessibility">
           
           <i id="textSliderIcon" className="fa-solid fa-text-height" onClick={showTextSlider}>
@@ -106,6 +125,8 @@ const footer = ({ setShowLogout }: Props) => {
 
           <i className="fa-solid fa-circle-half-stroke" onClick={changeContrast}></i>
         </div>
+
+        <GoogleTranslate></GoogleTranslate>
       </div>
     </>
   );

@@ -6,6 +6,7 @@
     display: flex;
     z-index: 300;
     padding: 0 1rem;
+    border-top: var(--WHITE) 2px solid;
 }
 
 .footer-button {
@@ -20,7 +21,7 @@
 
 .footer-time {
     color: var(--WHITE);
-    font-size: var(--FONT-MED);
+    font-size: var(--FONT-MED-NORMAL);
     display: flex;
     align-items: center;
     padding-right: 30px;
@@ -30,7 +31,7 @@
 
 .footer-weather {
     color: var(--WHITE);
-    font-size: var(--FONT-MED);
+    font-size: var(--FONT-MED-NORMAL);
     display: flex;
     align-items: center;
     margin-right: 20px;
@@ -121,6 +122,10 @@
     }
 }
 
+.google-translate{
+    margin-left: 15px;
+}
+    
 svg {
     width: 36px;
 }
