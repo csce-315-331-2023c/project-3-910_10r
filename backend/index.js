@@ -70,7 +70,7 @@ app.get("/oauth", (req, res) => {
 
 // gets all inventory items
 app.get("/inventory", (req, res) => {
-  let command = "SELECT name, alert, amount, capacity, unit, topping FROM inventory;";
+  let command = "SELECT name, alert, amount, capacity, unit, topping FROM inventory ORDER BY name;";
     
   pool.query(command)
   .then((query_res) => {
@@ -796,28 +796,42 @@ app.put("/recipes/edit", (req, res) => {
 });
 
 // Create a route for adding a new item to the inventory
-app.post("/recipes/add", (req, res) => {
-  const { drinkname, ingredient_names, ingredient_values, price, category } = req.body;
+app.post("/recipes/add", async (req, res) => {
+  try {
+    // Get the count of items in the recipes table
+    const countQuery = 'SELECT COUNT(*) AS recipecount FROM recipes';
+    const countResult = await pool.query(countQuery);
+    const recipeCount = parseInt(countResult.rows[0].recipecount);
 
-  // Construct the SQL query to insert a new item into the inventory
-  const command = `
-    INSERT INTO recipes (drinkname, ingredient_names, ingredient_values, price, category)
-    VALUES ($1, $2, $3, $4, $5);
-  `;
-  const values = [drinkname, ingredient_names, ingredient_values, price, category];
+    console.log("Type of countResult:", typeof countResult);
+    console.log("Count of recipes:", countResult.rows[0].recipeCount);
+    if (isNaN(recipeCount)) {
+      throw new Error('Count of recipes is not a valid number');
+    }
 
-  // Execute the query
-  pool.query(command, values)
-    .then((query_res) => {
-      // Send a success response or any other data you need
-      res.status(200).json({ message: "Item added successfully" });
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).json({
-        error: "An error occurred when adding an item to the inventory",
-      });
+    const nextRecipeId = recipeCount + 1;
+    
+
+    const { drinkname, ingredient_names, ingredient_values, price, category } = req.body;
+
+    // Construct the SQL query to insert a new item into the inventory
+    const command = `
+      INSERT INTO recipes (recipeid, drinkname, ingredient_names, ingredient_values, price, category)
+      VALUES ($1, $2, $3, $4, $5, $6);
+    `;
+    const values = [nextRecipeId, drinkname, ingredient_names, ingredient_values, price, category];
+
+    // Execute the query
+    await pool.query(command, values);
+
+    // Send a success response
+    res.status(200).json({ message: "Item added successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: "An error occurred when adding an item to the inventory",
     });
+  }
 });
 
 // gets all toppings
