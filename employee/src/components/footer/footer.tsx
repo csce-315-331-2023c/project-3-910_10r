@@ -1,6 +1,7 @@
 import "./footer.scss";
 import { useState, useEffect } from "react";
 import TextSlider from "./textSlider";
+import GoogleTranslate from "./translate.tsx";
 
 import {
   employeeColors,
@@ -31,20 +32,16 @@ const footer = ({ setShowLogout }: Props) => {
 
   function getDate() {
     const date = new Date();
-    let hour = date.getHours();
-    let minute = date.getMinutes();
-    let second = date.getSeconds();
+    let hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+    let minute =
+      date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    let second =
+      date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
     return `${hour}:${minute}:${second}`;
   }
 
-  //var [date, setDate] = useState(new Date());
   const [time, setTime] = useState<string>("");
-  // useEffect(() => {
-  //   var timer = setInterval(() => setDate(new Date()), 1000);
-  //   return function cleanup() {
-  //     clearInterval(timer);
-  //   };
-  // });
+
   useEffect(() => {
     var timer = setInterval(() => setTime(getDate()), 1000);
     return function cleanup() {
@@ -122,12 +119,14 @@ const footer = ({ setShowLogout }: Props) => {
           </span>
 
           {/* <i className="fa-solid fa-language"></i> */}
-          <span className="material-symbols-outlined">g_translate</span>
+          {/* <span className="material-symbols-outlined">g_translate</span> */}
           <i
             className="fa-solid fa-circle-half-stroke"
             onClick={changeContrast}
           ></i>
         </div>
+
+        <GoogleTranslate></GoogleTranslate>
       </div>
     </>
   );

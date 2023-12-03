@@ -6,8 +6,6 @@ import Payment from "./pages/Cashier/Payment.tsx";
 // import axios from "axios";
 // import React, { useEffect } from "react";
 
-import Translate from "./components/googleTranslate/translate.tsx";
-
 import {
   BrowserRouter as Router,
   Route,
