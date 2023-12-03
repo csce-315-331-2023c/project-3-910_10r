@@ -123,7 +123,29 @@ function DrinkCustomize({
 
     updateOrder(_order);
 
-    API.put("/cashier/updateInventory", { backend_order });
+    console.log(name);
+    console.log(backend_order.ice);
+    console.log(backend_order.sugar);
+    console.log(backend_order.topping);
+    console.log(backend_order.count);
+
+    const backendData = {
+      name: name,
+      ice: backend_order.ice,
+      sugar: backend_order.sugar,
+      topping: backend_order.topping,
+      count: backend_order.count
+  };
+
+    API.put("/cashier/updateInventory", backendData)
+      .then((response) => {
+        console.log(response.data);
+      })
+    .catch((error) => {
+        console.error(error);
+    });
+
+    console.log("Called updateInventory API");
 
     resetCount();
   };

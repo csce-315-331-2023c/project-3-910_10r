@@ -11,24 +11,25 @@ const getLowIngredientForDrink =
 
 const updateRecipeItems =
   "\
-UPDATE inventory AS i \
-SET amount = new_amount \
-FROM ( \
-    SELECT \
-        subquery.ingredient, \
-        CASE \
-            WHEN subquery.ingredient IN ('brown sugar', 'fructose', 'honey', 'sugar') THEN amount - subquery.amount - $1 \
-            ELSE amount - subquery.amount \
-        END AS new_amount \
-    FROM ( \
-        SELECT \
-            unnest(ingredient_names) AS ingredient, \
-            unnest(ingredient_values) AS amount \
-        FROM recipes \
-        WHERE lower(drinkname) = $2 \
-    ) AS subquery \
-) AS subquery \
-WHERE i.name = subquery.ingredient;";
+  UPDATE inventory AS i \
+  SET amount = subquery.new_amount \
+  FROM ( \
+      SELECT \
+          subquery.ingredient, \
+          CASE \
+              WHEN subquery.ingredient IN ('brown sugar', 'fructose', 'honey', 'sugar') THEN i.amount - subquery.amount - $1 \
+              ELSE i.amount - subquery.amount \
+          END AS new_amount \
+      FROM ( \
+          SELECT \
+              unnest(ingredient_names) AS ingredient, \
+              unnest(ingredient_values) AS amount \
+          FROM recipes \
+          WHERE lower(drinkname) = lower($2) \
+      ) AS subquery \
+      INNER JOIN inventory AS i on i.name = subquery.ingredient \
+  ) AS subquery \
+  WHERE i.name = subquery.ingredient;";
 
 const updateIce =
   "\
@@ -49,24 +50,25 @@ WHERE i.name = subquery.topping;";
 
 const restoreRecipeItems =
   "\
-UPDATE inventory AS i \
-SET amount = new_amount \
-FROM ( \
-    SELECT \
-        subquery.ingredient, \
-        CASE \
-            WHEN subquery.ingredient IN ('brown sugar', 'fructose', 'honey', 'sugar') THEN amount + subquery.amount + $1 \
-            ELSE amount + subquery.amount \
-        END AS new_amount \
-    FROM ( \
-        SELECT \
-            unnest(ingredient_names) AS ingredient, \
-            unnest(ingredient_values) AS amount \
-        FROM recipes \
-        WHERE lower(drinkname) = $2 \
-    ) AS subquery \
-) AS subquery \
-WHERE i.name = subquery.ingredient;";
+  UPDATE inventory AS i \
+  SET amount = subquery.new_amount \
+  FROM ( \
+      SELECT \
+          subquery.ingredient, \
+          CASE \
+              WHEN subquery.ingredient IN ('brown sugar', 'fructose', 'honey', 'sugar') THEN i.amount + subquery.amount + $1 \
+              ELSE i.amount + subquery.amount \
+          END AS new_amount \
+      FROM ( \
+          SELECT \
+              unnest(ingredient_names) AS ingredient, \
+              unnest(ingredient_values) AS amount \
+          FROM recipes \
+          WHERE lower(drinkname) = lower($2) \
+      ) AS subquery \
+      INNER JOIN inventory AS i on i.name = subquery.ingredient \
+  ) AS subquery \
+  WHERE i.name = subquery.ingredient;";
 
 const restoreIce =
   "\
@@ -80,17 +82,25 @@ UPDATE inventory AS i \
 SET amount = i.amount + 10 * subquery.amount \
 FROM ( \
     SELECT \
-        unnest($1::test[]) AS topping, \
+        unnest($1::text[]) AS topping, \
         unnest($2::int[]) AS amount \
 ) AS subquery \
 WHERE i.name = subquery.topping;";
 
 const makeOrder =
-  "\
-INSERT INTO orders (drink_id, order_date, order_time, totalcost) \
-SELECT id, $1::date, $2::time, $3 \
-FROM recipes \
-WHERE lower(drink_name) IN ($4:csv);";
+"WITH RecipeIDs AS ( \
+  SELECT \
+    array_agg(recipeid) AS recipe_ids \
+  FROM recipes \
+  WHERE lower(drinkname) IN (SELECT lower(unnest($4::text[]))) \
+) \
+INSERT INTO orders (drink_id, date, time, cost) \
+SELECT \
+  r.recipe_ids, \
+  $1, \
+  $2, \
+  $3 \
+FROM RecipeIDs r;";
 
 module.exports = {
   getPriceByDrink,

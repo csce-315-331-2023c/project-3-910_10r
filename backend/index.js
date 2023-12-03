@@ -3,7 +3,7 @@ const cors = require("cors");
 const pool = require("./db");
 const queries = require("./reports/queries");
 
-const path = require('path');
+// const path = require('path');
 const app = express();
 const cashierRouter = require('./cashier/routers')
 const reportRouter = require('./reports/routers')
@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/cashier', cashierRouter)
+
 app.use('/report', reportRouter)
 
 // gets the manager boolean based on a given username and password
@@ -385,7 +386,7 @@ app.get("/orderHistory/total", (req, res) => {
 
   // Adjust SQL query to include pagination
   let command = `SELECT * FROM orders WHERE date <= '${today}'`;
-  command += `ORDER BY date DESC`;
+  command += `ORDER BY date DESC, time ASC`;
   command += ` LIMIT ${pageSize} OFFSET ${offset}`; // Add LIMIT and OFFSET
 
   const filtered = [];
