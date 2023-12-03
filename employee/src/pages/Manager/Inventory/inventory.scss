@@ -150,6 +150,15 @@
                     padding: var(--PADDING-SMALL);
                     font-size: var(--FONT-NORMAL);
                 }
+
+                &.inv-topping {
+                    justify-content: flex-start;
+
+                    input {
+                        margin-left: 0.15rem;
+                        transform: scale(170%);
+                    }
+                }
             }
 
             &__buttons {
