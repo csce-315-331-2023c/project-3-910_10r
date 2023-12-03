@@ -150,7 +150,7 @@ onSubmit();
           </button>
         </div>
         <label>
-          Drink Name:
+          <p style={{color: "var(--NORMALLY-BLACK)"}}>Drink Name:</p>
           <select defaultValue="" onChange={(e) => onDrinkNameChange(e.target.value || null)}>
             <option value="">Select a drink</option>
             {drinks.map((drink, index) => (
@@ -161,7 +161,7 @@ onSubmit();
           </select>
         </label>
         <label>
-          Start Date:
+          <p style={{color: "var(--NORMALLY-BLACK)"}}>Start Date:</p>
           <DatePicker
             selected={startDate ? new Date(startDate) : null}
             onChange={(date) => onStartDateChange(date ? format(date, "yyyy-MM-dd") : null)}
@@ -172,7 +172,7 @@ onSubmit();
           />
         </label>
         <label>
-          End Date:
+          <p style={{color: "var(--NORMALLY-BLACK)"}}>End Date:</p>
           <DatePicker
             selected={endDate ? new Date(endDate) : null}
             onChange={(date) => onEndDateChange(date ? format(date, "yyyy-MM-dd") : null)}
@@ -183,7 +183,7 @@ onSubmit();
           />
         </label>
         <label>
-          Price Range:
+          <p style={{color: "var(--NORMALLY-BLACK)"}}>Price Range:</p>
           <input
             type="text"
             placeholder="Min Price"
@@ -194,7 +194,7 @@ onSubmit();
               onMinPriceChange(isNaN(parsedMinPrice) ? 0 : parsedMinPrice);
             }}
           />
-          <span>to</span>
+          <span><p style={{color: "var(--NORMALLY-BLACK)"}}>to</p></span>
           <input
             type="text"
             placeholder="Max Price"

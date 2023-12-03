@@ -144,7 +144,7 @@ const Inventory = () => {
         </form>
 
         <button><i>
-          <FontAwesomeIcon icon="square-plus" size="2x" style={{ color: '#0d6f06' }} onClick={handlePopup}/>
+          <FontAwesomeIcon icon="square-plus" size="2x" style={{ color: "var(--GREEN-DARK)" }} onClick={handlePopup}/>
         </i></button>
       </div>
 

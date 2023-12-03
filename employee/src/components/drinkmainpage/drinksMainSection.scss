@@ -3,7 +3,7 @@
     width: 100%;
     padding-left: 80px;
     padding-top: 50px;
-    background-color: var(--GREEN-MED); 
+    background-color: var(--GREEN-MED60); 
 }
 
 .drinks-selected{
@@ -48,4 +48,5 @@
 
 .drinks-grid-drink:hover {
     background-color: rgb(244, 244, 244);
+    cursor: pointer;
   }

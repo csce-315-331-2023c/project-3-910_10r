@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios , { AxiosInstance } from 'axios';
-
 let baseURL = import.meta.env.VITE_API_URL;
 
 const API: AxiosInstance = axios.create({
@@ -78,7 +77,7 @@ const InventoryItemPopup: React.FC<InventoryItemPopupProps> = ({
         <button onClick={closePopup}><i className="fa-solid fa-xmark"></i></button>
 
         <div className="inventory__items-popup-field">
-          <label htmlFor="item_name">Name</label>
+          <label className='labels' htmlFor="item_name">Name</label>
           <input
             type="text"
             name="item_name"
@@ -91,7 +90,7 @@ const InventoryItemPopup: React.FC<InventoryItemPopupProps> = ({
         </div>
 
         <div className="inventory__items-popup-field">
-          <label htmlFor="item_amount">Amount</label>
+          <label className='labels' htmlFor="item_amount">Amount</label>
           <input
             type="number"
             name="item_amount"
@@ -104,7 +103,7 @@ const InventoryItemPopup: React.FC<InventoryItemPopupProps> = ({
         </div>
 
         <div className="inventory__items-popup-field">
-          <label htmlFor="item_capacity">Capacity</label>
+          <label className='labels' htmlFor="item_capacity">Capacity</label>
           <input
             type="number"
             name="item_capacity"
@@ -117,7 +116,7 @@ const InventoryItemPopup: React.FC<InventoryItemPopupProps> = ({
         </div>
 
         <div className="inventory__items-popup-field">
-          <label htmlFor="item_unit">Unit</label>
+          <label className='labels' htmlFor="item_unit">Unit</label>
           <input
             type="text"
             name="item_unit"

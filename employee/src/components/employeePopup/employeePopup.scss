@@ -16,7 +16,7 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    background-color: var(--GREEN-MED);
+    background-color: var(--POPUP);
     border: 2px solid var(--POPUP-OVERLAY);
     border-radius: 10px;
     width: 700px;
@@ -80,7 +80,7 @@
   
   .popup button {
     padding: 10px 20px;
-    background: var(--GREEN-DARK);
+    background: var(--CONFIRM);
     color: var(--TEXT-COLOR-LIGHT);
     border: none;
     border-radius: 5px;
@@ -90,4 +90,6 @@
   .popup button:first-child {
     background-color: var(--ACCENT-COLOR-DARK);
   }
-  
+  .labels{
+    color: var(--NORMALLY-BLACK)
+  }

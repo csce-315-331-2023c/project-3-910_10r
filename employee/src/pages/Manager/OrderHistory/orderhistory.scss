@@ -74,7 +74,7 @@
               background-color: var(--ON-HOVER); // Change background color on hover
             }
             &.selected {
-              background-color: var(--GREEN-DARK);
+              background-color: var(--SELECTED);
             }
             &.inactive{
                 pointer-events: none;

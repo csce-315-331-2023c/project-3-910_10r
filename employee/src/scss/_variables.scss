@@ -23,6 +23,9 @@
     --ACCENT-COLOR: hsl(0, 86%, 81%);
     --ACCENT-COLOR-LIGHT: hsl(0, 100%, 91%);
 
+    --POPUP: #CCE3DE;
+    --CONFIRM-COLOR: #F8A3A3;
+    --CONFIRM: #6B9080;
     --GREEN-LIGHT: #F6FFF8;
     --GREEN-MED: #CCE3DE;
     --GREEN-MED60: hsla(167, 29%, 85%, 0.60);
@@ -33,10 +36,13 @@
     --GRAY-LIGHT: #D9D9D9;
     --GRAY-MEDIAN: #9d9d9d;
     --GRAY-DARK: #7b7b7b;
+    --NORMALLY-BLACK:black;
+    --NORMALLY-WHITE:white;
 
     --TEXT-COLOR-LIGHT: white;
     --TEXT-COLOR-DARK: var(--GREEN-DARK);
-
+    --TO-GREEN: #0d6f06;
+    
     --SIDEBAR-BG-COLOR: #F6FFF8;
     --SELECTION-COLOR: blue;
 
@@ -48,7 +54,8 @@
     --ON-ACTIVE: rgb(206, 206, 206);
 
     --WHITE: #f9f9f9;
-
+    --SELECTED: #6B9080;
+    --GREEN-LIGHT-TO-BLACK: #CCE3DE;
     /* cashier side navigation bar colors */
     --RED: rgb(221, 175, 175);
     --GREEN: rgb(201, 236, 201);

@@ -142,7 +142,7 @@ const MenuItemPopup: React.FC<MenuItemPopupProps> = ({
 
             <div className='scroll-window'>
                 <div className="menu__items-popup-field">
-                    <label htmlFor="item_name">Name</label>
+                    <label style={{ color: "var(--GREEN-MED60)" }} htmlFor="item_name">Name</label>
                     <input
                         type="text"
                         name="item_name"
@@ -155,7 +155,7 @@ const MenuItemPopup: React.FC<MenuItemPopupProps> = ({
                 </div>
 
                 <div id="ingredients-field" className="menu__items-popup-field">
-                    <label>Ingredients</label>
+                    <label style={{ color: "var(--GREEN-MED60)" }} >Ingredients</label>
                     <div className='ingredients-container'>
                     {displayedIngredients.map((ingredient, index) => (
                         <IngredientField
@@ -173,14 +173,14 @@ const MenuItemPopup: React.FC<MenuItemPopupProps> = ({
                         <FontAwesomeIcon
                             icon="square-plus"
                             size="2x"
-                            style={{ color: "#0d6f06", cursor: "pointer" }}
+                            style={{ color: "var(--TO-GREEN)", cursor: "pointer" }}
                             onClick={handleAddIngredient}
                         />
                     </i>
                 </div>
 
                 <div className="menu__items-popup-field">
-                    <label htmlFor="price">Price</label>
+                    <label style={{ color: "var(--GREEN-MED60)" }}  htmlFor="price">Price</label>
                     <input
                         type="number"
                         name="price"
@@ -193,7 +193,7 @@ const MenuItemPopup: React.FC<MenuItemPopupProps> = ({
                 </div>
 
                 <div className="menu__items-popup-field">
-                    <label htmlFor="category">Category</label>
+                    <label style={{ color: "var(--GREEN-MED60)" }}  htmlFor="category">Category</label>
                     <select
                         value={category}
                         name="category"

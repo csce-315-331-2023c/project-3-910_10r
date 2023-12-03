@@ -17,7 +17,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1002;
-        background-color: var(--TEXT-COLOR-LIGHT);
+        background-color: var(--NORMALLY-WHITE);
         width: clamp(400px, 70vw, 600px);
         box-shadow: var(--LOGIN-SHADOW);
         border-radius: var(--LOGIN-BORDER-RADIUS);
@@ -29,7 +29,7 @@
         flex-flow: column nowrap;
 
         > button {
-            color: var(--GREEN-DARK);
+            color: var(--NORMALLY-BLACK);
             font-size: 2.5rem;
             width: 36px;
             height: 36px;

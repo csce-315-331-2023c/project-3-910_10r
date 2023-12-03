@@ -147,13 +147,13 @@ function Employee() {
     
 
   return (
-    <div style={{ position: "relative" }}>
+    <div className = "background" style={{ position: "relative"}}>
     {(loadedM && loadedE) ? (
       <div>
       <div className="section">
           <button className="section-icon-button" onClick={() => openEmployeePopup("", "Manager")}>
             <i>
-              <FontAwesomeIcon icon="square-plus" size="2x" style={{color: "#0d6f06",}} />
+              <FontAwesomeIcon icon="square-plus" size="2x" style={{color: "var(--GREEN-DARK)"}} />
             </i>
           </button>
         <h1>Managers:</h1>
@@ -173,7 +173,7 @@ function Employee() {
       <div className="section">
           <button className="section-icon-button" onClick={() => openEmployeePopup("", "Employee")}>
             <i>
-              <FontAwesomeIcon icon="square-plus" size="2x" style={{color: "#0d6f06",}} />
+              <FontAwesomeIcon icon="square-plus" size="2x" style={{color: "var(--GREEN-DARK)"}} />
             </i>
           </button>
         <h2>Employees:</h2>

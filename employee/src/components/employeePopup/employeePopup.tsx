@@ -144,22 +144,22 @@ const EmployeePopup: React.FC<Props> = ({ isOpen, onClose, initialData}) => {
             ) : (
               // Show input fields and buttons if not confirmed
               <>
-                <label>
+                <label className="labels">
                   Name:
                   <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                 </label>
-                <label>
+                <label className="labels">
                   Position:
                   <select value={position} onChange={(e) => setPosition(e.target.value)}>
                     <option value="Manager">Manager</option>
                     <option value="Employee">Employee</option>
                   </select>
                 </label>
-                <label>
+                <label className="labels">
                   Hours per Week:
                   <input type="number" value={hoursPerWeek} onChange={(e) => setHoursPerWeek(e.target.value)} />
                 </label>
-                <label>
+                <label className="labels">
                   Hourly Pay:
                   <input type="number" value={hourlyPay} onChange={(e) => setHourlyPay(e.target.value)} />
                 </label>
