@@ -20,6 +20,7 @@ const InventoryPopup: React.FC<InventoryPopupProps> = ({
     const [amount, setAmount] = useState('');
     const [capacity, setCapacity] = useState('');
     const [unit, setUnit] = useState('');
+    const [topping, setTopping] = useState(false);
   
     const handleSubmit = (event: React.FormEvent) => {
       event.preventDefault();
@@ -31,6 +32,7 @@ const InventoryPopup: React.FC<InventoryPopupProps> = ({
         capacity,
         unit,
         alert: false, // You might want to set this to a default value
+        topping
       })
         .then((response) => {
           console.log(response.data);
@@ -102,6 +104,19 @@ const InventoryPopup: React.FC<InventoryPopupProps> = ({
               required
               autoComplete="off"
               onChange={(e) => setUnit(e.target.value)} // Handle changes and update state
+            />
+          </div>
+
+          <div className="inventory__items-popup-field inv-topping">
+            <label htmlFor="item_topping">Topping</label>
+            <input
+              type="checkbox"
+              name="item_topping"
+              id="item_topping"
+              defaultChecked={topping} 
+              required
+              autoComplete="off"
+              onChange={(e) => setTopping(Boolean(e.target.value))} // Handle changes and update state
             />
           </div>
   

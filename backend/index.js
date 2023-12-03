@@ -70,7 +70,7 @@ app.get("/oauth", (req, res) => {
 
 // gets all inventory items
 app.get("/inventory", (req, res) => {
-  let command = "SELECT name, alert, amount, capacity, unit FROM inventory;";
+  let command = "SELECT name, alert, amount, capacity, unit, topping FROM inventory;";
     
   pool.query(command)
   .then((query_res) => {
@@ -129,11 +129,11 @@ app.put("/inventory/editItem", (req, res) => {
   const itemName = req.query.parameter; // The name of the item to be edited
   const editedItem = req.body; // Assuming you pass the edited item data in the request body as JSON
 
-  const { name, amount, capacity, unit } = editedItem;
+  const { name, amount, capacity, unit, topping } = editedItem;
 
   // Create a SQL command to update the inventory item
-  const command = `UPDATE inventory SET name=$1, amount=$2, capacity=$3, unit=$4 WHERE name=$5;`;
-  const values = [name, amount, capacity, unit, itemName];
+  const command = `UPDATE inventory SET name=$1, amount=$2, capacity=$3, unit=$4, topping=$5 WHERE name=$6;`;
+  const values = [name, amount, capacity, unit, topping, itemName];
 
   pool.query(command, values)
     .then((query_res) => {
@@ -149,14 +149,14 @@ app.put("/inventory/editItem", (req, res) => {
 
 // Create a route for adding a new item to the inventory
 app.post("/inventory/addItem", (req, res) => {
-  const { name, amount, capacity, unit, alert } = req.body;
+  const { name, amount, capacity, unit, alert, topping } = req.body;
 
   // Construct the SQL query to insert a new item into the inventory
   const command = `
-    INSERT INTO inventory (name, amount, capacity, unit, alert)
-    VALUES ($1, $2, $3, $4, $5);
+    INSERT INTO inventory (name, amount, capacity, unit, alert, topping)
+    VALUES ($1, $2, $3, $4, $5, $6);
   `;
-  const values = [name, amount, capacity, unit, alert];
+  const values = [name, amount, capacity, unit, alert, topping];
 
   // Execute the query
   pool.query(command, values)
