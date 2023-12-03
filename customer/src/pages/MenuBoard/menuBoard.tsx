@@ -132,7 +132,9 @@ function MenuBoard({setMenuFalse, setOrderFalse, menuToOrderPage} : MenuBoardPro
                   </div>
                 </div>
               </div>
+              <div className='centerContainer'>
               <ToOrderButton ToOrderPage = {menuToOrderPage}></ToOrderButton>
+              </div>
           </div>
       </div>
   );

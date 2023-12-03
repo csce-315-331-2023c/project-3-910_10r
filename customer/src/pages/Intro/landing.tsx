@@ -21,6 +21,7 @@ function IntroPage({isReadyToOrder, isLookingAtMenu} : IntroPageProps) {
           {/* Your buttons or additional content can go here */}
         </div>
         <div>
+            <p className='menuParagraph'>View Menu</p>
             <MenuBoardButton setMenuPage = {isLookingAtMenu}></MenuBoardButton>
             <Carousel data = {{slides}}/>
             <p className='orderParagraph'>Ready to Order?</p>

@@ -1,3 +1,9 @@
+.centerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;  // Set to 100% of the viewport height or adjust as needed
+}
 .outer-container {
     min-height: 100vh;
     height: max(100vh, auto);

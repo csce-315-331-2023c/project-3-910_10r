@@ -30,17 +30,17 @@ const employeeColors: string[] = [
     "--ACCENT-COLOR-DARK", "--ACCENT-COLOR", '--ACCENT-COLOR-LIGHT',
     "--GREEN-LIGHT", "--GREEN-MED", "--GREEN-MED60", '--GREEN-DARK', "--GREEN-DARK40", "--GREEN-GRAY",
     "--TEXT-COLOR-LIGHT",
-    "--SIDEBAR-BG-COLOR", "--SELECTION-COLOR",
+    "--SIDEBAR-BG-COLOR", "--SELECTION-COLOR","--SELECTED","--GREEN-LIGHT-TO-BLACK",
     "--ERROR-COLOR",
     "--ON-HOVER", "--ON-ACTIVE",
     "--WHITE",
     "--GRAY-DARK", "--GRAY-MEDIAN", "--GRAY-LIGHT",
-    "--RED", "--GREEN", "--BLUE", "--ORANGE", "--PURPLE", "--PINK", "--SKY-BLUE", "--YELLOW"
+    "--RED", "--GREEN", "--BLUE", "--ORANGE", "--PURPLE", "--PINK", "--SKY-BLUE", "--YELLOW", "--CONFIRM-COLOR", "--CONFIRM","--POPUP", "--NORMALLY-BLACK", "--NORMALLY-WHITE"
 ];
 
 /* TODO: Decide which colors go into the black/white arrays */
-const employeeColorsDark: string[] = [];
-const employeeColorsLight: string[] = [];
+const employeeColorsDark: string[] = ["--GREEN-DARK", "--POPUP", "--NORMALLY-WHITE"];
+const employeeColorsLight: string[] = [ "--NORMALLY-BLACK","--GREEN-MED60", "--ACCENT-COLOR-DARK", "--ACCENT-COLOR", '--ACCENT-COLOR-LIGHT', "--RED", "--GREEN", "--BLUE", "--ORANGE", "--PURPLE", "--PINK", "--SKY-BLUE", "--YELLOW", "--GRAY-LIGHT"];
 
 export {employeeColors, employeeColorsDark, employeeColorsLight};
 
@@ -91,4 +91,13 @@ export const setContrast = (colorDark: string[], colorLight: string[]) => {
         document.documentElement.style.setProperty(color, "#fafafa");
     });
     document.documentElement.style.setProperty("--CONFIRM-COLOR", "red");
+    document.documentElement.style.setProperty("--ACCENT-COLOR", "red");
+    document.documentElement.style.setProperty("--ACCENT-COLOR-DARK", "red");
+    document.documentElement.style.setProperty("--CONFIRM", "#81aef7");
+    document.documentElement.style.setProperty("--POPUP", "black");
+    document.documentElement.style.setProperty("--NORMALLY-BLACK", "white");
+    document.documentElement.style.setProperty("--NORMALLY-WHITE", "black");
+    document.documentElement.style.setProperty("--TO-GREEN", "green");
+    document.documentElement.style.setProperty("--SELECTED", "#c9c6c5");
+    document.documentElement.style.setProperty("--GREEN-LIGHT-TO-BLACK", "black");
 }

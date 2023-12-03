@@ -1,0 +1,15 @@
+.menu-to-order-button{
+    width: 600px;
+    height: 150px;
+    font-size: xx-large;
+    border:none;
+    font-family: "Rock Salt", cursive;
+    border-radius: 10px;
+}
+
+.menu-to-order-button:hover{
+    transition-duration: 1s;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+}
