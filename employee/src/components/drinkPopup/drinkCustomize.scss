@@ -71,7 +71,7 @@
 .customize, .low{
     width: 50vw;
     height: 90vh;
-    background-color: var(--GREEN-MED);
+    background-color: var(--GREEN-MEDIAN);
     left: 20vw;
     position: absolute;
     top: 2vh;
@@ -151,7 +151,7 @@
 
 .customize-exit{
     position: absolute;
-    background-color: var(--GREEN-MED);
+    background-color: var(--GREEN-MEDIAN);
     border: none;
     // font-size: 40px;
     font-size: var( --FONT-MED);

@@ -28,7 +28,7 @@ export {customerColors, customerColorsDark, customerColorsLight};
 // missing text-color-dark, popup-overlay (on purpose)
 const employeeColors: string[] = [
     "--ACCENT-COLOR-DARK", "--ACCENT-COLOR", '--ACCENT-COLOR-LIGHT',
-    "--GREEN-LIGHT", "--GREEN-MED", "--GREEN-MED60", '--GREEN-DARK', "--GREEN-DARK40", "--GREEN-GRAY", "--RED-PINK",
+    "--GREEN-LIGHT", "--GREEN-MED", "--GREEN-MEDIAN", "--GREEN-MED60", '--GREEN-DARK', "--GREEN-DARK40", "--GREEN-GRAY", "--RED-PINK",
     "--TEXT-COLOR-LIGHT",
     "--SIDEBAR-BG-COLOR", "--SELECTION-COLOR",
     "--ERROR-COLOR",
@@ -41,7 +41,7 @@ const employeeColors: string[] = [
 /* TODO: Decide which colors go into the black/white arrays */
 const employeeColorsDark: string[] = ["--BLACK", "--GREEN-MED", "--RED-PINK", "--GREEN-DARK"];
 const employeeColorsLight: string[] = ["--GRAY-LIGHT",
-"--RED", "--GREEN", "--BLUE", "--ORANGE", "--PURPLE", "--PINK", "--SKY-BLUE", "--YELLOW", "--WHITE", "--GREEN-LIGHT"];
+"--RED", "--GREEN", "--BLUE", "--ORANGE", "--PURPLE", "--PINK", "--SKY-BLUE", "--YELLOW", "--WHITE", "--GREEN-LIGHT", "--GREEN-MEDIAN"];
 
 export {employeeColors, employeeColorsDark, employeeColorsLight};
 
