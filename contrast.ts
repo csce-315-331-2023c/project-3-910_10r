@@ -109,4 +109,5 @@ export const setContrast = (colorDark: string[], colorLight: string[]) => {
     document.documentElement.style.setProperty("--TO-GREEN", "green");
     document.documentElement.style.setProperty("--SELECTED", "#c9c6c5");
     document.documentElement.style.setProperty("--GREEN-LIGHT-TO-BLACK", "black");
+    sessionStorage.setItem("contrastApplied", JSON.stringify(true));
 }
