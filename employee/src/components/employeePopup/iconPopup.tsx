@@ -11,6 +11,11 @@ interface Props {
   color: string;
 }
 
+/**
+ * Icon popup component to display icon popup
+ * @param props Props for IconPopup component
+ * @returns IconPopup component or null if isOpen is false
+ */
 const IconPopup: React.FC<Props> = ({ isOpen, onClose }) => {
   if (!isOpen) {
     return null;

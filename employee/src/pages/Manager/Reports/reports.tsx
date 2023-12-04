@@ -23,6 +23,10 @@ const API: AxiosInstance = axios.create({
 // Register the locale to use with react-datepicker
 registerLocale("en-GB", enGB);
 
+/**
+ * Reports component: Displays What Sales Together and Excess Report based on time increment selected
+ * @returns {JSX.Element} Reports Component
+ */
 const Reports = () => {
   const [selectedOption, setSelectedOption] = useState("last24");
   const [startDate, setStartDate] = useState<string | null>(null); // Specify the type
@@ -46,6 +50,9 @@ const Reports = () => {
     setInventoryInfo({});
   }*/
 
+  /**
+   * Fetches the data for the last 24 hours
+   */
   const fetch24HoursData = () => {
     const currentDate = new Date();
     const beginningDate = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000); // 24 hours ago
@@ -64,6 +71,9 @@ const Reports = () => {
     }
   };
 
+  /**
+   * Fetches the data for the last 7 days
+   */
   const fetch7DaysData = () => {
     const currentDate = new Date();
     const beginningDate = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000); // 7 days ago
@@ -81,6 +91,10 @@ const Reports = () => {
       console.error("Formatted beginning date is null");
     }
   };
+
+  /**
+   * Fetches data for the last 30 days
+   */
   const fetch30DaysData = () => {
     const currentDate = new Date();
     const beginningDate = new Date(currentDate.getTime() - 30 * 24 * 60 * 60 * 1000); // 30 days ago
@@ -99,6 +113,9 @@ const Reports = () => {
     }
   };
 
+  /**
+   * Fetches data for the last 180 days
+   */
   const fetch180DaysData = () => {
     const currentDate = new Date();
     const beginningDate = new Date(currentDate.getTime() - 180 * 24 * 60 * 60 * 1000); // 180 days ago
@@ -117,6 +134,9 @@ const Reports = () => {
     }
   };
 
+  /**
+   * Fetches data for the last year
+   */
   const fetch365DaysData = () => {
     const currentDate = new Date();
     const beginningDate = new Date(currentDate.getTime() - 365 * 24 * 60 * 60 * 1000); // 365 days ago
@@ -135,6 +155,10 @@ const Reports = () => {
     }
   };
 
+  /**
+   * Handles the option change for the dropdown of time increments
+   * @param e Event object
+   */
   const handleOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
 
@@ -167,6 +191,11 @@ const Reports = () => {
     }
   };
 
+  /**
+   * Converts the date into a string YYYY-MM-DD
+   * @param date Date object to convert
+   * @returns Formatted date string or null
+   */
   const formatDate = (date: Date | null): string | null => {
     if (date) {
       const year = date.getFullYear();
@@ -177,6 +206,11 @@ const Reports = () => {
     return null;
   };
 
+  /**
+   * Fetches the excess report based off of time increment
+   * @param beginningDate Beginning date for the range
+   * @param endDate End date for the range
+   */
   const fetchExcessData = async (beginningDate: string, endDate: string) => {
     try{
       const inventoryInfo2: { [key: string]: number } = {};
@@ -215,8 +249,6 @@ const Reports = () => {
     delete drinkCountMap[0];
 
 
-
-    // Fetch inventory information
     const inventoryResponse = await API.get("/reports/getExcessReport/inventoryInfo",{});
         const invdata = inventoryResponse.data;
   
@@ -310,6 +342,10 @@ const Reports = () => {
     calculateTotals();
   }, [ingredientsMap, inventoryInfo]); */
 
+
+  /**
+   * Calculate totals based off of inventory and ingredients maps from recipes
+   */
   const calculateTotals = () => {
     setExcessIngredients([]);
     const excess = [];
@@ -331,6 +367,12 @@ const Reports = () => {
     //setLoadingExcess(false);
   }
 
+
+  /**
+   * Fetch data for what sales together based off of the date range
+   * @param beginningDate Beginning date for the range
+   * @param endDate End date for the range
+   */
   const fetchData = async (beginningDate: string, endDate: string) => {
     try {
       const drinkNamesPromise = API.get("/managers/drinknames");
@@ -402,7 +444,9 @@ const Reports = () => {
   
   
   
-
+  /**
+   * Handle the submission from CustomTimePopup component
+   */
   const handleCustomTimeSubmit = () => {
     if (startDate && endDate) {
       setStartDate(formatDate(new Date(startDate)));

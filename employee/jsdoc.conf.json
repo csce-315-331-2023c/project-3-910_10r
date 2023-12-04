@@ -1,0 +1,12 @@
+{
+    "source": {
+      "include": ["src/components/employeePopup/employeePopup.tsx", "src/pages/Manager/Employees/employees.tsx"],
+      "includePattern": ".+\\.tsx?$",
+      "excludePattern": "(node_modules/|docs)"
+    },
+    "opts": {
+      "recurse": true,
+      "destination": "./docs",
+      "plugins": ["node_modules/typescript"]
+    }
+  }

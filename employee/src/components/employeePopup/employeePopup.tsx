@@ -26,6 +26,11 @@ interface Props {
   initialData: EmployeeData;
 }
 
+/**
+ * EmployeePopup component to display employee information when selected
+ * @param props Props for the EmployeePopup component
+ * @returns EmployeePopup or null if isOpen is false
+ */
 const EmployeePopup: React.FC<Props> = ({ isOpen, onClose, initialData}) => {
   const [name, setName] = useState(initialData.name);
   const [position, setPosition] = useState(initialData.position);
@@ -64,6 +69,9 @@ const EmployeePopup: React.FC<Props> = ({ isOpen, onClose, initialData}) => {
   }, [initialData.name]);
   
 
+  /**
+   * Function to handle removal of an employee from database
+   */
   const handleRemove = () => {
     API.put('/employees/remove', {name,})
       .then((response) => {
@@ -76,6 +84,9 @@ const EmployeePopup: React.FC<Props> = ({ isOpen, onClose, initialData}) => {
       })
   };
 
+  /**
+   * Function to handle adding an employee to database or editing the employee
+   */
   const handleSubmit = () => {
     // Make the PUT request to update the database
     const isManager = position === "Manager";
