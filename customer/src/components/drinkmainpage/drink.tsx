@@ -122,7 +122,7 @@ const drink = ({
     cursor: `pointer`,
   };
   const buttonStyleDimmed = {
-    backgroundImage: `url('../../src/assets/drinkImgs/${children}.png')`,
+    backgroundImage: `url(${imgObj[imgName]})`,
     filter: "brightness(30%)",
   };
 
