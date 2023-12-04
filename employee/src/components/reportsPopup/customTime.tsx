@@ -38,7 +38,7 @@ const CustomTimePopup: React.FC<CustomTimePopupProps> = ({
             </button>
         </div>
             <label>
-            Start Date: 
+            <p style={{color: "var(--NORMALLY-BLACK)"}} >Start Date: </p>
             <DatePicker
             selected={startDate}
             onChange={(date) => onStartDateChange(date)}
@@ -49,7 +49,7 @@ const CustomTimePopup: React.FC<CustomTimePopupProps> = ({
             />
         </label>
         <label>
-            End Date:
+            <p style={{color: "var(--NORMALLY-BLACK)"}}>End Date:</p>
             <DatePicker
             selected={endDate}
             onChange={(date) => onEndDateChange(date)}
