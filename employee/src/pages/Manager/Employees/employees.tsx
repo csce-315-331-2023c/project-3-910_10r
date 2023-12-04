@@ -176,7 +176,7 @@ function Employee() {
               <FontAwesomeIcon icon="square-plus" size="2x" style={{color: "var(--GREEN-DARK)"}} />
             </i>
           </button>
-        <h2>Employees:</h2>
+        <h2>Cashiers:</h2>
       <ul className="ullabel">
           {employeeNames.map((employeeName, index) => (
                 <li key={index} className="lisection">

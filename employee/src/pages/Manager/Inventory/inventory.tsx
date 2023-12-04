@@ -21,6 +21,7 @@ const Inventory = () => {
     amount: number;
     capacity: number;
     unit: string;
+    topping: boolean;
   }[]>([]);
 
   const [displayedInventory, setDisplayedInventory] = useState<{
@@ -29,6 +30,7 @@ const Inventory = () => {
     amount: number;
     capacity: number;
     unit: string;
+    topping: boolean;
   }[]>([]);
 
   useEffect(() => {
@@ -41,12 +43,14 @@ const Inventory = () => {
           amount: number;
           capacity: number;
           unit: string;
+          topping: boolean;
         }[] = response.data.map((item: {
           name: string;
           alert: boolean;
           amount: number;
           capacity: number;
           unit: string;
+          topping: boolean;
         }) => ({
           ...item,
           alert: (item.amount / item.capacity) <= 0.1,
@@ -158,6 +162,7 @@ const Inventory = () => {
             amount={item.amount}
             capacity={item.capacity}
             unit={item.unit}
+            topping={item.topping}
           />
         ))}
       </div>

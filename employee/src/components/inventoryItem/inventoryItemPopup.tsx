@@ -12,6 +12,7 @@ interface InventoryItemPopupProps {
   amount: number;
   capacity: number;
   unit: string;
+  topping: boolean;
   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -20,6 +21,7 @@ const InventoryItemPopup: React.FC<InventoryItemPopupProps> = ({
   amount,
   capacity,
   unit,
+  topping,
   setShowPopup
 }) => {
     // Create state variables to hold the edited values
@@ -27,6 +29,7 @@ const InventoryItemPopup: React.FC<InventoryItemPopupProps> = ({
     const [editedAmount, setEditedAmount] = useState(amount);
     const [editedCapacity, setEditedCapacity] = useState(capacity);
     const [editedUnit, setEditedUnit] = useState(unit);
+    const [editedTopping, setEditedTopping] = useState(topping);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -57,7 +60,10 @@ const InventoryItemPopup: React.FC<InventoryItemPopupProps> = ({
             amount: editedAmount,
             capacity: editedCapacity,
             unit: editedUnit,
+            topping: editedTopping
         };
+
+        console.log(editedItem);
     
         // Send a PUT request to update the item in the inventory
         API.put(`/inventory/editItem?parameter=${name}`, editedItem)
@@ -69,6 +75,10 @@ const InventoryItemPopup: React.FC<InventoryItemPopupProps> = ({
             });
     
         closePopup();
+    };
+
+    const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setEditedTopping(e.target.checked);
     };
 
   return (
@@ -125,6 +135,19 @@ const InventoryItemPopup: React.FC<InventoryItemPopupProps> = ({
             required
             autoComplete="off"
             onChange={(e) => setEditedUnit(e.target.value)} // Handle changes and update state
+          />
+        </div>
+
+        <div className="inventory__items-popup-field inv-topping">
+          <label htmlFor="item_topping">Topping</label>
+          <input
+            type="checkbox"
+            name="item_topping"
+            id="item_topping"
+            defaultChecked={topping} 
+            required
+            autoComplete="off"
+            onChange={handleCheckboxChange} // Handle changes and update state
           />
         </div>
 

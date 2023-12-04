@@ -7,9 +7,10 @@ interface InventoryItemProps {
     amount: number;
     capacity: number;
     unit: string;
+    topping: boolean;
 }  
 
-const InventoryItem: React.FC<InventoryItemProps> = ({ name, alert, amount, capacity, unit }) => {
+const InventoryItem: React.FC<InventoryItemProps> = ({ name, alert, amount, capacity, unit, topping }) => {
   const [showPopup, setShowPopup] = useState(false);
 
   const handlePopup  = () => {
@@ -24,6 +25,7 @@ const InventoryItem: React.FC<InventoryItemProps> = ({ name, alert, amount, capa
         amount={amount}
         capacity={capacity}
         unit={unit}
+        topping={topping}
         setShowPopup={setShowPopup}
       />}
       

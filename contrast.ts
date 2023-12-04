@@ -28,12 +28,12 @@ export {customerColors, customerColorsDark, customerColorsLight};
 // missing text-color-dark, popup-overlay (on purpose)
 const employeeColors: string[] = [
     "--ACCENT-COLOR-DARK", "--ACCENT-COLOR", '--ACCENT-COLOR-LIGHT',
-    "--GREEN-LIGHT", "--GREEN-MED", "--GREEN-MED60", '--GREEN-DARK', "--GREEN-DARK40", "--GREEN-GRAY",
+    "--GREEN-LIGHT", "--GREEN-MED", "--GREEN-MEDIAN", "--GREEN-MED60", '--GREEN-DARK', "--GREEN-DARK40", "--GREEN-GRAY", "--RED-PINK",
     "--TEXT-COLOR-LIGHT",
     "--SIDEBAR-BG-COLOR", "--SELECTION-COLOR","--SELECTED","--GREEN-LIGHT-TO-BLACK",
     "--ERROR-COLOR",
     "--ON-HOVER", "--ON-ACTIVE",
-    "--WHITE",
+    "--WHITE", "--BLACK",
     "--GRAY-DARK", "--GRAY-MEDIAN", "--GRAY-LIGHT",
     "--RED", "--GREEN", "--BLUE", "--ORANGE", "--PURPLE", "--PINK", "--SKY-BLUE", "--YELLOW", "--CONFIRM-COLOR", "--CONFIRM","--POPUP", "--NORMALLY-BLACK", "--NORMALLY-WHITE"
 ];
@@ -59,10 +59,17 @@ export {employeeColors, employeeColorsDark, employeeColorsLight};
     NOTE: you must run this function first (and only once) to store the arrays locally
 */
 export const getOrigColors = (colorVar: string[]) => {
-    const origColors: string[] = [];
-    colorVar.forEach((color) => {
-        origColors.push(getComputedStyle(document.documentElement).getPropertyValue(color));
-    });
+    let origColors: string[] = [];
+
+    if(sessionStorage.getItem("origColors")) {
+        origColors = JSON.parse(sessionStorage.getItem("origColors")!);
+    }
+    else {
+        colorVar.forEach((color) => {
+            origColors.push(getComputedStyle(document.documentElement).getPropertyValue(color));
+        });
+        sessionStorage.setItem("origColors", JSON.stringify(origColors));
+    }
 
     return origColors;
 }
@@ -76,6 +83,8 @@ export const setOrigColors = (colorVar: string[], origColors: string[]) => {
     for(let i = 0; i < colorVar.length; i++) {
         document.documentElement.style.setProperty(colorVar[i], origColors[i]);
     }
+
+    sessionStorage.setItem("contrastApplied", JSON.stringify(false));
 }
 
 /* 

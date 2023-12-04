@@ -14,6 +14,12 @@
     color: black;
 }
 
+.customer-header{
+    z-index:10;
+    background-color: white;
+    position: relative;
+}
+
 .header-image{
     width: auto;
     height: 176px;
@@ -40,6 +46,7 @@
     transition: background-color 0.3s, opacity 0.3s, color 0.3s; /* Smooth transition effects */
     opacity: .7;
     cursor: pointer;
+    z-index:2;
 }
 
 .order-button:hover{

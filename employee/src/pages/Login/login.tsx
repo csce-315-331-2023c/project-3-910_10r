@@ -71,6 +71,31 @@ const Login = ({setIsManager, setIsLogin, setIsCashier, setPayPage} : Props) => 
         }
     }, [isSubmitClicked, formData.username, formData.password]);
 
+    // This is Kevin's attempt at centering the Sign in with Google Button
+    /* useLayoutEffect(() => {
+
+        console.log("hey");
+
+        const googleContainer = document.querySelector(".login__form-google iframe") as HTMLIFrameElement;
+        const googleButton = document.querySelector("#container") as HTMLDivElement;
+        const googleSVG = document.querySelector("svg") as SVGElement;
+
+        if (googleContainer) {
+            googleContainer.style.width = "100% !important";
+            googleContainer.style.margin = "0 !important";
+            googleContainer.style.padding = "0 !important";
+        }
+        
+        if (googleButton) {
+            googleButton.style.width = "100% !important";
+            googleButton.style.padding = "0 !important";
+        }
+        
+        if (googleSVG) {
+            googleSVG.style.transform = "scale(1.05) !important";
+        }
+    }, []); */
+
     return (
         <div className="login-container">
             <div className="login">
