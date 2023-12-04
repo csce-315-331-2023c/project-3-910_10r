@@ -40,7 +40,7 @@ const employeeColors: string[] = [
 
 /* TODO: Decide which colors go into the black/white arrays */
 const employeeColorsDark: string[] = ["--GREEN-DARK", "--POPUP", "--NORMALLY-WHITE"];
-const employeeColorsLight: string[] = [ "--NORMALLY-BLACK","--GREEN-MED60", "--ACCENT-COLOR-DARK", "--ACCENT-COLOR", '--ACCENT-COLOR-LIGHT', "--RED", "--GREEN", "--BLUE", "--ORANGE", "--PURPLE", "--PINK", "--SKY-BLUE", "--YELLOW", "--GRAY-LIGHT"];
+const employeeColorsLight: string[] = [ "--NORMALLY-BLACK","--GREEN-MED60", "--GREEN-MED", "--GREEN-LIGHT", "--ACCENT-COLOR-DARK", "--ACCENT-COLOR", '--ACCENT-COLOR-LIGHT', "--RED", "--GREEN", "--BLUE", "--ORANGE", "--PURPLE", "--PINK", "--SKY-BLUE", "--YELLOW", "--GRAY-LIGHT"];
 
 export {employeeColors, employeeColorsDark, employeeColorsLight};
 
