@@ -7,16 +7,16 @@
 // missing text-color-dark (on purpose)
 const customerColors: string[] = [
     "--ACCENT-COLOR-DARK", "--ACCENT-COLOR", '--ACCENT-COLOR-LIGHT',
-    "--GREEN-LIGHT", "--GREEN-MED", "--GREEN-MED60", '--GREEN-DARK', "--GREEN-DARK40",
+    "--GREEN-LIGHT", "--GREEN-MED", "--GREEN-MED60", "--GREEN-DARK", "--GREEN-DARK40",
     "--TEXT-COLOR-LIGHT",
     "--SIDEBAR-BG-COLOR", "--SELECTION-COLOR",
     "--ERROR-COLOR",
     "--ON-HOVER", "--ON-ACTIVE",
-    "--GRAY-DARK", "--GRAY-MED", "--GRAY-LIGHT", "--GRAY-XLIGHT", "--CONFIRM-COLOR", "--GREEN-DARK-TO-BLACK"
+    "--GRAY-DARK", "--GRAY-MED", "--GRAY-LIGHT", "--GRAY-XLIGHT", "--CONFIRM-COLOR"
 ];
 
 /* TODO: Decide which colors go into the black/white arrays */
-const customerColorsDark: string[] = ["--GRAY-DARK", "--GREEN-DARK-TO-BLACK", "--GREEN-DARK"];
+const customerColorsDark: string[] = ["--GRAY-DARK", "--GREEN-DARK"];
 const customerColorsLight: string[] = ["--ACCENT-COLOR", "--ACCENT-COLOR-LIGHT", "--GRAY-XLIGHT", "--GRAY-LIGHT", "--GREEN-MED"];
 
 export {customerColors, customerColorsDark, customerColorsLight};
