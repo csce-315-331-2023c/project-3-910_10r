@@ -12,11 +12,11 @@ const customerColors: string[] = [
     "--SIDEBAR-BG-COLOR", "--SELECTION-COLOR",
     "--ERROR-COLOR",
     "--ON-HOVER", "--ON-ACTIVE",
-    "--GRAY-DARK", "--GRAY-MED", "--GRAY-LIGHT", "--GRAY-XLIGHT", "--CONFIRM-COLOR"
+    "--GRAY-DARK", "--GRAY-MED", "--GRAY-LIGHT", "--GRAY-XLIGHT", "--CONFIRM-COLOR", "--GREEN-DARK-TO-BLACK"
 ];
 
 /* TODO: Decide which colors go into the black/white arrays */
-const customerColorsDark: string[] = ["--GRAY-DARK"];
+const customerColorsDark: string[] = ["--GRAY-DARK", "--GREEN-DARK-TO-BLACK", "--GREEN-DARK"];
 const customerColorsLight: string[] = ["--ACCENT-COLOR", "--ACCENT-COLOR-LIGHT", "--GRAY-XLIGHT", "--GRAY-LIGHT", "--GREEN-MED"];
 
 export {customerColors, customerColorsDark, customerColorsLight};
