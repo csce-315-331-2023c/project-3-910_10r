@@ -107,7 +107,7 @@
 
 .ice-button-selected, .sugar-button-selected{
     min-height: 45px;
-    background-color: var(--GREEN-DARK);
+    background-color: var(--GREEN-DARK) !important;
     color: white;
 }
 
