@@ -115,7 +115,7 @@ const drink = ({
     console.log(imgName);
   }
 
-  console.log(imgName);
+  console.log("final name ",imgName);
 
   const buttonStyle = {
     backgroundImage: `url(${imgObj[imgName]})`,
