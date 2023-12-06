@@ -1,0 +1,11 @@
+{
+    "source": {
+      "include": ["./"],
+      "exclude": ["node_modules"]
+    },
+    "opts": {
+        "recurse": true,
+        "destination": "./doc",
+        "access": "all" 
+    }
+  }

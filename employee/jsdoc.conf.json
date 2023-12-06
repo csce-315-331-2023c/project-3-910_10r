@@ -1,0 +1,25 @@
+  {
+    "source": {
+      "entryPoints": [
+        "src/**/*.ts",
+        "src/**/*.tsx"
+      ],
+      "include": ["src/pages/Manager/Employees/employees.tsx"],
+      "exclude": ["node_modules", "**/*.spec.ts"],
+      "includePattern": ".+\\.tsx?$",
+      "excludePattern": "(node_modules/|docs)",
+      "mode": "file",
+      "excludeNotImported": false
+    },
+    "opts": {
+      "destination": "./docs",
+      "recurse": true,
+      "allowUnknownTags": true
+    },
+    "plugins": ["node_modules/typescript"],
+      "typescript": {
+        "mode": "file",
+        "module": "CommonJS",
+        "target": "es6"
+      }      
+  }

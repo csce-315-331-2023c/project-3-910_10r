@@ -18,6 +18,11 @@ process.on("SIGINT", function () {
   process.exit(0);
 });
 
+/**
+ * Responds with a message confirming the server is running.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
 app.get('/', (req, res) => {
   res.send('Server running!');
 });
@@ -27,6 +32,12 @@ app.use('/cashier', cashierRouter)
 app.use('/report', reportRouter)
 
 // gets the manager boolean based on a given username and password
+/**
+ * Retrieves the manager boolean based on a given username and password.
+ * @function login
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/login", (req, res) => {
     let command = "SELECT manager FROM employee WHERE " + req.query.parameter +";";
 
@@ -47,7 +58,12 @@ app.get("/login", (req, res) => {
     });
 })
 
-//check log in name for oauth
+/**
+ * Checks the log in name for oauth
+ * @function oauth
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/oauth", (req, res) => {
   let command = "SELECT manager FROM employee WHERE " + req.query.parameter +";";
     
@@ -68,7 +84,12 @@ app.get("/oauth", (req, res) => {
   });
 })
 
-// gets all inventory items
+/**
+ * Gets all inventory items
+ * @function inventory
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/inventory", (req, res) => {
   let command = "SELECT name, alert, amount, capacity, unit, topping FROM inventory ORDER BY name;";
     
@@ -84,7 +105,12 @@ app.get("/inventory", (req, res) => {
   });
 })
 
-// updates alerts appropiately
+/**
+ * Updates alerts appropriately
+ * @function updateAlert
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.put("/inventory/updateAlert", (req, res) => {
   const itemName = req.query.parameter;
   const newAlertValue = req.body.alert; // Assuming you pass the new alert value in the request body as JSON
@@ -105,7 +131,12 @@ app.put("/inventory/updateAlert", (req, res) => {
     });
 });
 
-// Delete an item from the inventory
+/**
+ * Deletes an item from the inventory
+ * @function deleteItem
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.delete("/inventory/deleteItem", (req, res) => {
   const itemName = req.query.parameter; // Get the item name from the query parameter
 
@@ -124,7 +155,12 @@ app.delete("/inventory/deleteItem", (req, res) => {
     });
 });
 
-// edit an item in the invetory
+/**
+ * Edit an item in the inventory
+ * @function editItem
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.put("/inventory/editItem", (req, res) => {
   const itemName = req.query.parameter; // The name of the item to be edited
   const editedItem = req.body; // Assuming you pass the edited item data in the request body as JSON
@@ -147,7 +183,12 @@ app.put("/inventory/editItem", (req, res) => {
     });
 });
 
-// Create a route for adding a new item to the inventory
+/**
+ * Create a route for adding a new item to the inventory
+ * @function addItem
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.post("/inventory/addItem", (req, res) => {
   const { name, amount, capacity, unit, alert, topping } = req.body;
 
@@ -172,7 +213,12 @@ app.post("/inventory/addItem", (req, res) => {
     });
 });
 
-// Get all categories and their associated drinks
+/**
+ * Gets all categories and their associated drinks
+ * @function drinkCategoryAndDrinks
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/menus/drinkCategoryAndDrinks", (req, res) => {
   let command = "SELECT category, drinkname FROM recipes;";
   const categoryMap = {};
@@ -205,8 +251,12 @@ app.get("/menus/drinkCategoryAndDrinks", (req, res) => {
     });
 });
 
-
-// gets all the employees for the employee page
+/**
+ * Gets all the employees for the employee page
+ * @function employeesNames
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/employees/names", (req, res) => {
   let command = "SELECT * FROM employee WHERE manager = false;";
   let names = [];
@@ -226,7 +276,11 @@ app.get("/employees/names", (req, res) => {
     });
 });
 
-// gets all the managers for the employee page
+/**
+ * Gets all the managers for the employee page
+ * @function managersNames
+ * @param {object} res - The response object
+ */
 app.get("/managers/names", (req, res) => {
   let command = "SELECT * FROM employee WHERE manager = true;";
   let names = [];
@@ -246,8 +300,12 @@ app.get("/managers/names", (req, res) => {
     });
 });
 
-
-//get the information about an employee for popup on employee page
+/**
+ * Gets the information about an employee for popup on employee page
+ * @function employeesInfo
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/employees/info", (req, res) => {
   let command = "SELECT * FROM employee WHERE name = '" + req.query.name + "';";
   //arraylist of strings
@@ -270,7 +328,12 @@ app.get("/employees/info", (req, res) => {
     });
 });
 
-//update employee database for edited employee
+/**
+ * Updates employee database for edited employee
+ * @function employeesEdit
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.put("/employees/edit", (req, res) => {
   // Extract the updated data from the request body
   const { name, position, hoursPerWeek, hourlyPay } = req.body;
@@ -299,7 +362,12 @@ app.put("/employees/edit", (req, res) => {
     });
 });
 
-//add new employee
+/**
+ * Add new employee to database
+ * @function employeesAdd
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.put("/employees/add", (req, res) => {
   // Extract the updated data from the request body
   const { name, position, password, hoursPerWeek, hourlyPay } = req.body;
@@ -322,7 +390,12 @@ app.put("/employees/add", (req, res) => {
     });
 });
 
-//remove employee
+/**
+ * Remove employee from database
+ * @function employeesRemove
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.put("/employees/remove", (req, res) => {
   // Extract the updated data from the request body
   const { name } = req.body;
@@ -344,6 +417,12 @@ app.put("/employees/remove", (req, res) => {
 });
 
 //get order history from filter
+/**
+ * Get order history from filter
+ * @function filter
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/orderHistory/filter", (req, res) => {
   const { startDate, endDate, drink, minPrice, maxPrice, page, pageSize } = req.query;
   const offset = (page - 1) * pageSize;
@@ -377,7 +456,12 @@ app.get("/orderHistory/filter", (req, res) => {
     });
 });
 
-//get all order history from db
+/**
+ * Get all order history from database
+ * @function totalOrderHistory
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/orderHistory/total", (req, res) => {
   const { page, pageSize } = req.query;
   const offset = (page - 1) * pageSize; // Calculate the offset for pagination
@@ -405,8 +489,12 @@ app.get("/orderHistory/total", (req, res) => {
     });
 });
 
-
-//gets drinkNames from recipes
+/**
+ * Gets drinkNames from recipes
+ * @function drinknames
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/managers/drinknames", (req, res) => {
   let command = "SELECT drinkname, recipeid FROM recipes;";
   const drinks = [];
@@ -424,7 +512,12 @@ app.get("/managers/drinknames", (req, res) => {
     });
 });
 
-//gets specific drinkid
+/**
+ * Gets specific drinkid from recipes db
+ * @function drinkid
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/managers/drinkid", (req, res) => {
   const { drink } = req.query;
   let command = "SELECT recipeid FROM recipes WHERE drinkname = '" + drink + "'";
@@ -449,7 +542,12 @@ app.get("/managers/drinkid", (req, res) => {
     });
 });
 
-//gets specific drinkName
+/**
+ * Gets specific drinkname from recipes
+ * @function drinkNameandPrice
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/managers/drinkNameandPrice", (req, res) => {
   const { drink } = req.query;
   let command = "SELECT drinkname, price FROM recipes WHERE recipeid = '" + drink + "'";
@@ -472,7 +570,12 @@ app.get("/managers/drinkNameandPrice", (req, res) => {
     });
 });
 
-//gets multiple:
+/**
+ * Gets multiple drinkids from recipes
+ * @function drinkids
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/managers/drinkids", (req, res) => {
   const { drinks } = req.query;
   // Ensure that "drinks" is an array
@@ -509,8 +612,12 @@ app.get("/managers/drinkids", (req, res) => {
     });
 });
 
-
-//get drinkids in specific time range for what sales together
+/**
+ * Gets drinkids in specific time range for what sales together from orders
+ * @function whatSalesTogether2
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/managers/whatSalesTogether", (req, res) => {
   const { beginningDate, endDate } = req.query;
   let command = "SELECT drink_id FROM orders WHERE date >= '" + beginningDate + "' AND date <= '"
@@ -536,6 +643,12 @@ app.get("/managers/whatSalesTogether", (req, res) => {
     });
 });
 
+/**
+ * Gets order data for excess report
+ * @function orderData2
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/reports/getExcessReport/orderData", (req, res) => {
   const { beginningDate, endDate } = req.query;
   let command = "SELECT drink_id FROM orders WHERE date >= '" + beginningDate + "' AND date <= '"
@@ -561,6 +674,12 @@ app.get("/reports/getExcessReport/orderData", (req, res) => {
     });
 });
 
+/**
+ * Gets recipe data for excess report of ingredients
+ * @function recipeData
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/reports/getExcessReport/recipeData", (req, res) => {
   const { drink } = req.query;
   let command =  "SELECT ingredient_names, ingredient_values FROM recipes WHERE recipeid = "
@@ -588,6 +707,12 @@ app.get("/reports/getExcessReport/recipeData", (req, res) => {
     });
 });
 
+/**
+ * Gets information about ingredients from inventory for excess report
+ * @function inventoryInfo
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/reports/getExcessReport/inventoryInfo", (req, res) => {
   const { drink } = req.query;
   let command =  "SELECT name, amount FROM inventory";
@@ -614,8 +739,12 @@ app.get("/reports/getExcessReport/inventoryInfo", (req, res) => {
     });
 });
 
-
-//get drinkids in specific time range for what sales together
+/**
+ * Gets drinkids in specific time range for what sales together
+ * @function whatSalesTogether
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/managers/whatSalesTogether", (req, res) => {
   const { beginningDate, endDate } = req.query;
   let command = "SELECT drink_id FROM orders WHERE date >= '" + beginningDate + "' AND date <= '"
@@ -641,6 +770,12 @@ app.get("/managers/whatSalesTogether", (req, res) => {
     });
 });
 
+/**
+ * Gets order data for excess report about drinkid
+ * @function orderData
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/reports/getExcessReport/orderData", (req, res) => {
   const { beginningDate, endDate } = req.query;
   let command = "SELECT drink_id FROM orders WHERE date >= '" + beginningDate + "' AND date <= '"
@@ -666,6 +801,12 @@ app.get("/reports/getExcessReport/orderData", (req, res) => {
     });
 });
 
+  /**
+ * Gets recipe data of ingredient names for excess report
+ * @function recipeData
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/reports/getExcessReport/recipeData", (req, res) => {
   const { drink } = req.query;
   let command =  "SELECT ingredient_names, ingredient_values FROM recipes WHERE recipeid = "
@@ -693,6 +834,12 @@ app.get("/reports/getExcessReport/recipeData", (req, res) => {
     });
 });
 
+/**
+ * Gets information about inventory for excess report
+ * @function inventoryInfo2
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/reports/getExcessReport/inventoryInfo", (req, res) => {
   const { drink } = req.query;
   let command =  "SELECT name, amount FROM inventory";
@@ -719,7 +866,12 @@ app.get("/reports/getExcessReport/inventoryInfo", (req, res) => {
     });
 });
 
-// gets all from a specific drink
+/**
+ * Gets all info on a specific drink in recipes
+ * @function recipesDrink
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/recipes/drink", (req, res) => {
   const { drink } = req.query;
   const command = "SELECT ingredient_names, ingredient_values, price, category FROM recipes WHERE drinkname = $1";
@@ -737,6 +889,12 @@ app.get("/recipes/drink", (req, res) => {
 });
 
 // gets the unit of an item
+/**
+ * Gets the unit of an item from inventory
+ * @function drinkItemUnit
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/recipes/drinkItemUnit", (req, res) => {
   const { drink } = req.query;
   const command = "SELECT unit FROM inventory WHERE name = $1";
@@ -754,6 +912,12 @@ app.get("/recipes/drinkItemUnit", (req, res) => {
 });
 
 // Delete a recipe
+/**
+ * Deletes a recipe 
+ * @function recipesDelete
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.delete("/recipes/delete", (req, res) => {
   const drink = req.query.parameter; // Get the item name from the query parameter
 
@@ -773,6 +937,12 @@ app.delete("/recipes/delete", (req, res) => {
 });
 
 // edit a recipe
+/**
+ * Edits a recipe in the database
+ * @function recipesEdit
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.put("/recipes/edit", (req, res) => {
   const drink = req.query.parameter; // The name of the item to be edited
   const editedItem = req.body; // Assuming you pass the edited item data in the request body as JSON
@@ -795,7 +965,12 @@ app.put("/recipes/edit", (req, res) => {
     });
 });
 
-// Create a route for adding a new item to the inventory
+/**
+ * Creates a route for adding a new item to the inventory
+ * @function recipesAdd
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.post("/recipes/add", async (req, res) => {
   try {
     // Get the count of items in the recipes table
@@ -835,6 +1010,12 @@ app.post("/recipes/add", async (req, res) => {
 });
 
 // gets all toppings
+/**
+ * Gets all toppings from inventory
+ * @function customerToppings
+ * @param {object} req - The request object containing query parameters
+ * @param {object} res - The response object
+ */
 app.get("/customer/toppings", (req, res) => {
 
   const command = "SELECT name FROM inventory WHERE topping = true;";

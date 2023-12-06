@@ -15,6 +15,11 @@ interface CustomTimePopupProps {
     onSubmit: () => void;
   }
 
+/**
+ * CustomTime Popup for determining time range
+ * @param props CustomTimePopupProps component props
+ * @returns CustomTimePopup component or null of isOpen is false
+ */
 const CustomTimePopup: React.FC<CustomTimePopupProps> = ({
   isOpen,
   startDate,

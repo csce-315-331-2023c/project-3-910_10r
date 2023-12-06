@@ -2,7 +2,9 @@
   "compilerOptions": {
     "composite": true,
     "skipLibCheck": true,
-    "module": "ESNext",
+    "module": "CommonJS",
+    "mode": "modules",
+    "excludeNotExported": false,
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true
   },

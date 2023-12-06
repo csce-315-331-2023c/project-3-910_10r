@@ -32,6 +32,11 @@ interface FilterPopupProps {
   onSubmit: () => void;
 }
 
+/**
+ * FilterPopup component to show when filtering order history
+ * @param props FilterPopupProps for the FilterPopup Component
+ * @returns FilterPopup component or null if isOpen is false
+ */
 const FilterPopup: React.FC<FilterPopupProps> = ({
   fetchOrdersFilter,
   drink,
@@ -56,6 +61,10 @@ const FilterPopup: React.FC<FilterPopupProps> = ({
     return null;
   }
 
+
+  /**
+   * Function to handle when the filter is submitted, gets the drinkid from the drink name selected
+   */
   const handleFilterSubmit = () => {
     const page = 1;
 

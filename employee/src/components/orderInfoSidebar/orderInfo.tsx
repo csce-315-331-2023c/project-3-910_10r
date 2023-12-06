@@ -19,6 +19,11 @@ interface OrderInfoProps {
   };
 }
 
+/**
+ * OrderInfo component to display information about a selected order
+ * @param props OrderInfoProps for OrderInfo component
+ * @returns OrderInfo component
+ */
 const OrderInfo: React.FC<OrderInfoProps> = ({ order }) => {
   const [drinkData, setDrinkData] = useState<{ drinkname: string; price: number }[]>([]);
 

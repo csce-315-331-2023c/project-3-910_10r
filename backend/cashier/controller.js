@@ -1,7 +1,11 @@
 const pool = require("../db");
 const queries = require("./queries");
 
-// gets the price for a specific drink whose name is passed in via parameter
+/**
+ * Gets the price for a specific drink whose name is passed in via parameter
+ * @param {object} req - The request object containing the query parameter for the drink.
+ * @param {object} res - The response object to send back the drink's price or an error message.
+ */
 const getPriceByDrink = (req, res) => {
   const drink = req.query.drink;
   pool.query(queries.getPriceByDrink, [drink], (error, results) => {
@@ -26,6 +30,11 @@ const getPriceByDrink = (req, res) => {
   });
 };
 
+/**
+ * Gets the ingredients that are low in the inventory
+ * @param {object} req - The request object containing the query parameter for the drink.
+ * @param {object} res - The response object to send back the drink's price or an error message.
+ */
 const getLowIngredientForDrink = (req, res) => {
   const drink = req.query.drink;
   pool.query(queries.getLowIngredientForDrink, [drink], (error, results) => {
@@ -52,6 +61,11 @@ const getLowIngredientForDrink = (req, res) => {
   });
 };
 
+/**
+ * Gets the default included toppings from drink
+ * @param {object} req - The request object containing the query parameter for the drink.
+ * @param {object} res - The response object to send back the drink's price or an error message.
+ */
 const getDefaultToppingsByDrink = (req, res) => {
   const drink = req.query.drink;
   pool.query(queries.getDefaultToppingsByDrink, [drink], (error, results) => {

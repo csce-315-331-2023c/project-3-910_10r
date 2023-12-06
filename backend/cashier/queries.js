@@ -1,14 +1,28 @@
+/**
+ * SQL query to get a drink price
+ * @type {string}
+ */
 const getPriceByDrink =
   "SELECT price FROM recipes where lower(drinkname) = $1;";
-
+/**
+ * SQL query to get the default toppings of a specific drink in recipes
+ * @type {string}
+ */
 const getDefaultToppingsByDrink =
   "SELECT inventory.name from inventory JOIN recipes ON inventory.name = ANY(recipes.ingredient_names) WHERE lower(recipes.drinkname) = $1 AND inventory.topping = true;";
-
+/**
+ * SQL query to get low ingredients from a specific drink
+ * @type {string}
+ */
 const getLowIngredientForDrink =
   "\
   SELECT Inventory.name, ROUND(100 * Inventory.amount/Inventory.capacity) AS ratio FROM recipes, inventory WHERE lower(recipes.drinkname) = $1 AND inventory.name = ANY(recipes.ingredient_names) AND inventory.alert = true\
   ";
 
+/**
+ * SQL query to update recipe items in inventory
+ * @type {string}
+ */
 const updateRecipeItems =
   "\
   UPDATE inventory AS i \
@@ -31,12 +45,20 @@ const updateRecipeItems =
   ) AS subquery \
   WHERE i.name = subquery.ingredient;";
 
+/**
+ * SQL query to update ice in inventory
+ * @type {string}
+ */
 const updateIce =
   "\
 UPDATE inventory \
 SET amount = amount - $1 \
 WHERE name = 'ice';";
 
+/**
+ * SQL query to update toppings in inventory
+ * @type {string}
+ */
 const updateToppings =
   "\
 UPDATE inventory AS i \
@@ -48,6 +70,10 @@ FROM ( \
 ) AS subquery \
 WHERE i.name = subquery.topping;";
 
+/**
+ * SQL query to restore recipe items in inventory
+ * @type {string}
+ */
 const restoreRecipeItems =
   "\
   UPDATE inventory AS i \
@@ -70,12 +96,20 @@ const restoreRecipeItems =
   ) AS subquery \
   WHERE i.name = subquery.ingredient;";
 
+/**
+ * SQL query to restore ice in inventory
+ * @type {string}
+ */
 const restoreIce =
   "\
 UPDATE inventory \
 SET amount = amount + $1 \
 WHERE name = 'ice';";
 
+/**
+ * SQL query to restore toppings in inventory
+ * @type {string}
+ */
 const restoreToppings =
   "\
 UPDATE inventory AS i \
@@ -87,6 +121,10 @@ FROM ( \
 ) AS subquery \
 WHERE i.name = subquery.topping;";
 
+/**
+ * SQL query to make an order by inserting it into the orders table based on recipe IDs.
+ * @type {string}
+ */
 const makeOrder =
 "WITH RecipeIDs AS ( \
   SELECT \

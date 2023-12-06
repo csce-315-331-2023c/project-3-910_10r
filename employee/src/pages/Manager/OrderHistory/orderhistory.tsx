@@ -29,6 +29,11 @@ interface Order {
 
 const PAGE_SIZE = 100; // Number of orders per page
 
+/**
+ * OrderHistory component to display order history based off of filters
+ * @returns Order history component
+ */
+
 const OrderHistory: React.FC = () => {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [showFilterPopup, setShowFilterPopup] = useState(false);
@@ -48,6 +53,10 @@ const OrderHistory: React.FC = () => {
     fetchOrders(currentPage);
   }, []);
 
+  /**
+   * Fetch the order information from the database
+   * @param page Page number to fetch orders for
+   */
   const fetchOrders = (page: number) => {
     if (loading) {
       return; // Don't make another request while one is in progress
@@ -87,6 +96,16 @@ const OrderHistory: React.FC = () => {
       });
   };
 
+  /**
+   * Fetch the order information from database based off of the parameter filters
+   * @param page Page number to fetch orders from
+   * @param startDate String YYYY-MM-DD or null for start date range
+   * @param endDate String YYYY-MM-DD or null for end date range
+   * @param drink Drink name or null to filter orders
+   * @param minPrice Minimum price or null for order price range
+   * @param maxPrice Maximum price or null for order price range
+   * @param id Drink id or null to filter orders
+   */
   const fetchOrdersFilter = (
     page: number,
     startDate: string | null,
@@ -169,7 +188,9 @@ const OrderHistory: React.FC = () => {
   
   
   
-
+  /**
+   * Clear out each of the Order components for when clearing the filter
+   */
   const handleClearFilter = () => {
     setIsFilterActive(false);
     setDrinkName(null);
@@ -184,15 +205,25 @@ const OrderHistory: React.FC = () => {
     fetchOrders(1); // Fetch the original order history
   };
 
+  /**
+   * Sets the order right side bar with the order information
+   * @param data Order information for what is clicked
+   */
   const handleOrderClick = (data: Order) => {
     setSelectedOrder(data);
   };
 
+  /**
+   * Handles when to show the filter popup
+   */
   const handleFilterButtonClick = () => {
     setSelectedOrder(null);
     setShowFilterPopup(true);
   };
 
+  /**
+   * Handles when the filter popup is submitted, filtering the data and displaying it
+   */
   const handleFilterSubmit = () => {
 
   // Call the fetchOrdersFilter function with the updated parameter types
@@ -207,6 +238,9 @@ const OrderHistory: React.FC = () => {
   };
   
 
+  /**
+   * Ensures that the order data is filtered based off of the parameters
+   */
   const filteredOrderData = isFilterActive
   ? orderData.filter((data) => {
     //console.log(id);
