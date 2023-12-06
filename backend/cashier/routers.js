@@ -9,12 +9,25 @@ const router = Router();
 //   // res.send("Cashier router loaded");
 //   next()
 // })
-
+/**
+ * Gets price of drink
+ */
 router.get("/price", controller.getPriceByDrink);
+/**
+ * Handles the creation of a new order by inserting it into the database.
+ */
 router.get("/getDefaultToppingsByDrink", controller.getDefaultToppingsByDrink);
+/**
+ * Gets low ingredients in drink
+ */
 router.get("/getLowIngredientForDrink", controller.getLowIngredientForDrink);
 
 // gets all the categories for the display bar
+/**
+ * Gets distinct categories from recipes
+ * @param {object} req - The request object containing the order details in the body.
+ * @param {object} res - The response object to send back success or error messages.
+ */
 router.get("/drinkCategory", (req, res) => {
   let command = "SELECT DISTINCT category from recipes;";
   let categories = [];
@@ -34,6 +47,11 @@ router.get("/drinkCategory", (req, res) => {
     });
 });
 
+/**
+ * Gets the drinks that are low on ingredients
+ * @param {object} req - The request object containing the order details in the body.
+ * @param {object} res - The response object to send back success or error messages.
+ */
 router.get("/getLowDrinkNames", (req, res) => {
   let command =
     "SELECT DISTINCT drinkname FROM recipes JOIN inventory ON inventory.name = ANY(recipes.ingredient_names) WHERE inventory.alert = true;";
@@ -57,6 +75,11 @@ router.get("/getLowDrinkNames", (req, res) => {
 });
 
 // gets all the categories and drinks and send it as a dictionary
+/**
+ * Gets all the categories and drinks and send it as a dictionary
+ * @param {object} req - The request object containing the order details in the body.
+ * @param {object} res - The response object to send back success or error messages.
+ */
 router.get("/drinkAndCategories", (req, res) => {
   let command = "SELECT category, drinkname FROM recipes;";
   const categoryMap = {};
@@ -83,6 +106,11 @@ router.get("/drinkAndCategories", (req, res) => {
     });
 });
 
+/**
+ * Gets toppings info from inventory
+ * @param {object} req - The request object containing the order details in the body.
+ * @param {object} res - The response object to send back success or error messages.
+ */
 router.get("/toppings", (req, res) => {
   let command = "SELECT name, alert FROM inventory WHERE topping = true;";
   const toppings = {};
@@ -95,6 +123,11 @@ router.get("/toppings", (req, res) => {
   });
 });
 
+/**
+ * Retrieves drinkname from recipes
+ * @param {object} req - The request object containing the order details in the body.
+ * @param {object} res - The response object to send back success or error messages.
+ */
 router.get("/drinknames", (req, res) => {
   let command = "SELECT drinkname FROM recipes;";
   const drinknames = [];
@@ -115,6 +148,11 @@ router.get("/drinknames", (req, res) => {
     });
 });
 
+/**
+ * Updates the inventory when an order is created
+ * @param {object} req - The request object containing the order details in the body.
+ * @param {object} res - The response object to send back success or error messages.
+ */
 router.put("/updateInventory", (req, res) => {
   const { name, ice, sugar, topping, count } = req.body;
   // console.log(name)
@@ -190,6 +228,11 @@ router.put("/updateInventory", (req, res) => {
 });
 
 // router.put("/restoreInventory", controller.restoreInventory);
+/**
+ * Restore the inventory from a cancelled order entry
+ * @param {object} req - The request object containing the order details in the body.
+ * @param {object} res - The response object to send back success or error messages.
+ */
 router.put("/restoreInventory", (req, res) => {
   const { name, ice, sugar, topping, count } = req.body;
   //get recipe from drink name
@@ -237,6 +280,11 @@ router.put("/restoreInventory", (req, res) => {
   res.status(200).send("Restoring successful");
 });
 
+/**
+ * Handles the creation of a new order into database
+ * @param {object} req - The request object containing the order details in the body.
+ * @param {object} res - The response object to send back success or error messages.
+ */
 router.post("/makeOrder", (req, res) => {
   const { drinks, date, time, cost } = req.body;
 

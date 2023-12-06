@@ -1,6 +1,9 @@
 const { Pool } = require("pg");
 const dotenv = require("dotenv").config();
-
+/**
+ * PostgreSQL Pool instance for managing database connections.
+ * @type {Pool}
+ */
 const pool = new Pool({
   user: process.env.PSQL_USER,
   host: process.env.PSQL_HOST,
