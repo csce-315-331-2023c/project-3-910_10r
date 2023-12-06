@@ -62,7 +62,7 @@
 
 .customize{
     width: 50vw;
-    height: 90vh;
+    height: 105vh;
     background-color: var(--GREEN-MED);
     left: 20vw;
     position: absolute;
@@ -112,6 +112,7 @@
     text-align: center;
     font-size: 30px;
     margin-top: 10px;
+    
 }
 
 .ice-title, .sugar-title, .toppings-title{
@@ -124,11 +125,14 @@
     right: 10px;
     width: 100px;
     height: 50px;
-    background-color: white;
+    background-color: var(--CONFIRM);
+    border-radius: 10px;
+    border: none;;
 }
 
 .customize-confirm:hover{
-    background-color: var(--ON-HOVER);
+    background-color: lightskyblue;
+    transition: 1s;
 }
 
 .customize-confirm:active{

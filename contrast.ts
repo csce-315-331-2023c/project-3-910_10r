@@ -7,7 +7,7 @@
 // missing text-color-dark (on purpose)
 const customerColors: string[] = [
     "--ACCENT-COLOR-DARK", "--ACCENT-COLOR", '--ACCENT-COLOR-LIGHT',
-    "--GREEN-LIGHT", "--GREEN-MED", "--GREEN-MED60", '--GREEN-DARK', "--GREEN-DARK40",
+    "--GREEN-LIGHT", "--GREEN-MED", "--GREEN-MED60", "--GREEN-DARK", "--GREEN-DARK40",
     "--TEXT-COLOR-LIGHT",
     "--SIDEBAR-BG-COLOR", "--SELECTION-COLOR",
     "--ERROR-COLOR",
@@ -16,7 +16,7 @@ const customerColors: string[] = [
 ];
 
 /* TODO: Decide which colors go into the black/white arrays */
-const customerColorsDark: string[] = ["--GRAY-DARK"];
+const customerColorsDark: string[] = ["--GRAY-DARK", "--GREEN-DARK"];
 const customerColorsLight: string[] = ["--ACCENT-COLOR", "--ACCENT-COLOR-LIGHT", "--GRAY-XLIGHT", "--GRAY-LIGHT", "--GREEN-MED"];
 
 export {customerColors, customerColorsDark, customerColorsLight};
@@ -40,7 +40,7 @@ const employeeColors: string[] = [
 
 /* TODO: Decide which colors go into the black/white arrays */
 const employeeColorsDark: string[] = ["--GREEN-DARK", "--POPUP", "--NORMALLY-WHITE"];
-const employeeColorsLight: string[] = [ "--NORMALLY-BLACK","--GREEN-MED60", "--ACCENT-COLOR-DARK", "--ACCENT-COLOR", '--ACCENT-COLOR-LIGHT', "--RED", "--GREEN", "--BLUE", "--ORANGE", "--PURPLE", "--PINK", "--SKY-BLUE", "--YELLOW", "--GRAY-LIGHT"];
+const employeeColorsLight: string[] = [ "--NORMALLY-BLACK","--GREEN-MED60", "--GREEN-MED", "--GREEN-LIGHT", "--ACCENT-COLOR-DARK", "--ACCENT-COLOR", '--ACCENT-COLOR-LIGHT', "--RED", "--GREEN", "--BLUE", "--ORANGE", "--PURPLE", "--PINK", "--SKY-BLUE", "--YELLOW", "--GRAY-LIGHT"];
 
 export {employeeColors, employeeColorsDark, employeeColorsLight};
 
