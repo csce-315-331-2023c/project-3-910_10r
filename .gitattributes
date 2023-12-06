@@ -1,0 +1,3 @@
+backend/doc/** linguist-documentation
+customer/docs/** linguist-documentation
+employee/docs/** linguist-documentation
