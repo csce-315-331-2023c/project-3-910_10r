@@ -20,7 +20,7 @@ import Strawberry_Matcha from "../../assets/drinkImgs/Strawberry_Matcha.png";
 import Taro_ice_blended_with_pudding from "../../assets/drinkImgs/Taro_ice_blended_with_pudding.png";
 import Wintermelon_tea from "../../assets/drinkImgs/Wintermelon_tea.png";
 import Wintermelon_with_fresh_milk from "../../assets/drinkImgs/Wintermelon_with_fresh_milk.png";
-
+import Strawberry_Milk from "../../assets/drinkImgs/Strawberry_Milk.png";
 interface Props {
   children: string;
   setShowCustomizationPage: React.Dispatch<React.SetStateAction<boolean>>;
@@ -87,6 +87,7 @@ const imgObj: ImageObject = {
   Taro_ice_blended_with_pudding: Taro_ice_blended_with_pudding,
   Wintermelon_tea: Wintermelon_tea,
   Wintermelon_with_fresh_milk: Wintermelon_with_fresh_milk,
+  Strawberry_Milk: Strawberry_Milk
 };
 
 const drink = ({
@@ -115,7 +116,7 @@ const drink = ({
     console.log(imgName);
   }
 
-  console.log("final name ",imgName);
+  console.log("final name",imgName);
 
   const buttonStyle = {
     backgroundImage: `url(${imgObj[imgName]})`,
