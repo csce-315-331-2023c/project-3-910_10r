@@ -33,6 +33,12 @@ interface Props {
   setShowCustomizationPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * displays ice, sugar, topping customization for the selected drink
+ * @param {string} Props.name
+ * @param {function} Props.updateOrder
+ *  @param {React.Dispatch<React.SetStateAction<boolean>>} Props.setShowCustomizationPage
+ */
 function DrinkCustomize({
   name,
   updateOrder,
@@ -134,16 +140,16 @@ function DrinkCustomize({
       ice: backend_order.ice,
       sugar: backend_order.sugar,
       topping: backend_order.topping,
-      count: backend_order.count
-  };
+      count: backend_order.count,
+    };
 
     API.put("/cashier/updateInventory", backendData)
       .then((response) => {
         console.log(response.data);
       })
-    .catch((error) => {
+      .catch((error) => {
         console.error(error);
-    });
+      });
 
     console.log("Called updateInventory API");
 

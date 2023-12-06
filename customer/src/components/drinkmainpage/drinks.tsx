@@ -9,7 +9,14 @@ interface Props {
   drinks: string[];
   drinksWithLowStock: string[];
 }
-
+/**
+ * represent all drinks within a category
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} Props.setShowCustomizationPage
+ * @param {boolean} Props.showCustomizationPage
+ *  @param {React.Dispatch<React.SetStateAction<string>>} Props.setDrinkName
+ * @param {string[]} Props.drinks
+ * @param {string[]} Props.drinksWithLowStock
+ */
 function drinks({
   setShowCustomizationPage,
   showCustomizationPage,
@@ -17,16 +24,6 @@ function drinks({
   drinks,
   drinksWithLowStock,
 }: Props) {
-  // let drinkNames = [
-  //   "Classic milk tea",
-  //   "Honey milk tea",
-  //   "Matcha milk tea",
-  //   "Fresh milk tea",
-  //   "Fresh honey milk tea",
-  //   "Fresh matcha milk tea",
-  // ];
-
-  // const [drinks, setDrinks] = useState<string[]>([]);
   return (
     <div
       //className="drinks"

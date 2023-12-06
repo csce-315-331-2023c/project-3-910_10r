@@ -37,29 +37,6 @@ const Show = (
   setDrinkName(children);
 };
 
-// const imgNameArr = [
-//   Classic_milk_black_tea,
-//   Classic_black_tea,
-//   Cocoa_creama,
-//   Cocoa_lover_with_fresh_milk,
-//   Coffee_creama,
-//   Coffee_milk_tea,
-//   Hawaii_fruit_tea_with_aiyu_jelly,
-//   Honey_milk_tea,
-//   Lime_mojito,
-//   Mango_and_passion_fruit_tea,
-//   Mango_green_tea,
-//   Matcha_red_bean_milk_tea,
-//   Milk_tea_ice_blended_with_pearl,
-//   Passion_fruit_orange_and_grapefruit_tea,
-//   Peach_mojito,
-//   Strawberry_ice_blended_with_lychee_jelly_and_ice_cream,
-//   Strawberry_Matcha,
-//   Taro_ice_blended_with_pudding,
-//   Wintermelon_tea,
-//   Wintermelon_with_fresh_milk,
-// ];
-
 type ImageObject = {
   [key: string]: string; // Assuming all values are strings (image URLs)
 };
@@ -87,9 +64,16 @@ const imgObj: ImageObject = {
   Taro_ice_blended_with_pudding: Taro_ice_blended_with_pudding,
   Wintermelon_tea: Wintermelon_tea,
   Wintermelon_with_fresh_milk: Wintermelon_with_fresh_milk,
-  Strawberry_Milk: Strawberry_Milk
+  Strawberry_Milk: Strawberry_Milk,
 };
 
+/**
+ * represent one drink with name and picture
+ * @param {string} Props.children
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} Props.setShowCustomizationPage
+ *  @param {React.Dispatch<React.SetStateAction<boolean>>} Props.setDrinkName
+ * @param {string[]} Props.drinksWithLowStock
+ */
 const drink = ({
   children,
   setShowCustomizationPage,
@@ -116,7 +100,7 @@ const drink = ({
     console.log(imgName);
   }
 
-  console.log("final name",imgName);
+  console.log("final name", imgName);
 
   const buttonStyle = {
     backgroundImage: `url(${imgObj[imgName]})`,

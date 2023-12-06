@@ -23,37 +23,41 @@ interface Props {
   setOrders: React.Dispatch<React.SetStateAction<order[]>>;
   setPayPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
+/**
+ * order cart
+ * @param {order[]} Props.orders
+ * @param {function} Props.setOrders
+ *  @param {function} Props.setPayPage
+ */
 function Cart({ orders, setOrders, setPayPage }: Props) {
-  let drinks : string[] = [];
+  let drinks: string[] = [];
   let totalPrice = 0;
 
   const updatePrice = (price: number) => {
     totalPrice += price;
   };
 
-  const navigateToPayPage = (price : number) => {
+  const navigateToPayPage = (price: number) => {
     if (price > 0) {
-      
       //get drinks from orders
-      for(const index in orders) {
+      for (const index in orders) {
         drinks.push(orders[index].name);
       }
 
-      //get date and time 
+      //get date and time
       const currentDate = new Date();
 
       // Format the date
       const year = currentDate.getFullYear();
-      const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 and padding with '0' if necessary
-      const day = currentDate.getDate().toString().padStart(2, '0');
+      const month = (currentDate.getMonth() + 1).toString().padStart(2, "0"); // Adding 1 and padding with '0' if necessary
+      const day = currentDate.getDate().toString().padStart(2, "0");
 
       const formattedDate = `${year}-${month}-${day}`;
 
       // Format the time
-      const hours = currentDate.getHours().toString().padStart(2, '0');
-      const minutes = currentDate.getMinutes().toString().padStart(2, '0');
-      const seconds = currentDate.getSeconds().toString().padStart(2, '0');
+      const hours = currentDate.getHours().toString().padStart(2, "0");
+      const minutes = currentDate.getMinutes().toString().padStart(2, "0");
+      const seconds = currentDate.getSeconds().toString().padStart(2, "0");
 
       const formattedTime = `${hours}:${minutes}:${seconds}`;
 
@@ -72,24 +76,24 @@ function Cart({ orders, setOrders, setPayPage }: Props) {
       };
 
       API.post("/cashier/makeOrder", backendData)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
           console.error(error);
-      });
+        });
 
       setPayPage(true);
     }
   };
 
-  const removeChild = (index : number, _order : order) => {
+  const removeChild = (index: number, _order: order) => {
     const updatedComponents = [...orders];
     updatedComponents.splice(index, 1);
     setOrders(updatedComponents);
-    
-    let ice : number = 0.0;
-    let sugar : number = 0.0;
+
+    let ice: number = 0.0;
+    let sugar: number = 0.0;
 
     if (_order.ice === "regular ice") {
       ice = 10;
@@ -116,8 +120,8 @@ function Cart({ orders, setOrders, setPayPage }: Props) {
       sugar = 12;
     }
 
-    let topping_names : string[] = [];
-    let topping_count : number[] = [];
+    let topping_names: string[] = [];
+    let topping_count: number[] = [];
 
     for (const index in _order.topping) {
       const topping = _order.topping[index];
@@ -126,16 +130,16 @@ function Cart({ orders, setOrders, setPayPage }: Props) {
       const match = topping.match(/(.+)\s*x(\d+)/);
 
       if (match) {
-          const topping_name = match[1].trim();; // Extracted item name
-          const topping_amount = parseInt(match[2], 10); // Extracted quantity as an integer
+        const topping_name = match[1].trim(); // Extracted item name
+        const topping_amount = parseInt(match[2], 10); // Extracted quantity as an integer
 
-          if(topping_amount > 0) {
-            topping_names.push(topping_name);
-            topping_count.push(topping_amount);
-          }
+        if (topping_amount > 0) {
+          topping_names.push(topping_name);
+          topping_count.push(topping_amount);
+        }
       } else {
-          console.log("Invalid input format");
-      }      
+        console.log("Invalid input format");
+      }
     }
 
     console.log(_order.name);
@@ -149,16 +153,16 @@ function Cart({ orders, setOrders, setPayPage }: Props) {
       ice: ice,
       sugar: sugar,
       topping: topping_names,
-      count: topping_count
+      count: topping_count,
     };
 
     API.put("/cashier/restoreInventory", backendData)
       .then((response) => {
         console.log(response.data);
       })
-    .catch((error) => {
+      .catch((error) => {
         console.error(error);
-    });
+      });
   };
 
   return (
@@ -187,7 +191,10 @@ function Cart({ orders, setOrders, setPayPage }: Props) {
         total={"$" + (totalPrice * 1.0625).toFixed(2)}
       ></Checkout>
       <div className="cart-buttons">
-        <button className="cart-buttons-1" onClick={() => navigateToPayPage(totalPrice)}>
+        <button
+          className="cart-buttons-1"
+          onClick={() => navigateToPayPage(totalPrice)}
+        >
           Checkout
         </button>
       </div>

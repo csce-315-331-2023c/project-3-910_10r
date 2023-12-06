@@ -27,6 +27,12 @@ interface Props {
   setMenuFalse: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * displays title, weather, time and accessibility features
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} Props.setMenuFalse
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} Props.setorderFalse
+ */
+
 function CustomerHeader({ setMenuFalse, setOrderFalse }: Props) {
   const [formattedTime, setFormattedTime] = useState<string>("");
   const [weatherIcon, setWeatherIcon] = useState<string>("");

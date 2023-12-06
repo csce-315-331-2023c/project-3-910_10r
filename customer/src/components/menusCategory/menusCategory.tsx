@@ -1,14 +1,21 @@
-import React from 'react';
+import React from "react";
 import "./menusCategory.scss";
 import MenuItem from "../menuItem/menuItem";
 
 interface MenusCategoryProps {
-    categoryName: string;
-    drinks: string[];
+  categoryName: string;
+  drinks: string[];
 }
-  
-const MenusCategory: React.FC<MenusCategoryProps> = ({ categoryName, drinks }) => {
 
+/**
+ * displays the menu category
+ * @param {string} MenusCategoryProps.categoryName
+ * @param {string[]} MenusCategoryProps.drinks
+ */
+const MenusCategory: React.FC<MenusCategoryProps> = ({
+  categoryName,
+  drinks,
+}) => {
   return (
     <div className="menu__category">
       <div className="menu__category-header">

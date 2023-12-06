@@ -3,7 +3,12 @@ interface Props {
   tax: string;
   total: string;
 }
-
+/**
+ * display monetary value for cart
+ * @param {string} Props.price
+ * @param {string} Props.tax
+ *  @param {string} Props.total
+ */
 const checkoutAmount = ({ price, tax, total }: Props) => {
   return (
     <>

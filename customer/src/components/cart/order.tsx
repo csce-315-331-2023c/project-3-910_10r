@@ -8,7 +8,15 @@ interface Props {
   price: string;
   onRemove: () => void;
 }
-
+/**
+ * order component for each order customer made
+ * @param {string} Props.name
+ * @param {string} Props.ice
+ *  @param {string} Props.sugar
+ * @param {string} Props.topping
+ * @param {string} Props.price
+ *  @param {function} Props.onRemove
+ */
 const order = ({ name, ice, sugar, topping, price, onRemove }: Props) => {
   return (
     <>

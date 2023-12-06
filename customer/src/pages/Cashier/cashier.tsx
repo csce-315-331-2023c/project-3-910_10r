@@ -29,6 +29,12 @@ interface Props {
   setMenuFalse: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * customer side function
+ * @param {function} Props.setPayPage
+ * @param {function} Props.setMenuFalse
+ * @param {function} Props.setOrderFalse
+ */
 function Cashier({ setPayPage, setMenuFalse, setOrderFalse }: Props) {
   // keeps track of orders in the cart
   const [orders, setOrders] = useState<order[]>([]);

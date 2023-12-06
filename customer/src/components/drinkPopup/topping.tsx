@@ -10,6 +10,15 @@ interface Props {
   lowStock: boolean;
 }
 
+/**
+ * displays a topping with add and subtract button and count
+ * @param {string} Props.name
+ * @param {number} Props.count
+ *  @param {function} Props.onIncrement
+ * @param {function} Props.onDecrement
+ * @param {number} Props.index
+ * @param {boolean} Props.lowStock
+ */
 const Topping = ({
   name,
   count,

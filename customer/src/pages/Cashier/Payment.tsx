@@ -1,3 +1,7 @@
+/**
+ * payment page after order function
+ */
+
 function Payment() {
   return (
     <>

@@ -9,14 +9,17 @@ interface Props {
   category: string[];
 }
 
+/**
+ * navigation bar for drink categories
+ * @param {boolean} Props.showCustomizationPage
+ * @param {React.Dispatch<React.SetStateAction<string>>} Props.setCatogory
+ *  @param {string[]} Props.category
+ */
 function Navigationbar({
   showCustomizationPage,
   setCatogory,
   category,
 }: Props) {
-  // keeps track of the drink categories
-  //
-
   return (
     <div className={`${showCustomizationPage ? "nav-selected" : "nav"}`}>
       <div className="nav-bar">

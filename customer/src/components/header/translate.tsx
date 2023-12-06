@@ -3,6 +3,10 @@ import "./header.scss";
 
 declare const window: any;
 
+/**
+ * component that translates all text on the page
+ */
+
 const GoogleTranslate = () => {
   const scriptLoaded = useRef(false);
 
