@@ -39,7 +39,7 @@ const employeeColors: string[] = [
 ];
 
 /* TODO: Decide which colors go into the black/white arrays */
-const employeeColorsDark: string[] = ["--GREEN-DARK", "--POPUP", "--NORMALLY-WHITE", "--GREEN-DARK70"];
+const employeeColorsDark: string[] = ["--GREEN-DARK", "--POPUP", "--NORMALLY-WHITE", "--GREEN-DARK70", "--LOGIN-BG-COLOR", "--LOGIN-BG-COLOR-1"];
 const employeeColorsLight: string[] = [ "--NORMALLY-BLACK","--GREEN-MED60", "--GREEN-MED", "--GREEN-LIGHT", "--ACCENT-COLOR-DARK", "--ACCENT-COLOR", '--ACCENT-COLOR-LIGHT', "--RED", "--GREEN", "--BLUE", "--ORANGE", "--PURPLE", "--PINK", "--SKY-BLUE", "--YELLOW", "--GRAY-LIGHT"];
 
 export {employeeColors, employeeColorsDark, employeeColorsLight};
@@ -99,9 +99,9 @@ export const setContrast = (colorDark: string[], colorLight: string[]) => {
     colorLight.forEach((color) => {
         document.documentElement.style.setProperty(color, "#fafafa");
     });
-    document.documentElement.style.setProperty("--CONFIRM-COLOR", "red");
-    document.documentElement.style.setProperty("--ACCENT-COLOR", "red");
-    document.documentElement.style.setProperty("--ACCENT-COLOR-DARK", "red");
+    document.documentElement.style.setProperty("--CONFIRM-COLOR", "rgb(239, 83, 83)");
+    document.documentElement.style.setProperty("--ACCENT-COLOR", "rgb(239, 83, 83)");
+    document.documentElement.style.setProperty("--ACCENT-COLOR-DARK", "rgb(239, 83, 83)");
     document.documentElement.style.setProperty("--CONFIRM", "#81aef7");
     document.documentElement.style.setProperty("--POPUP", "black");
     document.documentElement.style.setProperty("--NORMALLY-BLACK", "white");

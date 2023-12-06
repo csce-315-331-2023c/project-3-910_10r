@@ -1,7 +1,7 @@
 @import './../../scss/main.scss';
 
 .login-container {
-    background-color: var(--GREEN-DARK);
+    background-color: var(--LOGIN-BG-COLOR-1);
     position: fixed;
     width: 100%;
     height: 100%;
@@ -22,7 +22,7 @@
     padding-bottom: var(--PADDING-MED-LARGE);
 
     &__header {
-        color: var(--GREEN-DARK);
+        color: var(--LOGIN-BG-COLOR);
         text-align: center;
         padding-bottom: var(--PADDING-MED);
         font-size: 4rem;
@@ -45,12 +45,12 @@
             width: 100%;
             border: none;
             background-color: white;
-            color: var(--GREEN-DARK);
+            color: var(--LOGIN-BG-COLOR);
             transition: box-shadow 0.25s;
-            border: 2px solid var(--GREEN-DARK70);
+            border: 2px solid var(--LOGIN-BG-COLOR);
 
             &::placeholder {
-                color: var(--GREEN-DARK);
+                color: var(--LOGIN-BG-COLOR);
             }
 
             &:focus-visible {
@@ -71,25 +71,25 @@
             width: 100%;
             margin-top: var(--MARGIN-SMALL);
             padding: var(--PADDING-SMALL);
-            border: var(--BORDER-DARK);
+            border: var(--BORDER-DARKER);
             border-radius: var(--BUTTON-BORDER-RADIUS);
             @include button-interact(var(--BUTTON-SHADOW), var(--TEXT-SHADOW-LIGHT));
-            background-color: var(--GREEN-DARK);
+            background-color: var(--LOGIN-BG-COLOR);
             color: var(--TEXT-COLOR-LIGHT);
         }
 
         &-google {
             margin-top: var(--MARGIN-MED);
-            border-top: var(--BORDER-DARK);
+            border-top: var(--BORDER-DARKER);
             position: relative;
             padding-top: var(--PADDING-MED);
             
             &-btn {
                 background-color: var(--TEXT-COLOR-LIGHT);
-                color: var(--TEXT-COLOR-DARK);
+                color: var(--LOGIN-BG-COLOR);
                 width: 100%;
                 padding: var(--PADDING-SMALL);
-                border: var(--BORDER-DARK);
+                border: var(--BORDER-DARKER);
                 border-radius: var(--BUTTON-BORDER-RADIUS);
                 @include button-interact(var(--BUTTON-SHADOW), var(--TEXT-SHADOW-LIGHT));
 
@@ -101,7 +101,7 @@
             &::before {
                 content: "or";
                 background-color: var(--TEXT-COLOR-LIGHT);
-                color: var(--TEXT-COLOR-DARK);
+                color: var(--LOGIN-BG-COLOR);
                 width: clamp(35px, 7%, 70px);
                 height: 25px;
                 text-align: center;

@@ -35,6 +35,9 @@
     --GREEN-DARK70: hsla(154, 15%, 49%, 0.70);
     --GREEN-GRAY: #616e68;
 
+    --LOGIN-BG-COLOR: #375D4C;
+    --LOGIN-BG-COLOR-1: #274437;
+
     --GRAY-LIGHT: #D9D9D9;
     --GRAY-MEDIAN: #9d9d9d;
     --GRAY-DARK: #7b7b7b;
@@ -73,8 +76,8 @@
     
     /**************** SHADOWS ****************/
     --LOGIN-SHADOW: 
-        0px 0px 7px var(--GREEN-MED),
-        0px 0px 20px var(--GREEN-MED60);
+        0px 0px 7px var(--GREEN-DARK),
+        0px 0px 20px var(--GREEN-MED);
     --LOGOUT-SHADOW: 0px 0px 15px var(--ACCENT-COLOR-DARK);
     
     --BUTTON-SHADOW: 0px 0px 5px var(--GREEN-DARK);
@@ -91,6 +94,7 @@
 
     --BORDER-MED: 2px solid var(--GREEN-MED);
     --BORDER-DARK: 2px solid var(--GREEN-DARK);
+    --BORDER-DARKER: 2px solid var(--LOGIN-BG-COLOR);
     --BORDER-ACCENT: 2px solid var(--ACCENT-COLOR);
     --BORDER-ACCENT-DARK: 2px solid var(--ACCENT-COLOR-DARK);
     --BORDER-HELP: 1px solid red;
