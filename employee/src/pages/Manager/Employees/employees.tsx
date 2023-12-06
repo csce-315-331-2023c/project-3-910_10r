@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import axios , { AxiosInstance } from 'axios';
 
+
 let baseURL = import.meta.env.VITE_API_URL;
 
 const API: AxiosInstance = axios.create({
@@ -17,8 +18,16 @@ const API: AxiosInstance = axios.create({
 });
 
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+/**
+ * Data structure for an employee
+ * @typedef {Object} EmployeeData
+ * @property {string} name - Name of the employee
+ * @property {string} position - Position of the employee ("manager" or "employee")
+ * @property {number} hoursPerWeek - Number of hours per week
+ * @property {number} hourlyPay - Hourly pay rate
+ */
 
-
+// Interface to track specific employee's data
 interface EmployeeData {
   name: string;
   position: string; // "manager" or "employee"
@@ -28,9 +37,9 @@ interface EmployeeData {
 
 /**
  * Employee component that displays the cashiers and managers
- * @returns Employee component
+ * @returns {JSX.Element} Employee component
  */
-function Employee() {
+function Employee(): JSX.Element {
   console.log("Employee component is being rendered");
   //if Managers and Employees loaded
   const [loadedM, setLoadedM] = useState<boolean>(false);
@@ -45,10 +54,11 @@ function Employee() {
 
   /**
    * Function that opens the employee popup
-   * @param employeeName String of the name of employee selected to popup and display information of
-   * @param position String of position: manager or employee
+   * @function openEmployeePopup
+   * @param {string} employeeName String of the name of employee selected to popup and display information of
+   * @param {string} position String of position: manager or employee
    */
-  const openEmployeePopup = (employeeName: string, position: string) => {
+  var openEmployeePopup = (employeeName: string, position: string) => {
     const employeeData: EmployeeData = {
       name: employeeName,
       position: position,
@@ -61,8 +71,9 @@ function Employee() {
 
   /**
    * Function that closes the employee popup and refreshes the cashier and manager display
+   * @function closeEmployeePopup
    */
-  const closeEmployeePopup = () => {
+  var closeEmployeePopup = () => {
     setSelectedEmployee(null);
     setIsPopupOpen(false);
   //reload
@@ -115,7 +126,7 @@ function Employee() {
   
   /**
    * Handles when the confirm button is pressed for the employee popup. Will perform the necessary api call for adding, editing, or removing an employee
-   * @param data EmployeeData interface for specific employee
+   * @param {EmployeeData} data EmployeeData interface for specific employee
    */
   const handleConfirmation = (data: EmployeeData) => {
     if (data.name) {

@@ -5,6 +5,7 @@ import { faCheckCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 import IconPopup from "./iconPopup"; // Import the IconPopup component
 import axios , { AxiosInstance } from 'axios';
 
+// @ts-ignore
 let baseURL = import.meta.env.VITE_API_URL;
 
 const API: AxiosInstance = axios.create({
