@@ -44,17 +44,22 @@
             padding: var(--PADDING-SMALL);
             width: 100%;
             border: none;
-            background-color: var(--GREEN-MED);
-            color: var(--TEXT-COLOR-DARK);
+            background-color: white;
+            color: var(--GREEN-DARK);
             transition: box-shadow 0.25s;
+            border: 2px solid var(--GREEN-DARK70);
 
             &::placeholder {
-                color: var(--TEXT-COLOR-DARK);
+                color: var(--GREEN-DARK);
             }
 
             &:focus-visible {
                 outline: none;
                 box-shadow: var(--BUTTON-SHADOW);
+            }
+
+            &:last-of-type {
+                margin-top: 0.15rem;
             }
         }
 
