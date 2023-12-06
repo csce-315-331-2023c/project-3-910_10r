@@ -1,6 +1,6 @@
-.background{
+/* .background{
   background-color: var(--GREEN-MED60);
-}
+} */
 .main-content {
     z-index: 290;
     flex: 1;
@@ -19,7 +19,7 @@
     flex-wrap: wrap;
     gap: 10px;
     font: inherit;
-    background-color: var(--GREEN-MED60);
+    // background-color: var(--GREEN-MED60);
   }
   .section-icon-button {
     z-index: 500;
