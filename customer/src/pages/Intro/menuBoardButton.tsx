@@ -14,7 +14,7 @@ function MenuBoardButton({ setMenuPage }: Props) {
     setMenuPage(true);
   };
 
-  return <button className="menu-button" onClick={navigateToMenuPage}></button>;
+  return <button className="menu-button" onClick={navigateToMenuPage}>Menu</button>;
 }
 
 export default MenuBoardButton;

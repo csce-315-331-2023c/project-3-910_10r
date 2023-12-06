@@ -45,11 +45,11 @@ export const Carousel: React.FC<CarouselProps> = ({ data }) => {
       <span className="indicators">
         {data.slides.map((_, idx) => {
           return (
-            <button
+            <div
               className={
                 slide === idx ? "indicator" : "indicator indicator-inactive"
               }
-            ></button>
+            ></div>
           );
         })}
       </span>

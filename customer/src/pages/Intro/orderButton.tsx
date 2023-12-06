@@ -16,7 +16,7 @@ function OrderButton({ setOrderPage }: Props) {
   };
 
   return (
-    <button className="order-button" onClick={navigateToOrderPage}></button>
+    <button className="order-button" onClick={navigateToOrderPage}>Order</button>
   );
 }
 
