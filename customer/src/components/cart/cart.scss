@@ -19,6 +19,7 @@
     font-size: 25px;
     margin-top: 10px;
     height: 50px;
+    font-size: var(--FONT-MED-NORMAL);
 }
 
 .cart-buttons{
@@ -36,7 +37,7 @@
     margin-top: 10px;
     background-color: var(--CONFIRM-COLOR);
     color: white;
-    font-size: 30px;
+    font-size: var(--FONT-MED-NORMAL);
     border-color: white;
 }
 
@@ -79,6 +80,7 @@
 
 .checkout-title{
     margin-left: 20px;
+    font-size: var(--FONT-NORMAL);
 }
 
 .checkout-title-total{
@@ -88,4 +90,9 @@
 .checkout-price{
     margin-right: 30px;
     border-top: solid;
+    font-size: var(--FONT-NORMAL);
+}
+
+.numbas{
+    font-size: var(--FONT-NORMAL);
 }

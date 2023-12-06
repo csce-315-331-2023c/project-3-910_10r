@@ -54,9 +54,10 @@
 }
 .orderParagraph{
     position: absolute;
-    top: 30%;
-    right: 200px;
+    top: 29%;
+    right: 170px;
     transform: translateY(-50%);
+    font-size: var(--FONT-MED-NORMAL);
 }
 
 .menu-button{
@@ -81,6 +82,15 @@
 .menuParagraph{
     position: absolute;
     top: 28%;
-    left: 225px;
+    left: 205px;
     transform: translateY(-50%);
+    font-size: var(--FONT-MED-NORMAL);
+    
+}
+
+.welcome-text{
+    font-size: var(--FONT-MED);
+}
+.intro-text{
+    font-size: var(--FONT-NORMAL);
 }

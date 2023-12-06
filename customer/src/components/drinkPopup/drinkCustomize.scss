@@ -9,6 +9,7 @@
     align-items: center;
     justify-items: center;
     padding-right: 3px;
+    font-size: var(--FONT-NORMAL);
 }
 .topping-unavailable{
     display: grid;
@@ -25,9 +26,10 @@
 
 .topping-name{
     color: white;
-    font-size: 18px;
+    font-size: var(--FONT-NORMAL);
     text-align: center;
     line-height: 23px;
+
 }
 
 .topping-button{
@@ -86,6 +88,7 @@
     grid-template-columns: 1fr 1fr;
     row-gap: 10px;
     column-gap: 10px;
+    font-size: var(--FONT-NORMAL);
     
 }
 
@@ -110,13 +113,13 @@
 
 .customize-drink{
     text-align: center;
-    font-size: 30px;
+    font-size: var(--FONT-MED-NORMAL);
     margin-top: 10px;
     
 }
 
 .ice-title, .sugar-title, .toppings-title{
-    font-size: 20px;
+    font-size: var(--FONT-MED-NORMAL);
     margin-bottom: 5px;
 }
 
@@ -147,4 +150,8 @@
     right: 15px;
     top: 0px;
     cursor: pointer;
+}
+
+.text{
+    font-size: var(--FONT-NORMAL);
 }

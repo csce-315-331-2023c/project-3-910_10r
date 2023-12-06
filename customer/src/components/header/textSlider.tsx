@@ -7,7 +7,6 @@ function TextSlider() {
       const slider = document.querySelector("#slider") as HTMLInputElement;
       let sliderPercentage = Number(slider?.value);
       let newValue = Number(fontSizesRoot[index]) * ((sliderPercentage + 50) / 100);
-      console.log(newValue);
       document.documentElement.style.setProperty(font, `${newValue}rem`);
     });
   }

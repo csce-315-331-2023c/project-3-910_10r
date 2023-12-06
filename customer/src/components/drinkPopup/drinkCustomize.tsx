@@ -262,7 +262,7 @@ function DrinkCustomize({
                   }`}
                   onClick={() => handleButtonClick(1)}
                 >
-                  Regular Ice
+                  <div className="text">Regular Ice</div>
                 </button>
                 <button
                   className={`${
@@ -270,7 +270,7 @@ function DrinkCustomize({
                   }`}
                   onClick={() => handleButtonClick(2)}
                 >
-                  Light Ice
+                  <div className="text">Light Ice</div>
                 </button>
                 <button
                   className={`${
@@ -278,7 +278,7 @@ function DrinkCustomize({
                   }`}
                   onClick={() => handleButtonClick(3)}
                 >
-                  No Ice
+                  <div className="text">No Ice</div>
                 </button>
                 <button
                   className={`${
@@ -286,7 +286,7 @@ function DrinkCustomize({
                   }`}
                   onClick={() => handleButtonClick(4)}
                 >
-                  Extra Ice
+                  <div className="text">Extra Ice</div>
                 </button>
               </div>
             </div>
