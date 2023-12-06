@@ -71,7 +71,9 @@
 
     
     /**************** SHADOWS ****************/
-    --LOGIN-SHADOW: 0px 0px 30px var(--GREEN-DARK);
+    --LOGIN-SHADOW: 
+        0px 0px 7px var(--GREEN-MED),
+        0px 0px 20px var(--GREEN-MED60);
     --LOGOUT-SHADOW: 0px 0px 15px var(--ACCENT-COLOR-DARK);
     
     --BUTTON-SHADOW: 0px 0px 5px var(--GREEN-DARK);
