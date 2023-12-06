@@ -136,7 +136,6 @@ const Login = ({setIsManager, setIsLogin, setIsCashier, setPayPage} : Props) => 
                     <button id="loginSubmitBtn" type="submit" className="login__form-login">Login</button>
 
                     <div className='login__form-google'>
-                        <div className='login__form-google-cover'>or</div>
                         <GoogleOAuthProvider clientId={clientID}>
                             <OAuth setIsLogin={setIsLogin} setIsManager={setIsManager} setIsCashier={setIsCashier} setPayPage={setPayPage}/>
                         </GoogleOAuthProvider>

@@ -44,7 +44,7 @@
             padding: var(--PADDING-SMALL);
             width: 100%;
             border: none;
-            background-color: var(--GREEN-MED60);
+            background-color: var(--GREEN-MED);
             color: var(--TEXT-COLOR-DARK);
             transition: box-shadow 0.25s;
 
@@ -76,6 +76,8 @@
         &-google {
             margin-top: var(--MARGIN-MED);
             border-top: var(--BORDER-DARK);
+            position: relative;
+            padding-top: var(--PADDING-MED);
             
             &-btn {
                 background-color: var(--TEXT-COLOR-LIGHT);
@@ -91,13 +93,14 @@
                 }
             }
 
-            &-cover {
+            &::before {
+                content: "or";
                 background-color: var(--TEXT-COLOR-LIGHT);
                 color: var(--TEXT-COLOR-DARK);
                 width: clamp(35px, 7%, 70px);
                 height: 25px;
                 text-align: center;
-                position: relative;
+                position: absolute;
                 top: 0;
                 left: 50%;
                 transform: translate(-50%, -50%);
