@@ -18,6 +18,9 @@ interface IngredientFieldProps {
   oneIngredient: boolean;
 }
 
+  /**
+ * Ingredients field component
+ */
 const IngredientField: React.FC<IngredientFieldProps> = ({ index, ingredient: initialIngredient, ingredientValue: initialIngredientValue, onChange, onDelete, oneIngredient }) => {
     const [ingredient, setIngredient] = useState<string>(initialIngredient);
     const [ingredientValue, setIngredientValue] = useState<number>(initialIngredientValue);

@@ -10,6 +10,14 @@ interface Props {
   category: string[];
 }
 
+/**
+ * Function for navigation bar
+ * @param {boolean} props.showCustomizationPage Showing page
+ * @param {boolean} props.showLowPage Show if low
+ * @param {function} props.setCategory to set the category React
+ * @param {string[]} props.category List of categories
+ * @returns 
+ */
 function Navigationbar({
   showCustomizationPage,
   showLowPage,

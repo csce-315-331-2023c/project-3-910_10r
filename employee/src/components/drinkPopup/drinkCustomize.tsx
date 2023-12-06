@@ -33,6 +33,12 @@ interface Props {
   setShowCustomizationPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * Drink customization component
+ * @param {string} props.name Drink name
+ * @param {function} props.updateOrder Function to update the order
+ * @param {function} props.setShowCustomizationPage Function to show the page
+ */
 function DrinkCustomize({
   name,
   updateOrder,

@@ -14,7 +14,11 @@ interface NewDrinkPopupProps {
   category: string;
   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
+  /**
+ * New Drink popup component
+ * @param {string} category String of the categories for drink
+ * @param {function} setShowPopup Function to show the popup
+ */
 const NewDrinkPopup: React.FC<NewDrinkPopupProps> = ({ category: initialCategory, setShowPopup }) => {
     const [categories, setCategories] = useState<string[]>([]);
 

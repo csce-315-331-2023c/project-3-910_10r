@@ -3,6 +3,9 @@ import "./footer.scss";
 
 declare const window: any;
 
+  /**
+ * Google Translate Component
+ */
 const GoogleTranslate = () => {
   const scriptLoaded = useRef(false);
 

@@ -4,6 +4,12 @@ interface Props {
   total: string;
 }
 
+/**
+ * Checkout amount component
+ * @param {string} props.price Price before tax
+ * @param {string} props.tax  Tax total
+ * @param {string} props.total Price total after tax
+ */
 const checkoutAmount = ({ price, tax, total }: Props) => {
   return (
     <>

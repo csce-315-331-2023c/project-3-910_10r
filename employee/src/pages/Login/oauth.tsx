@@ -22,6 +22,10 @@ interface JwtPayload {
     email_verified: boolean
 }
 
+/**
+ * OAuth for login page
+ * @returns Oauth component
+ */
 const OAuth = ({setIsManager, setIsLogin, setIsCashier, setPayPage} : Props) => {
     const [showError, setShowError] = useState(false);
 

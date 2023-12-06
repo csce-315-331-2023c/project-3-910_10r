@@ -13,6 +13,11 @@ interface Props {
   setShowLowPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * Low Ingredients Component
+ * @param {string} drinkName String of drinkName
+ * @param {function} setShowLowPage Function to show low page
+ */
 function lowIngredients({ drinkName, setShowLowPage }: Props) {
   const [ingredientsMap, setIngredientsMap] = useState<{
     [key: string]: string[];

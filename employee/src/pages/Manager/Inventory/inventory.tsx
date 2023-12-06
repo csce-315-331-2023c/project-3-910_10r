@@ -12,6 +12,10 @@ baseURL: baseURL,
   timeout: 10000
 });
 
+/**
+ * Inventory page that shows the inventory information
+ * @returns  Inventory component
+ */
 const Inventory = () => {
   let [showSearchClear, setShowSearchClear] = useState(false);
   const [showPopup, setShowPopup] = useState(false);

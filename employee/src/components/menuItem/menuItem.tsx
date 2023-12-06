@@ -13,6 +13,10 @@ interface MenuItemProps {
   drinkName: string;
 }
 
+  /**
+ * Menu item component
+ * @param {stirng} drinkName Drink name for menu
+ */
 const MenuItem: React.FC<MenuItemProps> = ({ drinkName }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [ingredients, setIngredients] = useState<string[]>([]);

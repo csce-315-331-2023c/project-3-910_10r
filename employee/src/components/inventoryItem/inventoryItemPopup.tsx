@@ -16,6 +16,9 @@ interface InventoryItemPopupProps {
   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+  /**
+ * Inventory Item Popup Component
+ */
 const InventoryItemPopup: React.FC<InventoryItemPopupProps> = ({
   name,
   amount,

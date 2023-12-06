@@ -9,6 +9,11 @@ interface MenusCategoryProps {
     drinks: string[];
 }
   
+  /**
+ * Menus Category Component
+ * @param {string} props.categoryName String of category name
+ * @param {string[]} props.drinks List of drink names
+ */
 const MenusCategory: React.FC<MenusCategoryProps> = ({ categoryName, drinks }) => {
   const [showNewDrinkPopup, setShowNewDrinkPopup] = useState(false);
 

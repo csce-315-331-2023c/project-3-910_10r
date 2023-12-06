@@ -21,6 +21,10 @@ interface Props{
     setPayPage: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+/**
+ * Login page for managers and employees
+ * @returns Login component
+ */
 const Login = ({setIsManager, setIsLogin, setIsCashier, setPayPage} : Props) => {
     const [formData, setFormData] = useState({ username: '', password: '' });
     const [isSubmitClicked, setIsSubmitClicked] = useState(false);

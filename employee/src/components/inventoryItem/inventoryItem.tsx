@@ -10,6 +10,9 @@ interface InventoryItemProps {
     topping: boolean;
 }  
 
+  /**
+ * Inventory item component
+ */
 const InventoryItem: React.FC<InventoryItemProps> = ({ name, alert, amount, capacity, unit, topping }) => {
   const [showPopup, setShowPopup] = useState(false);
 

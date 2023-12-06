@@ -22,7 +22,9 @@ interface MenuItemPopupProps {
     price: number;
     category: string;
 }
-
+  /**
+ * Menu item popup component
+ */
 const MenuItemPopup: React.FC<MenuItemPopupProps> = ({ 
     setShowPopup, 
     setIngredients, setIngredientValues, setOriginalPrice, setOriginalCategory, 

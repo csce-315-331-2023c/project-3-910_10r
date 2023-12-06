@@ -27,6 +27,13 @@ const ShowLow = (
   setDrinkName(children);
 };
 
+/**
+ * Drink component
+ * @param {string} props.children String of children
+ * @param {function} props.setDrinkName Function to set the drink name
+ * @param {function} props.setShowLowPage Function to set the low pages
+ * @param {string[]} props.drinksWithLowStock List of low stock drinks
+ */
 const drink = ({
   children,
   setShowCustomizationPage,

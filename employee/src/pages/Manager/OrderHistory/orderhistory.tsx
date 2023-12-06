@@ -30,10 +30,9 @@ interface Order {
 const PAGE_SIZE = 100; // Number of orders per page
 
 /**
- * OrderHistory component to display order history based off of filters
- * @returns Order history component
+ * OrderHistory to display orderHistory component
+ * @returns {React.FC} orderHistory component
  */
-
 const OrderHistory: React.FC = () => {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [showFilterPopup, setShowFilterPopup] = useState(false);

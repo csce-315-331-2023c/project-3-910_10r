@@ -7,6 +7,13 @@ interface Props{
     setIsCashier: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+  /**
+ * LogoutPopup component
+ * @param {function} setIsLogout to show logout
+ * @param {function} setIsLogin to show login
+ * @param {function} setIsManager to show Manager
+ * @param {function} setIsCashier to show cashier
+ */
 const LogoutPopup = ({setIsLogout, setIsLogin, setIsManager, setIsCashier} : Props) => {
 
     const confirmLogout = () => {

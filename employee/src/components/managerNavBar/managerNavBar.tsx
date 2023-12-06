@@ -13,6 +13,9 @@ interface Props {
     toggleReports: () => void;
 }
 
+  /**
+ * ManagerNavBar component
+ */
 const ManagerNavBar = ({ 
         showEmployees, showInventory, showMenus, showOrderHistory, showReports,
         toggleEmployees, toggleInventory, toggleMenus, toggleOrderHistory, toggleReports 

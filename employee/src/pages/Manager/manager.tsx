@@ -21,6 +21,10 @@ interface Props {
     setIsCashier: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * Manager main page to toggle
+ * @returns {JSX.Element} Manager component
+ */
 const Manager = ({setIsLogin, setIsManager, setIsCashier} : Props) => {
 
     const [showEmployees, setShowEmployees] = useState(true);

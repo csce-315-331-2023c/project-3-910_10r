@@ -28,6 +28,17 @@ interface Props {
   setIsCashier: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * Cart component
+ * @param {object} props - The props object
+ * @param {array} props.orders - The array of orders
+ * @param {function} props.setOrders - Function to set the orders
+ * @param {function} props.setPayPage - Function to set the pay page
+ * @param {function} props.setNumber - Function to set the number
+ * @param {number} props.num - The number
+ * @param {function} props.setIsManager - Function to set the manager state
+ * @param {function} props.setIsCashier - Function to set the cashier state
+ */
 function Cart({ orders, setOrders, setPayPage, setNumber, num, setIsManager, setIsCashier}: Props) {
   let totalPrice = 0;
   let drinks : string[] = [];

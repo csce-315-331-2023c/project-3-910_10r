@@ -12,6 +12,16 @@ interface Props {
   showLowPage: boolean;
 }
 
+/**
+ * Drinks component
+ * @param {function} props.setShowCustomizationPage Function to set the page
+ * @param {boolean} props.showCustomizationPage Boolean for showing page
+ * @param {function} props.setDrinkName Function to set the drink
+ * @param {string[]} props.drinknames List of drinknames
+ * @param {function} props.setShowLowPage Function to show low
+ * @param {string[]} props.drinksWithLowStock List of low stock drinks
+ * @param {boolean} props.showLowPage Boolean to show page
+ */
 function drinks({
   setShowCustomizationPage,
   showCustomizationPage,

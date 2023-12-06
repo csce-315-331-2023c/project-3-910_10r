@@ -1,3 +1,6 @@
+  /**
+ * Test Slider Component
+ */
   function TextSlider() {
       const fontSizes = ["--FONT-LARGE", "--FONT-MED-LARGE", "--FONT-MED", "--FONT-MED-NORMAL", "--FONT-NORMAL", "--FONT-SMALL"];
       const fontSizesRoot= ['4', '3', '2', '1.5', '1', '0.5'];

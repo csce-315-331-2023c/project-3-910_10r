@@ -11,6 +11,15 @@ interface Props {
   // setCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
+/**
+ * Topping Component
+ * @param {number} props.index Index of topping
+ * @param {string} props.name Name
+ * @param {number} props.count Count of topping
+ * @param {function} props.onIncrement Function to increment
+ * @param {function} props.onDecrement Function to decrement
+ * @param {boolean} props.lowStock Boolean for if low
+ */
 const Topping = ({
   name,
   count,

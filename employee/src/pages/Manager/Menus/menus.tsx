@@ -10,6 +10,10 @@ const API: AxiosInstance = axios.create({
   timeout: 10000,
 });
 
+/**
+ * Menu page that shows recipe database information
+ * @returns Menus component
+ */
 const Menus = () => {
   const [categories, setCategories] = useState([]);
   const [drinks, setDrinks] = useState<{ [category: string]: string[] | undefined }>({});

@@ -25,6 +25,10 @@ interface Props {
   setShowLogout: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * Footer component
+ * @param {function} setShowLogout Function to show logout popup
+ */
 const footer = ({ setShowLogout }: Props) => {
   const showLogout = () => {
     setShowLogout(true);

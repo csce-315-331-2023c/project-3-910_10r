@@ -35,6 +35,9 @@ interface Props {
   setIsCashier: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * Cashier function to show cashier component page information
+ */
 function Cashier({
   setPayPage,
   setIsLogin,

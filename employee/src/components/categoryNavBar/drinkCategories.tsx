@@ -39,6 +39,12 @@ interface Props {
   index: number;
 }
 
+/**
+ * Drink Categories component
+ * @param {string} props.children for drinkCategories
+ * @param {function} props.onClick function to show when click on a category
+ * @param {number} props.index number for the index
+ */
 const drinkCategories = ({ children, onClick, index }: Props) => {
   const ClassName = `nav-category nav-category-${index}`;
   return (

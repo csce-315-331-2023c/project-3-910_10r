@@ -25,7 +25,7 @@ registerLocale("en-GB", enGB);
 
 /**
  * Reports component: Displays What Sales Together and Excess Report based on time increment selected
- * @returns {JSX.Element} Reports Component
+ * @returns  Reports Component
  */
 const Reports = () => {
   const [selectedOption, setSelectedOption] = useState("last24");

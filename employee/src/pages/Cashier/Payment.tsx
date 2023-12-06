@@ -6,6 +6,9 @@ interface Props {
   setIsCashier: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * Function to show payment for cashier
+ */
 function Payment({ setPayPage, num, setIsCashier}: Props) {
   return (
     <>
