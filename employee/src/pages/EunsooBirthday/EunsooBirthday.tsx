@@ -54,6 +54,12 @@ const EunsooBirthday = () => {
 
     return (
         <div className='outer'>
+
+            <div className='meme'>
+                <p>Obligatory Meme</p>
+                <img src="https://cdn.vox-cdn.com/thumbor/PzidjXAPw5kMOXygTMEuhb634MM=/11x17:1898x1056/1200x800/filters:focal(807x387:1113x693)/cdn.vox-cdn.com/uploads/chorus_image/image/72921759/vlcsnap_2023_12_01_10h37m31s394.0.jpg" alt="Meme"/>
+            </div>
+
             <div className="eunsoo__container">
                 <div className='title'>
                     <span className='title-txt'>Hold On</span>
@@ -70,11 +76,6 @@ const EunsooBirthday = () => {
                 <div className='message'>
                     <p>We wish you a fantastic day and a wonderful year.</p>
                     <p>-ur favs</p>
-                </div>
-
-                <div className='meme'>
-                    <p>Obligatory Meme</p>
-                    <img src="https://cdn.vox-cdn.com/thumbor/PzidjXAPw5kMOXygTMEuhb634MM=/11x17:1898x1056/1200x800/filters:focal(807x387:1113x693)/cdn.vox-cdn.com/uploads/chorus_image/image/72921759/vlcsnap_2023_12_01_10h37m31s394.0.jpg" alt="Meme" width={400}/>
                 </div>
 
                 <div className='party-popper left'>

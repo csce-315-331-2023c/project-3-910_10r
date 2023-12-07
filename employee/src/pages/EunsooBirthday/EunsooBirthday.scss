@@ -8,7 +8,7 @@
     cursor: none;
     background-color: aliceblue;
     background-image: linear-gradient( 109.6deg,  rgba(254,253,205,1) 11.2%, rgba(163,230,255,1) 91.1% );
-    animation: fin 0.75s calc(0.75 * 5s + 4.15s + 5s + 10s + 3.25s) forwards;
+    animation: fin 0.75s calc(0.75 * 5s + 4.15s + 5s + 10s + 3s) forwards;
     
 }
 
@@ -49,7 +49,7 @@
             background-color: rgb(247, 247, 247);
         }
         10%, 90% {
-            background-color: rgba(247, 247, 247, 0.4);
+            background-color: rgba(247, 247, 247, 0.25);
         }
         100% {
             background-color: rgb(247, 247, 247);;
@@ -120,7 +120,7 @@
     .bday {
         animation: 
             display-bday 2s calc(0.75 * 5s + 4.15s) forwards,
-            display-bday2 2s calc(0.75 * 5s + 4.15s + 3s) forwards;
+            display-bday2 2s calc(0.75 * 5s + 4.15s + 3.15s) forwards;
         font-size: 5rem;
 
         @keyframes display-bday {
@@ -228,7 +228,7 @@
             }
             to {
                 opacity: 0;
-                transform: translateY(-500%);
+                transform: translateY(-530%);
             }
         }
     }
@@ -243,7 +243,7 @@
             bottom: 4rem;
 
             animation: 
-                cheer-left 1.15s calc(0.75 * 5s + 4.15s + 5.25s) 6 forwards,
+                cheer-left 1.15s calc(0.75 * 5s + 4.15s + 5.27s) 6 forwards,
                 cheer-goodbye-left 2.5s calc(0.75 * 5s + 4.15s + 5s + 7.15s) forwards;
         }
         &.right {
@@ -252,7 +252,7 @@
             bottom: 4rem;
 
             animation: 
-                cheer-right 1.15s calc(0.75 * 5s + 4.15s + 5.25s) 6 forwards,
+                cheer-right 1.15s calc(0.75 * 5s + 4.15s + 5.27s) 6 forwards,
                 cheer-goodbye-right 2.5s calc(0.75 * 5s + 4.15s + 5s + 7.15s) forwards;
         }
 
@@ -300,35 +300,44 @@
             }
         }
     }
+}
 
-    .meme {
-        display: flex;
-        flex-flow: column nowrap;
-        gap: 0.5rem;
-        justify-content: center;
-        align-items: center;
-        font-size: 2.85rem;
-        opacity: 0;
-        animation: meme 3.25s calc(0.75 * 5s + 4.15s + 5s + 9.25s) forwards ease-in;
+.meme {
+    z-index: 1003;
+    display: block;
+    font-size: 2.55rem;
+    animation: meme 4s calc(0.75 * 5s + 4.15s + 5s + 9.25s) forwards;
+    opacity: 0.8;
+    position: fixed;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
 
-        img {
-            border: 3px solid rgb(51, 49, 49);
-            box-shadow: 0 0 3px rgb(51, 49, 49);
-        }
-
-        @keyframes meme {
-            from {
-                transform: translateX(250%);
-                opacity: 0.8;
-            }
-            to {
-                transform: translateX(-270%);
-                opacity: 0.8;
-            }
-        }
+    p {
+        white-space: nowrap;
     }
 
+    img {
+        width: 400px;
+        border: 3px solid rgb(51, 49, 49);
+        box-shadow: 0 0 3px rgb(51, 49, 49);
+    }
 
+    @keyframes meme {
+        from {
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.8;
+        }
+
+        to {
+            left: -600px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.8;
+        }
+    }
 }
 
 
@@ -337,7 +346,7 @@
     position: fixed;
   
   .hoverme {
-    width: 240px;
+    width: 280px;
     text-align: center;
     padding: 10px 0;
     position: relative;
