@@ -33,6 +33,7 @@ interface Props {
   num: number;
   setIsManager: React.Dispatch<React.SetStateAction<boolean>>;
   setIsCashier: React.Dispatch<React.SetStateAction<boolean>>;
+  setEunsooBirthdayShow: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 /**
@@ -45,6 +46,7 @@ function Cashier({
   num,
   setIsManager,
   setIsCashier,
+  setEunsooBirthdayShow
 }: Props) {
   // keeps track of orders in the cart
   const [orders, setOrders] = useState<order[]>([]);
@@ -162,6 +164,8 @@ function Cashier({
                 setIsLogin={setIsLogin}
                 setIsManager={setIsManager}
                 setIsCashier={setIsCashier}
+                setEunsooBirthdayShow={setEunsooBirthdayShow}
+                fromManager={false}
               ></LogoutPopup>
             )}
           </div>

@@ -3,6 +3,7 @@ import Cashier from "./pages/Cashier/cashier.tsx";
 import Payment from "./pages/Cashier/Payment.tsx";
 import { Route, Navigate, Routes } from "react-router-dom";
 import Manager from "./pages/Manager/manager.tsx";
+import EunsooBirthday from "./pages/EunsooBirthday/EunsooBirthday.tsx";
 
 import Login from "./pages/Login/login.tsx";
 
@@ -31,6 +32,8 @@ function App() {
     storedNum ? JSON.parse(storedNum) : 1
   );
 
+  const [EunsooBirthdayShow, setEunsooBirthdayShow] = useState(false);
+
   // Save state to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("payPage", JSON.stringify(payPage));
@@ -41,6 +44,8 @@ function App() {
   }, [payPage, isManager, isCashier, isLogin, num]);
 
   return (
+    <>
+      {EunsooBirthdayShow && <EunsooBirthday></EunsooBirthday>}
       <Routes>
         <Route
           path="/"
@@ -65,6 +70,7 @@ function App() {
                 setIsLogin={setIsLogin}
                 setIsManager={setIsManager}
                 setIsCashier={setIsCashier}
+                setEunsooBirthdayShow={setEunsooBirthdayShow}
               />
             ) : (
               <Navigate to="/payment" />
@@ -96,6 +102,7 @@ function App() {
                 num={num}
                 setIsManager={setIsManager}
                 setIsCashier={setIsCashier}
+                setEunsooBirthdayShow={setEunsooBirthdayShow}
               />
             ) : payPage ? (
               <Navigate to="/payment" />
@@ -116,6 +123,7 @@ function App() {
           }
         />
       </Routes>
+    </>
   );
 }
 

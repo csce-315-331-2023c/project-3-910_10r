@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Sometype+Mono:wght@700&display=swap');
+
+.outer {
+    position: fixed;
+    z-index: 999;
+    height: 100vh;
+    width: 100vw;
+    cursor: none;
+    background-color: aliceblue;
+    background-image: linear-gradient( 109.6deg,  rgba(254,253,205,1) 11.2%, rgba(163,230,255,1) 91.1% );
+    animation: fin 0.75s calc(0.75 * 5s + 4.15s + 5s + 10s + 3.25s) forwards;
+    
+}
+
+.eunsoo__container {
+    overflow: hidden;
+    font-family: "Fragment Mono";
+    background-color: rgb(247, 247, 247);
+    color: rgb(51, 49, 49);
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 1000;
+    font-size: 8rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 1s;
+    display: flex;
+    flex-flow: column nowrap;
+    cursor: none;
+
+    > div {
+        z-index: 1001;
+        text-align: center;
+        position: absolute;
+        opacity: 0;
+    }
+
+
+    animation: 
+        flash 0.75s 4 ease-in-out,
+        bday-image 8s calc(0.75 * 5s + 4.15s + 4.75s) ease-in-out forwards,
+        fin 0.75s calc(0.75 * 5s + 4.15s + 5s + 10s + 3.25s) forwards;
+
+    @keyframes bday-image {
+        0% {
+            background-color: rgb(247, 247, 247);
+        }
+        10%, 90% {
+            background-color: rgba(247, 247, 247, 0.4);
+        }
+        100% {
+            background-color: rgb(247, 247, 247);;
+        }
+    }
+
+    @keyframes flash {
+        from, to {
+            background-color: rgb(247, 247, 247);
+        }
+        20%, 80% {
+            background-color: rgb(222, 89, 89);
+        } 
+    }
+
+    @keyframes fin {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        } 
+        100% {
+            display: none;
+            cursor: auto;
+        }
+    }
+
+    .title {
+        animation: display-title 4.15s calc(0.75 * 4s) forwards;
+
+        @keyframes display-title {
+            from {
+                opacity: 1;
+            }
+            87% {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        &-txt {
+            transform: translateY(-15%);
+            opacity: 0;
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 7px solid rgb(51, 49, 49);
+            border-color: transparent;
+
+            animation:
+                typing 2.15s steps(7, end) calc(0.75 * 4s) forwards,
+                blink-caret 0.75s calc(0.75 * 4s) step-end 4;
+
+            @keyframes typing {
+                from { width: 0; opacity: 1;}
+                to { width: 100%; opacity: 1;}
+            }
+            @keyframes blink-caret {
+                from, to { border-color: rgb(51, 49, 49); }
+                50% { border-color: transparent; }
+            }
+        }
+    }
+
+    .bday {
+        animation: 
+            display-bday 2s calc(0.75 * 5s + 4.15s) forwards,
+            display-bday2 2s calc(0.75 * 5s + 4.15s + 3s) forwards;
+        font-size: 5rem;
+
+        @keyframes display-bday {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(-30%);
+                opacity: 1;
+            }
+        }
+
+        @keyframes display-bday2 {
+            from {
+                transform: translateY(-30%);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(450%);
+                opacity: 0;
+            }
+            
+        }
+
+        span {
+            display: inline-block;
+            animation: cheer 0.75s calc(0.75 * 5s + 4.35s) 3 forwards;
+
+            @keyframes cheer {
+                from, to {
+                    transform: scale(100%);
+                }
+                50% {
+                    transform: scale(120%);
+                }
+            }
+        }
+    }
+
+    .main {
+        background-image: url(https://images.unsplash.com/6/blurred_lines.jpeg?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+        background-size: cover;
+        background-position: center;
+        background-clip: text;
+        -webkit-background-clip: text;
+
+        filter: drop-shadow(0 0 4px rgb(104, 104, 131));
+
+        animation: 
+            display-main 2.5s calc(0.75 * 5s + 4.15s + 4.75s) forwards,
+            display-main2 2.5s calc(0.75 * 5s + 4.15s + 5s + 7.15s) forwards,
+            ;
+
+        @keyframes display-main {
+            from {
+                transform: translateY(-350%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(-200%);
+                opacity: 1;
+            }
+        }
+
+        @keyframes display-main2 {
+            from {
+                transform: translateY(-200%);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-600%);
+                opacity: 0;
+            }
+        }
+
+        h1 {
+            font-size: 6rem !important;
+            color: hsla(236, 20%, 15%, 0.65);
+        }
+    }
+
+    .message {
+        animation: 
+            display-message 2.25s calc(0.75 * 5s + 4.15s + 6.5s) forwards,
+            display-message2 2.5s calc(0.75 * 5s + 4.15s + 5s + 7.15s) forwards;
+        font-size: 2.5rem;
+        line-height: 3.5rem;
+
+        @keyframes display-message {
+            from {
+                opacity: 0;
+                transform: translateY(175%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(-15%);
+            }
+        }
+
+        @keyframes display-message2 {
+            from {
+                opacity: 1;
+                transform: translateY(-15%);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-500%);
+            }
+        }
+    }
+
+    
+    .party-popper {
+        text-align: start;
+
+        &.left {
+            position: absolute;
+            left: 4rem;
+            bottom: 4rem;
+
+            animation: 
+                cheer-left 1.15s calc(0.75 * 5s + 4.15s + 5.25s) 6 forwards,
+                cheer-goodbye-left 2.5s calc(0.75 * 5s + 4.15s + 5s + 7.15s) forwards;
+        }
+        &.right {
+            transform: scale(-1, 1);
+            right: 4rem;
+            bottom: 4rem;
+
+            animation: 
+                cheer-right 1.15s calc(0.75 * 5s + 4.15s + 5.25s) 6 forwards,
+                cheer-goodbye-right 2.5s calc(0.75 * 5s + 4.15s + 5s + 7.15s) forwards;
+        }
+
+        @keyframes cheer-left {
+            from, to {
+                transform: scale(100%) translate(0, 0);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(140%) translate(10%, -10%);
+                opacity: 1;
+            }
+        }
+
+        @keyframes cheer-right {
+            from, to {
+                transform: scale(-100%, 100%) translate(0, 0);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(-140%, 140%) translate(10%, -10%);
+                opacity: 1;
+            }
+        }
+
+        @keyframes cheer-goodbye-left {
+            from {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            to {
+                transform: translate(0, -575%);
+                opacity: 0;
+            }
+        }
+
+        @keyframes cheer-goodbye-right {
+            from {
+                transform: scale(-100%, 100%) translate(0, 0);
+                opacity: 1;
+            }
+            to {
+                transform: scale(-100%, 100%) translate(0, -575%);
+                opacity: 0;
+            }
+        }
+    }
+
+    .meme {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 0.5rem;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.85rem;
+        opacity: 0;
+        animation: meme 3.25s calc(0.75 * 5s + 4.15s + 5s + 9.25s) forwards ease-in;
+
+        img {
+            border: 3px solid rgb(51, 49, 49);
+            box-shadow: 0 0 3px rgb(51, 49, 49);
+        }
+
+        @keyframes meme {
+            from {
+                transform: translateX(250%);
+                opacity: 0.8;
+            }
+            to {
+                transform: translateX(-270%);
+                opacity: 0.8;
+            }
+        }
+    }
+
+
+}
+
+
+.container {
+    z-index: 1002;
+    position: fixed;
+  
+  .hoverme {
+    width: 240px;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+
+    i {
+      position: absolute;
+      display: block;
+      left: 50%;
+      top: 0;
+      width: 5px;
+      height: 10px;
+      background: red;
+      opacity: 1;
+    }
+    
+    @for $i from 1 through 50 {
+        i:nth-of-type(#{$i}) {
+          transform: translate3d(
+              random(190) - 100 + px,
+              random(200) - 100 + px,
+              0
+            )
+            rotate(random(360) + deg);
+          background: hsla(random(360), 100%, 50%, 1);
+          animation: bang 700ms ease-out forwards;
+          opacity: 0;
+        }
+    }
+  }
+
+  @keyframes bang {
+    from {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+}
