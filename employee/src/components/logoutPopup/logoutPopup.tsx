@@ -5,6 +5,8 @@ interface Props{
     setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
     setIsManager: React.Dispatch<React.SetStateAction<boolean>>;
     setIsCashier: React.Dispatch<React.SetStateAction<boolean>>;
+    setEunsooBirthdayShow: React.Dispatch<React.SetStateAction<boolean>>;
+    fromManager: boolean
 }
 
   /**
@@ -14,13 +16,18 @@ interface Props{
  * @param {function} setIsManager to show Manager
  * @param {function} setIsCashier to show cashier
  */
-const LogoutPopup = ({setIsLogout, setIsLogin, setIsManager, setIsCashier} : Props) => {
+const LogoutPopup = ({setIsLogout, setIsLogin, setIsManager, setIsCashier, setEunsooBirthdayShow, fromManager} : Props) => {
 
     const confirmLogout = () => {
         setIsLogout(true);
         setIsLogin(true);
         setIsManager(false);
         setIsCashier(false);
+
+        // Set this to true to see the animation or false to remove it
+        if(fromManager) {
+          setEunsooBirthdayShow(true);
+        }
     }
 
     const cancelLogout = () => {

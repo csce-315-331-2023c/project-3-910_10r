@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './manager.scss';
 
 import ManagerNavBar from "../../components/managerNavBar/managerNavBar.tsx";
@@ -19,13 +19,14 @@ interface Props {
     setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
     setIsManager: React.Dispatch<React.SetStateAction<boolean>>;
     setIsCashier: React.Dispatch<React.SetStateAction<boolean>>;
+    setEunsooBirthdayShow: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 /**
  * Manager main page to toggle
  * @returns {JSX.Element} Manager component
  */
-const Manager = ({setIsLogin, setIsManager, setIsCashier} : Props) => {
+const Manager = ({setIsLogin, setIsManager, setIsCashier, setEunsooBirthdayShow} : Props) => {
 
     const [showEmployees, setShowEmployees] = useState(true);
     const [showInventory, setShowInventory] = useState(false);
@@ -33,6 +34,10 @@ const Manager = ({setIsLogin, setIsManager, setIsCashier} : Props) => {
     const [showOrderHistory, setShowOrderHistory] = useState(false);
     const [showReports, setShowReports] = useState(false);
     const [isLogout, setIsLogout] = useState(false);
+
+    useEffect(() => {
+        setEunsooBirthdayShow(false);
+    })
 
     return (
         <div className="manager-container">
@@ -87,7 +92,7 @@ const Manager = ({setIsLogin, setIsManager, setIsCashier} : Props) => {
                 {showReports && <Reports></Reports>}
             </div>
             <Footer setShowLogout={setIsLogout}></Footer>
-            {isLogout && <LogoutPopup setIsLogout={setIsLogout} setIsLogin={setIsLogin} setIsManager={setIsManager} setIsCashier={setIsCashier}></LogoutPopup>}
+            {isLogout && <LogoutPopup setIsLogout={setIsLogout} setIsLogin={setIsLogin} setIsManager={setIsManager} setIsCashier={setIsCashier} setEunsooBirthdayShow={setEunsooBirthdayShow} fromManager={true}></LogoutPopup>}
         </div>
     );
 };
