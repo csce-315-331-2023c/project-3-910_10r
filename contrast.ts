@@ -32,6 +32,7 @@ const employeeColors: string[] = [
     "--TEXT-COLOR-LIGHT",
     "--SIDEBAR-BG-COLOR", "--SELECTION-COLOR","--SELECTED","--GREEN-LIGHT-TO-BLACK",
     "--ERROR-COLOR",
+    "--LOGIN-BG-COLOR", "--LOGIN-BG-COLOR-1",
     "--ON-HOVER", "--ON-ACTIVE",
     "--WHITE", "--BLACK",
     "--GRAY-DARK", "--GRAY-MEDIAN", "--GRAY-LIGHT",
