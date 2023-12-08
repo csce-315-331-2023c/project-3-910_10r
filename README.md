@@ -23,7 +23,7 @@
 - Cashier Login:
   * Leo Toro
   * pass
-- Manager Login: (email ktang147@gmail.com for manager login)
+- Manager Login: (email kevintank777@gmail.com for manager login)
 
 ---
 
