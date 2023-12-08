@@ -23,9 +23,7 @@
 - Cashier Login:
   * Leo Toro
   * pass
-- Manager Login:
-  * Frank Ocean
-  * password
+- Manager Login: (email ktang147@gmail.com for manager login)
 
 ---
 
